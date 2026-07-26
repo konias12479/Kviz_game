@@ -18,7 +18,7 @@
     --ok:#2eff8a; --bad:#ff4d6d; --text:#f2f0ff;
   }
   *{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
-  html,body{height:100%}
+  html,body{height:100%;height:100dvh}
   body{
     font-family:'Segoe UI',system-ui,-apple-system,sans-serif;color:var(--text);
     background:radial-gradient(ellipse at 50% -20%, #2b1f6e 0%, var(--bg2) 45%, var(--bg1) 100%);
@@ -35,7 +35,8 @@
   .flash.bad{background:radial-gradient(circle, rgba(255,77,109,.25), transparent 70%)}
   .flash.show{opacity:1}
 
-  .screen{position:fixed;inset:0;display:none;flex-direction:column;z-index:1;max-width:560px;margin:0 auto}
+  .screen{position:fixed;top:0;left:0;right:0;height:100%;height:100dvh;display:none;flex-direction:column;z-index:1;max-width:560px;margin:0 auto;
+    padding-bottom:env(safe-area-inset-bottom)}
   .screen.active{display:flex}
 
   /* ====== MENU ====== */
@@ -86,7 +87,7 @@
 
   /* ====== HRA ====== */
   #game{padding:0}
-  .stage{flex:0 0 56%;position:relative;display:flex;flex-direction:column;align-items:center;
+  .stage{flex:1 1 auto;min-height:0;max-height:52%;position:relative;display:flex;flex-direction:column;align-items:center;
     background:radial-gradient(ellipse at 50% 110%, rgba(0,229,255,.12), transparent 60%);padding:10px 14px 0}
   .hud{width:100%;display:flex;justify-content:space-between;align-items:center;font-size:13px;gap:8px}
   .hud .chip{background:rgba(0,0,0,.35);border:1px solid rgba(255,255,255,.15);border-radius:20px;padding:5px 12px;white-space:nowrap}
@@ -145,17 +146,17 @@
     transition:transform .3s cubic-bezier(.2,1.6,.4,1);filter:drop-shadow(0 0 14px rgba(0,229,255,.7));pointer-events:none}
   .emopop.show{transform:translate(-50%,0) scale(1)}
 
-  .qpanel{flex:1;display:flex;flex-direction:column;background:linear-gradient(180deg,var(--panel) 0%, #120f30 100%);
+  .qpanel{flex:1 1 auto;min-height:0;display:flex;flex-direction:column;background:linear-gradient(180deg,var(--panel) 0%, #120f30 100%);
     border-top:2px solid var(--neon-cyan);box-shadow:0 -6px 30px rgba(0,229,255,.25);
-    border-radius:22px 22px 0 0;padding:14px 16px 16px;gap:9px}
+    border-radius:22px 22px 0 0;padding:14px 16px calc(12px + env(safe-area-inset-bottom));gap:9px;overflow-y:auto;overscroll-behavior:contain}
   .qpanel.panic{border-top-color:#ff4d6d;box-shadow:0 -6px 30px rgba(255,77,109,.45)}
   .qmeta{display:flex;justify-content:space-between;font-size:11.5px;color:#9c94d8;text-transform:uppercase;letter-spacing:1px}
   .timebar{height:6px;background:#0d0b26;border-radius:4px;overflow:hidden}
   .timebar div{height:100%;width:100%;background:linear-gradient(90deg,#2eff8a,#ffcf3f,#ff4d6d);transition:width 1s linear}
-  .qtext{font-size:clamp(14px,4vw,19px);font-weight:800;text-align:center;min-height:34px;flex-shrink:0;max-height:26vh;overflow-y:auto;
+  .qtext{font-size:clamp(14px,4vw,19px);font-weight:800;text-align:center;min-height:34px;flex-shrink:0;overflow-y:auto;
     display:flex;align-items:center;justify-content:center;line-height:1.3;
     text-shadow:0 0 14px rgba(0,229,255,.4)}
-  .answers{display:grid;gap:8px;overflow-y:auto;min-height:0;flex:1;align-content:start}
+  .answers{display:grid;gap:8px;min-height:0;flex:0 0 auto;align-content:start}
   .ans{display:flex;align-items:center;gap:10px;background:linear-gradient(90deg,#221c56,#2b2470);
     border:1.5px solid rgba(0,229,255,.4);border-radius:12px;padding:9px 12px;color:var(--text);
     font-family:inherit;font-size:13.5px;font-weight:600;cursor:pointer;text-align:left;line-height:1.25;
@@ -172,7 +173,7 @@
   .ans.wrong .letter{background:var(--bad)}
   .ans.hidden5050{opacity:.18;pointer-events:none}
   .ans:disabled{cursor:default}
-  .jokerrow{display:flex;justify-content:center;gap:10px;margin-top:2px;flex-shrink:0;flex-wrap:wrap}
+  .jokerrow{display:flex;justify-content:center;gap:8px;margin-top:auto;padding-top:8px;flex-shrink:0;flex-wrap:wrap}
   .joker{background:none;border:1px dashed rgba(255,207,63,.6);color:var(--neon-gold);
     border-radius:20px;padding:5px 14px;font-family:inherit;font-size:12.5px;cursor:pointer}
   .joker:disabled{opacity:.3;border-style:solid;cursor:default}
@@ -191,6 +192,53 @@
     font-weight:900;font-size:16px;font-family:inherit;border-radius:14px;padding:13px 26px;cursor:pointer;
     box-shadow:0 0 18px rgba(0,229,255,.5)}
   .bigbtn.alt{background:var(--panel);color:var(--text);border:1px solid rgba(255,255,255,.3);box-shadow:none}
+
+  /* ====== OVLÁDACÍ PANEL ⚙️ BĚHEM HRY ====== */
+  .gearbtn{background:rgba(0,0,0,.35);border:1px solid rgba(255,255,255,.15);border-radius:20px;
+    padding:5px 11px;font-size:15px;line-height:1;color:var(--text);cursor:pointer;flex:0 0 auto}
+  .gearbtn:active{transform:scale(.94)}
+  .gearpanel{position:absolute;top:46px;right:0;z-index:9;width:min(255px,86vw);
+    background:rgba(14,12,40,.97);border:1px solid rgba(0,229,255,.45);border-radius:16px;
+    box-shadow:0 12px 34px rgba(0,0,0,.6);padding:9px;display:none;flex-direction:column;gap:6px;
+    max-height:min(70vh,340px);overflow-y:auto}
+  .gearpanel.show{display:flex;animation:pop .18s}
+  .gearpanel button{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.18);
+    border-radius:11px;padding:10px 12px;color:var(--text);font-family:inherit;font-size:13.5px;
+    font-weight:700;text-align:left;cursor:pointer}
+  .gearpanel button:active{background:rgba(255,255,255,.14)}
+  .gearpanel .quit{border-color:rgba(255,77,109,.5);color:#ff8fa3}
+  .gearback{position:fixed;inset:0;z-index:8;display:none}
+  .gearback.show{display:block}
+
+  /* ====== TELEFON NA ŠÍŘKU = DVA SLOUPCE ====== */
+  @media (orientation:landscape) and (max-height:520px){
+    .screen{max-width:100%}
+    #game{flex-direction:row}
+    .stage{flex:0 0 34%;max-height:100%;height:100%;padding:8px 8px 0;justify-content:flex-start}
+    .hud{font-size:11.5px;gap:5px;flex-wrap:wrap}
+    .hud .chip{padding:3px 8px}
+    .timerwrap{width:36px;height:36px;flex:0 0 36px}
+    .timerwrap svg{width:36px;height:36px}
+    .timerwrap .tnum{font-size:12px}
+    #calcsvg{max-height:100%}
+    .bubble{font-size:13px;padding:8px 11px;max-width:98%}
+    .bubble.explain{font-size:12px}
+    .qpanel{flex:1 1 auto;border-radius:0;border-top:none;border-left:2px solid var(--neon-cyan);
+      box-shadow:-6px 0 30px rgba(0,229,255,.22);padding:9px 12px calc(9px + env(safe-area-inset-bottom))}
+    .qtext{font-size:clamp(13px,2.4vw,16px);min-height:0}
+    .ans{padding:6px 10px;font-size:12.5px}
+    .ans .letter{flex:0 0 21px;height:21px;font-size:11px}
+    .aemo{font-size:15px}
+    .answers{gap:5px}
+    .joker{padding:4px 10px;font-size:11.5px}
+    .gearpanel{top:40px}
+  }
+  /* ====== HODNĚ NÍZKÝ DISPLEJ NA VÝŠKU ====== */
+  @media (orientation:portrait) and (max-height:680px){
+    .stage{max-height:44%}
+    .ans{padding:7px 10px;font-size:12.5px}
+    .joker{padding:4px 11px;font-size:11.5px}
+  }
 </style>
 </head>
 <body>
@@ -244,10 +292,19 @@
     <div class="hud">
       <div class="chip donkchip" id="donkChip"><span class="di">🫏</span><b id="scoreTxt">0</b></div>
       <div class="chip" id="qCounter">1/15</div>
+      <button class="gearbtn" id="gearBtn" title="Nastavení a konec hry">⚙️</button>
       <div class="timerwrap">
         <svg width="46" height="46"><circle cx="23" cy="23" r="19" fill="none" stroke="#2a2560" stroke-width="4"/>
         <circle id="tArc" cx="23" cy="23" r="19" fill="none" stroke="#00e5ff" stroke-width="4" stroke-linecap="round" stroke-dasharray="119.4" stroke-dashoffset="0"/></svg>
         <div class="tnum" id="tNum">15</div>
+      </div>
+      <div class="gearback" id="gearBack"></div>
+      <div class="gearpanel" id="gearPanel">
+        <button id="gMusic">🎵 Hudba: hraje</button>
+        <button id="gSound">🔊 Zvuk: zapnutý</button>
+        <button id="gVoice">🗣️ Hlas: zapnutý</button>
+        <button id="gQuips">💬 Hlášky: zapnuté</button>
+        <button class="quit" id="gQuit">✖ Ukončit hru a zpět do menu</button>
       </div>
     </div>
     <div class="calcwrap">
@@ -439,9 +496,9 @@
     <div class="jokerrow">
       <button class="joker" id="confirmBtn" style="display:none;border-style:solid;background:linear-gradient(90deg,var(--neon-gold),#ffb03f);color:#221a00;font-weight:900">✅ Potvrdit odpovědi</button>
       <button class="joker" id="jokerBtn">🦵 Oslí kopanec (škrtne 1 špatnou)</button>
-      <button class="joker" id="quipBtnGame" title="Vypnout hlášky Kalkulátora (vysvětlení zůstanou)">💬 Hlášky: zap</button>
-      <button class="joker" id="voiceBtnGame" title="Zapnout/vypnout hlas Kalkulátora">🗣️ Hlas: zap</button>
-      <button class="joker" id="quitBtn" style="border-color:rgba(255,255,255,.3);color:#9c94d8">✖ Konec</button>
+      <button class="joker" id="quipBtnGame" style="display:none">💬 Hlášky: zap</button>
+      <button class="joker" id="voiceBtnGame" style="display:none">🗣️ Hlas: zap</button>
+      <button class="joker" id="quitBtn" style="display:none">✖ Konec</button>
     </div>
     <div class="credit mini">✒️ © 2026 <b>Petr Poslušný</b></div>
   </div>
@@ -1984,7 +2041,7 @@ document.querySelectorAll(".mode").forEach(b=>b.addEventListener("click",()=>{co
 document.querySelectorAll(".ans").forEach(b=>b.addEventListener("click",()=>onAnswer(+b.dataset.i)));
 $("jokerBtn").addEventListener("click",useJoker);
 $("confirmBtn").addEventListener("click",confirmMulti);
-$("quitBtn").addEventListener("click",()=>{clearInterval(timerInt);clearTimeout(pauseTO);paused=false;$("skipBtn").classList.remove("show");$("calcsvg").classList.remove("army","retro");showScreen("menu");refreshMenuBar();});
+$("quitBtn").addEventListener("click",()=>{gearOpen(false);clearInterval(timerInt);clearTimeout(pauseTO);paused=false;$("skipBtn").classList.remove("show");$("calcsvg").classList.remove("army","retro");showScreen("menu");refreshMenuBar();});
 $("againBtn").addEventListener("click",()=>startGame(G.mode));
 $("menuBtn").addEventListener("click",()=>{showScreen("menu");refreshMenuBar();});
 $("shareBtn").addEventListener("click",()=>{
@@ -2000,6 +2057,7 @@ $("soundBtn").addEventListener("click",()=>{
 function refreshVoiceBtns(){
   $("voiceBtn").textContent=voiceOn?"🗣️ Hlas Kalkulátora: zapnutý":"🔇 Hlas Kalkulátora: vypnutý";
   $("voiceBtnGame").textContent=voiceOn?"🗣️ Hlas: zap":"🔇 Hlas: vyp";
+  refreshGear();
 }
 function toggleVoice(){
   voiceOn=!voiceOn;store.voice=voiceOn;save();
@@ -2013,6 +2071,7 @@ $("voiceBtnGame").addEventListener("click",toggleVoice);
 /* ===== PŘEPÍNAČ HLÁŠEK (vysvětlení otázek zůstávají vždy) ===== */
 function refreshQuipBtn(){
   $("quipBtnGame").textContent=quipsOn?"💬 Hlášky: zap":"🤐 Hlášky: vyp";
+  refreshGear();
 }
 refreshQuipBtn();
 $("quipBtnGame").addEventListener("click",()=>{
@@ -2085,6 +2144,29 @@ $("musicBtn").addEventListener("click",e=>{
   if(musicWanted){$("musicBtn").textContent="🎵 Hudba: hraje";tryMusic();}
   else{ALL_TRACKS.forEach(a=>a.pause());$("musicBtn").textContent="🎵 Hudba: vypnutá";}
 });
+/* ===== OVLÁDACÍ PANEL ⚙️ BĚHEM HRY ===== */
+function gearOpen(o){
+  $("gearPanel").classList.toggle("show",o);
+  $("gearBack").classList.toggle("show",o);
+  if(o)refreshGear();
+}
+function refreshGear(){
+  if(!document.getElementById("gMusic"))return;
+  // hudba se nastavuje níž ve skriptu, při prvním volání ještě nemusí existovat
+  try{$("gMusic").textContent=musicWanted?"🎵 Hudba: hraje":"🎵 Hudba: vypnutá";}catch(e){}
+  $("gSound").textContent=soundOn?"🔊 Zvuk: zapnutý":"🔇 Zvuk: vypnutý";
+  $("gVoice").textContent=voiceOn?"🗣️ Hlas: zapnutý":"🔇 Hlas: vypnutý";
+  $("gQuips").textContent=quipsOn?"💬 Hlášky: zapnuté":"🤐 Hlášky: vypnuté";
+}
+$("gearBtn").addEventListener("click",e=>{e.stopPropagation();gearOpen(!$("gearPanel").classList.contains("show"));});
+$("gearBack").addEventListener("click",()=>gearOpen(false));
+$("gMusic").addEventListener("click",e=>{e.stopPropagation();$("musicBtn").click();refreshGear();});
+$("gSound").addEventListener("click",e=>{e.stopPropagation();$("soundBtn").click();refreshGear();});
+$("gVoice").addEventListener("click",e=>{e.stopPropagation();toggleVoice();refreshGear();});
+$("gQuips").addEventListener("click",e=>{e.stopPropagation();$("quipBtnGame").click();refreshGear();});
+$("gQuit").addEventListener("click",e=>{e.stopPropagation();gearOpen(false);$("quitBtn").click();});
+
+
 refreshMenuBar();
 
 /* ===== AUTOMATICKÉ NAČTENÍ VLASTNÍCH OTÁZEK =====
