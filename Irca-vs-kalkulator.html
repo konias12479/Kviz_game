@@ -290,6 +290,7 @@
   </div>
   <button class="soundtoggle" id="soundBtn">🔊 Zvuk: zapnutý</button>
   <button class="soundtoggle" id="voiceBtn">🗣️ Hlas Kalkulátora: zapnutý</button>
+  <button class="soundtoggle" id="voiceCfgBtn">🎚️ Nastavení hlasu (hloubka, výběr hlasu)</button>
   <button class="soundtoggle" id="musicBtn">🎵 Hudba: zapnutá</button>
   <button class="soundtoggle" id="mixBtn">🔀 Školní otázky i v ostatních módech: vypnuto</button>
   <button class="soundtoggle" id="uploadBtn" style="border-color:rgba(255,207,63,.5);color:var(--neon-gold)">📂 Nahrát vlastní otázky (PDF / Word / TXT)</button>
@@ -316,6 +317,7 @@
         <button id="gSound">🔊 Zvuk: zapnutý</button>
         <button id="gVoice">🗣️ Hlas: zapnutý</button>
         <button id="gQuips">💬 Hlášky: zapnuté</button>
+        <button id="gVoiceCfg">🎚️ Nastavení hlasu…</button>
         <button class="quit" id="gQuit">✖ Ukončit hru a zpět do menu</button>
       </div>
     </div>
@@ -1629,17 +1631,33 @@ setInterval(()=>{
   const sv=$("calcsvg");if(!sv||sv.classList.contains("talking"))return;
   sv.classList.add("tap");setTimeout(()=>sv.classList.remove("tap"),700);
 },6500);
+/* Mužské hlasy pro češtinu telefony většinou vůbec nemají — Google i Apple
+   dodávají jen ženský. Proto: 1) hledáme mužský agresivněji a zkusíme i slovenštinu,
+   2) necháme uživatele hlas ručně vybrat, 3) posazením výšky níž hlas zmužštíme. */
+const MALE_RE=/anton|jakub|ondrej|ondřej|adam|petr|tomas|tomáš|martin|honza|jan\b|vojta|filip|lukas|lukáš|male|muž|muz|#male|_m_|-m-|\bm\b/i;
+function vsetting(k,d){const x=store["v_"+k];return (x===undefined||x===null)?d:x;}
+function pickVoice(){
+  if(!window.speechSynthesis)return null;
+  const all=speechSynthesis.getVoices()||[];
+  if(!all.length)return null;
+  const rucne=store.v_name&&all.find(v=>v.name===store.v_name);
+  if(rucne)return rucne;                                  // ruční volba má přednost
+  const cs=all.filter(v=>v.lang&&/^cs/i.test(v.lang));
+  const sk=all.filter(v=>v.lang&&/^sk/i.test(v.lang));    // slovenština čte česky srozumitelně
+  return cs.find(v=>MALE_RE.test(v.name))||sk.find(v=>MALE_RE.test(v.name))
+       ||cs.find(v=>/natural|neural|premium|enhanced/i.test(v.name))||cs[0]||sk[0]||null;
+}
 function speak(txt,chance=1){
   if(!voiceOn||!soundOn||!window.speechSynthesis||Math.random()>chance)return;
   try{
     let t=txt.replace(/[^\p{L}\p{N}\s.,!?%„“‚'’()–—-]/gu,"");
     for(const [re,sub] of PRON)t=t.replace(re,sub);
     const u=new SpeechSynthesisUtterance(t);
-    u.lang="cs-CZ";u.rate=0.94;u.pitch=0.8;u.volume=.95; // hlubší, volnější recitátorský přednes
-    const voices=speechSynthesis.getVoices().filter(v=>v.lang&&v.lang.toLowerCase().startsWith("cs"));
-    const v=voices.find(v=>/anton|jakub|ondrej|ondřej|adam|male|muž/i.test(v.name)) // přednostně mužský hlas, pokud existuje
-          ||voices.find(v=>/natural|neural|premium|enhanced|google/i.test(v.name))||voices[0];
-    if(v)u.voice=v;
+    u.lang="cs-CZ";u.volume=.95;
+    u.rate=vsetting("rate",0.94);
+    u.pitch=vsetting("pitch",IS_MOBILE?0.55:0.8); // na mobilu níž, tam bývá jen ženský hlas
+    const v=pickVoice();
+    if(v){u.voice=v;if(v.lang)u.lang=v.lang;}
     u.onstart=startTalking;
     u.onend=stopTalking;u.onerror=stopTalking;
     speechSynthesis.cancel();speechSynthesis.speak(u);
@@ -2807,6 +2825,68 @@ renderMenu();
 </html>
 `;
 /* ==== VERUNKA-KONEC ==== */
+/* ===== NASTAVENÍ HLASU ===== */
+function openVoiceCfg(){
+  const old=document.getElementById("vcOv");if(old)old.remove();
+  const d=document.createElement("div");
+  d.id="vcOv";
+  d.style.cssText="position:fixed;inset:0;z-index:998;background:rgba(8,8,26,.97);display:flex;flex-direction:column;align-items:center;justify-content:flex-start;padding:22px 16px;overflow:auto";
+  d.innerHTML='<div style="max-width:540px;width:100%;display:flex;flex-direction:column;gap:11px">'
+   +'<div style="font-weight:900;font-size:21px;color:var(--neon-gold)">🎚️ Nastavení hlasu Kalkulátora</div>'
+   +'<div id="vcInfo" style="font-size:12.5px;line-height:1.5;opacity:.85"></div>'
+   +'<label style="font-size:13px;font-weight:700">Hlas v tomto zařízení</label>'
+   +'<select id="vcSel" style="background:#1a1540;border:1px solid rgba(0,229,255,.45);border-radius:11px;padding:11px;color:#f2f0ff;font-family:inherit;font-size:14px"></select>'
+   +'<label style="font-size:13px;font-weight:700;margin-top:4px">Hloubka hlasu — <span id="vcPv"></span><br><span style="font-weight:400;font-size:11.5px;opacity:.75">Nižší číslo = hlubší, mužštější. Nejlepší výsledek bývá mezi 0,4 a 0,7.</span></label>'
+   +'<input type="range" id="vcPitch" min="0.1" max="1.6" step="0.05" style="width:100%">'
+   +'<label style="font-size:13px;font-weight:700;margin-top:4px">Tempo řeči — <span id="vcRv"></span></label>'
+   +'<input type="range" id="vcRate" min="0.5" max="1.4" step="0.02" style="width:100%">'
+   +'<button class="bigbtn" id="vcTest" style="margin-top:6px">🔊 Vyzkoušet, jak to zní</button>'
+   +'<button class="bigbtn alt" id="vcReset">Vrátit doporučené nastavení</button>'
+   +'<div style="font-size:12px;line-height:1.55;opacity:.8;background:rgba(255,255,255,.05);border-radius:11px;padding:11px;margin-top:4px">'
+   +'<b>Proč je hlas ženský?</b><br>Telefony a tablety mají pro češtinu od výroby jen ženský hlas — Google i Apple mužský nedodávají. Aplikace si ho nemůže vyrobit sama.<br><br>'
+   +'<b>Co s tím jde udělat:</b><br>1. Stáhnout hloubku posuvníkem — nejrychlejší cesta, hlas zní výrazně mužštěji.<br>'
+   +'2. Zkusit v seznamu <b>slovenský</b> hlas, pokud ho zařízení má. Češtinu přečte srozumitelně a bývá posazený jinak.<br>'
+   +'3. Na Androidu doinstalovat jiný převod textu na řeč s mužskou češtinou (například eSpeak NG) a přepnout na něj v <i>Nastavení → Usnadnění → Text na řeč</i>. Pak se objeví v seznamu výše.</div>'
+   +'<button class="bigbtn alt" id="vcBack">← Zpět</button></div>';
+  document.body.appendChild(d);
+  const naplnit=()=>{
+    const all=(window.speechSynthesis?speechSynthesis.getVoices():[])||[];
+    const cs=all.filter(v=>/^cs/i.test(v.lang||"")),sk=all.filter(v=>/^sk/i.test(v.lang||"")),
+          ost=all.filter(v=>!/^cs|^sk/i.test(v.lang||""));
+    const auto=pickVoice();
+    let o='<option value="">Automaticky'+(auto?" — nyní: "+auto.name:"")+'</option>';
+    const grp=(t,arr)=>arr.length?('<optgroup label="'+t+'">'+arr.map(v=>'<option value="'+v.name.replace(/"/g,"")+'"'+(store.v_name===v.name?" selected":"")+'>'+v.name+" ("+v.lang+")"+(MALE_RE.test(v.name)?" ♂":"")+'</option>').join("")+"</optgroup>"):"";
+    o+=grp("Čeština",cs)+grp("Slovenština — čte česky srozumitelně",sk)+grp("Ostatní jazyky",ost);
+    $("vcSel").innerHTML=o;
+    $("vcInfo").textContent=all.length
+      ? "Zařízení nabízí "+all.length+" hlasů, z toho pro češtinu "+cs.length+(sk.length?" a pro slovenštinu "+sk.length:"")+"."
+      : "Zařízení zatím nehlásí žádné hlasy. Zkus panel zavřít a otevřít znovu.";
+  };
+  naplnit();
+  if(window.speechSynthesis)speechSynthesis.onvoiceschanged=naplnit;
+  const p=$("vcPitch"),r=$("vcRate");
+  p.value=vsetting("pitch",IS_MOBILE?0.55:0.8);r.value=vsetting("rate",0.94);
+  const popisky=()=>{$("vcPv").textContent=(+p.value).toFixed(2).replace(".",",");$("vcRv").textContent=(+r.value).toFixed(2).replace(".",",");};
+  popisky();
+  const uloz=()=>{store.v_pitch=+p.value;store.v_rate=+r.value;store.v_name=$("vcSel").value||null;save();popisky();};
+  p.addEventListener("input",uloz);r.addEventListener("input",uloz);
+  $("vcSel").addEventListener("change",()=>{uloz();zkouska();});
+  function zkouska(){ // ukázka zazní i když je hlas nebo zvuk zrovna vypnutý
+    const pv=voiceOn,ps=soundOn;
+    voiceOn=true;soundOn=true;
+    speak("Vojíne Poslušný, tady Kalkulátor. Takhle teď zním.");
+    voiceOn=pv;soundOn=ps;
+  }
+  $("vcTest").addEventListener("click",()=>{voiceOn=true;store.voice=true;save();refreshVoiceBtns();zkouska();});
+  $("vcReset").addEventListener("click",()=>{
+    store.v_pitch=IS_MOBILE?0.55:0.8;store.v_rate=0.94;store.v_name=null;save();
+    p.value=store.v_pitch;r.value=store.v_rate;naplnit();popisky();zkouska();
+  });
+  $("vcBack").addEventListener("click",()=>{if(window.speechSynthesis)speechSynthesis.onvoiceschanged=null;d.remove();});
+}
+$("voiceCfgBtn").addEventListener("click",openVoiceCfg);
+$("gVoiceCfg").addEventListener("click",e=>{e.stopPropagation();gearOpen(false);openVoiceCfg();});
+
 function openVerunka(){
   const f=$("vFrame");
   if(!f.dataset.loaded){f.srcdoc=VERUNKA_HTML;f.dataset.loaded="1";}
