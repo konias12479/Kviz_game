@@ -1841,7 +1841,13 @@ function renderQ(){
   });
   calcFace(Math.random()<.4?"squint":"neutral");
   if(G.mode==="tata"){
-    speak(Q.q); // v módu Pro Tátu Kalkulátor otázku předčítá
+    speak(Q.q); // v módu Pro Tátu se otázka předčítá vždycky
+  }else if(G.mode==="adelka"){
+    // ve školním módu se předčítá zhruba 60 % otázek — učí se líp, když je i slyší
+    if(Math.random()<.6)speak(Q.q);
+    else if(quipsOn&&Math.random()<.25){
+      const t=pickQuip(Math.random()<.5?"tension":"funny");bubble(t,2600);speak(t,.4);
+    }
   }else if(quipsOn&&Math.random()<.35){
     const t=pickQuip(Math.random()<.5?"tension":"funny");bubble(t,2600);speak(t,.4);
   }
