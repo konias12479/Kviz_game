@@ -222,7 +222,9 @@
     <button class="mode" data-mode="duel"><span class="ic">⚡</span><div><b>Rychlý duel</b><span>60 sekund. Kolik toho stihneš?</span></div></button>
     <button class="mode" data-mode="kalkulator"><span class="ic">🧮</span><div><b>Kalkulátor mód</b><span>Jen tříhvězdičkové otázky. Dvojnásobné XP.</span></div></button>
     <button class="mode" data-mode="legendy"><span class="ic">🇨🇿</span><div><b>České legendy</b><span>Česká kultura, filmy, historie a sport. Bez lehkých otázek.</span></div></button>
+    <button class="mode" data-mode="irca"><span class="ic">👩</span><div><b>Otázky Irča</b><span>Otázky ke zkouškám — načtou se samy ze souboru.</span></div></button>
     <button class="mode" data-mode="vlastni"><span class="ic">📂</span><div><b>Moje otázky</b><span>Hraje se jen z tvých nahraných otázek.</span></div></button>
+    <button class="mode" data-mode="ucit"><span class="ic">🎓</span><div><b>Pojď se učit</b><span>Napiš téma a Claude ti připraví učící kvíz.</span></div></button>
     <button class="mode" data-mode="tata"><span class="ic">👨</span><div><b>Pro Tátu</b></div></button>
   </div>
   <button class="soundtoggle" id="soundBtn">🔊 Zvuk: zapnutý</button>
@@ -1620,22 +1622,36 @@ const MODES={
   kalkulator:{name:"Kalkulátor mód",time:18,xpMult:2},
   legendy:{name:"České legendy",time:12,xpMult:1.5},
   vlastni:{name:"Moje otázky",time:15,xpMult:1},
+  irca:{name:"Otázky Irča",time:15,xpMult:1},
+  ucit:{name:"Pojď se učit",time:20,xpMult:1},
   tata:{name:"Pro Tátu",time:30,xpMult:1}
 };
 const MIL_RE=/pluk|tank|vojen|vojn|kasárn|ČSLA|major|důstoj|voják|vojín|služn|přísah|MiG|letec|divi[zs]|kanad|rajón|mazák|bažant|budíček|žold|hodnost|OT-|T-5|Dukl|zbraní SS|Milovic|Vltava 1966|nárameník|uniform|zupák|štáb/i;
 let G=null, timerInt=null;
 
 function buildDeck(mode){
-  const base=QUESTIONS.filter(x=>mixCustom||(x.k!=="Vlastní"&&x.k!=="Pro Tátu")); // speciální sady jen ve svých módech
+  const base=QUESTIONS.filter(x=>x.k!=="Pro Tátu"&&x.k!=="Učení"&&(mixCustom||(x.k!=="Vlastní"&&x.k!=="Irča"))); // speciální sady jen ve svých módech
   const d1=shuffle(base.filter(x=>x.d===1)), d2=shuffle(base.filter(x=>x.d===2)), d3=shuffle(base.filter(x=>x.d===3));
   if(mode==="klasik") return [...d1.slice(0,1),...d2.slice(0,6),...d3.slice(0,13)];
   if(mode==="kalkulator") return d3.slice(0,12);
   if(mode==="legendy") return shuffle(base.filter(x=>x.cz&&x.d>=2)).slice(0,15);
   if(mode==="vlastni") return shuffle(QUESTIONS.filter(x=>x.k==="Vlastní"));
+  if(mode==="irca") return shuffle(QUESTIONS.filter(x=>x.k==="Irča"));
+  if(mode==="ucit") return shuffle(QUESTIONS.filter(x=>x.k==="Učení"));
   if(mode==="tata"){ // nejdřív žatecký pluk a vojna, pak ostatní vzpomínky — 18 otázek
+    // otázky se neopakují, dokud se nevyčerpá celá zásoba (pamatuje se i mezi hrami)
     const qs=QUESTIONS.filter(x=>x.k==="Pro Tátu");
-    const mil=shuffle(qs.filter(x=>MIL_RE.test(x.q))).slice(0,8);
-    const rest=shuffle(qs.filter(x=>!MIL_RE.test(x.q))).slice(0,10);
+    if(!Array.isArray(store.tataSeen))store.tataSeen=[];
+    const seen=new Set(store.tataSeen);
+    const pickFresh=(arr,n)=>{
+      let fresh=arr.filter(x=>!seen.has(x.q));
+      if(fresh.length<n){arr.forEach(x=>seen.delete(x.q));fresh=arr.slice();} // vyčerpáno → nové kolo
+      return shuffle(fresh).slice(0,n);
+    };
+    const mil=pickFresh(qs.filter(x=>MIL_RE.test(x.q)),8);
+    const rest=pickFresh(qs.filter(x=>!MIL_RE.test(x.q)),10);
+    [...mil,...rest].forEach(x=>seen.add(x.q));
+    store.tataSeen=[...seen];save();
     return [...mil,...rest];
   }
   return shuffle(base.filter(x=>x.d>=2)); // duel — bez lehkých otázek
@@ -1646,6 +1662,14 @@ function startGame(mode){
     alert("Zatím nemáš žádné vlastní otázky. Nahraj je tlačítkem „📂 Nahrát vlastní otázky“ dole v menu.");
     return;
   }
+  if(mode==="irca"&&!QUESTIONS.some(x=>x.k==="Irča")){
+    alert("Otázky Irča se načítají ze souboru moje-otazky.txt — na webu se načtou samy, zkus to za chviličku.");
+    return;
+  }
+  if(mode==="ucit"&&!QUESTIONS.some(x=>x.k==="Učení")){
+    alert("Zatím tu žádný učící kvíz není. Klikni na Pojď se učit a připrav si zadání pro Clauda.");
+    return;
+  }
   if(mode==="tata"&&!QUESTIONS.some(x=>x.k==="Pro Tátu")){
     alert("Otázky „Pro Tátu“ se načítají ze souboru pro-tatu.txt vedle hry — na webu se načtou samy.");
     return;
@@ -1653,7 +1677,7 @@ function startGame(mode){
   const c=ac(); if(c&&c.state==="suspended")c.resume();
   const deck=buildDeck(mode);
   G={mode,deck,i:0,score:0,streak:0,best:0,jokerUsed:false,
-     total:mode==="duel"?Infinity:(mode==="vlastni"||mode==="tata"?deck.length:(mode==="klasik"?20:(mode==="legendy"?15:(mode==="kalkulator"?12:10)))),
+     total:mode==="duel"?Infinity:(["vlastni","tata","irca","ucit"].includes(mode)?deck.length:(mode==="klasik"?20:(mode==="legendy"?15:(mode==="kalkulator"?12:10)))),
      timeLeft:MODES[mode].time, answered:0};
   $("jokerBtn").disabled=false;
   showScreen("game");
@@ -1675,7 +1699,7 @@ function startDuelTimer(){
 function startQTimer(){
   if(G.mode==="duel")return;
   clearInterval(timerInt);
-  const max=MODES[G.mode].time*(G.curQ&&G.curQ.k==="Vlastní"?2:1); // vlastní otázky = dvojnásobný čas
+  const max=MODES[G.mode].time*(G.curQ&&(G.curQ.k==="Vlastní"||G.curQ.k==="Irča")?2:1); // vlastní otázky = dvojnásobný čas
   G.timeLeft=max;
   updateTimer(G.timeLeft,max);
   timerInt=setInterval(()=>{
@@ -1949,7 +1973,7 @@ function refreshMenuBar(){
 }
 
 /* ================= UDÁLOSTI ================= */
-document.querySelectorAll(".mode").forEach(b=>b.addEventListener("click",()=>startGame(b.dataset.mode)));
+document.querySelectorAll(".mode").forEach(b=>b.addEventListener("click",()=>{if(b.dataset.mode==="ucit"){openUcit();return;}startGame(b.dataset.mode)}));
 document.querySelectorAll(".ans").forEach(b=>b.addEventListener("click",()=>onAnswer(+b.dataset.i)));
 $("jokerBtn").addEventListener("click",useJoker);
 $("confirmBtn").addEventListener("click",confirmMulti);
@@ -2022,7 +2046,7 @@ let musicWanted=true;
 const ALL_TRACKS=[bgAudio,vlastniAudio,hraAudio,tataAudio];
 function currentTrack(){ // menu a výsledky = initial, hra = hra.mp3, Moje otázky = vlastní
   if(G&&$("game").classList.contains("active"))
-    return G.mode==="vlastni"?vlastniAudio:(G.mode==="tata"?tataAudio:hraAudio);
+    return (G.mode==="vlastni"||G.mode==="irca"||G.mode==="ucit")?vlastniAudio:(G.mode==="tata"?tataAudio:hraAudio);
   return bgAudio;
 }
 function showEnterOverlay(){ // prohlížeč blokuje zvuk do prvního kliknutí → uvítací brána
@@ -2061,12 +2085,57 @@ refreshMenuBar();
    načte se sám — sekce „Moje otázky“ je pak rovnou plná. */
 fetch("moje-otazky.txt")
   .then(r=>r.ok?r.text():null)
-  .then(t=>{if(t){const qs=parseCustom(t);if(qs.length)QUESTIONS.push(...qs);}})
+  .then(t=>{if(t){const qs=parseCustom(t,"Irča","👩");if(qs.length)QUESTIONS.push(...qs);}})
   .catch(()=>{});
 fetch("pro-tatu.txt")
   .then(r=>r.ok?r.text():null)
   .then(t=>{if(t){const qs=parseCustom(t,"Pro Tátu","👨");if(qs.length)QUESTIONS.push(...qs);}})
   .catch(()=>{}); // lokálně (file://) se tiše přeskočí
+fetch("ucit.txt")
+  .then(r=>r.ok?r.text():null)
+  .then(t=>{if(t){const qs=parseCustom(t,"Učení","🎓");if(qs.length){QUESTIONS.push(...qs);refreshUcitStav();}}})
+  .catch(()=>{});
+
+/* ===== POJĎ SE UČIT — panel ===== */
+function refreshUcitStav(){
+  const el=document.getElementById("ucitStav");
+  if(!el)return;
+  const n=QUESTIONS.filter(x=>x.k==="Učení").length;
+  el.textContent=n?("📚 Načteno "+n+" učících otázek (soubor ucit.txt). Můžeš spustit kvíz!"):"📚 Zatím žádný učící kvíz — připrav si ho níže.";
+}
+function openUcit(){
+  const ex=document.getElementById("ucitOv");
+  if(ex){ex.style.display="flex";refreshUcitStav();return;}
+  const d=document.createElement("div");
+  d.id="ucitOv";
+  d.style.cssText="position:fixed;inset:0;z-index:998;background:rgba(8,8,26,.97);display:flex;flex-direction:column;align-items:center;justify-content:flex-start;padding:22px 16px;overflow:auto";
+  d.innerHTML='<div style="max-width:560px;width:100%;display:flex;flex-direction:column;gap:12px">'
+   +'<div style="font-weight:900;font-size:22px;color:#ffcf3f">🎓 Pojď se učit</div>'
+   +'<div id="ucitStav" style="font-size:13px;opacity:.85"></div>'
+   +'<button id="ucitPlay" style="background:linear-gradient(90deg,#00e5ff,#2b6cff);border:none;border-radius:22px;padding:13px 20px;font-family:inherit;font-weight:900;font-size:15px;color:#01102a;cursor:pointer">▶ Spustit učící kvíz</button>'
+   +'<div style="font-size:13px;line-height:1.55;opacity:.92">Chceš nové téma? Napiš dole, <b>co se chceš naučit</b> — čím víc detailů, tím lepší kvíz: téma, úroveň (začátečník/pokročilý), na co se zaměřit, kolik otázek, jestli chceš vysvětlení. Pak zmáčkni tlačítko níže, <b>zadání se zkopíruje</b> — vlož ho Claudovi do chatu v aplikaci Claude. Claude se doptá na detaily, ověří si fakta na webu, kvíz nahraje sem do hry a pak stačí <b>obnovit stránku</b>.</div>'
+   +'<textarea id="ucitTxt" rows="5" placeholder="Např.: Chci se naučit dějiny Karla IV. Úroveň středoškolák, zaměř se na letopočty a stavby, 25 otázek s vysvětleními." style="background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.25);border-radius:12px;padding:10px;color:#fff;font-family:inherit;font-size:14px;resize:vertical"></textarea>'
+   +'<button id="ucitGen" style="background:linear-gradient(90deg,#ffcf3f,#ffb03f);border:none;border-radius:22px;padding:13px 20px;font-family:inherit;font-weight:900;font-size:15px;color:#221a00;cursor:pointer">📋 Připravit zadání pro Clauda a zkopírovat</button>'
+   +'<div id="ucitOut" style="display:none;white-space:pre-wrap;font-size:12px;background:rgba(255,255,255,.06);border-radius:12px;padding:10px;max-height:200px;overflow:auto"></div>'
+   +'<button id="ucitBack" style="background:none;border:1px solid rgba(255,255,255,.3);border-radius:22px;padding:11px 20px;font-family:inherit;font-weight:700;font-size:14px;color:#fff;cursor:pointer">← Zpět do menu</button>'
+   +'</div>';
+  document.body.appendChild(d);
+  refreshUcitStav();
+  document.getElementById("ucitBack").addEventListener("click",()=>{d.style.display="none"});
+  document.getElementById("ucitPlay").addEventListener("click",()=>{
+    if(!QUESTIONS.some(x=>x.k==="Učení")){alert("Zatím tu žádný učící kvíz není. Napiš téma níže a pošli zadání Claudovi.");return;}
+    d.style.display="none";startGame("ucit");
+  });
+  document.getElementById("ucitGen").addEventListener("click",()=>{
+    const t=document.getElementById("ucitTxt").value.trim();
+    if(!t){alert("Nejdřív napiš, co se chceš naučit.");return;}
+    const p="Ahoj Claude! Připrav mi prosím učící kvíz do hry Pomsta Kalkulátora.\n\nTÉMA A POŽADAVKY:\n"+t
+     +"\n\nÚKOL:\n1) Pokud ti chybí detaily (úroveň, rozsah, zaměření, počet otázek), nejdřív se mě doptej.\n2) Ověř si fakta na webu.\n3) Vytvoř kvízové otázky, každou na jeden řádek ve formátu:\nOtázka?;správná odpověď;špatná;špatná(;špatná)\n— více správných odpovědí označ hvězdičkou: *odpověď\n— na konec řádku můžeš přidat vysvětlení: ;~krátké vysvětlení\n4) Výsledek ulož jako soubor ucit.txt do GitHub repozitáře konias12479/Kviz_game (nahraď jeho obsah) a pushni. Ve hře se pak po obnovení stránky objeví v módu Pojď se učit.";
+    const out=document.getElementById("ucitOut");out.style.display="block";out.textContent=p;
+    (navigator.clipboard&&navigator.clipboard.writeText?navigator.clipboard.writeText(p):Promise.reject())
+      .then(()=>alert("✅ Zadání zkopírováno! Vlož ho Claudovi do chatu."),()=>alert("Zadání je vypsané na obrazovce — zkopíruj ho ručně."));
+  });
+}
 </script>
 </body>
 </html>
