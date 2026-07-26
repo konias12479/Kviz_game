@@ -72,6 +72,9 @@ color:var(--chalk-dim);margin-bottom:10px}
 .fb{padding:12px;border-radius:11px;margin-top:12px;font-size:15px;font-weight:700;text-align:center;animation:fade .3s}
 .fb.ok{background:rgba(110,231,160,.16);color:var(--green);border:1px solid rgba(110,231,160,.4)}
 .fb.no{background:rgba(255,216,77,.13);color:var(--gold);border:1px solid rgba(255,216,77,.4)}
+.speed{width:100%;background:rgba(255,255,255,.05);border:1px dashed rgba(244,241,232,.28);border-radius:11px;
+padding:9px;color:var(--chalk-dim);font-size:12.5px;font-weight:700;margin-bottom:12px}
+.speed.on{background:rgba(127,227,255,.13);border:1px solid rgba(127,227,255,.55);color:var(--cyan)}
 .tag{display:inline-block;font-size:11px;letter-spacing:1.2px;text-transform:uppercase;font-weight:800;
 color:var(--pink);margin-bottom:7px}
 svg.vis{display:block;max-width:100%;height:auto;margin:12px auto}
@@ -112,7 +115,7 @@ svg.vis{display:block;max-width:100%;height:auto;margin:12px auto}
   </button>
   <button class="card" onclick="startUlohy()">
     <b>✏️ Chci to zkusit</b>
-    <span>Jdeš rovnou na úlohy. Postup se ti vždycky ukáže na tabuli po odpovědi — ať odpovíš správně, nebo ne.</span>
+    <span>Jdeš rovnou na úlohy. Po odpovědi si můžeš nechat ukázat postup na tabuli — nebo rovnou pokračovat dál. Když látku umíš, zapni si u úloh ⏩ rychlý režim a poletíš.</span>
   </button>
   <button class="btn sec" onclick="go('menu')">← Zpět na okruhy</button>
 </div>
@@ -137,6 +140,7 @@ svg.vis{display:block;max-width:100%;height:auto;margin:12px auto}
 <!-- ===== ÚLOHA ===== -->
 <div class="screen" id="s-uloha">
   <div class="qhead"><span id="ulOkruh"></span><span class="pill" id="ulPoc"></span></div>
+  <button class="speed" id="ulSpeed" onclick="toggleRychly()"></button>
   <div class="board">
     <div class="chalkline">📝</div>
     <div class="tag" id="ulTag">Úloha</div>
@@ -146,6 +150,7 @@ svg.vis{display:block;max-width:100%;height:auto;margin:12px auto}
   <div id="ulAns" style="margin-top:14px"></div>
   <div id="ulFb"></div>
   <button class="btn cy" id="ulShow" style="display:none" onclick="showTabule()">🧑‍🏫 Ukaž postup na tabuli</button>
+  <button class="btn" id="ulNext" style="display:none" onclick="dalsiUloha()">Pokračovat na další úlohu →</button>
   <button class="btn sec" onclick="go('menu')">Zpět na okruhy</button>
 </div>
 
@@ -479,6 +484,15 @@ let S={done:{},ok:0,total:0};
 try{const s=localStorage.getItem("verunka_save");if(s)S=JSON.parse(s);}catch(e){}
 function save(){try{localStorage.setItem("verunka_save",JSON.stringify(S))}catch(e){}}
 let O=null,ui=0,vi=0,ki=0,odpovezeno=false;
+if(S.rychly===undefined)S.rychly=false;
+function toggleRychly(){S.rychly=!S.rychly;save();kresliSpeed();if(!odpovezeno)renderUloha();}
+function kresliSpeed(){
+  const b=$("ulSpeed");if(!b)return;
+  b.classList.toggle("on",!!S.rychly);
+  b.textContent=S.rychly
+    ?"⏩ Rychlý režim: ZAPNUTÝ — správná odpověď rovnou přeskočí na další úlohu"
+    :"⏩ Rychlý režim: vypnutý — umíš to? Klepni a zrychli si to";
+}
 
 function go(n){document.querySelectorAll(".screen").forEach(x=>x.classList.remove("on"));$("s-"+n).classList.add("on");window.scrollTo(0,0);}
 
@@ -535,14 +549,15 @@ function renderUloha(){
   $("ulPoc").textContent="Úloha "+(ui+1)+"/"+O.ulohy.length;
   $("ulQ").textContent=u.q;
   $("ulVis").innerHTML=u.svg||"";
-  $("ulFb").innerHTML="";$("ulShow").style.display="none";
+  $("ulFb").innerHTML="";$("ulShow").style.display="none";$("ulNext").style.display="none";
+  kresliSpeed();
   if(u.typ==="choice"){
     $("ulAns").innerHTML=u.moz.map((m,i)=>'<button class="ans" data-i="'+i+'"><span class="k">'+"ABCD"[i]+'</span>'+m+'</button>').join("");
     document.querySelectorAll("#ulAns .ans").forEach(b=>b.addEventListener("click",()=>volba(+b.dataset.i)));
   }else{
     $("ulAns").innerHTML='<input type="text" id="ulIn" inputmode="text" autocomplete="off" placeholder="sem napiš výsledek">'
       +'<div class="hintline">Stačí samotné číslo, například 6 nebo 30</div>'
-      +'<button class="btn" id="ulChk">Zkontrolovat</button>';
+      +'<button class="btn" id="ulChk">'+(S.rychly?"Zkontrolovat a pokračovat ⏩":"Zkontrolovat")+'</button>';
     $("ulChk").addEventListener("click",kontrola);
     $("ulIn").addEventListener("keydown",e=>{if(e.key==="Enter")kontrola()});
   }
@@ -569,10 +584,19 @@ function kontrola(){
 }
 function hotovo(spravne){
   zapis(spravne);
+  // rychlý režim: správná odpověď = rovnou dál, tabule se nezdržuje
+  if(spravne&&S.rychly){
+    $("ulFb").innerHTML='<div class="fb ok">✅ Správně — jedeme dál</div>';
+    setTimeout(()=>{if(document.getElementById("s-uloha").classList.contains("on"))dalsiUloha();},620);
+    return;
+  }
   $("ulFb").innerHTML='<div class="fb '+(spravne?"ok":"no")+'">'
     +(spravne?"✅ Správně! Přesně tak.":"🤔 Tentokrát ne. Nevadí — pojď se podívat, jak na to.")+"</div>";
   $("ulShow").style.display="block";
   $("ulShow").textContent=spravne?"🧑‍🏫 Ukaž postup na tabuli":"🧑‍🏫 Vysvětli mi to na tabuli";
+  // chybu si vždycky projdeme, ale i tak nechávám cestu dál
+  $("ulNext").style.display="block";
+  $("ulNext").textContent=spravne?"Pokračovat na další úlohu →":"Přeskočit a jít dál →";
 }
 /* ================= TABULE ================= */
 function showTabule(){
