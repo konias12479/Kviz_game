@@ -1,0 +1,566 @@
+# Adélka škola — Aplikovaná chemie 28-44-M/01, 2. ročník
+# VOŠZ a SZŠ Praha 1, Alšovo nábřeží 6
+# Formát: Otázka?;správná;špatná;špatná(;špatná);~vysvětlení
+
+#TÉMA: Organická chemie — základy a vazby
+Který prvek je základem všech organických sloučenin?;uhlík;dusík;křemík;kyslík;~Uhlík umí vytvářet čtyři vazby a řetězit se, proto zvládne miliony sloučenin.
+Kolik vazeb tvoří uhlík ve stabilních organických sloučeninách?;čtyři;dvě;tři;šest;~Uhlík je čtyřvazný, má čtyři valenční elektrony.
+Jaká je elektronová konfigurace valenční vrstvy uhlíku?;2s2 2p2;2s2 2p4;2s1 2p3;3s2 3p2;~Čtyři valenční elektrony ve druhé slupce.
+Kterou hybridizaci má uhlík v methanu?;sp3;sp2;sp;bez hybridizace;~Čtyři jednoduché vazby, tvar tetraedru.
+Kterou hybridizaci má uhlík v ethenu?;sp2;sp3;sp;sp3d;~Dvojná vazba znamená tři sigma vazby v rovině.
+Kterou hybridizaci má uhlík v ethynu?;sp;sp2;sp3;sp3d2;~Trojná vazba, molekula je lineární.
+Jaký je vazebný úhel u hybridizace sp3?;109,5°;120°;180°;90°;~Tetraedrické uspořádání dává úhel 109,5 stupně.
+Jaký je vazebný úhel u hybridizace sp2?;120°;109,5°;180°;60°;~Trigonálně planární tvar, tři vazby v rovině.
+Jaký je vazebný úhel u hybridizace sp?;180°;120°;109,5°;90°;~Lineární uspořádání, například u acetylenu.
+Z čeho se skládá dvojná vazba?;z jedné sigma a jedné pí vazby;ze dvou sigma vazeb;ze dvou pí vazeb;ze tří sigma vazeb;~Sigma vazba je pevná, pí vazba je slabší a reaktivnější.
+Z čeho se skládá trojná vazba?;z jedné sigma a dvou pí vazeb;ze tří sigma vazeb;ze dvou sigma a jedné pí;ze tří pí vazeb;~Proto je trojná vazba nejkratší a nejpevnější.
+Která vazba je pevnější?;sigma;pí;obě stejně;delta;~Sigma vazba vzniká čelním překryvem orbitalů, pí bočním.
+Jak se nazývá vzorec, který ukazuje jen počty atomů?;sumární (molekulový);strukturní;racionální;elektronový;~Například C2H6O, ale neřekne nám, jestli jde o ethanol nebo dimethylether.
+Jaký vzorec zapisuje CH3-CH2-OH?;racionální;sumární;empirický;stechiometrický;~Zkrácený strukturní vzorec ukazuje uspořádání skupin.
+Co udává empirický vzorec?;nejjednodušší poměr atomů;přesný počet atomů;prostorové uspořádání;molární hmotnost;~Například pro glukosu C6H12O6 je empirický vzorec CH2O.
+Jaký typ vazby převládá v organických sloučeninách?;kovalentní;iontová;kovová;vodíková;~Uhlík sdílí elektronové páry, netvoří ionty.
+Co je to homologická řada?;řada sloučenin lišících se o skupinu CH2;řada izomerů;řada solí;řada katalyzátorů;~Například methan, ethan, propan — vlastnosti se mění pozvolna.
+Co znamená pojem uhlovodíkový zbytek?;část molekuly po odtržení vodíku;celá molekula uhlovodíku;funkční skupina;anorganický zbytek;~Například z methanu vznikne methyl CH3-.
+Jak se značí obecně uhlovodíkový zbytek?;R;X;Z;Q;~Písmeno R zastupuje jakýkoli alkyl nebo aryl.
+Co je funkční skupina?;atom nebo skupina určující vlastnosti látky;jakýkoli uhlík v řetězci;počet vazeb;izomer;~Funkční skupina rozhoduje o chemickém chování celé sloučeniny.
+Jak se nazývá uhlík vázaný na jeden další uhlík?;primární;sekundární;terciární;kvartérní;~Podle počtu sousedních uhlíků rozlišujeme primární až kvartérní.
+Jak se nazývá uhlík vázaný na tři další uhlíky?;terciární;primární;sekundární;kvartérní;~Terciární uhlík má tři uhlíkové sousedy a jeden vodík.
+Co je to konstituce molekuly?;pořadí a způsob spojení atomů;prostorové uspořádání;počet elektronů;molární hmotnost;~Konstituce popisuje, co je na co navázané.
+Co znamená nasycený uhlovodík?;obsahuje jen jednoduché vazby;obsahuje dvojnou vazbu;obsahuje trojnou vazbu;je aromatický;~Nasycené uhlovodíky jsou alkany a cykloalkany.
+Co znamená nenasycený uhlovodík?;obsahuje násobnou vazbu;obsahuje jen sigma vazby;obsahuje kyslík;je vždy cyklický;~Alkeny, alkyny a areny jsou nenasycené.
+Který uhlovodík je nejjednodušší?;methan;ethan;ethen;benzen;~Methan CH4 má jediný uhlík.
+Co je to katenace?;schopnost atomů se řetězit;štěpení řetězce;tvorba iontů;oxidace;~Uhlík má schopnost katenace mimořádně vyvinutou.
+Jaké je názvosloví organických sloučenin celosvětově řízeno?;IUPAC;ISO;ČSN;DIN;~Mezinárodní unie pro čistou a užitou chemii stanovuje pravidla.
+Co určuje hlavní řetězec v názvosloví?;nejdelší řetězec s hlavní funkční skupinou;nejkratší řetězec;řetězec s nejvíce vodíky;libovolný řetězec;~Hlavní řetězec dává základ názvu.
+Jak číslujeme hlavní řetězec?;tak, aby substituenty měly nejnižší lokanty;vždy zleva;vždy zprava;podle abecedy;~Cílem je nejnižší možná čísla poloh.
+
+#TÉMA: Organická chemie — izomerie
+Co jsou izomery?;látky se stejným sumárním vzorcem, ale jinou strukturou;látky se stejnou strukturou;látky se stejnou hmotností;látky ze stejné suroviny;~Například butan a isobutan mají oba C4H10.
+Jak se dělí izomerie?;na konstituční a prostorovou;na pevnou a kapalnou;na kyselou a zásaditou;na rychlou a pomalou;~Konstituční se liší pořadím vazeb, prostorová uspořádáním.
+Co je řetězová izomerie?;liší se tvarem uhlíkatého řetězce;liší se polohou skupiny;liší se funkční skupinou;liší se prostorově;~Butan versus 2-methylpropan.
+Co je polohová izomerie?;liší se umístěním funkční skupiny;liší se délkou řetězce;liší se typem skupiny;liší se prostorově;~Propan-1-ol versus propan-2-ol.
+Co je funkční izomerie?;liší se druhem funkční skupiny;liší se jen polohou;liší se počtem uhlíků;liší se prostorově;~Ethanol a dimethylether mají oba C2H6O.
+Co je tautomerie?;rovnováha mezi dvěma izomery lišícími se polohou vodíku;stálá směs solí;typ oxidace;druh polymerace;~Klasickým příkladem je keto-enol tautomerie.
+Jak se jinak říká prostorové izomerii?;stereoizomerie;konstituční izomerie;tautomerie;mesomerie;~Stereoizomery mají stejné pořadí vazeb, jiné uspořádání v prostoru.
+Na čem je založena cis-trans izomerie?;na omezené rotaci kolem dvojné vazby;na volné rotaci;na chiralitě;na počtu uhlíků;~Pí vazba brání otáčení, substituenty zůstanou na jedné nebo opačné straně.
+Co znamená označení cis?;substituenty jsou na stejné straně dvojné vazby;na opačných stranách;v jedné rovině;kolmo na sebe;~Latinsky cis znamená na této straně.
+Co znamená označení trans?;substituenty jsou na opačných stranách;na stejné straně;nad sebou;v jedné přímce;~Trans izomery bývají obvykle stabilnější.
+Které písmeno označuje cis podle E-Z názvosloví?;Z;E;R;S;~Z je z německého zusammen, tedy dohromady.
+Které písmeno označuje trans podle E-Z názvosloví?;E;Z;R;S;~E je z německého entgegen, tedy naproti.
+Co je chiralita?;vlastnost molekuly nesouměřitelné se svým zrcadlovým obrazem;souměrnost molekuly;schopnost hořet;polarita vazby;~Chirální molekula se nedá ztotožnit se svým odrazem, jako pravá a levá ruka.
+Co je asymetrický uhlík?;uhlík se čtyřmi různými substituenty;uhlík se čtyřmi vodíky;uhlík v cyklu;uhlík s dvojnou vazbou;~Bývá označován hvězdičkou a je zdrojem optické aktivity.
+Co jsou enantiomery?;zrcadlové izomery, které nelze ztotožnit;stejné molekuly;izomery lišící se řetězcem;polymery;~Liší se jen směrem stáčení roviny polarizovaného světla.
+Co je racemická směs?;směs obou enantiomerů v poměru 1:1;čistý jeden enantiomer;směs polymerů;směs solí;~Racemát je opticky neaktivní, účinky se ruší.
+Čím se měří optická aktivita?;polarimetrem;refraktometrem;spektrofotometrem;pH metrem;~Polarimetr měří úhel stočení roviny polarizovaného světla.
+Proč je chiralita důležitá ve farmacii?;enantiomery mohou mít různý účinek na organismus;nemá žádný význam;ovlivňuje jen barvu;mění molární hmotnost;~Jeden enantiomer může léčit a druhý být neúčinný nebo škodlivý.
+Co jsou diastereomery?;stereoizomery, které nejsou zrcadlové obrazy;zrcadlové obrazy;konstituční izomery;stejné látky;~Mají odlišné fyzikální vlastnosti, dají se oddělit destilací.
+Kolik stereoizomerů má molekula se dvěma různými chirálními centry?;čtyři;dva;osm;jeden;~Počet je 2 na n, kde n je počet chirálních center.
+Co je konformace?;prostorové uspořádání vzniklé otáčením kolem jednoduché vazby;pevná struktura;typ vazby;izomer řetězce;~Konformace přecházejí jedna v druhou bez štěpení vazeb.
+Která konformace ethanu je nejstabilnější?;nezákrytová;zákrytová;planární;lineární;~V nezákrytové konformaci jsou vodíky nejdál od sebe.
+Která konformace cyklohexanu je nejstabilnější?;židličková;vaničková;planární;zkřížená;~Židličková konformace nemá pnutí ve vazebných úhlech.
+Kolik izomerů má butan?;dva;tři;čtyři;jeden;~Butan a 2-methylpropan.
+Kolik konstitučních izomerů má pentan?;tři;dva;čtyři;pět;~Pentan, 2-methylbutan a 2,2-dimethylpropan.
+
+#TÉMA: Organická chemie — alkany a cykloalkany
+Jaký je obecný vzorec alkanů?;CnH2n+2;CnH2n;CnH2n-2;CnHn;~Nasycený řetězec má maximum vodíků.
+Jakou příponu mají alkany?;-an;-en;-yn;-ol;~Ethan, propan, butan.
+Jak se nazývá alkan se třemi uhlíky?;propan;ethan;butan;methan;~Propan je hlavní složkou propan-butanových bomb.
+Jak se nazývá alkan s pěti uhlíky?;pentan;butan;hexan;heptan;~Pent- je řecká předpona pro pět.
+Jak se nazývá alkan s osmi uhlíky?;oktan;heptan;nonan;hexan;~Podle oktanu se odvozuje oktanové číslo benzinu.
+V jakém skupenství jsou první čtyři alkany za normálních podmínek?;plynném;kapalném;pevném;kašovitém;~Methan až butan jsou plyny, od pentanu kapaliny.
+Jak se mění teplota varu alkanů s délkou řetězce?;roste;klesá;nemění se;kolísá náhodně;~Delší řetězec znamená silnější van der Waalsovy síly.
+Jak se mění teplota varu s větvením řetězce?;klesá;roste;nemění se;zdvojnásobí se;~Rozvětvená molekula má menší povrch pro mezimolekulové síly.
+Jsou alkany rozpustné ve vodě?;ne, jsou nepolární;ano, dobře;jen za tepla;jen v kyselinách;~Platí pravidlo podobné se rozpouští v podobném.
+Jaká je hlavní reakce alkanů?;radikálová substituce;elektrofilní adice;nukleofilní substituce;eliminace;~Alkany jsou málo reaktivní, reagují hlavně za světla nebo tepla.
+Čím se iniciuje radikálová substituce alkanů?;ultrafialovým světlem nebo teplem;kyselinou;zásadou;vodou;~Vzniká radikál homolytickým štěpením vazby.
+Jaké tři fáze má radikálová substituce?;iniciace, propagace, terminace;adice, eliminace, oxidace;start, oxidace, konec;příprava, reakce, čištění;~V terminaci se radikály spojí a reakce končí.
+Co vzniká úplným spalováním alkanů?;oxid uhličitý a voda;oxid uhelnatý a saze;methanol;pouze voda;~Při nedostatku kyslíku vzniká jedovatý oxid uhelnatý.
+Proč je nedokonalé spalování nebezpečné?;vzniká jedovatý oxid uhelnatý;vzniká kyselina;uvolňuje se chlor;vzniká méně tepla;~Oxid uhelnatý se váže na hemoglobin místo kyslíku.
+Odkud se získávají alkany průmyslově?;z ropy a zemního plynu;z uhlí;z vápence;ze soli;~Ropa se dělí frakční destilací.
+Jaká je hlavní složka zemního plynu?;methan;ethan;propan;butan;~Methanu bývá v zemním plynu přes 90 procent.
+Jaký je obecný vzorec cykloalkanů?;CnH2n;CnH2n+2;CnH2n-2;CnHn;~Uzavřením cyklu se ztratí dva vodíky.
+Který cykloalkan je nejstabilnější?;cyklohexan;cyklopropan;cyklobutan;cyklopentan;~Šestičlenný cyklus má ideální vazebné úhly.
+Proč je cyklopropan velmi reaktivní?;kvůli velkému pnutí vazebných úhlů;kvůli dvojné vazbě;kvůli polaritě;kvůli velké hmotnosti;~Úhel 60 stupňů je daleko od ideálních 109,5.
+Jak se nazývá substituent odvozený od methanu?;methyl;methylen;methin;methanid;~Odtržením jednoho vodíku vznikne CH3-.
+Jak se nazývá substituent CH3-CH2-?;ethyl;methyl;propyl;vinyl;~Dvouuhlíkatý alkyl.
+Jak se nazývá skupina (CH3)2CH-?;isopropyl;propyl;butyl;terc-butyl;~Systematicky propan-2-yl.
+Co je oktanové číslo?;údaj o odolnosti paliva proti klepání motoru;počet uhlíků;hustota benzinu;teplota vzplanutí;~Referenční je isooktan se stem a heptan s nulou.
+Který uhlovodík má oktanové číslo 100?;isooktan;heptan;oktan;benzen;~2,2,4-trimethylpentan je referenční látkou.
+K čemu se používá parafin?;na svíčky a masti;jako palivo do tryskáčů;jako rozpouštědlo kyselin;na výrobu skla;~Parafin je směs vyšších pevných alkanů.
+Co je to vazelína?;polotuhá směs uhlovodíků;kapalný alkan;aromatický uhlovodík;olej rostlinného původu;~Ve farmacii slouží jako mastný základ.
+
+#TÉMA: Organická chemie — alkeny, alkadieny a alkyny
+Jaký je obecný vzorec alkenů?;CnH2n;CnH2n+2;CnH2n-2;CnH2n+1;~Jedna dvojná vazba ubere dva vodíky oproti alkanu.
+Jakou příponu mají alkeny?;-en;-an;-yn;-al;~Ethen, propen, buten.
+Jak se dříve říkalo ethenu?;ethylen;acetylen;methylen;propylen;~Ethylen je triviální název stále běžný v průmyslu.
+Kolik uhlíků má nejjednodušší alken?;dva;jeden;tři;čtyři;~Ethen CH2=CH2 je nejjednodušší.
+Jaká je typická reakce alkenů?;elektrofilní adice;radikálová substituce;nukleofilní substituce;eliminace;~Dvojná vazba je bohatá na elektrony, přitahuje elektrofily.
+Co vzniká adicí vodíku na alken?;alkan;alkyn;alkohol;halogenderivát;~Hydrogenace probíhá na katalyzátoru, například niklu.
+Co vzniká adicí vody na alken?;alkohol;aldehyd;kyselina;ether;~Hydratace se provádí v kyselém prostředí.
+Co vzniká adicí bromu na alken?;dibromalkan;bromalkan;alkohol;alkyn;~Odbarvení bromové vody je důkazem dvojné vazby.
+Jak dokážeme přítomnost dvojné vazby?;odbarvením bromové vody;Fehlingovou zkouškou;plamennou zkouškou;lakmusem;~Používá se i odbarvení manganistanu draselného.
+Co říká Markovnikovovo pravidlo?;vodík se váže na uhlík s více vodíky;vodík na uhlík s méně vodíky;vodík vždy doprava;halogen na terciární uhlík;~Vzniká stabilnější karbokation, proto je produkt hlavní.
+Co je polymerace?;spojování malých molekul do makromolekuly;štěpení řetězce;oxidace;destilace;~Z ethenu vzniká polyethylen.
+Který polymer vzniká z ethenu?;polyethylen;polypropylen;polystyren;PVC;~Nejrozšířenější plast na světě.
+Který polymer vzniká z propenu?;polypropylen;polyethylen;PVC;teflon;~Používá se na obaly, textilie a laboratorní nádobí.
+Který monomer dává PVC?;vinylchlorid;ethen;styren;propen;~Polyvinylchlorid se vyrábí z chlorethenu.
+Který monomer dává polystyren?;styren;ethen;propen;butadien;~Styren je vinylbenzen.
+Jaký je obecný vzorec alkynů?;CnH2n-2;CnH2n;CnH2n+2;CnHn;~Trojná vazba ubere čtyři vodíky oproti alkanu.
+Jakou příponu mají alkyny?;-yn;-en;-an;-ol;~Ethyn, propyn, butyn.
+Jak se běžně říká ethynu?;acetylen;ethylen;methan;propylen;~Acetylen se používá při svařování.
+Jaká je teplota kyslíko-acetylenového plamene?;přes 3000 °C;kolem 500 °C;kolem 1000 °C;kolem 200 °C;~Proto se hodí na svařování a řezání kovů.
+Z čeho se dříve vyráběl acetylen?;z karbidu vápníku a vody;z ropy;ze dřeva;z vápence pálením;~Reakcí CaC2 s vodou vzniká acetylen a hydroxid vápenatý.
+Jaký tvar má molekula acetylenu?;lineární;lomený;tetraedrický;planární trojúhelníkový;~Hybridizace sp dává úhel 180 stupňů.
+Co jsou alkadieny?;uhlovodíky se dvěma dvojnými vazbami;s jednou dvojnou vazbou;s trojnou vazbou;cyklické alkany;~Přípona -dien, například butadien.
+Který dien je základem syntetického kaučuku?;buta-1,3-dien;propadien;penta-1,4-dien;isopren pouze;~Butadienový kaučuk je základ pneumatik.
+Který dien tvoří přírodní kaučuk?;isopren;butadien;acetylen;styren;~Polyisopren se získává z latexu kaučukovníku.
+Co jsou konjugované dvojné vazby?;střídají se s jednoduchými vazbami;jsou vedle sebe;jsou v cyklu;jsou trojné;~Konjugace stabilizuje molekulu delokalizací elektronů.
+Co je vulkanizace?;síťování kaučuku sírou;tavení plastů;destilace ropy;spalování gumy;~Objevil ji Charles Goodyear, guma je pak pružná a pevná.
+
+#TÉMA: Organická chemie — areny
+Co je charakteristické pro areny?;aromatický kruh s delokalizovanými elektrony;trojná vazba;jen jednoduché vazby;obsah dusíku;~Delokalizace dodává mimořádnou stabilitu.
+Jaký je vzorec benzenu?;C6H6;C6H12;C6H14;C5H6;~Šest uhlíků a šest vodíků v rovinném kruhu.
+Kdo navrhl cyklickou strukturu benzenu?;Friedrich August Kekulé;Dmitrij Mendělejev;Antoine Lavoisier;Justus Liebig;~Podle pověsti ho inspiroval sen o hadovi kousajícím se do ocasu.
+Jaký tvar má molekula benzenu?;rovinný pravidelný šestiúhelník;židličkový;lineární;tetraedrický;~Všechny vazby jsou stejně dlouhé, mezi jednoduchou a dvojnou.
+Kolik delokalizovaných elektronů má benzen?;šest;čtyři;dva;dvanáct;~Podle Hückelova pravidla 4n+2 pro n=1.
+Jaká je typická reakce arenů?;elektrofilní substituce;elektrofilní adice;radikálová adice;eliminace;~Substitucí se zachová stabilní aromatický kruh.
+Proč areny raději substituují než adují?;adice by zrušila aromatický systém;jsou příliš těžké;nemají vodíky;jsou nepolární;~Zachování delokalizace je energeticky výhodné.
+Jak se nazývá methylbenzen?;toluen;fenol;anilin;xylen;~Toluen je běžné rozpouštědlo.
+Jak se nazývá dimethylbenzen?;xylen;toluen;styren;kumen;~Existuje ve třech polohových izomerech.
+Jak se označuje poloha 1,2 na benzenovém jádře?;ortho;meta;para;ipso;~Sousední polohy se značí o-.
+Jak se označuje poloha 1,3 na benzenovém jádře?;meta;ortho;para;ipso;~Přes jeden uhlík, značí se m-.
+Jak se označuje poloha 1,4 na benzenovém jádře?;para;ortho;meta;ipso;~Naproti sobě, značí se p-.
+Jak se nazývá hydroxyderivát benzenu?;fenol;anilin;benzaldehyd;toluen;~Fenol je slabá kyselina, dříve karbolová kyselina.
+Jak se nazývá aminoderivát benzenu?;anilin;fenol;toluen;nitrobenzen;~Anilin je výchozí látka pro barviva a léčiva.
+Jaký je název C6H5- skupiny?;fenyl;benzyl;tolyl;aryl;~Benzenové jádro jako substituent.
+Který aren má dvě kondenzovaná jádra?;naftalen;benzen;anthracen;fenanthren;~Naftalen se používal do kuliček proti molům.
+Který aren má tři jádra v řadě?;anthracen;naftalen;benzen;pyren;~Základ pro antrachinonová barviva.
+Jsou polycyklické areny zdravotně nezávadné?;ne, mnohé jsou karcinogenní;ano, zcela;jen v potravinách;jen za tepla;~Benzo[a]pyren z kouře a spalin je silný karcinogen.
+Je benzen zdraví škodlivý?;ano, je karcinogenní;ne, je neškodný;jen při požití;jen v plynné formě;~Poškozuje kostní dřeň, proto se nahrazuje toluenem.
+Co je nitrace benzenu?;zavedení skupiny NO2;zavedení skupiny NH2;zavedení OH;odstranění vodíku;~Používá se směs kyseliny dusičné a sírové.
+Co je sulfonace benzenu?;zavedení skupiny SO3H;zavedení NO2;zavedení Cl;zavedení CH3;~Reakce s dýmavou kyselinou sírovou.
+Jak se jmenuje reakce zavádějící alkyl na benzen?;Friedelova-Craftsova alkylace;Kekulého reakce;Wurtzova reakce;Grignardova reakce;~Katalyzuje ji chlorid hlinitý.
+Co je TNT?;2,4,6-trinitrotoluen;toluen;trinitrofenol;tetranitromethan;~Tritol je klasická trhavina.
+Co je kyselina pikrová?;2,4,6-trinitrofenol;trinitrotoluen;kyselina benzoová;kyselina salicylová;~Žlutá výbušná látka, dříve i antiseptikum.
+Odkud se areny průmyslově získávají?;z ropy a černouhelného dehtu;z vápence;z písku;z mořské vody;~Koksování uhlí a reformování ropných frakcí.
+
+#TÉMA: Organická chemie — halogenderiváty
+Co jsou halogenderiváty?;deriváty s atomem halogenu místo vodíku;deriváty s kyslíkem;deriváty s dusíkem;soli kyselin;~Fluor, chlor, brom nebo jod nahradí vodík.
+Jakou příponu nebo předponu mají halogenderiváty?;fluor-, chlor-, brom-, jod-;-ol;-al;-amin;~Například chlormethan, 2-brompropan.
+Jaká je typická reakce halogenderivátů?;nukleofilní substituce;elektrofilní adice;radikálová substituce;polymerace;~Halogen je dobrá odstupující skupina.
+Co je nukleofil?;částice s volným elektronovým párem;částice s kladným nábojem;radikál;proton;~Nukleofil hledá kladné centrum, například OH- nebo NH3.
+Co je elektrofil?;částice chudá na elektrony;částice bohatá na elektrony;neutrální molekula;radikál;~Elektrofil přijímá elektronový pár, například NO2+.
+Co vzniká reakcí halogenderivátu s hydroxidem?;alkohol;aldehyd;kyselina;amin;~Nukleofilní substituce OH- za halogen.
+Co vzniká reakcí halogenderivátu s amoniakem?;amin;alkohol;ether;ester;~Amoniak jako nukleofil nahradí halogen.
+Co je eliminace u halogenderivátů?;odštěpení halogenovodíku za vzniku dvojné vazby;přidání vody;spojení dvou molekul;oxidace;~Dehydrohalogenace v alkalickém prostředí dá alken.
+Který halogenderivát je znám jako chloroform?;trichlormethan;tetrachlormethan;dichlormethan;chlorethan;~Dříve používaná narkóza, dnes rozpouštědlo.
+Jak se jmenuje CCl4?;tetrachlormethan;chloroform;dichlormethan;chlorethan;~Dříve hasicí médium, dnes zakázán pro toxicitu na játra.
+Co je freon?;halogenderivát s fluorem a chlorem;přírodní olej;typ alkoholu;druh soli;~Freony poškozovaly ozonovou vrstvu, jsou omezeny Montrealským protokolem.
+Který mezinárodní protokol omezil freony?;Montrealský;Kjótský;Pařížský;Ženevský;~Podepsán roku 1987 na ochranu ozonové vrstvy.
+Co je teflon?;polytetrafluorethylen;polyvinylchlorid;polystyren;polyamid;~Mimořádně odolný, nesmáčivý, používá se na pánve i v laboratoři.
+Který halogenderivát se používá jako inhalační anestetikum?;halothan;chlormethan;vinylchlorid;freon 12;~Moderní halogenované ethery nahradily starší éter.
+Proč jsou vazby C-halogen polární?;halogen má vyšší elektronegativitu než uhlík;uhlík je elektronegativnější;jsou nepolární;kvůli velikosti atomu;~Uhlík nese částečný kladný náboj a je napadán nukleofilem.
+Který halogenderivát je karcinogenní monomer PVC?;vinylchlorid;chlorethan;chloroform;chlorbenzen;~Práce s ním podléhá přísným hygienickým limitům.
+Jsou halogenderiváty rozpustné ve vodě?;většinou špatně;výborně;jen za horka;jen v kyselinách;~Jsou to nepolární rozpouštědla, mísí se s tuky.
+
+#TÉMA: Organická chemie — alkoholy, fenoly a ethery
+Jaká funkční skupina je v alkoholech?;hydroxylová OH;karbonylová CO;karboxylová COOH;aminová NH2;~Skupina OH navázaná na uhlíku dává příponu -ol.
+Jakou příponu mají alkoholy?;-ol;-al;-on;-an;~Methanol, ethanol, propanol.
+Jak dělíme alkoholy podle uhlíku s OH skupinou?;primární, sekundární, terciární;kyselé a zásadité;lehké a těžké;polární a nepolární;~Rozhoduje počet uhlíků navázaných na nositele OH.
+Co vzniká oxidací primárního alkoholu?;aldehyd;keton;kyselina rovnou;ether;~Dalším stupněm oxidace pak vzniká karboxylová kyselina.
+Co vzniká oxidací sekundárního alkoholu?;keton;aldehyd;kyselina;ester;~Keton se dále běžně neoxiduje.
+Lze snadno oxidovat terciární alkohol?;ne, chybí vodík na uhlíku s OH;ano, na aldehyd;ano, na keton;ano, na ether;~Oxidace by musela štěpit uhlíkatý řetězec.
+Který alkohol je jedovatý a způsobuje slepotu?;methanol;ethanol;propan-2-ol;glycerol;~V těle se mění na formaldehyd a kyselinu mravenčí.
+Jaká je smrtelná dávka methanolu?;řádově desítky mililitrů;několik litrů;jeden gram na kilogram;methanol není smrtelný;~Už kolem 30 ml může zabít, 10 ml oslepit.
+Čím se léčí otrava methanolem?;podáním ethanolu;podáním vody;podáním octa;podáním soli;~Ethanol obsadí enzym a zabrání vzniku toxických metabolitů.
+Jaký alkohol je v alkoholických nápojích?;ethanol;methanol;butanol;glycerol;~Vzniká kvašením cukrů.
+Jak se nazývá dvojsytný alkohol používaný jako nemrznoucí směs?;ethylenglykol;glycerol;methanol;ethanol;~Je sladký a přitom velmi jedovatý.
+Kolik hydroxylových skupin má glycerol?;tři;jednu;dvě;čtyři;~Propan-1,2,3-triol je základ tuků.
+K čemu se glycerol používá ve farmacii?;jako zvlhčovadlo a základ mastí;jako dezinfekce;jako indikátor;jako katalyzátor;~Váže vodu, změkčuje pokožku.
+Proč mají alkoholy vyšší teplotu varu než odpovídající alkany?;tvoří vodíkové můstky;jsou těžší;jsou nepolární;mají větší molekulu;~Vodíkové vazby je nutné rozrušit, což stojí energii.
+Jsou nižší alkoholy mísitelné s vodou?;ano, neomezeně;ne, vůbec;jen za tepla;jen s kyselinami;~Skupina OH vytváří vodíkové vazby s vodou.
+Jak se mění rozpustnost alkoholů ve vodě s délkou řetězce?;klesá;roste;nemění se;kolísá;~Nepolární část molekuly převáží nad polární OH skupinou.
+Co je denaturovaný líh?;ethanol s přídavkem odpuzující látky;čistý ethanol;methanol;směs s vodou;~Denaturační přísada brání pití a daňovému úniku.
+Kolik procent ethanolu má lékařský líh na dezinfekci?;kolem 70 %;100 %;30 %;10 %;~Sedmdesátiprocentní roztok proniká do buňky lépe než absolutní líh.
+Co je fenol?;hydroxyderivát benzenu;alkohol s dlouhým řetězcem;keton;ester;~OH skupina je vázána přímo na aromatické jádro.
+Je fenol kyselejší než alkoholy?;ano, výrazně;ne, je zásaditý;stejně kyselý;fenol není kyselý;~Aromatické jádro stabilizuje vzniklý fenolátový anion.
+Jak se dříve říkalo fenolu?;kyselina karbolová;kyselina octová;kyselina mravenčí;lihová kyselina;~Joseph Lister ji zavedl jako první antiseptikum na operačních sálech.
+Který lékař zavedl fenol jako antiseptikum?;Joseph Lister;Ignác Semmelweis;Louis Pasteur;Robert Koch;~Výrazně snížil úmrtnost po operacích.
+Co je pyrokatechol?;benzen-1,2-diol;benzen-1,3-diol;benzen-1,4-diol;fenol;~Dvojsytný fenol v poloze ortho.
+Co je hydrochinon?;benzen-1,4-diol;benzen-1,2-diol;benzen-1,3-diol;fenol;~Používá se ve fotografii jako vývojka a v kosmetice.
+Jaká je funkční skupina etherů?;kyslík mezi dvěma uhlíky;OH skupina;COOH skupina;NH2 skupina;~Obecný vzorec R-O-R.
+Který ether se používal jako narkóza?;diethylether;dimethylether;anisol;tetrahydrofuran;~Poprvé veřejně předveden roku 1846 v Bostonu.
+Jaká je hlavní nebezpečnost diethyletheru v laboratoři?;je vysoce hořlavý a tvoří peroxidy;je žíravý;je radioaktivní;je nehořlavý;~Peroxidy mohou při destilaci explodovat, éter se skladuje v tmavé lahvi.
+Tvoří ethery vodíkové vazby mezi sebou?;ne, chybí jim vodík na kyslíku;ano, silné;ano, slabé;jen za tepla;~Proto mají nižší teplotu varu než izomerní alkoholy.
+Co vzniká dehydratací ethanolu při 170 °C?;ethen;diethylether;kyselina octová;acetaldehyd;~Při nižší teplotě kolem 140 °C vzniká ether.
+
+#TÉMA: Organická chemie — aldehydy a ketony
+Jaká skupina je společná aldehydům a ketonům?;karbonylová C=O;hydroxylová;karboxylová;aminová;~Souhrnně se nazývají karbonylové sloučeniny.
+Kde je karbonylová skupina u aldehydů?;na konci řetězce;uprostřed řetězce;na cyklu;na dusíku;~Aldehydová skupina CHO má vždy vodík.
+Kde je karbonylová skupina u ketonů?;uvnitř řetězce;na konci;mimo řetězec;na kyslíku;~Keton má karbonyl mezi dvěma uhlíky.
+Jakou příponu mají aldehydy?;-al;-on;-ol;-ová kyselina;~Methanal, ethanal, propanal.
+Jakou příponu mají ketony?;-on;-al;-ol;-yl;~Propanon, butanon.
+Jak se běžně říká methanalu?;formaldehyd;acetaldehyd;aceton;benzaldehyd;~Vodný roztok se nazývá formalín.
+Co je formalín?;vodný roztok formaldehydu;roztok acetonu;čistý ethanol;kyselina mravenčí;~Asi 35% roztok, používá se ke konzervaci preparátů.
+Je formaldehyd zdravotně závadný?;ano, je karcinogenní;ne, je neškodný;jen v pevné formě;jen při styku s kůží;~Zařazen mezi prokázané lidské karcinogeny.
+Jak se běžně říká ethanalu?;acetaldehyd;formaldehyd;aceton;benzaldehyd;~Vzniká v těle při odbourávání alkoholu a působí kocovinu.
+Který nejjednodušší keton je běžné rozpouštědlo?;aceton;butanon;cyklohexanon;benzofenon;~Propanon rozpouští laky a odlakovače.
+Kdy se aceton objevuje v dechu pacienta?;při neléčené cukrovce;při chřipce;po jídle;při zlomenině;~Acetonový zápach doprovází ketoacidózu.
+Kterou zkouškou rozlišíme aldehyd od ketonu?;Fehlingovou nebo Tollensovou;plamennou;lakmusovou;destilační;~Aldehydy se snadno oxidují, ketony ne.
+Co pozorujeme při pozitivní Tollensově zkoušce?;stříbrné zrcátko na stěně zkumavky;červenou sraženinu;modrý roztok;bublinky plynu;~Aldehyd zredukuje stříbrné ionty na kovové stříbro.
+Co pozorujeme při pozitivní Fehlingově zkoušce?;cihlově červenou sraženinu;stříbrné zrcátko;bílý zákal;fialové zbarvení;~Vzniká oxid měďný Cu2O.
+Reagují ketony s Fehlingovým činidlem?;ne;ano, silně;jen za varu;jen v kyselině;~Ketony nemají vodík na karbonylovém uhlíku, nelze je snadno oxidovat.
+Co vzniká redukcí aldehydu?;primární alkohol;sekundární alkohol;kyselina;ether;~Reakce je opakem oxidace alkoholu.
+Co vzniká redukcí ketonu?;sekundární alkohol;primární alkohol;aldehyd;kyselina;~Karbonyl přejde na hydroxylovou skupinu.
+Jaká je typická reakce karbonylových sloučenin?;nukleofilní adice;elektrofilní substituce;radikálová substituce;eliminace;~Uhlík karbonylu je částečně kladný, přitahuje nukleofily.
+Který aldehyd voní po hořkých mandlích?;benzaldehyd;formaldehyd;acetaldehyd;propanal;~Používá se jako vonná složka.
+Co je vanilin?;aromatický aldehyd vanilky;keton;alkohol;kyselina;~Nejrozšířenější aromatická látka v potravinářství.
+Jaká je keto-enol tautomerie?;rovnováha mezi ketonem a enolem;mezi kyselinou a solí;mezi cis a trans;mezi dvěma alkoholy;~Vodík se přesouvá mezi uhlíkem a kyslíkem.
+Co je aldolová kondenzace?;spojení dvou karbonylových sloučenin;štěpení řetězce;oxidace;polymerace;~Vzniká aldol s OH i CHO skupinou.
+Který polymer vzniká z fenolu a formaldehydu?;bakelit;polyethylen;nylon;teflon;~První plně syntetický plast, vynalezl ho Leo Baekeland.
+
+#TÉMA: Organická chemie — karboxylové kyseliny a deriváty
+Jaká funkční skupina je v karboxylových kyselinách?;karboxylová COOH;karbonylová CO;hydroxylová OH;aminová NH2;~Spojení karbonylu a hydroxylu dává kyselé vlastnosti.
+Jakou příponu mají karboxylové kyseliny?;-ová kyselina;-al;-on;-ol;~Kyselina methanová, ethanová, propanová.
+Jak se běžně říká kyselině methanové?;mravenčí;octová;máselná;citronová;~Obsažena v jedu mravenců a kopřiv.
+Jak se běžně říká kyselině ethanové?;octová;mravenčí;máselná;šťavelová;~Ocet je zhruba osmiprocentní roztok.
+Jak se běžně říká kyselině butanové?;máselná;octová;mravenčí;propionová;~Charakteristický zápach žluklého másla.
+Která karboxylová kyselina je nejsilnější z uvedených?;kyselina trichloroctová;kyselina octová;kyselina propionová;kyselina máselná;~Elektronegativní chlory zvyšují kyselost odtahováním elektronů.
+Proč jsou karboxylové kyseliny kyselejší než alkoholy?;karboxylátový anion je stabilizován rezonancí;jsou těžší;mají více uhlíků;jsou nepolární;~Záporný náboj je rozprostřen mezi dva kyslíky.
+Co vzniká reakcí karboxylové kyseliny s alkoholem?;ester a voda;sůl a vodík;aldehyd;amid;~Esterifikace se katalyzuje kyselinou sírovou.
+Jak se nazývá opačná reakce k esterifikaci?;hydrolýza;polymerace;oxidace;neutralizace;~Rozštěpení esteru vodou zpět na kyselinu a alkohol.
+Co je zmýdelnění?;alkalická hydrolýza esteru;kyselá esterifikace;oxidace tuku;destilace;~Z tuku a hydroxidu vzniká mýdlo a glycerol.
+Co je mýdlo chemicky?;sodná nebo draselná sůl vyšší mastné kyseliny;ester;alkohol;polymer;~Sodná mýdla jsou tuhá, draselná mazlavá.
+Jakou vůni mají estery nižších kyselin?;ovocnou;štiplavou;po zkažených vejcích;bez vůně;~Používají se jako aromata v potravinářství.
+Co jsou tuky chemicky?;estery glycerolu a vyšších mastných kyselin;polysacharidy;bílkoviny;soli;~Nazývají se také triacylglyceroly.
+Čím se liší rostlinné oleje od živočišných tuků?;obsahují více nenasycených kyselin;jsou to bílkoviny;neobsahují glycerol;nejsou to estery;~Dvojné vazby snižují teplotu tání, proto jsou kapalné.
+Co je ztužování tuků?;katalytická hydrogenace dvojných vazeb;oxidace;destilace;kvašení;~Vznikají tuhé tuky, ale i nezdravé trans mastné kyseliny.
+Proč jsou trans mastné kyseliny nezdravé?;zvyšují riziko srdečně-cévních onemocnění;způsobují alergie;jsou karcinogenní přímo;ničí zuby;~Zhoršují poměr cholesterolu v krvi.
+Kolik karboxylových skupin má kyselina šťavelová?;dvě;jednu;tři;čtyři;~Nejjednodušší dikarboxylová kyselina, jedovatá, ve šťovíku a rebarboře.
+Kolik karboxylových skupin má kyselina citronová?;tři;jednu;dvě;čtyři;~Je také hydroxykyselinou, klíčová v Krebsově cyklu.
+Která kyselina způsobuje svalovou únavu?;mléčná;octová;citronová;mravenčí;~Vzniká anaerobní glykolýzou při nedostatku kyslíku.
+Která kyselina je v jablkách?;jablečná;citronová;vinná;mléčná;~Kyselina hydroxybutandiová.
+Která kyselina se vylučuje ve víně jako vinný kámen?;vinná;octová;mléčná;jablečná;~Hydrogenvinan draselný se usazuje na dně sudu.
+Co je kyselina salicylová?;2-hydroxybenzoová kyselina;benzoová kyselina;octová kyselina;mléčná kyselina;~Základ pro výrobu aspirinu, sama působí keratolyticky.
+Co je acetylsalicylová kyselina?;aspirin;paracetamol;ibuprofen;penicilin;~Vzniká acetylací kyseliny salicylové, tlumí bolest a horečku.
+Která kyselina se používá jako konzervant E210?;benzoová;octová;mravenčí;citronová;~Brzdí růst plísní a kvasinek.
+Co jsou anhydridy kyselin?;produkty odštěpení vody ze dvou molekul kyseliny;soli;estery;amidy;~Například anhydrid kyseliny octové.
+Co vzniká reakcí kyseliny s amoniakem za tepla?;amid;ester;anhydrid;ether;~Přes amonnou sůl se odštěpí voda.
+Jak se nazývá derivát kyseliny s halogenem místo OH?;halogenid kyseliny;ester;amid;anhydrid;~Například acetylchlorid, velmi reaktivní.
+Který derivát karboxylové kyseliny je nejreaktivnější?;halogenid kyseliny;amid;ester;sůl;~Chlor je výborná odstupující skupina.
+
+#TÉMA: Organická chemie — dusíkaté deriváty a heterocykly
+Jaká je funkční skupina aminů?;aminová NH2;nitro NO2;amidová CONH2;nitrilová CN;~Aminy jsou organické deriváty amoniaku.
+Jak dělíme aminy?;na primární, sekundární a terciární;na kyselé a zásadité;na těžké a lehké;na rozpustné a nerozpustné;~Rozhoduje počet uhlíkatých zbytků na dusíku.
+Mají aminy kyselý nebo zásaditý charakter?;zásaditý;kyselý;neutrální;amfoterní;~Volný elektronový pár na dusíku váže proton.
+Který amin je odvozen od benzenu?;anilin;fenol;toluen;nitrobenzen;~Anilin je základ pro syntetická barviva.
+Kdo objevil první syntetické barvivo z anilinu?;William Henry Perkin;Friedrich Wöhler;Justus Liebig;Robert Bunsen;~Mauvein objevil roku 1856 náhodou při pokusu o syntézu chininu.
+Co jsou biogenní aminy?;aminy vznikající v organismu rozkladem aminokyselin;syntetická barviva;plastické hmoty;anorganické soli;~Například histamin nebo adrenalin.
+Který biogenní amin způsobuje alergickou reakci?;histamin;serotonin;dopamin;adrenalin;~Proto se proti alergii podávají antihistaminika.
+Jaká je funkční skupina nitrosloučenin?;NO2;NH2;CN;CONH2;~Nitroskupina se váže přes dusík.
+Co vzniká redukcí nitrobenzenu?;anilin;fenol;benzen;toluen;~Průmyslová cesta k anilinu.
+Jaká je funkční skupina amidů?;CONH2;COOH;NH2;NO2;~Karbonyl spojený s dusíkem.
+Který přírodní polymer je tvořen amidovými vazbami?;bílkovina;škrob;celulóza;kaučuk;~Peptidová vazba je vlastně amidová.
+Jak se nazývá amidová vazba v bílkovinách?;peptidová;glykosidická;esterová;etherová;~Spojuje karboxyl jedné aminokyseliny s aminoskupinou druhé.
+Který syntetický polymer obsahuje amidové vazby?;nylon;polyethylen;PVC;teflon;~Polyamid, první syntetické vlákno na punčochy.
+Co jsou aminokyseliny?;látky s aminovou i karboxylovou skupinou;jen kyseliny;jen aminy;soli;~Základní stavební kameny bílkovin.
+Kolik aminokyselin tvoří bílkoviny živých organismů?;dvacet;deset;padesát;sto;~Proteinogenních aminokyselin je dvacet.
+Co je amfion neboli zwitterion?;částice s kladným i záporným nábojem současně;neutrální molekula;anion;kation;~Aminokyselina ve vodě přenese proton z COOH na NH2.
+Co je izoelektrický bod?;pH, při kterém je aminokyselina navenek neutrální;bod tání;bod varu;bod tuhnutí;~Při něm je rozpustnost nejnižší a bílkovina se sráží.
+Co jsou heterocyklické sloučeniny?;cykly obsahující i jiný atom než uhlík;jen uhlíkaté cykly;lineární řetězce;aromatické uhlovodíky;~Nejčastěji dusík, kyslík nebo síra.
+Který pětičlenný heterocyklus obsahuje dusík?;pyrrol;furan;thiofen;pyridin;~Je součástí hemu i chlorofylu.
+Který pětičlenný heterocyklus obsahuje kyslík?;furan;pyrrol;thiofen;pyran;~Odvozeny jsou od něj cukry ve furanózové formě.
+Který pětičlenný heterocyklus obsahuje síru?;thiofen;furan;pyrrol;pyridin;~Vyskytuje se v surové ropě.
+Který šestičlenný heterocyklus obsahuje dusík?;pyridin;benzen;furan;pyrrol;~Nepříjemně páchne, je zásaditý.
+Který heterocyklus je základem nukleových kyselin?;purin a pyrimidin;furan;thiofen;benzen;~Adenin a guanin jsou puriny, cytosin, thymin a uracil pyrimidiny.
+Co je alkaloid?;dusíkatá zásaditá látka rostlinného původu;cukr;tuk;bílkovina;~Například morfin, kofein nebo nikotin.
+Který alkaloid je v kávě?;kofein;nikotin;morfin;chinin;~Purinový alkaloid, stimuluje nervovou soustavu.
+Který alkaloid je v tabáku?;nikotin;kofein;kodein;atropin;~Velmi silně návykový, v čisté formě prudce jedovatý.
+Který alkaloid se získává z máku setého?;morfin;kofein;nikotin;chinin;~Silné analgetikum, ale s vysokým rizikem závislosti.
+Který alkaloid se používal proti malárii?;chinin;morfin;kofein;atropin;~Získává se z kůry chinovníku.
+Který alkaloid z rulíku zlomocné rozšiřuje zornice?;atropin;kofein;morfin;nikotin;~Používá se v očním lékařství.
+
+#TÉMA: Laboratorní cvičení a bezpečnost práce
+Co znamená zkratka BOZP?;bezpečnost a ochrana zdraví při práci;bezpečnostní ochrana zdravotního pracoviště;bezpečné odsávání zplodin z prostoru;bezpečnostní osvědčení zdravotního pracovníka;~Základní pravidla platí v každé laboratoři.
+Co znamená zkratka GHS?;globálně harmonizovaný systém klasifikace chemikálií;generální hygienická směrnice;globální hodnocení surovin;systém hodnocení skladování;~Zavádí jednotné piktogramy a věty po celém světě.
+Jaký tvar mají výstražné symboly GHS?;kosočtverec s červeným okrajem;oranžový čtverec;modrý kruh;zelený trojúhelník;~Bílé pole, černý symbol, červený rám.
+Co znamenají H-věty na etiketě?;standardní věty o nebezpečnosti;pokyny pro bezpečné zacházení;hmotnostní údaje;datum výroby;~H je z anglického hazard.
+Co znamenají P-věty na etiketě?;pokyny pro bezpečné zacházení;věty o nebezpečnosti;údaj o čistotě;jméno výrobce;~P je z anglického precaution.
+Co je bezpečnostní list?;dokument s údaji o nebezpečnosti a zacházení s látkou;účtenka za chemikálii;protokol z měření;etiketa;~Má šestnáct povinných oddílů.
+Kolik oddílů má bezpečnostní list?;šestnáct;osm;deset;dvacet;~Struktura je dána nařízením REACH.
+Co znamená piktogram s lebkou a zkříženými hnáty?;akutní toxicita;dráždivost;hořlavost;žíravost;~Nejzávažnější stupeň, látka může způsobit smrt.
+Co znamená piktogram s plamenem?;hořlavá látka;žíravá látka;toxická látka;oxidující látka;~Vyžaduje skladování mimo zdroje zapálení.
+Co znamená piktogram s plamenem nad kruhem?;oxidující látka;hořlavá látka;výbušnina;plyn pod tlakem;~Podporuje hoření, například peroxidy nebo dusičnany.
+Co znamená piktogram s tekutinou leptající ruku?;žíravost;dráždivost;toxicita;radioaktivita;~Poškozuje kůži i materiály.
+Co znamená piktogram s uhynulou rybou a stromem?;nebezpečnost pro životní prostředí;hořlavost;výbušnost;toxicita pro člověka;~Látka nesmí do odpadu ani kanalizace.
+Co znamená piktogram s tlakovou lahví?;plyn pod tlakem;výbušnina;hořlavina;oxidační činidlo;~Riziko exploze při zahřátí.
+Jak správně ředíme koncentrovanou kyselinu sírovou?;lijeme kyselinu do vody;lijeme vodu do kyseliny;smícháme naráz;přidáme led;~Kyselinu do vody, nikdy naopak — reakce je silně exotermní.
+Proč se nesmí lít voda do koncentrované kyseliny?;hrozí prskání a rozstřik kyseliny;reakce nenastane;vznikne plyn;kyselina zeslábne;~Uvolněné teplo způsobí prudký var na povrchu.
+Co uděláme při potřísnění kůže kyselinou?;omyjeme velkým množstvím vody;neutralizujeme silnou zásadou;otřeme hadrem;přiložíme led;~Až po opláchnutí případně slabý roztok sody.
+Co uděláme při zasažení oka chemikálií?;vyplachujeme proudem vody nejméně 15 minut;přiložíme obvaz;kapeme olej;protřeme rukou;~Poté vždy vyhledáme lékaře.
+Čím se hasí hořící rozpouštědlo v laboratoři?;práškovým nebo sněhovým hasicím přístrojem;vodou;pískem z chodby;mokrým hadrem přes obličej;~Voda by hořící rozpouštědlo roznesla.
+Kde se pracuje s těkavými a jedovatými látkami?;v digestoři;na volném stole;u okna;v lednici;~Digestoř odsává páry mimo pracoviště.
+Co patří mezi základní osobní ochranné prostředky v laboratoři?;plášť, brýle a rukavice;jen plášť;jen rukavice;pokrývka hlavy;~Ochrana očí je povinná i při krátké práci.
+Smí se v laboratoři jíst a pít?;ne, nikdy;ano, mimo digestoř;jen nápoje;jen o přestávce u stolu;~Hrozí požití chemikálií.
+Jak se čichá k látce v laboratoři?;mávnutím rukou přiháníme páry k nosu;přímo nad hrdlem lahve;vůbec se nečichá;přes filtrační papír;~Nikdy nedáváme nos přímo nad zkumavku.
+Čím se odměřuje přesný objem roztoku?;pipetou nebo byretou;odměrným válcem;kádinkou;Erlenmeyerovou baňkou;~Kádinka a válec slouží jen k orientačnímu odměření.
+K čemu slouží odměrná baňka?;k přípravě roztoku o přesné koncentraci;k zahřívání;k filtraci;k destilaci;~Má jedinou rysku pro daný objem.
+K čemu slouží byreta?;k odměrné analýze — titraci;k vážení;k sušení;k destilaci;~Umožňuje přesně odečíst spotřebu činidla.
+Kde odečítáme hladinu v byretě?;na spodním okraji menisku;na horním okraji;uprostřed;kdekoli;~Oko musí být v rovině s hladinou, jinak vzniká chyba paralaxou.
+K čemu slouží analytické váhy?;k vážení s přesností na desetiny miligramu;k hrubému vážení;k měření objemu;k měření hustoty;~Musí stát na pevném stole bez otřesů.
+Co je tára?;hmotnost prázdné nádoby;hmotnost vzorku;celková hmotnost;chyba vážení;~Vytárováním vah odečteme hmotnost nádoby.
+Co je filtrace?;dělení pevné látky od kapaliny přes porézní přepážku;odpaření kapaliny;oddělení dvou kapalin;čištění krystalizací;~Na filtru zůstane filtrační koláč, prochází filtrát.
+Co je dekantace?;slévání kapaliny nad usazenou sraženinou;filtrace přes papír;destilace;sušení;~Používá se před filtrací u hrubých sraženin.
+Co je destilace?;dělení kapalin podle rozdílné teploty varu;dělení podle hustoty;dělení podle barvy;dělení podle rozpustnosti;~Kapalina se odpaří a znovu zkondenzuje.
+K čemu slouží frakční destilace?;k dělení směsi více kapalin s blízkými body varu;k sušení;k filtraci;k odstředění;~Používá se u ropy nebo v lihovarnictví.
+Co je destilace s vodní parou?;šetrné dělení látek nemísitelných s vodou;destilace pod tlakem;destilace za sucha;odpařování;~Používá se na silice a éterické oleje, chrání látky před rozkladem.
+Proč se destiluje za sníženého tlaku?;aby látka vřela při nižší teplotě a nerozložila se;aby to bylo rychlejší;aby vznikl vakuový produkt;kvůli úspoře vody;~Snížením tlaku klesá teplota varu.
+Co je extrakce?;dělení látek podle rozdílné rozpustnosti ve dvou rozpouštědlech;dělení podle bodu varu;filtrace;odpařování;~Provádí se v dělicí nálevce.
+K čemu slouží dělicí nálevka?;k oddělení dvou nemísitelných kapalin;k filtraci;k destilaci;k titraci;~Spodní vrstva se vypustí kohoutem.
+Co je krystalizace?;čištění látky vyloučením krystalů z roztoku;odpařování dosucha;destilace;filtrace;~Nečistoty zůstanou v matečném louhu.
+Co je sublimace?;přechod pevné látky přímo v páru;tání;tuhnutí;var;~Používá se k čištění jodu nebo kofeinu.
+Co je chromatografie?;dělicí metoda využívající různou afinitu k mobilní a stacionární fázi;typ destilace;typ vážení;titrace;~Existuje papírová, tenkovrstvá, sloupcová i plynová.
+Co je Rf hodnota v chromatografii?;poměr dráhy látky k dráze rozpouštědla;rychlost průtoku;koncentrace vzorku;doba analýzy;~Je charakteristická pro danou látku za daných podmínek.
+Jak zjistíme čistotu pevné organické látky?;změřením teploty tání;změřením hmotnosti;podle barvy;podle vůně;~Čistá látka taje ostře, nečistota rozsah rozšiřuje a snižuje.
+Co je zpětný chladič?;chladič vracející páry zpět do baňky;chladič odvádějící destilát;chladicí lázeň;ledová vana;~Umožňuje dlouhý var bez ztráty rozpouštědla.
+Proč se do baňky přidávají varné kamínky?;aby var byl rovnoměrný a nedošlo k utajenému varu;kvůli katalýze;pro zvýšení výtěžku;kvůli barvě;~Zabraňují přehřátí a prudkému vystříknutí.
+Jak správně zahříváme zkumavku?;šikmo, ústím od sebe i od ostatních;svisle nad plamenem;ústím k sobě;vodorovně;~Obsah může vystříknout.
+Co je azeotropická směs?;směs, která vře při stálé teplotě a nelze ji rozdělit destilací;směs nemísitelných látek;emulze;roztok soli;~Například ethanol s vodou při 95,6 procenta.
+Jaká je maximální koncentrace ethanolu dosažitelná běžnou destilací?;asi 96 %;100 %;80 %;99,9 %;~Kvůli azeotropu je nutné pro absolutní líh použít jiné metody.
+
+#TÉMA: Technologické procesy
+Co je jednotková operace?;základní fyzikální děj společný různým výrobám;chemická reakce;typ katalyzátoru;měřicí přístroj;~Například filtrace, destilace nebo sušení.
+Co je surovina?;vstupní materiál pro výrobu;hotový výrobek;odpad;energie;~Dělíme je na primární a druhotné.
+Co znamená kontinuální výroba?;probíhá nepřetržitě;probíhá po dávkách;probíhá jen v zimě;probíhá ručně;~Suroviny se plynule přivádějí a produkt odvádí.
+Co znamená diskontinuální výroba?;probíhá po vsádkách;probíhá nepřetržitě;probíhá automaticky;probíhá bez katalyzátoru;~Vhodná pro malé série, například ve farmacii.
+Co je katalyzátor?;látka urychlující reakci, která se nespotřebuje;látka zpomalující reakci;surovina;produkt;~Snižuje aktivační energii.
+Co je inhibitor?;látka zpomalující reakci;látka urychlující reakci;rozpouštědlo;katalyzátor;~Například stabilizátory v monomerech.
+Co je exotermní reakce?;reakce uvolňující teplo;reakce spotřebovávající teplo;reakce bez tepelné změny;reakce za nízkého tlaku;~Reaktor je nutné chladit.
+Co je endotermní reakce?;reakce spotřebovávající teplo;reakce uvolňující teplo;reakce bez katalyzátoru;výbušná reakce;~Je nutné dodávat energii.
+Co říká Le Chatelierův princip?;soustava se brání vnější změně;reakce probíhá vždy doprava;teplo se neztrácí;hmota se zachovává;~Zvýšení tlaku posune rovnováhu tam, kde je méně plynných molekul.
+Jak se jmenuje výroba amoniaku ze vzduchu a vodíku?;Haberův-Boschův proces;Solvayův proces;Ostwaldův proces;Bayerův proces;~Probíhá za vysokého tlaku a teploty na železném katalyzátoru.
+K čemu se používá amoniak především?;na výrobu hnojiv;na výrobu skla;na výrobu papíru;na výrobu cementu;~Přes 80 procent produkce jde do dusíkatých hnojiv.
+Jak se jmenuje výroba kyseliny dusičné z amoniaku?;Ostwaldův proces;Haberův proces;Solvayův proces;kontaktní proces;~Katalytická oxidace na platinovém sítu.
+Jak se jmenuje moderní výroba kyseliny sírové?;kontaktní proces;komorový proces;Solvayův proces;Ostwaldův proces;~Oxid siřičitý se oxiduje na oxid sírový na katalyzátoru V2O5.
+Proč se oxid sírový nezavádí přímo do vody?;vznikla by obtížně kondenzovatelná mlha;reakce by neproběhla;voda by zamrzla;kyselina by se rozložila;~Zavádí se do koncentrované kyseliny sírové na oleum.
+Jak se jmenuje výroba sody Solvayovým způsobem?;amoniakový způsob;kontaktní způsob;komorový způsob;elektrolytický způsob;~Ze soli, vápence a amoniaku vzniká uhličitan sodný.
+Co je frakční destilace ropy?;dělení ropy podle teploty varu na frakce;odsolení ropy;krakování;rafinace;~V destilační koloně se oddělí benzin, petrolej, nafta i mazut.
+Která frakce ropy vře nejníže?;benzin;nafta;mazut;asfalt;~Lehké uhlovodíky odcházejí horem kolony.
+Co je krakování?;štěpení dlouhých uhlovodíků na kratší;spojování řetězců;odsiřování;destilace;~Zvyšuje výtěžek benzinu z ropy.
+Co je reformování?;úprava struktury uhlovodíků pro vyšší oktanové číslo;štěpení řetězců;odsolení;chlazení;~Vznikají rozvětvené a aromatické uhlovodíky.
+Co je koksování uhlí?;zahřívání uhlí bez přístupu vzduchu;spalování uhlí;mletí uhlí;praní uhlí;~Vzniká koks, koksárenský plyn a černouhelný dehet.
+Co je vysoká pec?;zařízení na výrobu surového železa;pec na pálení vápna;destilační kolona;sušárna;~Redukce oxidů železa koksem.
+Co je elektrolýza?;rozklad látky stejnosměrným proudem;tepelný rozklad;rozklad zářením;katalytická reakce;~Používá se na výrobu hliníku, chloru i hydroxidu sodného.
+Který kov se vyrábí elektrolýzou taveniny oxidu?;hliník;železo;měď;olovo;~Hall-Héroultův proces v tavenině kryolitu.
+Co vzniká elektrolýzou roztoku chloridu sodného?;hydroxid sodný, chlor a vodík;soda a kyslík;chlorid vápenatý;jen vodík;~Chloralkalická elektrolýza patří k základům chemického průmyslu.
+Co je fermentace?;biochemická přeměna pomocí mikroorganismů;destilace;filtrace;elektrolýza;~Používá se při výrobě lihu, antibiotik i kyseliny citronové.
+Který organismus zajišťuje lihové kvašení?;kvasinky;bakterie mléčného kvašení;plísně;řasy;~Saccharomyces cerevisiae mění cukr na ethanol a oxid uhličitý.
+Který lék se vyrábí biotechnologicky z plísně?;penicilin;aspirin;paracetamol;ibuprofen;~Objevil ho Alexander Fleming roku 1928.
+Co je bioreaktor neboli fermentor?;nádoba pro řízený růst mikroorganismů;destilační kolona;sušárna;filtr;~Řídí se v něm teplota, pH, kyslík i míchání.
+Co je SVP ve farmaceutické výrobě?;správná výrobní praxe;systém výrobního plánování;směrnice o výrobě prášků;standardní vzorkovací protokol;~Anglicky GMP, soubor pravidel zaručujících kvalitu léčiv.
+Co je validace procesu?;doložení, že proces trvale dává požadovaný výsledek;jednorázová kontrola;kalibrace vah;čištění zařízení;~Klíčový požadavek správné výrobní praxe.
+Co je čistá výroba?;strategie předcházení vzniku odpadu u zdroje;úklid provozu;filtrace odpadu;recyklace obalů;~Levnější než čištění odpadů na konci potrubí.
+Co jsou emise?;látky vypouštěné do ovzduší ze zdroje;látky naměřené v ovzduší;odpadní voda;pevný odpad;~Naproti tomu imise je koncentrace v prostředí.
+Co je čistička odpadních vod?;zařízení na mechanické a biologické čištění vod;filtr vzduchu;spalovna;skládka;~Aktivovaný kal rozkládá organické znečištění.
+Co je BSK5?;biochemická spotřeba kyslíku za pět dní;bezpečnostní kód;kyselost vody;tvrdost vody;~Ukazatel organického znečištění vody.
+
+#TÉMA: Technická příprava
+K čemu slouží technické kreslení?;k jednoznačnému grafickému zápisu tvaru a rozměrů;k výtvarnému vyjádření;k reklamě;k výpočtu ceny;~Řídí se normami ČSN a ISO.
+Jaký je základní formát výkresu?;A4;A0;A3;A5;~Ostatní formáty jsou jeho násobky nebo díly.
+Jaké jsou rozměry formátu A4?;210 × 297 mm;297 × 420 mm;148 × 210 mm;100 × 200 mm;~Základní kancelářský i výkresový formát.
+Co znamená měřítko 1:2?;výkres je dvakrát zmenšený;výkres je dvakrát zvětšený;skutečná velikost;polovina tloušťky;~První číslo je výkres, druhé skutečnost.
+Co znamená měřítko 2:1?;výkres je dvakrát zvětšený;dvakrát zmenšený;skutečná velikost;čtvrtinový;~Používá se pro drobné součásti.
+Jakou čarou se kreslí viditelné hrany?;tlustou plnou;tenkou plnou;čerchovanou;čárkovanou;~Nejvýraznější čára na výkrese.
+Jakou čarou se kreslí neviditelné hrany?;čárkovanou;plnou tlustou;čerchovanou;tenkou plnou;~Skryté obrysy za tělesem.
+Jakou čarou se kreslí osy souměrnosti?;tenkou čerchovanou;tlustou plnou;čárkovanou;vlnovkou;~Střídá se čárka a tečka.
+Co je kóta?;údaj o rozměru na výkrese;název součásti;typ materiálu;číslo výkresu;~Kótuje se v milimetrech bez uvedení jednotky.
+Co je řez na výkrese?;zobrazení vnitřního tvaru po myšleném rozříznutí;pohled zvenku;detail;rozvinutí;~Plocha řezu se šrafuje.
+Co je tolerance rozměru?;přípustná odchylka od jmenovitého rozměru;chyba měření;hmotnost;drsnost povrchu;~Bez tolerancí by součásti nešly zaměnit.
+Co je schéma v chemickém průmyslu?;zjednodušené grafické znázornění zařízení a toků;detailní výrobní výkres;fotografie provozu;seznam surovin;~Například technologické nebo potrubní schéma.
+Co je P&I schéma?;schéma potrubí a přístrojového vybavení;plán bezpečnosti;výkres budovy;seznam pracovníků;~Ukazuje aparáty, potrubí, armatury a měřicí body.
+Co je korozivzdorná ocel?;ocel s obsahem chromu nad 10,5 %;čisté železo;ocel s uhlíkem;litina;~Chrom tvoří pasivní vrstvu oxidu.
+Proč se v chemickém průmyslu používá sklo a keramika?;jsou chemicky odolné;jsou levné;jsou pružné;dobře vedou teplo;~Nevýhodou je křehkost.
+Který materiál je odolný vůči kyselině fluorovodíkové?;polyethylen nebo teflon;sklo;běžná ocel;hliník;~Kyselina fluorovodíková leptá sklo, skladuje se v plastu.
+Co je koroze?;znehodnocování materiálu chemickým nebo elektrochemickým působením;mechanické opotřebení;tepelná deformace;únava materiálu;~Nejčastěji rezavění železa.
+Jak se chrání ocel před korozí?;nátěrem, pokovením nebo katodovou ochranou;zahřátím;broušením;chlazením;~Cílem je oddělit kov od prostředí nebo změnit potenciál.
+Co je čerpadlo?;zařízení pro dopravu kapalin;zařízení pro dopravu plynů;výměník tepla;filtr;~Pro plyny slouží kompresory a ventilátory.
+K čemu slouží výměník tepla?;k přenosu tepla mezi dvěma médii;k čerpání kapalin;k filtraci;k míchání;~Například trubkový nebo deskový.
+Co je armatura na potrubí?;prvek pro uzavírání a regulaci toku;spojka trubek;izolace;podpěra;~Například ventil, kohout nebo klapka.
+Co je manometr?;přístroj na měření tlaku;na měření teploty;na měření průtoku;na měření hladiny;~Sleduje se u tlakových nádob.
+Co je termočlánek?;čidlo teploty založené na termoelektrickém jevu;čidlo tlaku;čidlo průtoku;čidlo pH;~Vzniká napětí úměrné rozdílu teplot spojů.
+Co je rotametr?;průtokoměr s plovákem ve svislé trubici;teploměr;tlakoměr;váha;~Výška plováku ukazuje průtok.
+
+#TÉMA: Biologie
+Co je základní stavební a funkční jednotkou života?;buňka;tkáň;orgán;molekula;~Buněčnou teorii formulovali Schleiden a Schwann.
+Čím se liší prokaryotická buňka od eukaryotické?;nemá jádro oddělené membránou;nemá cytoplazmu;nemá ribozomy;nemá DNA;~Prokaryota jsou bakterie a archea.
+Která organela je energetickým centrem buňky?;mitochondrie;ribozom;lyzozom;Golgiho aparát;~Probíhá v ní buněčné dýchání a tvorba ATP.
+Která organela zajišťuje fotosyntézu?;chloroplast;mitochondrie;jádro;vakuola;~Obsahuje zelené barvivo chlorofyl.
+Co je úkolem ribozomů?;syntéza bílkovin;tvorba ATP;trávení;dělení buňky;~Překládají genetickou informaci z mRNA.
+Která organela obsahuje trávicí enzymy?;lyzozom;ribozom;mitochondrie;chloroplast;~Rozkládá odpadní a poškozené části buňky.
+Co je úkolem Golgiho aparátu?;úprava a distribuce bílkovin;výroba energie;dělení buňky;fotosyntéza;~Balí produkty do váčků.
+Z čeho je tvořena buněčná stěna rostlin?;z celulózy;z chitinu;z peptidoglykanu;z bílkovin;~U hub je to chitin, u bakterií peptidoglykan.
+Kde je uložena genetická informace buňky?;v DNA;v bílkovinách;v tucích;v cukrech;~Deoxyribonukleová kyselina v jádře i mitochondriích.
+Jaký tvar má molekula DNA?;dvoušroubovice;jednoduchá spirála;kruh;kříž;~Model popsali Watson a Crick roku 1953.
+Které báze se v DNA párují s adeninem?;thymin;guanin;cytosin;uracil;~V RNA se místo thyminu páruje uracil.
+Které báze se v DNA párují s guaninem?;cytosin;adenin;thymin;uracil;~Spojují je tři vodíkové můstky.
+Čím se liší RNA od DNA?;obsahuje ribózu a uracil;obsahuje thymin;je vždy dvouvláknová;nemá báze;~RNA je zpravidla jednovláknová.
+Co je gen?;úsek DNA nesoucí informaci pro znak;celá buňka;bílkovina;chromozom;~Většinou kóduje jednu bílkovinu.
+Kolik chromozomů má lidská somatická buňka?;46;23;48;44;~Dvacet tři párů, z toho jeden pár pohlavní.
+Kolik chromozomů má lidská pohlavní buňka?;23;46;22;92;~Vzniká meiózou, obsahuje poloviční počet.
+Jak se jmenuje dělení vedoucí ke dvěma identickým buňkám?;mitóza;meióza;pučení;konjugace;~Slouží k růstu a obnově tkání.
+Jak se jmenuje redukční dělení?;meióza;mitóza;amitóza;pučení;~Vznikají čtyři buňky s polovičním počtem chromozomů.
+Co je fotosyntéza?;přeměna oxidu uhličitého a vody na cukr za pomoci světla;spalování cukru;rozklad bílkovin;tvorba tuků;~Vedlejším produktem je kyslík.
+Kde probíhá světelná fáze fotosyntézy?;v thylakoidech chloroplastu;ve stromatu;v mitochondrii;v jádře;~V membránách s fotosystémy.
+Co je buněčné dýchání?;oxidace živin za vzniku ATP;tvorba cukru;výměna plynů v plicích;transport kyslíku;~Probíhá v mitochondriích.
+Kolik ATP vznikne úplnou oxidací jedné molekuly glukózy?;přibližně 30 až 32;dvě;deset;sto;~Nejvíc energie dodá dýchací řetězec.
+Co je ATP?;univerzální přenašeč energie v buňce;stavební bílkovina;typ cukru;hormon;~Adenosintrifosfát uvolní energii odštěpením fosfátu.
+Kdo je zakladatelem genetiky?;Gregor Johann Mendel;Charles Darwin;Louis Pasteur;Carl Linné;~Své pokusy s hrachem prováděl v Brně.
+Co je genotyp?;soubor genetické informace jedince;vnější projev znaků;počet chromozomů;typ buňky;~Fenotyp je jeho vnější projev.
+Co je fenotyp?;vnější projev genotypu a prostředí;jen genetická výbava;počet genů;typ dělení;~Ovlivňuje ho i výživa a prostředí.
+Co je homozygot?;jedinec se dvěma stejnými alelami;se dvěma různými alelami;bez alel;s jednou alelou;~Například AA nebo aa.
+Co je heterozygot?;jedinec se dvěma různými alelami;se dvěma stejnými;bez alel;s trojicí alel;~Například Aa, projeví se dominantní alela.
+Co je dominantní alela?;alela projevující se i v heterozygotní sestavě;projevující se jen u homozygota;neúčinná alela;pohlavní alela;~Značí se velkým písmenem.
+Kolik krevních skupin má systém AB0?;čtyři;dvě;tři;osm;~A, B, AB a 0.
+Která krevní skupina je univerzálním dárcem?;0;AB;A;B;~Nemá na erytrocytech antigeny A ani B.
+Která krevní skupina je univerzálním příjemcem?;AB;0;A;B;~Nemá v plazmě protilátky anti-A ani anti-B.
+Co jsou enzymy?;biokatalyzátory bílkovinné povahy;hormony;vitaminy;tuky;~Urychlují reakce a jsou vysoce specifické.
+Co je aktivní místo enzymu?;část molekuly vážící substrát;obal enzymu;jádro;membrána;~Platí model zámku a klíče.
+Co se stane s enzymem při vysoké teplotě?;denaturuje a ztratí funkci;zrychlí se natrvalo;změní se v cukr;nic;~Poruší se prostorová struktura bílkoviny.
+Co jsou vitaminy?;nízkomolekulární látky nezbytné v malém množství;zdroje energie;stavební bílkoviny;minerály;~Tělo si je většinou neumí vyrobit.
+Který vitamin chrání před kurdějemi?;vitamin C;vitamin A;vitamin D;vitamin K;~Kyselina askorbová je nutná pro tvorbu kolagenu.
+Který vitamin vzniká v kůži působením slunce?;vitamin D;vitamin C;vitamin B12;vitamin E;~Nezbytný pro vstřebávání vápníku.
+Které vitaminy jsou rozpustné v tucích?;A, D, E, K;B a C;jen C;jen B12;~Mohou se v těle hromadit a předávkovat.
+Co jsou hormony?;látky řídící činnost orgánů, přenášené krví;trávicí enzymy;stavební látky;vitaminy;~Produkují je žlázy s vnitřní sekrecí.
+Který hormon snižuje hladinu cukru v krvi?;inzulin;glukagon;adrenalin;tyroxin;~Vytváří se ve slinivce břišní.
+Který hormon zvyšuje hladinu cukru v krvi?;glukagon;inzulin;estrogen;melatonin;~Působí opačně než inzulin.
+Co je diabetes mellitus?;porucha metabolismu cukrů s vysokou glykemií;nemoc jater;nedostatek vitaminu C;porucha srážlivosti;~První typ je nedostatek inzulinu, druhý inzulinová rezistence.
+Co jsou bakterie?;jednobuněčné organismy bez pravého jádra;viry;houby;prvoci;~Patří mezi prokaryota.
+Jsou viry živé organismy?;nemají vlastní metabolismus, množí se jen v hostiteli;ano, jsou plně samostatné;jsou to bakterie;jsou to houby;~Stojí na hranici mezi živým a neživým.
+Čím se léčí bakteriální infekce?;antibiotiky;antivirotiky;vitaminy;antihistaminiky;~Na viry antibiotika nepůsobí.
+Proč je nadužívání antibiotik problém?;vzniká rezistence bakterií;antibiotika zdraží;ničí viry;způsobují alergie vždy;~Odolné kmeny se pak obtížně léčí.
+Co je sterilizace?;úplné zničení všech mikroorganismů včetně spor;snížení počtu mikrobů;mytí;filtrace;~Například v autoklávu při 121 stupních.
+Co je dezinfekce?;zničení většiny choroboplodných mikroorganismů;zničení úplně všech;mechanický úklid;filtrace vzduchu;~Nezničí spolehlivě spory.
+Co je autokláv?;přístroj sterilizující nasycenou párou pod tlakem;sušárna;chladnička;odstředivka;~Standardně 121 stupňů po dobu 15 až 20 minut.
+Co je pasterizace?;šetrné zahřátí potraviny k usmrcení mikrobů;úplná sterilizace;zmrazení;sušení;~Zavedl ji Louis Pasteur, prodlužuje trvanlivost mléka.
+
+#TÉMA: Fyzika a cvičení z fyziky
+Co je vnitřní energie tělesa?;součet energií neuspořádaného pohybu částic;energie polohy;kinetická energie tělesa;elektrická energie;~Lze ji měnit konáním práce nebo tepelnou výměnou.
+Co říká první termodynamický zákon?;změna vnitřní energie se rovná dodanému teplu a práci;energie se ztrácí;teplo jde vždy od studeného;entropie klesá;~Je to zákon zachování energie pro tepelné děje.
+Co říká druhý termodynamický zákon?;teplo samovolně přechází z teplejšího na chladnější;teplo jde vždy nahoru;energie vzniká;práce se rovná teplu;~Nelze sestrojit perpetuum mobile druhého druhu.
+Jaký je vztah pro teplo přijaté látkou?;Q = m · c · Δt;Q = m · v;Q = F · s;Q = U · I;~c je měrná tepelná kapacita.
+Co je měrná tepelná kapacita?;teplo na ohřátí 1 kg látky o 1 K;celkové teplo látky;teplota tání;hustota;~Voda má vysokou hodnotu 4180 J/(kg·K).
+Co je kalorimetrická rovnice?;teplo odevzdané se rovná teplu přijatému;práce se rovná energii;tlak se rovná síle;odpor se rovná napětí;~Platí pro izolovanou soustavu.
+Co je stavová rovnice ideálního plynu?;pV = nRT;p = F/S;E = mc²;U = RI;~Spojuje tlak, objem, látkové množství a teplotu.
+Jaká je hodnota molární plynové konstanty?;8,31 J/(mol·K);9,81 J/(mol·K);6,02·10²³;1,60·10⁻¹⁹;~Značí se R.
+Jaký je molární objem plynu za normálních podmínek?;22,4 litru;24,0 litru;18,0 litru;10,0 litru;~Za 0 °C a 101,325 kPa.
+Co říká Boylův-Mariottův zákon?;při stálé teplotě je součin tlaku a objemu konstantní;tlak roste s teplotou;objem roste s teplotou;tlak je stálý;~Izotermický děj.
+Co říká Gay-Lussacův zákon?;při stálém objemu je tlak úměrný teplotě;objem je úměrný tlaku;teplota je stálá;tlak je stálý;~Izochorický děj.
+Co je izobarický děj?;děj za stálého tlaku;za stálého objemu;za stálé teploty;bez výměny tepla;~Objem je úměrný termodynamické teplotě.
+Co je adiabatický děj?;děj bez výměny tepla s okolím;za stálé teploty;za stálého tlaku;za stálého objemu;~Například rychlé stlačení plynu.
+Jaká je jednotka termodynamické teploty?;kelvin;stupeň Celsia;stupeň Fahrenheita;joule;~Nula kelvinů je absolutní nula.
+Kolik kelvinů je 0 °C?;273,15 K;0 K;100 K;373,15 K;~K teplotě ve stupních Celsia se přičítá 273,15.
+Co je elektrický proud?;usměrněný pohyb volných nosičů náboje;pohyb atomů;přenos tepla;pohyb molekul;~Jednotkou je ampér.
+Co říká Ohmův zákon?;proud je přímo úměrný napětí a nepřímo úměrný odporu;proud je roven napětí;odpor je roven proudu;napětí je stálé;~I = U/R.
+Jaká je jednotka elektrického odporu?;ohm;volt;ampér;watt;~Značí se řeckým písmenem omega.
+Na čem závisí odpor vodiče?;na materiálu, délce a průřezu;jen na napětí;jen na proudu;na barvě;~R = ρ · l / S.
+Jaký je vztah pro elektrický výkon?;P = U · I;P = U/I;P = I/U;P = U + I;~Jednotkou je watt.
+Co je elektrolýza z pohledu fyziky?;vedení proudu v roztoku spojené s vylučováním látek;vedení proudu v kovu;vedení v plynu;vedení ve vakuu;~Nosiči náboje jsou ionty.
+Co říká první Faradayův zákon elektrolýzy?;hmotnost vyloučené látky je úměrná prošlému náboji;hmotnost je úměrná napětí;objem je úměrný času;proud je stálý;~m = A · I · t.
+Jaká částice je nositelem záporného náboje v kovu?;elektron;proton;neutron;iont;~V kovech se pohybují volné elektrony.
+Co je magnetická indukce?;veličina popisující silové účinky magnetického pole;počet siločar;magnetický náboj;odpor cívky;~Jednotkou je tesla.
+Co je elektromagnetická indukce?;vznik napětí při změně magnetického toku;stálý proud v cívce;odpor vodiče;přeměna tepla;~Objevil ji Michael Faraday, je základem generátorů.
+Jaká je rychlost světla ve vakuu?;přibližně 3·10⁸ m/s;3·10⁶ m/s;3·10¹⁰ m/s;340 m/s;~Přesně 299 792 458 metrů za sekundu.
+Co je index lomu?;poměr rychlosti světla ve vakuu k rychlosti v látce;úhel lomu;vlnová délka;frekvence;~Měří se refraktometrem, slouží k identifikaci látek.
+K čemu se v laboratoři používá refraktometr?;k měření indexu lomu a určení koncentrace;k měření pH;k vážení;k měření tlaku;~Rychlá kontrola čistoty kapalin.
+Co je spektrofotometrie?;měření absorpce světla roztokem;měření hmotnosti;měření objemu;měření teploty;~Základ kvantitativní analýzy podle Lambertova-Beerova zákona.
+Co říká Lambertův-Beerův zákon?;absorbance je úměrná koncentraci a délce kyvety;absorbance je stálá;koncentrace je úměrná času;světlo se neabsorbuje;~A = ε · c · l.
+
+#TÉMA: Matematika
+Co je definiční obor funkce?;množina hodnot, pro které je funkce definována;množina výsledků;graf funkce;maximum funkce;~Například u odmocniny musí být výraz nezáporný.
+Co je obor hodnot funkce?;množina všech výstupních hodnot;množina vstupů;počet řešení;derivace;~U kvadratické funkce bývá omezen vrcholem.
+Jaký graf má lineární funkce?;přímku;parabolu;hyperbolu;kružnici;~Předpis y = ax + b.
+Jaký graf má kvadratická funkce?;parabolu;přímku;hyperbolu;sinusoidu;~Předpis y = ax² + bx + c.
+Kdy má parabola minimum?;když je koeficient a kladný;když je a záporný;vždy;nikdy;~Při kladném a je parabola otevřená nahoru.
+Jaký je diskriminant kvadratické rovnice?;b² − 4ac;b² + 4ac;2a;−b/2a;~Podle jeho znaménka poznáme počet řešení.
+Kolik řešení má kvadratická rovnice při záporném diskriminantu?;žádné v reálných číslech;jedno;dvě;nekonečně mnoho;~V oboru komplexních čísel existují dvě řešení.
+Kolik řešení má rovnice při nulovém diskriminantu?;jedno dvojnásobné;dvě různá;žádné;tři;~Parabola se dotýká osy x.
+Co je logaritmus?;exponent, na který umocníme základ, abychom dostali číslo;odmocnina;převrácená hodnota;derivace;~Log o základu 10 z tisíce je tři.
+Čemu se rovná log(a · b)?;log a + log b;log a · log b;log a − log b;log a / log b;~Součin se mění v součet, což usnadňuje výpočty.
+Čemu se rovná log(a / b)?;log a − log b;log a + log b;log a / log b;log(a·b);~Podíl se mění v rozdíl.
+Jak souvisí pH s logaritmem?;pH je záporný dekadický logaritmus koncentrace vodíkových iontů;pH je součet koncentrací;pH je odmocnina;pH nesouvisí s logaritmem;~Proto změna o jednotku znamená desetinásobek.
+Jaké pH má neutrální roztok při 25 °C?;7;0;14;1;~Koncentrace vodíkových iontů je 10⁻⁷ mol/l.
+O kolik se změní koncentrace při poklesu pH o 2?;stoupne stokrát;stoupne dvakrát;klesne stokrát;nezmění se;~Logaritmická stupnice je mocninná.
+Co je aritmetická posloupnost?;každý další člen se liší o stálý rozdíl;o stálý podíl;o druhou mocninu;náhodně;~Například 2, 5, 8, 11.
+Co je geometrická posloupnost?;každý další člen vznikne násobením stálým číslem;přičítáním stálého čísla;odčítáním;dělením nulou;~Například 2, 6, 18, 54.
+Jaký je vzorec pro obsah kruhu?;π r²;2π r;π d;r²;~Obvod je 2πr.
+Jaký je vzorec pro objem koule?;4/3 π r³;π r²;4 π r²;2/3 π r³;~Povrch koule je 4πr².
+Jaký je vzorec pro objem válce?;π r² · v;2π r · v;π r · v;r² · v;~Podstavou je kruh.
+Kolik procent je 0,25?;25 %;2,5 %;250 %;0,25 %;~Procento je setina celku.
+Jak spočítáme hmotnostní zlomek?;hmotnost složky děleno hmotnost roztoku;hmotnost roztoku děleno složky;objem děleno hmotností;součet hmotností;~Vyjadřuje se často v procentech.
+Jak spočítáme látkovou koncentraci?;látkové množství děleno objem roztoku;hmotnost děleno objem;objem děleno hmotnost;počet částic;~Jednotkou je mol na litr.
+Jaká je Avogadrova konstanta?;6,022·10²³ mol⁻¹;3·10⁸;8,31;9,81;~Počet částic v jednom molu látky.
+Jak vypočítáme látkové množství z hmotnosti?;n = m / M;n = m · M;n = M / m;n = m + M;~M je molární hmotnost v gramech na mol.
+Co je směšovací rovnice?;vztah pro výpočet koncentrace po smíchání roztoků;vzorec pro pH;vzorec pro objem;vztah pro hustotu;~Používá se křížové pravidlo.
+Co je relativní chyba měření?;podíl absolutní chyby a naměřené hodnoty;rozdíl dvou měření;součet chyb;střední hodnota;~Vyjadřuje se v procentech.
+Co je aritmetický průměr?;součet hodnot dělený jejich počtem;prostřední hodnota;nejčastější hodnota;rozdíl krajních hodnot;~U měření se používá k odhadu skutečné hodnoty.
+Co je medián?;prostřední hodnota seřazené řady;průměr;nejčastější hodnota;rozptyl;~Není citlivý na odlehlé hodnoty.
+Co je směrodatná odchylka?;míra rozptýlení hodnot kolem průměru;průměr hodnot;počet měření;největší hodnota;~Udává přesnost opakovaného měření.
+Kolik platných číslic uvádíme ve výsledku?;podle přesnosti nejméně přesného vstupu;vždy dvě;vždy všechny z kalkulačky;vždy pět;~Výsledek nemůže být přesnější než měření.
+
+#TÉMA: Dějepis, občanská nauka a ekonomika
+Kdy začala první světová válka?;1914;1918;1939;1900;~Spouštěčem byl atentát na Františka Ferdinanda d'Este v Sarajevu.
+Kdy vzniklo samostatné Československo?;28. října 1918;28. září 1918;1. ledna 1918;17. listopadu 1918;~Konec první světové války a rozpad Rakouska-Uherska.
+Kdo byl prvním československým prezidentem?;Tomáš Garrigue Masaryk;Edvard Beneš;Emil Hácha;Klement Gottwald;~Ve funkci byl v letech 1918 až 1935.
+Kdo byl prvním československým ministrem zahraničí?;Edvard Beneš;Milan Rastislav Štefánik;Karel Kramář;Antonín Švehla;~Později se stal druhým prezidentem.
+Kdy byla podepsána Mnichovská dohoda?;29. září 1938;15. března 1939;1. září 1939;28. října 1938;~Československo přišlo o pohraničí bez své účasti na jednání.
+Kdy začala druhá světová válka?;1. září 1939;15. března 1939;7. prosince 1941;8. května 1945;~Napadením Polska Německem.
+Kdy skončila druhá světová válka v Evropě?;8. května 1945;9. května 1945;2. září 1945;28. října 1945;~Podepsáním kapitulace Německa.
+Kdy proběhl komunistický převrat v Československu?;únor 1948;květen 1945;srpen 1968;listopad 1989;~Vítězný únor znamenal nástup totality.
+Co je demokracie?;forma vlády, kde moc vychází z lidu;vláda jednoho člověka;vláda vojska;vláda církve;~Řecky vláda lidu.
+Jaké jsou tři složky státní moci?;zákonodárná, výkonná a soudní;politická, ekonomická a sociální;vládní, stranická a lidová;místní, krajská a státní;~Dělba moci brání zneužití.
+Kdo v České republice schvaluje zákony?;Parlament;prezident;vláda;Ústavní soud;~Poslanecká sněmovna a Senát.
+Kolik poslanců má Poslanecká sněmovna?;200;81;100;300;~Volí se na čtyři roky poměrným systémem.
+Kolik senátorů má Senát?;81;200;100;50;~Volí se na šest let, třetina se obměňuje každé dva roky.
+Na jak dlouho je volen prezident ČR?;na pět let;na čtyři roky;na šest let;na sedm let;~Od roku 2013 přímou volbou.
+Co je Ústava?;základní zákon státu;seznam trestů;vyhláška vlády;mezinárodní smlouva;~Má nejvyšší právní sílu.
+Co je Listina základních práv a svobod?;součást ústavního pořádku ČR chránící lidská práva;trestní zákoník;občanský zákoník;evropská směrnice;~Zaručuje například svobodu projevu a právo na vzdělání.
+Kdy vstoupila Česká republika do Evropské unie?;2004;1999;1993;2007;~Ve stejné vlně jako Slovensko a Polsko.
+Kdy vstoupila Česká republika do NATO?;1999;2004;1993;1989;~Spolu s Polskem a Maďarskem.
+Co je HDP?;hrubý domácí produkt;hlavní daňový příjem;hospodářský dluh podniku;hodnota domácího prodeje;~Souhrn hodnoty statků a služeb vytvořených v zemi.
+Co je inflace?;růst cenové hladiny a pokles kupní síly peněz;pokles cen;růst mezd;růst výroby;~Měří se indexem spotřebitelských cen.
+Co je deflace?;pokles cenové hladiny;růst cen;růst mezd;stagnace;~Může vést k odkládání spotřeby a útlumu ekonomiky.
+Která instituce v ČR určuje měnovou politiku?;Česká národní banka;Ministerstvo financí;vláda;Nejvyšší kontrolní úřad;~Hlavním cílem je cenová stabilita.
+Co je nabídka v ekonomii?;množství zboží, které jsou prodávající ochotni prodat;množství poptávaného zboží;cena zboží;výrobní náklad;~S rostoucí cenou nabídka roste.
+Co je poptávka?;množství zboží, které jsou kupující ochotni koupit;množství vyrobeného zboží;zisk firmy;daň;~S rostoucí cenou poptávka klesá.
+Kde se protíná nabídka s poptávkou?;v rovnovážné ceně;v nulové ceně;v maximální ceně;v nákladech;~Trh se ustálí na rovnovážném množství.
+Co je zisk?;rozdíl mezi výnosy a náklady;součet tržeb;hodnota majetku;výše daně;~Kladný zisk znamená, že podnik vydělal.
+Co je fixní náklad?;náklad nezávislý na objemu výroby;náklad rostoucí s výrobou;jednorázová daň;mzda dělníka za kus;~Například nájem nebo odpisy.
+Co je variabilní náklad?;náklad měnící se s objemem výroby;stálý náklad;odpis budovy;pojistné;~Například spotřeba surovin.
+Co je DPH?;daň z přidané hodnoty;daň z příjmu;daň z pozemku;dovozní clo;~Nepřímá daň placená v ceně zboží.
+Co je živnostenský list dnes?;výpis ze živnostenského rejstříku;pracovní smlouva;daňové přiznání;certifikát jakosti;~Opravňuje k podnikání v dané živnosti.
+Co je akciová společnost?;kapitálová společnost se základním kapitálem rozděleným na akcie;družstvo;spolek;osobní společnost;~Zkratka a.s., akcionáři neručí za dluhy osobním majetkem.
+Co je společnost s ručením omezeným?;nejrozšířenější forma obchodní společnosti v ČR;státní podnik;nezisková organizace;družstvo;~Zkratka s.r.o.
+Co je marketing?;soubor činností zaměřených na potřeby zákazníka a prodej;výroba zboží;účetnictví;právní služba;~Zahrnuje průzkum trhu, cenu, propagaci i distribuci.
+Co je reklamace?;uplatnění práva z vadného plnění;vrácení bez důvodu;sleva na dani;objednávka;~Zákonná záruka pro spotřebitele je 24 měsíců.
+
+#TÉMA: Informační a komunikační technologie
+Co je hardware?;fyzické součásti počítače;programy;data;síť;~Například procesor, paměť, disk.
+Co je software?;programové vybavení počítače;fyzické součásti;kabeláž;monitor;~Operační systém i aplikace.
+Co je operační systém?;základní software řídící chod počítače;textový editor;antivirus;tabulkový procesor;~Například Windows, Linux nebo macOS.
+Která jednotka je největší?;terabajt;gigabajt;megabajt;kilobajt;~Terabajt je zhruba tisíc gigabajtů.
+Kolik bitů má jeden bajt?;osm;čtyři;šestnáct;deset;~Bajt umí zapsat 256 různých hodnot.
+K čemu slouží tabulkový procesor?;k výpočtům a analýze dat v tabulkách;k psaní dopisů;k úpravě fotek;k tvorbě webu;~Například Excel nebo Calc.
+Čím začíná vzorec v tabulkovém procesoru?;znaménkem rovná se;závorkou;plusem;písmenem;~Bez rovnítka se text nevyhodnotí.
+Která funkce sečte oblast buněk?;SUMA;PRŮMĚR;POČET;MAX;~Anglicky SUM.
+Která funkce spočítá aritmetický průměr?;PRŮMĚR;SUMA;MEDIAN;MIN;~Anglicky AVERAGE.
+Co je absolutní odkaz v tabulce?;odkaz, který se při kopírování nemění;odkaz měnící se při kopírování;odkaz na jiný soubor;odkaz na internet;~Zapisuje se se znakem dolaru, například $A$1.
+Který graf je vhodný pro podíly celku?;výsečový;spojnicový;bodový;plošný;~Ukazuje procentní zastoupení.
+Který graf je vhodný pro vývoj v čase?;spojnicový;výsečový;prstencový;pruhový;~Osa x nese časovou řadu.
+Co je kalibrační křivka?;závislost signálu na koncentraci standardů;graf teploty;časový harmonogram;histogram chyb;~V laboratoři se z ní odečítá koncentrace vzorku.
+Co je LIMS?;laboratorní informační systém;typ chromatografu;chemický vzorec;bezpečnostní list;~Eviduje vzorky, výsledky a protokoly.
+Co je phishing?;podvodné vylákání přihlašovacích údajů;typ viru ničícího disk;šifrování dat;zálohování;~Obvykle přichází podvodným e-mailem.
+Co je silné heslo?;dlouhé, kombinující znaky, jedinečné pro službu;datum narození;jméno psa;stejné heslo všude;~Nejlepší je správce hesel.
+Co je zálohování dat?;pořizování kopií pro případ ztráty;mazání starých souborů;komprimace;šifrování;~Doporučuje se pravidlo 3-2-1.
+Co je GDPR?;evropské nařízení o ochraně osobních údajů;norma jakosti;bezpečnostní list;účetní standard;~Platí od května 2018.
+Co je citace zdroje?;uvedení původu použité informace;vlastní názor;shrnutí;poznámka pod čarou obecně;~Bez citace jde o plagiát.
+Co je plagiát?;vydávání cizí práce za vlastní;citovaný text;vlastní překlad;shrnutí knihy;~Ve škole i v praxi je to závažné provinění.
