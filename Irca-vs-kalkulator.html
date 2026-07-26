@@ -208,6 +208,16 @@
   .gearpanel button:active{background:rgba(255,255,255,.14)}
   .gearpanel .quit{border-color:rgba(255,77,109,.5);color:#ff8fa3}
   .gearback{position:fixed;inset:0;z-index:8;display:none}
+
+  /* ====== VERUNKA — samostatná aplikace v izolovaném rámci ====== */
+  #vOverlay{position:fixed;inset:0;z-index:60;background:#0f1a17;display:none}
+  #vOverlay.show{display:block}
+  #vFrame{width:100%;height:100%;border:0;display:block}
+  #vClose{position:fixed;left:10px;top:calc(8px + env(safe-area-inset-top));z-index:61;
+    background:rgba(15,26,23,.92);border:1px solid rgba(244,241,232,.4);color:#f4f1e8;
+    border-radius:20px;padding:7px 14px;font-family:inherit;font-size:12.5px;font-weight:700;cursor:pointer;
+    box-shadow:0 3px 12px rgba(0,0,0,.5)}
+  #vClose:active{transform:scale(.96)}
   .gearback.show{display:block}
 
   /* ====== TELEFON NA ŠÍŘKU = DVA SLOUPCE ====== */
@@ -249,6 +259,8 @@
   <div class="beam m" style="left:86%;animation-delay:-1s"></div>
 </div>
 <div class="flash" id="flash"></div>
+<div id="vOverlay"><iframe id="vFrame" title="Verunka — příprava na přijímačky"></iframe></div>
+<button id="vClose" style="display:none">← Zpět do hry</button>
 
 <!-- ============ MENU ============ -->
 <div class="screen active" id="menu">
@@ -273,7 +285,7 @@
     <button class="mode" data-mode="irca"><span class="ic">👩</span><div><b>Otázky Irča</b><span>Otázky ke zkouškám — načtou se samy ze souboru.</span></div></button>
     <button class="mode" data-mode="adelka"><span class="ic">🧪</span><div><b>Adélka škola</b><span>Aplikovaná chemie, 2. ročník — vyber si okruh.</span></div></button>
     <button class="mode" data-mode="ucit"><span class="ic">🎓</span><div><b>Pojď se učit</b><span>Napiš téma a Claude ti připraví učící kvíz.</span></div></button>
-    <a class="mode" href="verunka.html" style="text-decoration:none;color:inherit"><span class="ic">📐</span><div><b>Verunka — přijímačky</b><span>Učení s tabulí. Matematika a čeština na zkoušku 2027.</span></div></a>
+    <button class="mode" id="verunkaBtn"><span class="ic">📐</span><div><b>Verunka — přijímačky</b><span>Učení s tabulí. Matematika a čeština na zkoušku 2027.</span></div></button>
     <button class="mode" data-mode="tata"><span class="ic">👨</span><div><b>Pro Tátu</b></div></button>
   </div>
   <button class="soundtoggle" id="soundBtn">🔊 Zvuk: zapnutý</button>
@@ -2037,7 +2049,13 @@ function refreshMenuBar(){
 }
 
 /* ================= UDÁLOSTI ================= */
-document.querySelectorAll(".mode").forEach(b=>b.addEventListener("click",()=>{const m=b.dataset.mode;if(m==="ucit"){openUcit();return;}if(m==="adelka"){openAdelka();return;}startGame(m)}));
+document.querySelectorAll(".mode").forEach(b=>b.addEventListener("click",()=>{
+  const m=b.dataset.mode;
+  if(!m)return;                       // tlačítko Verunky má vlastní obsluhu níž
+  if(m==="ucit"){openUcit();return;}
+  if(m==="adelka"){openAdelka();return;}
+  startGame(m);
+}));
 document.querySelectorAll(".ans").forEach(b=>b.addEventListener("click",()=>onAnswer(+b.dataset.i)));
 $("jokerBtn").addEventListener("click",useJoker);
 $("confirmBtn").addEventListener("click",confirmMulti);
@@ -2144,6 +2162,667 @@ $("musicBtn").addEventListener("click",e=>{
   if(musicWanted){$("musicBtn").textContent="🎵 Hudba: hraje";tryMusic();}
   else{ALL_TRACKS.forEach(a=>a.pause());$("musicBtn").textContent="🎵 Hudba: vypnutá";}
 });
+/* ================= VERUNKA — PŘÍPRAVA NA PŘIJÍMAČKY =================
+   Celá aplikace běží ve vlastním rámci, aby se její styly a skripty
+   nemohly potkat s hrou. Zdrojem je soubor verunka.html, odkud se obsah
+   vkládá skriptem slouc-verunku.py. */
+/* ==== VERUNKA-START (generováno skriptem slouc-verunku.py — needituj ručně) ==== */
+const VERUNKA_HTML=`<!DOCTYPE html>
+<!-- Verunka — příprava na jednotnou přijímací zkoušku (CERMAT, čtyřleté obory)
+     Copyright © 2026 Petr Poslušný. Všechna práva vyhrazena. -->
+<html lang="cs">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>📐 Verunka — příprava na přijímačky 2027</title>
+<style>
+:root{--board:#1e3d33;--board2:#17302a;--wood:#7a5230;--wood2:#5c3d24;--chalk:#f4f1e8;--chalk-dim:#bcc9c2;
+--gold:#ffd84d;--cyan:#7fe3ff;--pink:#ff8ad1;--green:#6ee7a0;--red:#ff8080;--bg:#0f1a17;}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+body{margin:0;background:radial-gradient(circle at 50% 0%,#1b2f28,#0b1411 70%);color:var(--chalk);
+font-family:'Segoe UI',system-ui,-apple-system,sans-serif;min-height:100vh;padding:14px 12px 40px}
+.wrap{max-width:760px;margin:0 auto}
+h1{font-size:23px;margin:6px 0 2px;letter-spacing:.3px}
+.sub{font-size:13px;color:var(--chalk-dim);margin-bottom:16px}
+.screen{display:none}.screen.on{display:block;animation:fade .25s}
+@keyframes fade{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+/* ===== TABULE ===== */
+.board{background:linear-gradient(160deg,var(--board),var(--board2));border:11px solid var(--wood);
+border-radius:10px;box-shadow:0 0 0 3px var(--wood2),0 14px 34px rgba(0,0,0,.55),inset 0 0 70px rgba(0,0,0,.35);
+padding:20px 18px;position:relative;min-height:180px}
+.board::after{content:"";position:absolute;left:0;right:0;bottom:-11px;height:11px;
+background:linear-gradient(var(--wood),var(--wood2))}
+.board .chalkline{position:absolute;right:16px;top:10px;font-size:19px;opacity:.5}
+.bt{font-size:18px;font-weight:700;color:var(--gold);margin-bottom:12px;
+text-shadow:0 0 9px rgba(255,216,77,.3)}
+.bx{font-size:16px;line-height:1.65;white-space:pre-wrap;text-shadow:0 0 6px rgba(244,241,232,.16)}
+.formula{font-size:20px;font-weight:700;letter-spacing:.6px;color:var(--cyan);margin:10px 0;
+text-align:center;text-shadow:0 0 10px rgba(127,227,255,.35)}
+/* ===== KROKY ===== */
+.step{border-left:3px solid rgba(255,216,77,.5);padding:8px 0 8px 13px;margin:12px 0;animation:fade .3s}
+.step .n{font-size:11px;color:var(--gold);letter-spacing:1.4px;font-weight:700;text-transform:uppercase}
+.step .d{font-size:15px;line-height:1.55;margin:4px 0 0}
+.step .f{font-size:19px;font-weight:700;color:var(--cyan);margin-top:7px;letter-spacing:.5px}
+.result{margin-top:16px;padding:13px;border-radius:9px;background:rgba(110,231,160,.14);
+border:1px solid rgba(110,231,160,.45);font-size:17px;font-weight:700;color:var(--green);text-align:center}
+/* ===== TLAČÍTKA ===== */
+button{font-family:inherit;cursor:pointer;border:none}
+.btn{display:block;width:100%;background:linear-gradient(90deg,var(--gold),#ffb43f);color:#241b00;
+font-weight:800;font-size:16px;padding:14px;border-radius:13px;margin-top:12px;
+box-shadow:0 5px 16px rgba(255,216,77,.28)}
+.btn:active{transform:translateY(1px)}
+.btn.sec{background:transparent;color:var(--chalk);border:1.5px solid rgba(244,241,232,.35);box-shadow:none}
+.btn.cy{background:linear-gradient(90deg,var(--cyan),#3fa9ff);color:#01243a;box-shadow:0 5px 16px rgba(127,227,255,.25)}
+.btn:disabled{opacity:.4;cursor:default}
+.row{display:flex;gap:10px}.row .btn{margin-top:12px}
+/* ===== KARTY / VÝBĚR ===== */
+.card{width:100%;text-align:left;background:rgba(255,255,255,.055);border:1px solid rgba(244,241,232,.16);
+border-radius:14px;padding:14px 16px;margin-bottom:10px;color:var(--chalk);display:block}
+.card:hover{background:rgba(255,255,255,.1)}
+.card b{font-size:16px;display:block;margin-bottom:3px}
+.card span{font-size:12.5px;color:var(--chalk-dim);line-height:1.45}
+.card .bar{height:5px;border-radius:3px;background:rgba(255,255,255,.13);margin-top:9px;overflow:hidden}
+.card .bar i{display:block;height:100%;background:linear-gradient(90deg,var(--green),var(--cyan))}
+.ans{width:100%;text-align:left;background:rgba(255,255,255,.06);border:1.5px solid rgba(244,241,232,.2);
+border-radius:12px;padding:13px 15px;margin-bottom:9px;color:var(--chalk);font-size:15.5px;line-height:1.4}
+.ans:hover{border-color:rgba(255,216,77,.6)}
+.ans.ok{background:rgba(110,231,160,.2);border-color:var(--green)}
+.ans.bad{background:rgba(255,128,128,.16);border-color:var(--red)}
+.ans .k{display:inline-block;width:24px;font-weight:800;color:var(--gold)}
+input[type=text]{width:100%;background:rgba(255,255,255,.08);border:1.5px solid rgba(244,241,232,.28);
+border-radius:12px;padding:14px;color:var(--chalk);font-family:inherit;font-size:19px;font-weight:700;
+text-align:center;letter-spacing:.5px}
+input[type=text]:focus{outline:none;border-color:var(--gold)}
+.hintline{font-size:12px;color:var(--chalk-dim);text-align:center;margin-top:7px}
+/* ===== HLAVIČKA ÚLOHY ===== */
+.qhead{display:flex;justify-content:space-between;align-items:center;font-size:12.5px;
+color:var(--chalk-dim);margin-bottom:10px}
+.pill{background:rgba(255,255,255,.09);border-radius:20px;padding:4px 12px;font-weight:700}
+.fb{padding:12px;border-radius:11px;margin-top:12px;font-size:15px;font-weight:700;text-align:center;animation:fade .3s}
+.fb.ok{background:rgba(110,231,160,.16);color:var(--green);border:1px solid rgba(110,231,160,.4)}
+.fb.no{background:rgba(255,216,77,.13);color:var(--gold);border:1px solid rgba(255,216,77,.4)}
+.speed{width:100%;background:rgba(255,255,255,.05);border:1px dashed rgba(244,241,232,.28);border-radius:11px;
+padding:9px;color:var(--chalk-dim);font-size:12.5px;font-weight:700;margin-bottom:12px}
+.speed.on{background:rgba(127,227,255,.13);border:1px solid rgba(127,227,255,.55);color:var(--cyan)}
+.tag{display:inline-block;font-size:11px;letter-spacing:1.2px;text-transform:uppercase;font-weight:800;
+color:var(--pink);margin-bottom:7px}
+svg.vis{display:block;max-width:100%;height:auto;margin:12px auto}
+.dots{display:flex;gap:5px;justify-content:center;margin-top:14px}
+.dots i{width:7px;height:7px;border-radius:50%;background:rgba(255,255,255,.25)}
+.dots i.on{background:var(--gold);width:20px;border-radius:4px}
+.foot{text-align:center;font-size:11px;color:#5d6f68;margin-top:26px}
+.stat{display:flex;gap:9px;margin-bottom:14px}
+.stat div{flex:1;background:rgba(255,255,255,.06);border-radius:11px;padding:9px;text-align:center}
+.stat b{display:block;font-size:19px;color:var(--gold)}
+.stat span{font-size:11px;color:var(--chalk-dim)}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<!-- ===== MENU ===== -->
+<div class="screen on" id="s-menu">
+  <h1>📐 Verunka — přijímačky 2027</h1>
+  <div class="sub">Jednotná přijímací zkouška, čtyřleté obory · podle specifikace CERMAT</div>
+  <div class="stat">
+    <div><b id="stDone">0</b><span>vyřešených úloh</span></div>
+    <div><b id="stOk">0 %</b><span>úspěšnost</span></div>
+    <div><b id="stDays">–</b><span>dní do zkoušky</span></div>
+  </div>
+  <div id="okruhy"></div>
+  <button class="btn sec" onclick="resetProgress()">Vynulovat postup</button>
+  <div class="foot">© 2026 Petr Poslušný — všechna práva vyhrazena</div>
+</div>
+
+<!-- ===== VÝBĚR REŽIMU ===== -->
+<div class="screen" id="s-rezim">
+  <h1 id="rzName"></h1>
+  <div class="sub" id="rzPopis"></div>
+  <button class="card" onclick="startVyklad()">
+    <b>🧑‍🏫 Nauč mě to</b>
+    <span>Nejdřív si na tabuli projdeš výklad s příklady. Teprve pak přijdou úlohy. Vyber, když látku ještě moc neznáš.</span>
+  </button>
+  <button class="card" onclick="startUlohy()">
+    <b>✏️ Chci to zkusit</b>
+    <span>Jdeš rovnou na úlohy. Po odpovědi si můžeš nechat ukázat postup na tabuli — nebo rovnou pokračovat dál. Když látku umíš, zapni si u úloh ⏩ rychlý režim a poletíš.</span>
+  </button>
+  <button class="btn sec" onclick="go('menu')">← Zpět na okruhy</button>
+</div>
+
+<!-- ===== VÝKLAD ===== -->
+<div class="screen" id="s-vyklad">
+  <div class="qhead"><span id="vkOkruh"></span><span class="pill" id="vkPoc"></span></div>
+  <div class="board">
+    <div class="chalkline">🖍️</div>
+    <div class="bt" id="vkH"></div>
+    <div class="bx" id="vkT"></div>
+    <div id="vkExtra"></div>
+  </div>
+  <div class="dots" id="vkDots"></div>
+  <div class="row">
+    <button class="btn sec" id="vkBack" onclick="vyklad(-1)">← Zpět</button>
+    <button class="btn" id="vkNext" onclick="vyklad(1)">Další →</button>
+  </div>
+  <button class="btn sec" onclick="go('menu')">Zpět na okruhy</button>
+</div>
+
+<!-- ===== ÚLOHA ===== -->
+<div class="screen" id="s-uloha">
+  <div class="qhead"><span id="ulOkruh"></span><span class="pill" id="ulPoc"></span></div>
+  <button class="speed" id="ulSpeed" onclick="toggleRychly()"></button>
+  <div class="board">
+    <div class="chalkline">📝</div>
+    <div class="tag" id="ulTag">Úloha</div>
+    <div class="bx" id="ulQ"></div>
+    <div id="ulVis"></div>
+  </div>
+  <div id="ulAns" style="margin-top:14px"></div>
+  <div id="ulFb"></div>
+  <button class="btn cy" id="ulShow" style="display:none" onclick="showTabule()">🧑‍🏫 Ukaž postup na tabuli</button>
+  <button class="btn" id="ulNext" style="display:none" onclick="dalsiUloha()">Pokračovat na další úlohu →</button>
+  <button class="btn sec" onclick="go('menu')">Zpět na okruhy</button>
+</div>
+
+<!-- ===== TABULE S POSTUPEM ===== -->
+<div class="screen" id="s-tabule">
+  <div class="qhead"><span id="tbOkruh"></span><span class="pill" id="tbPoc"></span></div>
+  <div class="board">
+    <div class="chalkline">🧑‍🏫</div>
+    <div class="bt">Postup krok za krokem</div>
+    <div class="bx" id="tbQ" style="font-size:14.5px;color:var(--chalk-dim)"></div>
+    <div id="tbSteps"></div>
+    <div id="tbRes"></div>
+  </div>
+  <button class="btn" id="tbNext" onclick="krok()">Další krok →</button>
+  <button class="btn cy" id="tbDone" style="display:none" onclick="dalsiUloha()">Další úloha →</button>
+  <button class="btn sec" onclick="go('menu')">Zpět na okruhy</button>
+</div>
+
+</div>
+<script>
+/* ================= DATA ================= */
+const ZKOUSKA=new Date("2027-04-13"); // orientační termín JPZ 2027
+
+const DATA=[
+{
+ id:"mat-rovnice", predmet:"Matematika", ikona:"🟰",
+ nazev:"Lineární rovnice",
+ popis:"Ekvivalentní úpravy, závorky, zlomky, zkouška i slovní úlohy. Objevuje se skoro v každém testu.",
+ vyklad:[
+  {h:"Co je vlastně rovnice?",
+   t:"Rovnice je tvrzení, že se dvě strany rovnají. Uprostřed je rovnítko a někde se schovává neznámá — obvykle x.\\n\\nTvůj úkol je jediný: dostat x samotné na jednu stranu. Všechno ostatní musí odejít na druhou.",
+   f:"3x + 5 = 20   →   x = 5"},
+  {h:"Rovnice jsou jako váhy",
+   t:"Představ si rovnítko jako střed vah. Obě strany jsou v rovnováze.\\n\\nKdyž něco přidáš vlevo, musíš to samé přidat i vpravo — jinak se váhy překlopí. Přesně to znamená ekvivalentní úprava.",
+   svg:'<svg class="vis" viewBox="0 0 320 130" xmlns="http://www.w3.org/2000/svg"><line x1="160" y1="20" x2="160" y2="95" stroke="#f4f1e8" stroke-width="3"/><line x1="55" y1="35" x2="265" y2="35" stroke="#f4f1e8" stroke-width="3"/><polygon points="160,95 135,120 185,120" fill="none" stroke="#f4f1e8" stroke-width="3"/><rect x="25" y="38" width="60" height="34" rx="5" fill="none" stroke="#7fe3ff" stroke-width="2.5"/><text x="55" y="61" fill="#7fe3ff" font-size="17" font-weight="700" text-anchor="middle" font-family="sans-serif">3x+5</text><rect x="235" y="38" width="60" height="34" rx="5" fill="none" stroke="#ffd84d" stroke-width="2.5"/><text x="265" y="61" fill="#ffd84d" font-size="17" font-weight="700" text-anchor="middle" font-family="sans-serif">20</text><text x="160" y="17" fill="#f4f1e8" font-size="15" text-anchor="middle" font-family="sans-serif">=</text></svg>'},
+  {h:"Úprava 1 — přičítání a odčítání",
+   t:"Chceš dostat x doleva a čísla doprava.\\n\\nPravidlo do kapsy: co přechází přes rovnítko, mění znaménko. Plus se změní na minus a naopak.",
+   f:"3x + 5 = 20  | −5\\n3x = 15"},
+  {h:"Úprava 2 — násobení a dělení",
+   t:"Když u x zůstane číslo, celou rovnici tím číslem vyděl. Zase obě strany!\\n\\nJediný zákaz: nikdy nesmíš dělit nulou.",
+   f:"3x = 15  | :3\\nx = 5"},
+  {h:"Závorky roznásob jako první",
+   t:"Máš-li v rovnici závorku, nejdřív ji odstraň. Číslo před závorkou vynásobíš každý člen uvnitř.\\n\\nPozor na minus před závorkou — to obrátí znaménka všech členů uvnitř.",
+   f:"2(x + 3) = 2x + 6\\n−(x − 4) = −x + 4"},
+  {h:"Zlomky? Vynásob a zmizí",
+   t:"Zlomky v rovnici jsou jen strašák. Najdi nejmenší společný jmenovatel a jím vynásob celou rovnici — každý člen na obou stranách.\\n\\nZlomky se zkrátí a zbude ti obyčejná rovnice.",
+   f:"x/2 + x/3 = 5  | ·6\\n3x + 2x = 30"},
+  {h:"Zkouška — a máš jistotu",
+   t:"Zkouška není otrava, je to tvoje pojistka. Za body v testu se často počítá i ona.\\n\\nDůležité: dosazuj vždy do PŮVODNÍ rovnice, ne do té upravené. Kdybys totiž udělala chybu při úpravě, zkouška by ti ji neodhalila.",
+   f:"L = 3·5 + 5 = 20\\nP = 20\\nL = P  ✓"},
+  {h:"Dva zvláštní případy",
+   t:"Občas se x vykrátí úplně. Nezpanikař, jsou jen dvě možnosti:\\n\\n• Zbude pravdivé tvrzení (třeba 0 = 0) → rovnice má nekonečně mnoho řešení.\\n• Zbude nesmysl (třeba 0 = 5) → rovnice nemá žádné řešení.",
+   f:"2x + 2 = 2x + 2  →  0 = 0\\n3x + 2 = 3x + 7  →  0 = 5"}
+ ],
+ ulohy:[
+  {q:"Řeš rovnici:\\n\\n4x + 7 = 31", typ:"open", odp:"6",
+   kroky:[
+    {n:"Krok 1 — dostaň čísla doprava", d:"Od obou stran odečti 7. Sedmička přejde přes rovnítko a změní znaménko.", f:"4x = 31 − 7\\n4x = 24"},
+    {n:"Krok 2 — osamostatni x", d:"U x stojí čtyřka, takže obě strany vyděl čtyřmi.", f:"x = 24 : 4\\nx = 6"},
+    {n:"Krok 3 — zkouška", d:"Dosaď 6 do původní rovnice a spočítej obě strany zvlášť.", f:"L = 4·6 + 7 = 31\\nP = 31   →   L = P ✓"}
+   ], vys:"x = 6"},
+
+  {q:"Řeš rovnici:\\n\\n5x − 7 = 2x + 8", typ:"open", odp:"5",
+   kroky:[
+    {n:"Krok 1 — x doleva", d:"Neznámá je na obou stranách. Odečti 2x od obou stran, aby zůstala jen vlevo.", f:"5x − 2x − 7 = 8\\n3x − 7 = 8"},
+    {n:"Krok 2 — čísla doprava", d:"Přičti 7 k oběma stranám.", f:"3x = 8 + 7\\n3x = 15"},
+    {n:"Krok 3 — vyděl", d:"Obě strany vyděl třemi.", f:"x = 5"},
+    {n:"Krok 4 — zkouška", d:"Dosaď do původní rovnice.", f:"L = 5·5 − 7 = 18\\nP = 2·5 + 8 = 18  ✓"}
+   ], vys:"x = 5"},
+
+  {q:"Řeš rovnici se závorkou:\\n\\n2(x + 3) = 14", typ:"open", odp:"4",
+   kroky:[
+    {n:"Krok 1 — roznásob závorku", d:"Dvojku vynásob s každým členem uvnitř závorky.", f:"2·x + 2·3 = 14\\n2x + 6 = 14"},
+    {n:"Krok 2 — odečti 6", d:"Šestka přejde doprava se změněným znaménkem.", f:"2x = 8"},
+    {n:"Krok 3 — vyděl dvěma", d:"", f:"x = 4"},
+    {n:"Zkouška", d:"Dosaď zpátky do původního tvaru se závorkou.", f:"L = 2·(4 + 3) = 2·7 = 14  ✓"}
+   ], vys:"x = 4"},
+
+  {q:"Pozor na minus před závorkou:\\n\\n5x − (2x − 6) = 12", typ:"open", odp:"2",
+   kroky:[
+    {n:"Krok 1 — odstraň závorku", d:"Před závorkou je minus, takže se obrátí znaménka VŠECH členů uvnitř. Tady dělá většina lidí chybu.", f:"5x − 2x + 6 = 12"},
+    {n:"Krok 2 — sečti x", d:"5x mínus 2x jsou 3x.", f:"3x + 6 = 12"},
+    {n:"Krok 3 — dopočítej", d:"Odečti 6 a vyděl třemi.", f:"3x = 6\\nx = 2"},
+    {n:"Zkouška", d:"", f:"L = 5·2 − (2·2 − 6) = 10 − (−2) = 12  ✓"}
+   ], vys:"x = 2"},
+
+  {q:"Řeš rovnici:\\n\\n4(x − 1) = 3(x + 2)", typ:"open", odp:"10",
+   kroky:[
+    {n:"Krok 1 — roznásob obě závorky", d:"Vlevo čtyřkou, vpravo trojkou.", f:"4x − 4 = 3x + 6"},
+    {n:"Krok 2 — x doleva, čísla doprava", d:"Odečti 3x a přičti 4.", f:"4x − 3x = 6 + 4\\nx = 10"},
+    {n:"Zkouška", d:"Dosaď do původní rovnice.", f:"L = 4·(10 − 1) = 36\\nP = 3·(10 + 2) = 36  ✓"}
+   ], vys:"x = 10"},
+
+  {q:"Rovnice se zlomkem:\\n\\nx/3 + 2 = 5", typ:"open", odp:"9",
+   kroky:[
+    {n:"Krok 1 — zbav se čísla", d:"Nejdřív odečti 2 od obou stran.", f:"x/3 = 3"},
+    {n:"Krok 2 — vynásob jmenovatelem", d:"Obě strany vynásob třemi, zlomek zmizí.", f:"x = 9"},
+    {n:"Zkouška", d:"", f:"L = 9:3 + 2 = 5  ✓"}
+   ], vys:"x = 9"},
+
+  {q:"Řeš rovnici:\\n\\nx/2 + x/3 = 5", typ:"open", odp:"6",
+   kroky:[
+    {n:"Krok 1 — najdi společný jmenovatel", d:"Jmenovatelé jsou 2 a 3. Nejmenší společný násobek je 6.", f:"NSN(2, 3) = 6"},
+    {n:"Krok 2 — vynásob celou rovnici šesti", d:"Každý člen na obou stranách! Zlomky se zkrátí.", f:"6·x/2 + 6·x/3 = 6·5\\n3x + 2x = 30"},
+    {n:"Krok 3 — dopočítej", d:"Sečti x a vyděl.", f:"5x = 30\\nx = 6"},
+    {n:"Zkouška", d:"", f:"L = 6:2 + 6:3 = 3 + 2 = 5  ✓"}
+   ], vys:"x = 6"},
+
+  {q:"Náročnější zlomky (typ z ostrého testu):\\n\\n(x − 6)/6 = (2x − 3)/2 − (3x − 2)/3", typ:"open", odp:"1",
+   kroky:[
+    {n:"Krok 1 — společný jmenovatel", d:"Jmenovatelé jsou 6, 2 a 3. Nejmenší společný násobek je 6.", f:"NSN(6, 2, 3) = 6"},
+    {n:"Krok 2 — vynásob šesti", d:"Každý zlomek vynásob šesti a zkrať. Čitatele dej do závorek, ať neuděláš chybu se znaménky.", f:"(x − 6) = 3(2x − 3) − 2(3x − 2)"},
+    {n:"Krok 3 — roznásob závorky", d:"Pozor na minus před druhou závorkou.", f:"x − 6 = 6x − 9 − 6x + 4"},
+    {n:"Krok 4 — zjednoduš pravou stranu", d:"6x a −6x se vyruší, zbudou jen čísla.", f:"x − 6 = −5"},
+    {n:"Krok 5 — dopočítej", d:"Přičti 6 k oběma stranám.", f:"x = 1"}
+   ], vys:"x = 1"},
+
+  {q:"Řeš rovnici:\\n\\n(x + 1)/4 − (x − 1)/6 = 1", typ:"open", odp:"7",
+   kroky:[
+    {n:"Krok 1 — společný jmenovatel", d:"Jmenovatelé 4 a 6, nejmenší společný násobek je 12.", f:"NSN(4, 6) = 12"},
+    {n:"Krok 2 — vynásob dvanácti", d:"12:4 = 3 a 12:6 = 2.", f:"3(x + 1) − 2(x − 1) = 12"},
+    {n:"Krok 3 — roznásob", d:"Minus před druhou závorkou obrátí znaménka.", f:"3x + 3 − 2x + 2 = 12"},
+    {n:"Krok 4 — sečti a dopočítej", d:"", f:"x + 5 = 12\\nx = 7"}
+   ], vys:"x = 7"},
+
+  {q:"Kolik řešení má tato rovnice?\\n\\n3x + 2 = 3x + 7", typ:"choice",
+   moz:["Nemá žádné řešení","Má jedno řešení x = 5","Má nekonečně mnoho řešení","Má dvě řešení"], spr:0,
+   kroky:[
+    {n:"Krok 1 — dej x na jednu stranu", d:"Odečti 3x od obou stran.", f:"3x − 3x + 2 = 7\\n2 = 7"},
+    {n:"Krok 2 — přečti, co ti zbylo", d:"Neznámá se vykrátila úplně a zbylo tvrzení 2 = 7. To ale není pravda — dvě se nikdy nerovnají sedmi.", f:"2 = 7   ✗ nepravda"},
+    {n:"Krok 3 — závěr", d:"Když po vykrácení zbude nepravdivé tvrzení, neexistuje žádné číslo, které by rovnici splnilo.", f:"Rovnice nemá řešení."}
+   ], vys:"Rovnice nemá žádné řešení"},
+
+  {q:"Kolik řešení má tato rovnice?\\n\\n2(x + 1) = 2x + 2", typ:"choice",
+   moz:["Nemá řešení","Jedno řešení x = 1","Nekonečně mnoho řešení","Jedno řešení x = 0"], spr:2,
+   kroky:[
+    {n:"Krok 1 — roznásob závorku", d:"", f:"2x + 2 = 2x + 2"},
+    {n:"Krok 2 — odečti 2x", d:"Obě strany jsou úplně stejné, x se vykrátí.", f:"2 = 2"},
+    {n:"Krok 3 — závěr", d:"Zbylo pravdivé tvrzení. To znamená, že rovnice platí pro jakékoli číslo, které za x dosadíš.", f:"Nekonečně mnoho řešení."}
+   ], vys:"Nekonečně mnoho řešení"},
+
+  {q:"SLOVNÍ ÚLOHA\\n\\nMatěj nasbírá za 45 minut půl džbánu malin.\\nZa jak dlouho by tři děti naplnily celý džbán, kdyby každé pracovalo stejným tempem jako Matěj?\\n\\n(Odpověz počtem minut.)", typ:"open", odp:"30",
+   kroky:[
+    {n:"Krok 1 — přelož zadání do čísel", d:"Matěj zvládne za 45 minut půl džbánu. Celý džbán by mu tedy trval dvakrát tak dlouho.", f:"1 dítě → celý džbán za 90 minut"},
+    {n:"Krok 2 — co udělají tři děti", d:"Tři děti pracují najednou, takže práci zvládnou třikrát rychleji. Čas se dělí třemi.", f:"90 : 3 = 30"},
+    {n:"Krok 3 — ověř úsudkem", d:"Dává to smysl? Tři děti musí být rychlejší než jedno — 30 minut je méně než 90. Sedí.", f:"Odpověď: 30 minut"}
+   ], vys:"30 minut"},
+
+  {q:"SLOVNÍ ÚLOHA\\n\\nMysli si číslo. Když ho zvětšíš o 12, dostaneš jeho trojnásobek.\\nKteré je to číslo?", typ:"open", odp:"6",
+   kroky:[
+    {n:"Krok 1 — označ neznámou", d:"Hledané číslo si pojmenuj x. To je vždycky první krok u slovní úlohy.", f:"x … hledané číslo"},
+    {n:"Krok 2 — přepiš větu do rovnice", d:"„Zvětšíš o 12\\" znamená x + 12. „Trojnásobek\\" znamená 3x. Slovo „dostaneš\\" je rovnítko.", f:"x + 12 = 3x"},
+    {n:"Krok 3 — vyřeš", d:"Odečti x od obou stran a vyděl dvěma.", f:"12 = 2x\\nx = 6"},
+    {n:"Krok 4 — ověř do zadání", d:"Šestka zvětšená o 12 je 18. Trojnásobek šesti je taky 18. Sedí.", f:"6 + 12 = 18 = 3·6  ✓"}
+   ], vys:"Hledané číslo je 6"},
+
+  {q:"SLOVNÍ ÚLOHA\\n\\nObdélník má obvod 46 cm. Jeho delší strana je o 5 cm delší než kratší.\\nJak dlouhá je kratší strana? (Odpověz v cm.)", typ:"open", odp:"9",
+   kroky:[
+    {n:"Krok 1 — označ neznámou", d:"Vždycky si označ to menší nebo jednodušší. Kratší strana bude x, delší je pak x + 5.", f:"kratší = x\\ndelší = x + 5"},
+    {n:"Krok 2 — napiš vzorec pro obvod", d:"Obvod obdélníku je dvakrát součet obou stran.", f:"o = 2·(a + b)\\n46 = 2·(x + x + 5)"},
+    {n:"Krok 3 — uprav a vyřeš", d:"Vyděl dvěma, pak sečti x a odečti 5.", f:"23 = 2x + 5\\n18 = 2x\\nx = 9"},
+    {n:"Krok 4 — ověř do zadání", d:"Kratší 9, delší 14. Obvod je 2·(9 + 14) = 46. Sedí.", f:"Kratší strana měří 9 cm"}
+   ], vys:"9 cm"},
+
+  {q:"Řeš rovnici s desetinnými čísly:\\n\\n0,5x + 1,5 = 4", typ:"open", odp:"5",
+   kroky:[
+    {n:"Krok 1 — zbav se desetinných čísel", d:"Vynásob celou rovnici deseti. Není to nutné, ale s celými čísly se počítá líp.", f:"5x + 15 = 40"},
+    {n:"Krok 2 — odečti 15", d:"", f:"5x = 25"},
+    {n:"Krok 3 — vyděl pěti", d:"", f:"x = 5"},
+    {n:"Zkouška", d:"", f:"L = 0,5·5 + 1,5 = 2,5 + 1,5 = 4  ✓"}
+   ], vys:"x = 5"}
+ ]
+},
+{
+ id:"cj-shoda", predmet:"Čeština", ikona:"✍️",
+ nazev:"Shoda přísudku s podmětem",
+ popis:"Kdy psát v příčestí -i, -y nebo -a. Nejčastější pravopisný jev v testu — a jeden z nejzrádnějších.",
+ vyklad:[
+  {h:"O co vlastně jde?",
+   t:"V minulém čase se sloveso musí přizpůsobit podmětu. Tomu se říká shoda přísudku s podmětem.\\n\\nRozhoduje se poslední písmeno slovesa — a to podle toho, jakého rodu a čísla je podmět.",
+   f:"Chlapci běželi.\\nDívky běžely.\\nKuřata běžela."},
+  {h:"Vždycky postupuj v těchto třech krocích",
+   t:"Nikdy nehádej podle citu. Vždycky si projdi tyhle tři otázky — nikdy tě nezradí:\\n\\n1. Najdi podmět. Zeptej se: KDO nebo CO to dělal?\\n2. Urči jeho rod a číslo.\\n3. Podle tabulky doplň koncovku.",
+   f:"KDO? → jaký rod? → koncovka"},
+  {h:"Množné číslo — hlavní tabulka",
+   t:"Tuhle tabulku si zapamatuj a máš vyhráno. Platí pro množné číslo:\\n\\n• rod mužský ŽIVOTNÝ → -i\\n• rod mužský NEŽIVOTNÝ → -y\\n• rod ŽENSKÝ → -y\\n• rod STŘEDNÍ → -a",
+   f:"muži nesli    (M životný)\\nstromy padaly (M neživotný)\\nženy nesly    (ženský)\\nauta jela     (střední)"},
+  {h:"Jednotné číslo je jednodušší",
+   t:"V jednotném čísle se koncovka řídí rodem takto:\\n\\n• rod mužský → -l  (chlapec běžel)\\n• rod ženský → -la (dívka běžela)\\n• rod střední → -lo (kotě běželo)\\n\\nTady chybu skoro nikdo neudělá, sluch si poradí sám.",
+   f:"pes štěkal · fena štěkala · štěně štěkalo"},
+  {h:"Zrádná slova, na kterých se propadá",
+   t:"Některá podstatná jména vypadají jako ženský rod, ale jsou mužská životná — nebo naopak. Ta si zapamatuj zvlášť:\\n\\n• koně, lidé, hosté, rodiče → mužský ŽIVOTNÝ → -i\\n• děti, oči, uši → rod ŽENSKÝ → -y\\n• housata, koťata, děvčata → rod STŘEDNÍ → -a",
+   f:"Koně běželi.   ale   Děti běhaly.\\nLidé přišli.   ale   Oči se leskly."},
+  {h:"Několikanásobný podmět",
+   t:"Když je podmětů víc, platí jednoduché pravidlo: stačí jediný mužský životný a celý přísudek dostane -i.\\n\\nJe úplně jedno, kolik je tam ženských nebo středních — ten jeden mužský životný rozhodne.",
+   f:"Maminka, sestra a bratr odjeli.\\n(bratr = M životný → -i)\\n\\nSestra a maminka odjely.\\n(oba ženské → -y)"},
+  {h:"Podmět nevyjádřený",
+   t:"Někdy podmět ve větě vůbec není napsaný. Pak ho musíš najít z předchozí věty nebo z tvaru slovesa.\\n\\nNejjistější je dosadit si zájmeno oni / ony / ona a podívat se, koho zastupuje.",
+   f:"Kluci šli do lesa. Nesli si batohy.\\n(kdo nesl? → kluci → -i)"},
+  {h:"Pozor na past: podmět není to nejbližší slovo",
+   t:"Tvůrci testů schválně dají těsně před sloveso slovo jiného rodu, aby tě zmátli. Podmět ale může být daleko vepředu.\\n\\nProto se vždycky ptej KDO / CO, ne co je nejblíž slovesu.",
+   f:"Chlapci u řeky s udicemi seděli.\\n(kdo seděl? chlapci → -i, ne udice!)"}
+ ],
+ ulohy:[
+  {q:"Doplň správnou koncovku:\\n\\nChlapci na hřišti hlasitě křičel__.", typ:"choice",
+   moz:["křičeli","křičely","křičela","křičel"], spr:0,
+   kroky:[
+    {n:"Krok 1 — najdi podmět", d:"Zeptej se: KDO křičel? Odpověď je chlapci. Slovo „na hřišti\\" tě nemá zmást, to je jen místo.", f:"podmět: chlapci"},
+    {n:"Krok 2 — urči rod a číslo", d:"Chlapec je mužský rod životný. Ve větě je jich víc, takže množné číslo.", f:"rod mužský ŽIVOTNÝ, množné číslo"},
+    {n:"Krok 3 — použij tabulku", d:"Mužský životný v množném čísle má vždy koncovku -i.", f:"→ křičeli"}
+   ], vys:"Chlapci na hřišti hlasitě křičeli."},
+
+  {q:"Doplň správnou koncovku:\\n\\nStromy v aleji se ohýbal__ ve větru.", typ:"choice",
+   moz:["ohýbaly","ohýbali","ohýbala","ohýbal"], spr:0,
+   kroky:[
+    {n:"Krok 1 — najdi podmět", d:"CO se ohýbalo? Stromy.", f:"podmět: stromy"},
+    {n:"Krok 2 — urči rod a číslo", d:"Strom je mužský rod, ale NEŽIVOTNÝ — strom není živá bytost, která by chodila. Množné číslo.", f:"rod mužský NEŽIVOTNÝ, množné číslo"},
+    {n:"Krok 3 — použij tabulku", d:"Mužský neživotný v množném čísle má koncovku -y, stejně jako ženský rod. Tady se chybuje nejčastěji — lidé napíšou -i jen proto, že je to mužský rod.", f:"→ ohýbaly"}
+   ], vys:"Stromy v aleji se ohýbaly ve větru."},
+
+  {q:"Doplň správnou koncovku:\\n\\nKoťata si spokojeně předl__ na peřině.", typ:"choice",
+   moz:["předla","předly","předli","předlo"], spr:0,
+   kroky:[
+    {n:"Krok 1 — najdi podmět", d:"KDO předl? Koťata.", f:"podmět: koťata"},
+    {n:"Krok 2 — urči rod a číslo", d:"Kotě je rod střední (to kotě). Koťata je množné číslo.", f:"rod STŘEDNÍ, množné číslo"},
+    {n:"Krok 3 — použij tabulku", d:"Střední rod v množném čísle má koncovku -a.", f:"→ předla"}
+   ], vys:"Koťata si spokojeně předla na peřině."},
+
+  {q:"Doplň správnou koncovku:\\n\\nKoně klidně pásl__ na louce.", typ:"choice",
+   moz:["pásli","pásly","pásla","pásl"], spr:0,
+   kroky:[
+    {n:"Krok 1 — najdi podmět", d:"KDO se pásl? Koně.", f:"podmět: koně"},
+    {n:"Krok 2 — pozor, tady je past", d:"Slovo „koně\\" končí na -ě a vypadá jako ženský rod. Není! Kůň je mužský rod ŽIVOTNÝ — je to živé zvíře.", f:"rod mužský ŽIVOTNÝ, množné číslo"},
+    {n:"Krok 3 — použij tabulku", d:"Mužský životný v množném čísle → -i. Tohle slovo se v testech objevuje schválně.", f:"→ pásli"}
+   ], vys:"Koně klidně pásli na louce."},
+
+  {q:"Doplň správnou koncovku:\\n\\nDěti si na dvoře hrál__ s míčem.", typ:"choice",
+   moz:["hrály","hráli","hrála","hrálo"], spr:0,
+   kroky:[
+    {n:"Krok 1 — najdi podmět", d:"KDO si hrál? Děti.", f:"podmět: děti"},
+    {n:"Krok 2 — pozor, druhá klasická past", d:"Děti jsou přece kluci i holky, tak by měla být -i, ne? NE. Slovo „děti\\" je v množném čísle rodu ŽENSKÉHO — ta děti, ty děti.", f:"rod ŽENSKÝ, množné číslo"},
+    {n:"Krok 3 — použij tabulku", d:"Ženský rod v množném čísle → -y. Zapamatuj si: děti, oči, uši → vždycky -y.", f:"→ hrály"}
+   ], vys:"Děti si na dvoře hrály s míčem."},
+
+  {q:"Doplň správnou koncovku:\\n\\nLidé před obchodem netrpělivě čekal__.", typ:"choice",
+   moz:["čekali","čekaly","čekala","čekalo"], spr:0,
+   kroky:[
+    {n:"Krok 1 — najdi podmět", d:"KDO čekal? Lidé.", f:"podmět: lidé"},
+    {n:"Krok 2 — urči rod", d:"Slovo „lidé\\" je mužský rod ŽIVOTNÝ v množném čísle — ti lidé. Patří do stejné skupiny jako koně, hosté nebo rodiče.", f:"rod mužský ŽIVOTNÝ, množné číslo"},
+    {n:"Krok 3 — použij tabulku", d:"", f:"→ čekali"}
+   ], vys:"Lidé před obchodem netrpělivě čekali."},
+
+  {q:"Doplň správnou koncovku:\\n\\nMaminka, teta a strýc přijel__ na návštěvu.", typ:"choice",
+   moz:["přijeli","přijely","přijela","přijelo"], spr:0,
+   kroky:[
+    {n:"Krok 1 — najdi podmět", d:"KDO přijel? Jsou tři: maminka, teta a strýc. Je to několikanásobný podmět.", f:"podmět: maminka, teta, strýc"},
+    {n:"Krok 2 — projdi rody", d:"Maminka je ženský rod. Teta je ženský rod. Strýc je mužský rod ŽIVOTNÝ.", f:"ženský + ženský + M životný"},
+    {n:"Krok 3 — použij pravidlo o převaze", d:"U několikanásobného podmětu stačí JEDINÝ mužský životný a celý přísudek dostane -i. Nezáleží na tom, že ženské jsou dvě.", f:"→ přijeli"}
+   ], vys:"Maminka, teta a strýc přijeli na návštěvu."},
+
+  {q:"Doplň správnou koncovku:\\n\\nSestra s kamarádkou odjel__ na výlet.", typ:"choice",
+   moz:["odjely","odjeli","odjela","odjelo"], spr:0,
+   kroky:[
+    {n:"Krok 1 — najdi podmět", d:"KDO odjel? Sestra a kamarádka.", f:"podmět: sestra, kamarádka"},
+    {n:"Krok 2 — urči rody", d:"Obě jsou ženský rod. Žádný mužský životný tam není.", f:"ženský + ženský, množné číslo"},
+    {n:"Krok 3 — použij tabulku", d:"Samé ženské rody v množném čísle → -y.", f:"→ odjely"}
+   ], vys:"Sestra s kamarádkou odjely na výlet."},
+
+  {q:"Doplň správnou koncovku:\\n\\nAuta na parkovišti stál__ v dlouhé řadě.", typ:"choice",
+   moz:["stála","stály","stáli","stálo"], spr:0,
+   kroky:[
+    {n:"Krok 1 — najdi podmět", d:"CO stálo? Auta.", f:"podmět: auta"},
+    {n:"Krok 2 — urči rod a číslo", d:"Auto je rod střední (to auto). Auta je množné číslo.", f:"rod STŘEDNÍ, množné číslo"},
+    {n:"Krok 3 — použij tabulku", d:"Střední rod v množném čísle → -a.", f:"→ stála"}
+   ], vys:"Auta na parkovišti stála v dlouhé řadě."},
+
+  {q:"Doplň správnou koncovku:\\n\\nRybáři u rybníka s pruty trpělivě seděl__.", typ:"choice",
+   moz:["seděli","seděly","seděla","sedělo"], spr:0,
+   kroky:[
+    {n:"Krok 1 — najdi podmět", d:"KDO seděl? Rybáři. Slova „u rybníka\\" a „s pruty\\" jsou schválně vložená, aby tě zmátla — těsně před slovesem stojí „pruty\\", ale ty nesedí.", f:"podmět: rybáři"},
+    {n:"Krok 2 — urči rod a číslo", d:"Rybář je mužský rod ŽIVOTNÝ, množné číslo.", f:"rod mužský ŽIVOTNÝ, množné číslo"},
+    {n:"Krok 3 — použij tabulku", d:"Pamatuj: podmět nemusí být to slovo nejblíž slovesu. Vždy se ptej KDO.", f:"→ seděli"}
+   ], vys:"Rybáři u rybníka s pruty trpělivě seděli."},
+
+  {q:"Doplň správnou koncovku:\\n\\nJejí oči se v přítmí leskl__.", typ:"choice",
+   moz:["leskly","leskli","leskla","lesklo"], spr:0,
+   kroky:[
+    {n:"Krok 1 — najdi podmět", d:"CO se lesklo? Oči.", f:"podmět: oči"},
+    {n:"Krok 2 — urči rod", d:"Slovo „oči\\" je v množném čísle rodu ŽENSKÉHO — ty oči. Patří do stejné skupiny jako děti a uši.", f:"rod ŽENSKÝ, množné číslo"},
+    {n:"Krok 3 — použij tabulku", d:"", f:"→ leskly"}
+   ], vys:"Její oči se v přítmí leskly."},
+
+  {q:"Doplň správnou koncovku (podmět není ve větě):\\n\\nSousedé se vrátili z dovolené. Hned nám vyprávěl__ o moři.", typ:"choice",
+   moz:["vyprávěli","vyprávěly","vyprávěla","vyprávělo"], spr:0,
+   kroky:[
+    {n:"Krok 1 — hledej podmět", d:"Ve druhé větě žádný podmět napsaný není. Musíš ho najít v té předchozí.", f:"podmět nevyjádřený"},
+    {n:"Krok 2 — dosaď zájmeno", d:"KDO vyprávěl? Oni — a to jsou sousedé z první věty.", f:"podmět: sousedé"},
+    {n:"Krok 3 — urči rod a doplň", d:"Soused je mužský rod ŽIVOTNÝ v množném čísle.", f:"→ vyprávěli"}
+   ], vys:"Hned nám vyprávěli o moři."},
+
+  {q:"Doplň správnou koncovku:\\n\\nNaše babičky pekly se vnučkami vánoční cukroví. Celý den se v kuchyni smál__.", typ:"choice",
+   moz:["smály","smáli","smála","smálo"], spr:0,
+   kroky:[
+    {n:"Krok 1 — najdi podmět", d:"KDO se smál? Babičky a vnučky — obojí z předchozí věty.", f:"podmět: babičky, vnučky"},
+    {n:"Krok 2 — urči rody", d:"Babička je ženský rod, vnučka také. Žádný mužský životný.", f:"samé ženské rody, množné číslo"},
+    {n:"Krok 3 — použij tabulku", d:"", f:"→ smály"}
+   ], vys:"Celý den se v kuchyni smály."},
+
+  {q:"Doplň správnou koncovku:\\n\\nHousata s kachňaty se batolil__ k vodě.", typ:"choice",
+   moz:["batolila","batolily","batolili","batolilo"], spr:0,
+   kroky:[
+    {n:"Krok 1 — najdi podmět", d:"KDO se batolil? Housata a kachňata.", f:"podmět: housata, kachňata"},
+    {n:"Krok 2 — urči rod", d:"Housata i kachňata jsou mláďata — a názvy mláďat jsou v češtině rod STŘEDNÍ (to house, to kachně).", f:"rod STŘEDNÍ, množné číslo"},
+    {n:"Krok 3 — použij tabulku", d:"Střední rod v množném čísle → -a. Pozor, mláďata jsou živá, ale rod je střední, ne mužský životný.", f:"→ batolila"}
+   ], vys:"Housata s kachňaty se batolila k vodě."},
+
+  {q:"Doplň správnou koncovku:\\n\\nDivadelní představení diváky nadchl__.", typ:"choice",
+   moz:["nadchlo","nadchli","nadchly","nadchla"], spr:0,
+   kroky:[
+    {n:"Krok 1 — najdi podmět", d:"Tady je past. CO nadchlo? Představení. Diváci nejsou podmět — ti byli nadšení, ale nic nedělali. Jsou předmět.", f:"podmět: představení"},
+    {n:"Krok 2 — urči rod a číslo", d:"Představení je rod STŘEDNÍ a tady jednotné číslo — jedno představení.", f:"rod STŘEDNÍ, jednotné číslo"},
+    {n:"Krok 3 — doplň koncovku", d:"Střední rod v jednotném čísle → -lo.", f:"→ nadchlo"}
+   ], vys:"Divadelní představení diváky nadchlo."}
+ ]
+}
+];
+
+/* ================= STAV ================= */
+const $=id=>document.getElementById(id);
+let S={done:{},ok:0,total:0};
+try{const s=localStorage.getItem("verunka_save");if(s)S=JSON.parse(s);}catch(e){}
+function save(){try{localStorage.setItem("verunka_save",JSON.stringify(S))}catch(e){}}
+let O=null,ui=0,vi=0,ki=0,odpovezeno=false;
+if(S.rychly===undefined)S.rychly=false;
+function toggleRychly(){S.rychly=!S.rychly;save();kresliSpeed();if(!odpovezeno)renderUloha();}
+function kresliSpeed(){
+  const b=$("ulSpeed");if(!b)return;
+  b.classList.toggle("on",!!S.rychly);
+  b.textContent=S.rychly
+    ?"⏩ Rychlý režim: ZAPNUTÝ — správná odpověď rovnou přeskočí na další úlohu"
+    :"⏩ Rychlý režim: vypnutý — umíš to? Klepni a zrychli si to";
+}
+
+function go(n){document.querySelectorAll(".screen").forEach(x=>x.classList.remove("on"));$("s-"+n).classList.add("on");window.scrollTo(0,0);}
+
+/* ================= MENU ================= */
+function renderMenu(){
+  const dny=Math.max(0,Math.ceil((ZKOUSKA-new Date())/86400000));
+  $("stDays").textContent=dny;
+  $("stDone").textContent=S.total||0;
+  $("stOk").textContent=(S.total?Math.round(100*S.ok/S.total):0)+" %";
+  let h="",last=null;
+  DATA.forEach((o,i)=>{
+    if(o.predmet!==last){h+='<div style="font-size:13px;letter-spacing:1.5px;text-transform:uppercase;color:var(--pink);font-weight:800;margin:16px 0 9px">'+o.predmet+'</div>';last=o.predmet;}
+    const d=(S.done[o.id]||[]).length,c=o.ulohy.length,p=Math.round(100*d/c);
+    h+='<button class="card" onclick="otevri('+i+')"><b>'+o.ikona+' '+o.nazev+'</b><span>'+o.popis+'</span>'
+      +'<div class="bar"><i style="width:'+p+'%"></i></div>'
+      +'<span style="display:block;margin-top:6px;font-size:11.5px">'+d+' z '+c+' úloh hotovo · '+o.vyklad.length+' stran výkladu</span></button>';
+  });
+  $("okruhy").innerHTML=h;
+}
+function otevri(i){O=DATA[i];$("rzName").textContent=O.ikona+" "+O.nazev;$("rzPopis").textContent=O.popis;go("rezim");}
+function resetProgress(){if(confirm("Opravdu vynulovat všechen postup?")){S={done:{},ok:0,total:0};save();renderMenu();}}
+
+/* ================= VÝKLAD ================= */
+function startVyklad(){vi=0;renderVyklad();go("vyklad");}
+function vyklad(d){
+  if(vi+d>=O.vyklad.length){startUlohy();return;}
+  vi=Math.max(0,vi+d);renderVyklad();window.scrollTo(0,0);
+}
+function renderVyklad(){
+  const v=O.vyklad[vi];
+  $("vkOkruh").textContent=O.ikona+" "+O.nazev;
+  $("vkPoc").textContent="Výklad "+(vi+1)+"/"+O.vyklad.length;
+  $("vkH").textContent=v.h;$("vkT").textContent=v.t;
+  let e="";
+  if(v.svg)e+=v.svg;
+  if(v.f)e+='<div class="formula">'+v.f.replace(/\\n/g,"<br>")+"</div>";
+  $("vkExtra").innerHTML=e;
+  $("vkBack").disabled=vi===0;
+  $("vkNext").textContent=vi===O.vyklad.length-1?"Teď to zkus ✏️":"Další →";
+  $("vkDots").innerHTML=O.vyklad.map((_,i)=>'<i class="'+(i===vi?"on":"")+'"></i>').join("");
+}
+
+/* ================= ÚLOHY ================= */
+function startUlohy(){
+  const d=S.done[O.id]||[];
+  ui=0;while(ui<O.ulohy.length&&d.includes(ui))ui++;
+  if(ui>=O.ulohy.length)ui=0;
+  renderUloha();go("uloha");
+}
+function renderUloha(){
+  odpovezeno=false;
+  const u=O.ulohy[ui];
+  $("ulOkruh").textContent=O.ikona+" "+O.nazev;
+  $("ulPoc").textContent="Úloha "+(ui+1)+"/"+O.ulohy.length;
+  $("ulQ").textContent=u.q;
+  $("ulVis").innerHTML=u.svg||"";
+  $("ulFb").innerHTML="";$("ulShow").style.display="none";$("ulNext").style.display="none";
+  kresliSpeed();
+  if(u.typ==="choice"){
+    $("ulAns").innerHTML=u.moz.map((m,i)=>'<button class="ans" data-i="'+i+'"><span class="k">'+"ABCD"[i]+'</span>'+m+'</button>').join("");
+    document.querySelectorAll("#ulAns .ans").forEach(b=>b.addEventListener("click",()=>volba(+b.dataset.i)));
+  }else{
+    $("ulAns").innerHTML='<input type="text" id="ulIn" inputmode="text" autocomplete="off" placeholder="sem napiš výsledek">'
+      +'<div class="hintline">Stačí samotné číslo, například 6 nebo 30</div>'
+      +'<button class="btn" id="ulChk">'+(S.rychly?"Zkontrolovat a pokračovat ⏩":"Zkontrolovat")+'</button>';
+    $("ulChk").addEventListener("click",kontrola);
+    $("ulIn").addEventListener("keydown",e=>{if(e.key==="Enter")kontrola()});
+  }
+}
+function norm(s){return String(s).toLowerCase().trim().replace(/\\s+/g,"").replace(/,/g,".").replace(/^x=/,"").replace(/(cm|minut|min)$/,"");}
+function zapis(spravne){
+  if(odpovezeno)return;odpovezeno=true;
+  const d=S.done[O.id]||(S.done[O.id]=[]);
+  if(!d.includes(ui)){d.push(ui);S.total++;if(spravne)S.ok++;}
+  save();
+}
+function volba(i){
+  if(odpovezeno)return;
+  const u=O.ulohy[ui],bs=document.querySelectorAll("#ulAns .ans");
+  bs[u.spr].classList.add("ok");
+  if(i!==u.spr)bs[i].classList.add("bad");
+  hotovo(i===u.spr);
+}
+function kontrola(){
+  if(odpovezeno)return;
+  const u=O.ulohy[ui],v=$("ulIn").value;
+  if(!v.trim()){$("ulIn").focus();return;}
+  hotovo(norm(v)===norm(u.odp));
+}
+function hotovo(spravne){
+  zapis(spravne);
+  // rychlý režim: správná odpověď = rovnou dál, tabule se nezdržuje
+  if(spravne&&S.rychly){
+    $("ulFb").innerHTML='<div class="fb ok">✅ Správně — jedeme dál</div>';
+    setTimeout(()=>{if(document.getElementById("s-uloha").classList.contains("on"))dalsiUloha();},620);
+    return;
+  }
+  $("ulFb").innerHTML='<div class="fb '+(spravne?"ok":"no")+'">'
+    +(spravne?"✅ Správně! Přesně tak.":"🤔 Tentokrát ne. Nevadí — pojď se podívat, jak na to.")+"</div>";
+  $("ulShow").style.display="block";
+  $("ulShow").textContent=spravne?"🧑‍🏫 Ukaž postup na tabuli":"🧑‍🏫 Vysvětli mi to na tabuli";
+  // chybu si vždycky projdeme, ale i tak nechávám cestu dál
+  $("ulNext").style.display="block";
+  $("ulNext").textContent=spravne?"Pokračovat na další úlohu →":"Přeskočit a jít dál →";
+}
+/* ================= TABULE ================= */
+function showTabule(){
+  const u=O.ulohy[ui];
+  $("tbOkruh").textContent=O.ikona+" "+O.nazev;
+  $("tbPoc").textContent="Úloha "+(ui+1)+"/"+O.ulohy.length;
+  $("tbQ").textContent=u.q;
+  $("tbSteps").innerHTML="";$("tbRes").innerHTML="";
+  ki=0;$("tbNext").style.display="block";$("tbNext").textContent="Začni psát →";$("tbDone").style.display="none";
+  go("tabule");
+}
+function krok(){
+  const u=O.ulohy[ui];
+  if(ki<u.kroky.length){
+    const k=u.kroky[ki];
+    $("tbSteps").insertAdjacentHTML("beforeend",
+      '<div class="step"><div class="n">'+k.n+'</div>'
+      +(k.d?'<p class="d">'+k.d+"</p>":"")
+      +(k.f?'<div class="f">'+k.f.replace(/\\n/g,"<br>")+"</div>":"")+"</div>");
+    ki++;
+    $("tbNext").textContent=ki<u.kroky.length?"Další krok →":"Ukaž výsledek 🎯";
+    window.scrollTo(0,document.body.scrollHeight);
+  }else{
+    $("tbRes").innerHTML='<div class="result">'+u.vys+"</div>";
+    $("tbNext").style.display="none";$("tbDone").style.display="block";
+    window.scrollTo(0,document.body.scrollHeight);
+  }
+}
+function dalsiUloha(){
+  if(ui+1>=O.ulohy.length){
+    alert("🎉 Hotovo! Prošla jsi celý okruh "+O.nazev+". Můžeš si ho dát znovu, nebo zkusit jiný.");
+    renderMenu();go("menu");return;
+  }
+  ui++;renderUloha();go("uloha");
+}
+renderMenu();
+<\/script>
+</body>
+</html>
+`;
+/* ==== VERUNKA-KONEC ==== */
+function openVerunka(){
+  const f=$("vFrame");
+  if(!f.dataset.loaded){f.srcdoc=VERUNKA_HTML;f.dataset.loaded="1";}
+  $("vOverlay").classList.add("show");
+  $("vClose").style.display="block";
+  ALL_TRACKS.forEach(a=>{if(!a.paused)a.pause()});   // učení bez herní hudby
+  document.body.style.overflow="hidden";
+}
+function closeVerunka(){
+  $("vOverlay").classList.remove("show");
+  $("vClose").style.display="none";
+  tryMusic();
+}
+$("verunkaBtn").addEventListener("click",openVerunka);
+$("vClose").addEventListener("click",closeVerunka);
+
 /* ===== OVLÁDACÍ PANEL ⚙️ BĚHEM HRY ===== */
 function gearOpen(o){
   $("gearPanel").classList.toggle("show",o);
