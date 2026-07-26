@@ -116,10 +116,27 @@
   #calcsvg.gest-open #handR{transform:translate(6px,-7px) rotate(20deg)}
   #calcsvg.tap #handR{animation:tapA .3s ease-in-out 2}
   @keyframes tapA{50%{transform:translateY(-3.5px)}}
+  /* ===== KALKULÁTORKA ===== */
+  .jenzena{display:none}
+  #calcsvg.ona .jenzena{display:inline}
+  #calcsvg.ona .jenmuz{display:none}
+  #calcsvg.ona #mouth{stroke:#a02840;stroke-width:4}
+  #calcsvg.ona #browL,#calcsvg.ona #browR{fill:#9c7440}
+  #calcsvg.ona #eyeL,#calcsvg.ona #eyeR{fill:#f4c79c}
+  #calcsvg.ona #handL path,#calcsvg.ona #handR path,
+  #calcsvg.ona #handL ellipse,#calcsvg.ona #handR ellipse{fill:#eab88c}
+  /* ženské kostýmy */
+  #zStudio,#zLab,#zUni,#zRetro,#zStudioArms,#zLabArms,#zUniArms,#zRetroArms{display:none}
+  #calcsvg.ona.k-studio #zStudio,#calcsvg.ona.k-studio #zStudioArms,
+  #calcsvg.ona.k-lab #zLab,#calcsvg.ona.k-lab #zLabArms,
+  #calcsvg.ona.k-uni #zUni,#calcsvg.ona.k-uni #zUniArms,
+  #calcsvg.ona.k-retro #zRetro,#calcsvg.ona.k-retro #zRetroArms{display:inline}
   /* kostýmy módu Pro Tátu */
   #uniformG,#uniformArms,#capG,#retroG,#retroArms{display:none}
   #calcsvg.army #uniformG,#calcsvg.army #uniformArms,#calcsvg.army #capG{display:inline}
   #calcsvg.retro #retroG,#calcsvg.retro #retroArms{display:inline}
+  #calcsvg.ona #uniformG,#calcsvg.ona #uniformArms,#calcsvg.ona #capG,
+  #calcsvg.ona #retroG,#calcsvg.ona #retroArms{display:none}
   /* recitátorská póza při vysvětlování: pravice pozvednutá, levice klidná */
   #calcsvg.declaim #handR{animation:none;transform:translate(5px,-16px) rotate(30deg)}
   #calcsvg.declaim #handL{animation:none;transform:translateY(-2px) rotate(-5deg)}
@@ -339,6 +356,30 @@
           <linearGradient id="beardG" x1="0" y1="0" x2="0" y2="1">
             <stop offset="0" stop-color="#c7c1b9"/><stop offset="1" stop-color="#a39d95"/>
           </linearGradient>
+          <radialGradient id="zPlet" cx=".5" cy=".33" r=".8">
+            <stop offset="0" stop-color="#fbdcbd"/><stop offset=".55" stop-color="#f2c69f"/><stop offset="1" stop-color="#dca67e"/>
+          </radialGradient>
+          <linearGradient id="zVlasy" x1=".25" y1="0" x2=".8" y2="1">
+            <stop offset="0" stop-color="#f9e6b0"/><stop offset=".5" stop-color="#e2c076"/><stop offset="1" stop-color="#b8934c"/>
+          </linearGradient>
+          <linearGradient id="zVlasyT" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0" stop-color="#d8b568"/><stop offset="1" stop-color="#9a7838"/>
+          </linearGradient>
+          <radialGradient id="zDuh" cx=".38" cy=".32" r=".72">
+            <stop offset="0" stop-color="#9ad6ec"/><stop offset=".55" stop-color="#4e93b8"/><stop offset="1" stop-color="#1f4f72"/>
+          </radialGradient>
+          <radialGradient id="zTvar" cx=".5" cy=".5" r=".5">
+            <stop offset="0" stop-color="#d98f66" stop-opacity=".30"/><stop offset="1" stop-color="#d98f66" stop-opacity="0"/>
+          </radialGradient>
+          <linearGradient id="zSako" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0" stop-color="#2c3768"/><stop offset="1" stop-color="#171c3e"/>
+          </linearGradient>
+          <linearGradient id="zPlast" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0" stop-color="#ffffff"/><stop offset="1" stop-color="#dbe3f0"/>
+          </linearGradient>
+          <linearGradient id="zUnifG" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0" stop-color="#6d6a44"/><stop offset="1" stop-color="#4c4a30"/>
+          </linearGradient>
         </defs>
         <g id="figure">
           <animateTransform attributeName="transform" type="translate" values="0 0;0 2.2;0 0" dur="4.5s" repeatCount="indefinite"/>
@@ -378,6 +419,43 @@
             <path d="M84 178 L100 172 L88 216 L70 198 Z" fill="#5d3f2b" stroke="#7c563c" stroke-width="1"/>
             <path d="M116 178 L100 172 L112 216 L130 198 Z" fill="#5d3f2b" stroke="#7c563c" stroke-width="1"/>
           </g>
+          <!-- ===== KOSTÝMY KALKULÁTORKY ===== -->
+          <g id="zStudio">
+            <path d="M18 260 C22 208 48 186 74 179 L100 173 L126 179 C152 186 178 208 182 260 Z" fill="url(#zSako)" stroke="#00e5ff" stroke-width="2"/>
+            <path d="M86 176 C90 190 110 190 114 176 L116 206 C110 212 90 212 84 206 Z" fill="#e9eefb"/>
+            <path d="M84 177 L100 171 L88 218 L70 198 Z" fill="#1b2140" stroke="#00e5ff" stroke-width="1.4"/>
+            <path d="M116 177 L100 171 L112 218 L130 198 Z" fill="#1b2140" stroke="#ff2bd6" stroke-width="1.4"/>
+            <circle cx="100" cy="196" r="2" fill="#ffcf3f"/><circle cx="100" cy="206" r="2" fill="#ffcf3f"/>
+          </g>
+          <g id="zLab">
+            <path d="M18 260 C22 208 48 186 74 179 L100 173 L126 179 C152 186 178 208 182 260 Z" fill="url(#zPlast)" stroke="#b9c4d8" stroke-width="1.6"/>
+            <path d="M86 176 C90 190 110 190 114 176 L116 200 C110 206 90 206 84 200 Z" fill="#2f9f8a"/>
+            <path d="M84 177 L100 171 L90 220 L72 200 Z" fill="#f3f7ff" stroke="#c3ccdd" stroke-width="1.2"/>
+            <path d="M116 177 L100 171 L110 220 L128 200 Z" fill="#f3f7ff" stroke="#c3ccdd" stroke-width="1.2"/>
+            <rect x="126" y="196" width="26" height="30" rx="3" fill="#eef2f9" stroke="#c3ccdd" stroke-width="1.2"/>
+            <rect x="132" y="192" width="4" height="10" rx="1.5" fill="#2f9f8a"/><rect x="140" y="192" width="4" height="10" rx="1.5" fill="#ff2bd6"/>
+          </g>
+          <g id="zUni">
+            <path d="M18 260 C22 208 48 186 74 179 L100 173 L126 179 C152 186 178 208 182 260 Z" fill="url(#zUnifG)" stroke="#3f3d28" stroke-width="1.6"/>
+            <path d="M86 176 C90 188 110 188 114 176 L115 198 C110 203 90 203 85 198 Z" fill="#9d9a6e"/>
+            <path d="M95 180 L105 180 L106 192 L100 214 L94 192 Z" fill="#33321f"/>
+            <path d="M84 177 L100 171 L88 218 L70 198 Z" fill="#5b5836" stroke="#7d7a4e" stroke-width="1.2"/>
+            <path d="M116 177 L100 171 L112 218 L130 198 Z" fill="#5b5836" stroke="#7d7a4e" stroke-width="1.2"/>
+            <path d="M77 183 L96 178 L97 185 L79 190 Z" fill="#3f4d2f" stroke="#c9a94e" stroke-width="1"/>
+            <path d="M123 183 L104 178 L103 185 L121 190 Z" fill="#3f4d2f" stroke="#c9a94e" stroke-width="1"/>
+            <path d="M84 181 l1 2 2.2.3-1.6 1.5.4 2.2-2-1.1-2 1.1.4-2.2-1.6-1.5 2.2-.3z" fill="#ffd75e"/>
+            <path d="M116 181 l1 2 2.2.3-1.6 1.5.4 2.2-2-1.1-2 1.1.4-2.2-1.6-1.5 2.2-.3z" fill="#ffd75e"/>
+            <rect x="55" y="186" width="24" height="9" rx="3" fill="#7d7a4e" stroke="#c9a94e" stroke-width="1" transform="rotate(-14 67 190)"/>
+            <rect x="121" y="186" width="24" height="9" rx="3" fill="#7d7a4e" stroke="#c9a94e" stroke-width="1" transform="rotate(14 133 190)"/>
+          </g>
+          <g id="zRetro">
+            <path d="M18 260 C22 208 48 186 74 179 L100 173 L126 179 C152 186 178 208 182 260 Z" fill="#7a4f6b" stroke="#5d3a51" stroke-width="1.6"/>
+            <path d="M86 176 C90 190 110 190 114 176 L116 204 C110 210 90 210 84 204 Z" fill="#e8b76b"/>
+            <path d="M84 177 L100 171 L90 218 L70 198 Z" fill="#634056" stroke="#8d5c7c" stroke-width="1.2"/>
+            <path d="M116 177 L100 171 L110 218 L130 198 Z" fill="#634056" stroke="#8d5c7c" stroke-width="1.2"/>
+            <circle cx="94" cy="192" r="2.6" fill="#c9803f"/><circle cx="106" cy="200" r="2.6" fill="#c9803f"/>
+            <circle cx="100" cy="184" r="4" fill="none" stroke="#e8b76b" stroke-width="1.6"/>
+          </g>
           <!-- ===== MODERÁTORSKÝ STŮL ===== -->
           <linearGradient id="deskG" x1="0" y1="0" x2="0" y2="1">
             <stop offset="0" stop-color="#2a2f5e"/><stop offset="1" stop-color="#141833"/>
@@ -401,6 +479,22 @@
             <rect x="80" y="227" width="9" height="11" rx="3" fill="#b9752f"/>
             <rect x="111" y="227" width="9" height="11" rx="3" fill="#b9752f"/>
           </g>
+          <g id="zStudioArms">
+            <path d="M34 204 C42 220 60 228 86 229 L86 238 C56 238 36 228 26 210 C28 204 31 202 34 204 Z" fill="#232a52" stroke="#39406b" stroke-width="1"/>
+            <path d="M166 204 C158 220 140 228 114 229 L114 238 C144 238 164 228 174 210 C172 204 169 202 166 204 Z" fill="#232a52" stroke="#39406b" stroke-width="1"/>
+          </g>
+          <g id="zLabArms">
+            <path d="M34 204 C42 220 60 228 86 229 L86 238 C56 238 36 228 26 210 C28 204 31 202 34 204 Z" fill="#f4f7fc" stroke="#c3ccdd" stroke-width="1"/>
+            <path d="M166 204 C158 220 140 228 114 229 L114 238 C144 238 164 228 174 210 C172 204 169 202 166 204 Z" fill="#f4f7fc" stroke="#c3ccdd" stroke-width="1"/>
+          </g>
+          <g id="zUniArms">
+            <path d="M34 204 C42 220 60 228 86 229 L86 238 C56 238 36 228 26 210 C28 204 31 202 34 204 Z" fill="#5f5c3c" stroke="#7d7a4e" stroke-width="1"/>
+            <path d="M166 204 C158 220 140 228 114 229 L114 238 C144 238 164 228 174 210 C172 204 169 202 166 204 Z" fill="#5f5c3c" stroke="#7d7a4e" stroke-width="1"/>
+          </g>
+          <g id="zRetroArms">
+            <path d="M34 204 C42 220 60 228 86 229 L86 238 C56 238 36 228 26 210 C28 204 31 202 34 204 Z" fill="#7a4f6b" stroke="#8d5c7c" stroke-width="1"/>
+            <path d="M166 204 C158 220 140 228 114 229 L114 238 C144 238 164 228 174 210 C172 204 169 202 166 204 Z" fill="#7a4f6b" stroke="#8d5c7c" stroke-width="1"/>
+          </g>
           <!-- levá ruka s prsty -->
           <g id="handL">
             <path d="M88 227 C86 231 86 235 89 238 C95 240 102 239 104 236 C105 232 103 228 99 226 C95 225 90 225 88 227 Z" fill="#e2ae80"/>
@@ -414,16 +508,25 @@
             <ellipse cx="110" cy="229" rx="2.8" ry="4" fill="#e8b78a" transform="rotate(25 110 229)"/>
           </g>
           <!-- krk -->
-          <path d="M88 148 L88 178 Q100 184 112 178 L112 148 Z" fill="#d9a67a"/>
-          <path d="M88 152 Q100 160 112 152 L112 158 Q100 164 88 158 Z" fill="#c9925f" opacity=".5"/>
+          <g class="jenmuz">
+            <path d="M88 148 L88 178 Q100 184 112 178 L112 148 Z" fill="#d9a67a"/>
+            <path d="M88 152 Q100 160 112 152 L112 158 Q100 164 88 158 Z" fill="#c9925f" opacity=".5"/>
+          </g>
+          <g class="jenzena">
+            <path d="M88 148 L88 178 Q100 184 112 178 L112 148 Z" fill="#e0ad82"/>
+            <path d="M88 152 Q100 160 112 152 L112 158 Q100 164 88 158 Z" fill="#cd9464" opacity=".45"/>
+          </g>
           <!-- ============ HLAVA ============ -->
           <g id="headG">
             <!-- ucho L/P -->
+            <g class="jenmuz">
             <ellipse cx="54" cy="93" rx="6.5" ry="11" fill="#dba97c"/>
             <path d="M52 88 Q55 93 52 98" stroke="#c08c5c" stroke-width="1.5" fill="none"/>
             <ellipse cx="146" cy="93" rx="6.5" ry="11" fill="#dba97c"/>
             <path d="M148 88 Q145 93 148 98" stroke="#c08c5c" stroke-width="1.5" fill="none"/>
+            </g>
             <!-- obličej -->
+            <g class="jenmuz">
             <path d="M100 34 C132 34 146 58 145 88 C144.5 112 132 132 118 141 C111 145.5 89 145.5 82 141 C68 132 55.5 112 55 88 C54 58 68 34 100 34 Z" fill="url(#skin)"/>
             <!-- lehké tváře a lidské detaily -->
             <ellipse cx="72" cy="106" rx="8" ry="5" fill="#d98f66" opacity=".18"/>
@@ -438,6 +541,7 @@
             <path d="M57 78 C59 46 79 32 100 32 C121 32 141 46 143 78 C137 57 121 45 100 45 C79 45 63 57 57 78 Z" fill="#a19a92"/>
             <path d="M57 78 Q60 68 66 61 L64 80 Z" fill="#a19a92"/>
             <path d="M143 78 Q140 68 134 61 L136 80 Z" fill="#a19a92"/>
+            </g>
             <!-- brigadýrka s hvězdou -->
             <g id="capG">
               <path d="M53 47 C56 22 144 22 147 47 C147 52 53 52 53 47 Z" fill="#5f5c3a"/>
@@ -445,18 +549,45 @@
               <path d="M68 51 C84 60 116 60 132 51 C118 55 82 55 68 51 Z" fill="#1f1e18"/>
               <path d="M100 30 l1.8 3.6 4 .5-2.9 2.7.8 3.9-3.7-2-3.7 2 .8-3.9-2.9-2.7 4-.5z" fill="#d6362b"/>
             </g>
-            <!-- plnovous -->
+            <!-- plnovous a knírek -->
+            <g class="jenmuz">
             <path d="M55 95 C55 128 70 150 100 152 C130 150 145 128 145 95 C143 116 132 124 100 124 C68 124 57 116 55 95 Z" fill="url(#beardG)"/>
             <path d="M70 128 Q72 140 80 146 M130 128 Q128 140 120 146 M100 130 L100 148" stroke="#8f8981" stroke-width="1" fill="none" opacity=".5"/>
-            <!-- knírek -->
             <path d="M84 120 Q100 127 116 120 Q108 129 100 128 Q92 129 84 120 Z" fill="#b3ada5"/>
+            </g>
+            <!-- ===== KALKULÁTORKA: hlava ===== -->
+            <g class="jenzena">
+              <path d="M100 22 C144 22 160 58 156 98 C154 122 150 142 145 158 C143 140 142 122 139 108 C143 78 134 50 100 50 C66 50 57 78 61 108 C58 122 57 140 55 158 C50 142 46 122 44 98 C40 58 56 22 100 22 Z" fill="url(#zVlasy)"/>
+              <path d="M44 98 C46 124 50 142 55 158 C57 140 58 122 61 108 C59 104 57 101 55 99 Z" fill="url(#zVlasyT)" opacity=".55"/>
+              <path d="M156 98 C154 124 150 142 145 158 C143 140 142 122 139 108 C141 104 143 101 145 99 Z" fill="url(#zVlasyT)" opacity=".55"/>
+              <ellipse cx="56" cy="94" rx="6" ry="10.5" fill="#e8b78a"/><path d="M54 89 Q57 94 54 99" stroke="#c58f60" stroke-width="1.4" fill="none"/>
+              <ellipse cx="144" cy="94" rx="6" ry="10.5" fill="#e8b78a"/><path d="M146 89 Q143 94 146 99" stroke="#c58f60" stroke-width="1.4" fill="none"/>
+              <circle cx="56" cy="103" r="3.2" fill="#f2eee4"/><circle cx="144" cy="103" r="3.2" fill="#f2eee4"/>
+              <path d="M100 38 C127 38 139 59 138 86 C137 107 127 126 114 136 C108 140.5 92 140.5 86 136 C73 126 63 107 62 86 C61 59 73 38 100 38 Z" fill="url(#zPlet)"/>
+              <ellipse cx="74" cy="104" rx="11" ry="7" fill="url(#zTvar)"/><ellipse cx="126" cy="104" rx="11" ry="7" fill="url(#zTvar)"/>
+              <path d="M88 118 Q84 126 87 132" stroke="#cf9a6a" stroke-width=".9" fill="none" opacity=".28"/>
+              <path d="M112 118 Q116 126 113 132" stroke="#cf9a6a" stroke-width=".9" fill="none" opacity=".28"/>
+              <path d="M100 84 C98.6 94 96.4 102 94.2 107 Q100 112.5 105.8 107 C103.6 102 101.4 94 100 84 Z" fill="#eeb98c"/>
+              <path d="M94.2 107 Q100 111 105.8 107" stroke="#c98f63" stroke-width="1.1" fill="none"/>
+              <ellipse cx="96" cy="107.4" rx="1.5" ry=".9" fill="#b07946"/><ellipse cx="104" cy="107.4" rx="1.5" ry=".9" fill="#b07946"/>
+              <path d="M86 126 Q93 121 100 122.5 Q107 121 114 126 Q107 131.5 100 131 Q93 131.5 86 126 Z" fill="#c2374f"/>
+              <path d="M86 126 Q93 123.5 100 124 Q107 123.5 114 126 Q107 128 100 127.6 Q93 128 86 126 Z" fill="#a02840" opacity=".7"/>
+              <path d="M92 128.6 Q100 130.4 108 128.6 Q100 133 92 128.6 Z" fill="#e0687c" opacity=".55"/>
+              <path d="M62 86 C61 60 74 40 100 40 C126 40 139 60 138 86 C133 64 122 52 106 50 C100 60 88 68 76 68 C69 72 64 78 62 86 Z" fill="url(#zVlasy)"/>
+              <path d="M106 50 C121 53 131 63 136 79 C129 64 119 56 104 54 Z" fill="url(#zVlasyT)" opacity=".5"/>
+              <path d="M70 63 Q80 52 97 48" stroke="#c9a55e" stroke-width="1.5" fill="none" opacity=".5" stroke-linecap="round"/>
+              <path d="M66 72 Q76 60 92 55" stroke="#c9a55e" stroke-width="1.3" fill="none" opacity=".4" stroke-linecap="round"/>
+              <path d="M116 54 Q127 61 133 73" stroke="#c9a55e" stroke-width="1.4" fill="none" opacity=".45" stroke-linecap="round"/>
+            </g>
             <!-- ústa -->
             <path id="mouth" d="M86 130 Q100 125 114 130" stroke="#5b4238" stroke-width="3.5" fill="none" stroke-linecap="round"/>
             <!-- nos -->
+            <g class="jenmuz">
             <path d="M100 86 C98.5 96 96 105 93.5 110 Q100 116.5 106.5 110 C104 105 101.5 96 100 86 Z" fill="#e8b688"/>
             <path d="M93.5 110 Q100 114 106.5 110" stroke="#c98f63" stroke-width="1.2" fill="none"/>
             <ellipse cx="95.5" cy="110.5" rx="1.6" ry="1" fill="#b07946"/>
             <ellipse cx="104.5" cy="110.5" rx="1.6" ry="1" fill="#b07946"/>
+            </g>
             <!-- oči: bělmo + duhovka + zornice -->
             <ellipse cx="77" cy="87" rx="8.5" ry="6" fill="#f7f3ec"/>
             <ellipse cx="123" cy="87" rx="8.5" ry="6" fill="#f7f3ec"/>
@@ -471,19 +602,28 @@
             <rect id="eyeR" x="114" y="78.5" width="18" height="6" rx="3" fill="#eebd8e"/>
             <path d="M69 93.5 Q77 96 85 93.5" stroke="#d9a06f" stroke-width="1" fill="none" opacity=".7"/>
             <path d="M115 93.5 Q123 96 131 93.5" stroke="#d9a06f" stroke-width="1" fill="none" opacity=".7"/>
+            <!-- řasy Kalkulátorky -->
+            <g class="jenzena">
+              <path d="M68 84.5 Q77 78 86 84.5" stroke="#3a2a20" stroke-width="2.2" fill="none" stroke-linecap="round"/>
+              <path d="M114 84.5 Q123 78 132 84.5" stroke="#3a2a20" stroke-width="2.2" fill="none" stroke-linecap="round"/>
+              <path d="M68.5 83 L65 79.5 M73 80 L71 76.2 M78 79.2 L78 75.2 M83 80.2 L85 76.6" stroke="#3a2a20" stroke-width="1.5" stroke-linecap="round"/>
+              <path d="M131.5 83 L135 79.5 M127 80 L129 76.2 M122 79.2 L122 75.2 M117 80.2 L115 76.6" stroke="#3a2a20" stroke-width="1.5" stroke-linecap="round"/>
+            </g>
             <!-- obočí -->
             <g id="brows">
               <path id="browL" d="M63 71 Q76 63.5 90 68.5 L90 73.5 Q76 69.5 64 76 Z" fill="#7d766e" transform="rotate(10 77 71)"/>
               <path id="browR" d="M110 68.5 Q124 63.5 137 71 L136 76 Q124 69.5 110 73.5 Z" fill="#7d766e" transform="rotate(-10 123 71)"/>
             </g>
             <!-- kulaté brýle -->
-            <g fill="none" stroke="#171310" stroke-width="4.5">
+            <g class="jenmuz" fill="none" stroke="#171310" stroke-width="4.5">
               <circle cx="77" cy="87" r="16.5"/><circle cx="123" cy="87" r="16.5"/>
               <path d="M93.5 85 Q100 81 106.5 85"/>
               <line x1="60.5" y1="83" x2="54" y2="79"/><line x1="139.5" y1="83" x2="146" y2="79"/>
             </g>
+            <g class="jenmuz">
             <path d="M66 78 Q71 73 78 73" stroke="#fff" stroke-width="2" fill="none" opacity=".18"/>
             <path d="M112 78 Q117 73 124 73" stroke="#fff" stroke-width="2" fill="none" opacity=".18"/>
+            </g>
           </g>
         </g>
         <!-- holografický nádech -->
@@ -1714,6 +1854,18 @@ const MODES={
   ucit:{name:"Pojď se učit",time:20,xpMult:1},
   tata:{name:"Pro Tátu",time:30,xpMult:1}
 };
+/* ===== KALKULÁTORKA: na mobilu a tabletu (kde bývá jen ženský hlas) ===== */
+const KOSTYMY=["k-studio","k-lab","k-retro"]; // uniforma je vyhrazená módu Pro Tátu
+function jeOna(){return IS_MOBILE;}
+function setKostym(k){
+  const cs=$("calcsvg");if(!cs)return;
+  ["k-studio","k-lab","k-uni","k-retro"].forEach(x=>cs.classList.remove(x));
+  if(k)cs.classList.add(k);
+}
+function nastavPostavu(){
+  const cs=$("calcsvg");if(!cs)return;
+  cs.classList.toggle("ona",jeOna());
+}
 const MIL_RE=/pluk|tank|vojen|vojn|kasárn|ČSLA|major|důstoj|voják|vojín|služn|přísah|MiG|letec|divi[zs]|kanad|rajón|mazák|bažant|budíček|žold|hodnost|OT-|T-5|Dukl|zbraní SS|Milovic|Vltava 1966|nárameník|uniform|zupák|štáb/i;
 let G=null, timerInt=null;
 
@@ -1763,6 +1915,9 @@ function startGame(mode){
     return;
   }
   const c=ac(); if(c&&c.state==="suspended")c.resume();
+  nastavPostavu();
+  // kostým se losuje na každou hru; v módu Pro Tátu ho řídí téma otázky
+  if(jeOna()&&mode!=="tata")setKostym(pick(KOSTYMY));
   const deck=buildDeck(mode);
   G={mode,deck,i:0,score:0,streak:0,best:0,jokerUsed:false,
      total:mode==="duel"?Infinity:(["adelka","tata","irca","ucit"].includes(mode)?deck.length:(mode==="klasik"?20:(mode==="legendy"?15:(mode==="kalkulator"?12:10)))),
@@ -1813,6 +1968,7 @@ function renderQ(){
   if(G.mode==="tata"){ // uniforma majora u vojenských otázek, pak dobové civilní oblečení
     G.curMil=MIL_RE.test(Q.q);
     const cs=$("calcsvg");cs.classList.toggle("army",G.curMil);cs.classList.toggle("retro",!G.curMil);
+    if(jeOna())setKostym(G.curMil?"k-uni":"k-retro");
   }else $("calcsvg").classList.remove("army","retro");
   // zamíchat odpovědi (3 nebo 4 možnosti), zapamatovat správné indexy
   const n=Q.a.length;
@@ -4428,6 +4584,7 @@ $("gQuit").addEventListener("click",e=>{e.stopPropagation();gearOpen(false);$("q
 
 
 refreshMenuBar();
+nastavPostavu(); // na mobilu a tabletu se ukáže Kalkulátorka
 
 /* ===== AUTOMATICKÉ NAČTENÍ VLASTNÍCH OTÁZEK =====
    Pokud vedle hry leží soubor moje-otazky.txt (např. na GitHub Pages),
