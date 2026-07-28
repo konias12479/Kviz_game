@@ -2397,7 +2397,8 @@ const VERUNKA_HTML=`<!DOCTYPE html>
 body{margin:0;background:radial-gradient(circle at 50% 0%,#1b2f28,#0b1411 70%);color:var(--chalk);
 font-family:'Segoe UI',system-ui,-apple-system,sans-serif;min-height:100vh;padding:12px 8px 40px}
 .wrap{max-width:980px;margin:0 auto}
-@media (min-width:900px){.wrap{max-width:1120px}}
+@media (min-width:900px){.wrap{max-width:1240px}}
+@media (min-width:1400px){.wrap{max-width:1440px}}
 h1{font-size:23px;margin:6px 0 2px;letter-spacing:.3px}
 .sub{font-size:13px;color:var(--chalk-dim);margin-bottom:16px}
 .screen{display:none}.screen.on{display:block;animation:fade .25s}
@@ -2406,6 +2407,20 @@ h1{font-size:23px;margin:6px 0 2px;letter-spacing:.3px}
 .board{background:linear-gradient(160deg,var(--board),var(--board2));border:11px solid var(--wood);
 border-radius:10px;box-shadow:0 0 0 3px var(--wood2),0 14px 34px rgba(0,0,0,.55),inset 0 0 70px rgba(0,0,0,.35);
 padding:26px 22px;position:relative;min-height:clamp(240px,46vh,460px)}
+@media (min-width:900px){
+  .board{padding:34px 30px;min-height:clamp(360px,58vh,720px)}
+  .bt{font-size:26px;margin-bottom:18px}
+  .bx{font-size:20px;line-height:1.75}
+  .formula{font-size:29px}
+  .formula .fl{padding:14px 18px;margin:12px 0}
+  .step .d{font-size:19px}
+  .step .f{font-size:27px}
+  .step .f .fl{padding:12px 16px}
+  .step{margin:22px 0;padding:12px 0 12px 18px}
+  svg.vis{max-width:640px}
+  .ans{font-size:17px;padding:15px 18px}
+  input[type=text]{font-size:22px;padding:16px}
+}
 .board::after{content:"";position:absolute;left:0;right:0;bottom:-11px;height:11px;
 background:linear-gradient(var(--wood),var(--wood2))}
 .board .chalkline{position:absolute;right:16px;top:10px;font-size:19px;opacity:.5}
@@ -2559,6 +2574,21 @@ border:1px solid rgba(255,216,77,.3);border-radius:11px;padding:12px;margin:14px
   <button class="btn sec" onclick="go('menu')">← Zpět na okruhy</button>
 </div>
 
+<!-- ===== JAK CHCE TEST PSÁT ===== -->
+<div class="screen" id="s-testrezim">
+  <h1 id="trNazev"></h1>
+  <div class="sub" id="trPopis"></div>
+  <button class="card" onclick="startTest(T.idx,false)">
+    <b>🎯 Nanečisto jako u zkoušky</b>
+    <span>Na čas, bez nápovědy. Správnost se dozvíš až po odevzdání — pak si projdeš rozbor všech úloh. Tohle je nejlepší zkouška nervů před ostrým termínem.</span>
+  </button>
+  <button class="card" onclick="startTest(T.idx,true)">
+    <b>🧑‍🏫 S vysvětlením po každé úloze</b>
+    <span>Bez časomíry. Po každé odpovědi se hned dozvíš, jestli je správně, a můžeš si nechat rozepsat postup na tabuli. Vhodné, když test píšeš poprvé.</span>
+  </button>
+  <button class="btn sec" onclick="openTesty()">← Zpět na testy</button>
+</div>
+
 <!-- ===== BĚŽÍCÍ TEST ===== -->
 <div class="screen" id="s-test">
   <div class="qhead"><span id="tsNazev"></span><span class="pill">⏱ <span class="tcas" id="tsCas">00:00</span></span></div>
@@ -2570,9 +2600,11 @@ border:1px solid rgba(255,216,77,.3);border-radius:11px;padding:12px;margin:14px
     <div id="tsVis"></div>
   </div>
   <div id="tsAns" style="margin-top:14px"></div>
+  <div id="tsFb"></div>
+  <button class="btn cy" id="tsShow" style="display:none" onclick="testTabule()">🧑‍🏫 Ukaž postup na tabuli</button>
   <div class="row">
     <button class="btn sec" id="tsSkip" onclick="testDal(true)">Přeskočit</button>
-    <button class="btn" id="tsNext" onclick="testDal(false)">Další úloha →</button>
+    <button class="btn" id="tsNext" onclick="testTlacitko()">Další úloha →</button>
   </div>
   <button class="btn sec" onclick="testUkoncit()">Ukončit test a vyhodnotit</button>
 </div>
@@ -2591,7 +2623,7 @@ border:1px solid rgba(255,216,77,.3);border-radius:11px;padding:12px;margin:14px
   </div>
   <div style="font-size:13px;font-weight:700;margin:16px 0 8px">Rozbor úloh — klepni na kteroukoli a ukáže se postup</div>
   <div id="vyList"></div>
-  <button class="btn cy" onclick="startTest(T.idx)">Zkusit test znovu</button>
+  <button class="btn cy" onclick="otevriTest(T.idx)">Zkusit test znovu</button>
   <button class="btn sec" onclick="openTesty()">← Zpět na testy</button>
 </div>
 
@@ -5158,7 +5190,7 @@ function openTesty(){
   let h="";
   TESTY.forEach(function(t,i){
     const r=(S.testy||{})[t.id];
-    h+='<button class="card" onclick="startTest('+i+')"><b>'+t.ikona+' '+t.nazev+'</b><span>'+t.popis+'</span>'
+    h+='<button class="card" onclick="otevriTest('+i+')"><b>'+t.ikona+' '+t.nazev+'</b><span>'+t.popis+'</span>'
       +'<span style="display:block;margin-top:7px;font-size:11.5px">'
       +(r?("Nejlepší výsledek: "+r.body+" z "+t.body+" bodů ("+Math.round(100*r.body/t.body)+" %)"):"Zatím nezkoušeno")
       +'</span></button>';
@@ -5166,13 +5198,23 @@ function openTesty(){
   $("testyList").innerHTML=h;
   go("testy");
 }
-function startTest(i){
+function otevriTest(i){
   const t=TESTY[i];
-  T={idx:i,t:t,i:0,odp:new Array(t.ulohy.length).fill(null),zbyva:t.cas*60,tik:null};
-  T.tik=setInterval(function(){
-    T.zbyva--;kresliCas();
-    if(T.zbyva<=0){clearInterval(T.tik);T.tik=null;vyhodnotit(true);}
-  },1000);
+  T={idx:i,t:t};
+  $("trNazev").textContent=t.ikona+" "+t.nazev;
+  $("trPopis").textContent=t.popis;
+  go("testrezim");
+}
+function startTest(i,ucebni){
+  const t=TESTY[i];
+  T={idx:i,t:t,i:0,odp:new Array(t.ulohy.length).fill(null),
+     zbyva:t.cas*60,tik:null,uc:!!ucebni,zkontrolovano:false};
+  if(!T.uc){   // v učebním režimu čas neběží, ať je klid na vysvětlení
+    T.tik=setInterval(function(){
+      T.zbyva--;kresliCas();
+      if(T.zbyva<=0){clearInterval(T.tik);T.tik=null;vyhodnotit(true);}
+    },1000);
+  }
   renderTestUloha();
   go("test");
 }
@@ -5190,6 +5232,10 @@ function renderTestUloha(){
   $("tsQ").textContent=u.q;
   $("tsVis").innerHTML=u.svg||"";
   $("tsBar").style.width=Math.round(100*T.i/t.ulohy.length)+"%";
+  T.zkontrolovano=false;
+  $("tsFb").innerHTML="";$("tsShow").style.display="none";
+  $("tsSkip").style.display=T.uc?"none":"block";
+  $("tsCas").parentNode.style.display=T.uc?"none":"";
   kresliCas();
   const dosud=T.odp[T.i];
   if(u.typ==="choice"){
@@ -5210,7 +5256,35 @@ function renderTestUloha(){
     $("tsIn").addEventListener("input",function(){T.odp[T.i]=$("tsIn").value;});
     $("tsIn").addEventListener("keydown",function(e){if(e.key==="Enter")testDal(false);});
   }
-  $("tsNext").textContent=(T.i+1>=t.ulohy.length)?"Odevzdat test 🎯":"Další úloha →";
+  $("tsNext").textContent=T.uc?"Zkontrolovat":((T.i+1>=t.ulohy.length)?"Odevzdat test 🎯":"Další úloha →");
+}
+function testTlacitko(){
+  if(!T.uc){testDal(false);return;}
+  if(!T.zkontrolovano){testZkontroluj();return;}
+  testDal(false);
+}
+function testZkontroluj(){
+  const u=T.t.ulohy[T.i],odp=T.odp[T.i];
+  if(odp==null||String(odp).trim()===""){
+    $("tsFb").innerHTML='<div class="fb no">Nejdřív něco vyplň — nebo dej Přeskočit.</div>';
+    return;
+  }
+  const ok=spravneT(u,odp);
+  T.zkontrolovano=true;
+  if(u.typ==="choice"){
+    const bs=document.querySelectorAll("#tsAns .ans");
+    bs.forEach(function(b){b.classList.remove("ok")});
+    if(bs[u.spr])bs[u.spr].classList.add("ok");
+    if(!ok&&bs[odp])bs[odp].classList.add("bad");
+  }
+  $("tsFb").innerHTML='<div class="fb '+(ok?"ok":"no")+'">'
+    +(ok?("✅ Správně — "+u.b+(u.b===1?" bod":(u.b<5?" body":" bodů"))+" máš doma."):("🤔 Tentokrát ne. Správně je: "+u.vys))+"</div>";
+  $("tsShow").style.display="block";
+  $("tsShow").textContent=ok?"🧑‍🏫 Ukaž postup na tabuli":"🧑‍🏫 Vysvětli mi to na tabuli";
+  $("tsNext").textContent=(T.i+1>=T.t.ulohy.length)?"Odevzdat test 🎯":"Další úloha →";
+}
+function testTabule(){                       // rozbor rovnou během učebního režimu
+  showTabuleFor(T.t.ulohy[T.i],T.t.ikona+" úloha "+(T.i+1),function(){go("test");});
 }
 function testDal(preskocit){
   if(preskocit)T.odp[T.i]=null;
