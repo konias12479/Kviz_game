@@ -2473,6 +2473,25 @@ svg.vis{display:block;width:100%;max-width:520px;height:auto;margin:16px auto}
 .dots i{width:7px;height:7px;border-radius:50%;background:rgba(255,255,255,.25)}
 .dots i.on{background:var(--gold);width:20px;border-radius:4px}
 .foot{text-align:center;font-size:11px;color:#5d6f68;margin-top:26px}
+.tcas{font-variant-numeric:tabular-nums;font-weight:800}
+.tcas.malo{color:var(--gold)}
+.tcas.dochazi{color:var(--red);animation:tik 1s infinite}
+@keyframes tik{50%{opacity:.45}}
+.tprogress{height:6px;border-radius:4px;background:rgba(255,255,255,.12);overflow:hidden;margin-bottom:12px}
+.tprogress i{display:block;height:100%;background:linear-gradient(90deg,var(--cyan),var(--green))}
+.tskore{text-align:center;padding:18px 12px}
+.tskore b{display:block;font-size:46px;font-weight:800;color:var(--gold);line-height:1}
+.tskore span{font-size:13px;color:var(--chalk-dim)}
+.tznam{display:inline-block;margin-top:10px;padding:7px 16px;border-radius:20px;font-size:14px;font-weight:800}
+.trow{display:flex;align-items:center;gap:10px;width:100%;background:rgba(255,255,255,.05);
+border:1px solid rgba(244,241,232,.14);border-radius:11px;padding:10px 12px;margin-bottom:7px;
+color:var(--chalk);font-family:inherit;font-size:13.5px;text-align:left;cursor:pointer}
+.trow:hover{background:rgba(255,255,255,.1)}
+.trow .zn{flex:0 0 26px;height:26px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:14px}
+.trow .zn.ok{background:rgba(110,231,160,.25);color:var(--green)}
+.trow .zn.no{background:rgba(255,128,128,.22);color:var(--red)}
+.trow .tx{flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.trow .bd{flex:0 0 auto;font-size:12px;color:var(--chalk-dim);font-weight:700}
 .stat{display:flex;gap:9px;margin-bottom:14px}
 .stat div{flex:1;background:rgba(255,255,255,.06);border-radius:11px;padding:9px;text-align:center}
 .stat b{display:block;font-size:19px;color:var(--gold)}
@@ -2491,9 +2510,57 @@ svg.vis{display:block;width:100%;max-width:520px;height:auto;margin:16px auto}
     <div><b id="stOk">0 %</b><span>úspěšnost</span></div>
     <div><b id="stDays">–</b><span>dní do zkoušky</span></div>
   </div>
+  <button class="card" onclick="openTesty()" style="border-color:rgba(255,216,77,.45)">
+    <b>📝 Zkušební testy</b>
+    <span>Nanečisto v podmínkách ostré zkoušky — na čas, na body, s rozborem na konci.</span>
+  </button>
   <div id="okruhy"></div>
   <button class="btn sec" onclick="resetProgress()">Vynulovat postup</button>
   <div class="foot">© 2026 Petr Poslušný — všechna práva vyhrazena</div>
+</div>
+
+<!-- ===== SEZNAM TESTŮ ===== -->
+<div class="screen" id="s-testy">
+  <h1>📝 Zkušební testy</h1>
+  <div class="sub">Stejná stavba jako u ostré zkoušky — počet úloh, body i čas. Úlohy jsou původní, napsané podle formátu z minulých let.</div>
+  <div id="testyList"></div>
+  <button class="btn sec" onclick="go('menu')">← Zpět na okruhy</button>
+</div>
+
+<!-- ===== BĚŽÍCÍ TEST ===== -->
+<div class="screen" id="s-test">
+  <div class="qhead"><span id="tsNazev"></span><span class="pill">⏱ <span class="tcas" id="tsCas">00:00</span></span></div>
+  <div class="tprogress"><i id="tsBar"></i></div>
+  <div class="board">
+    <div class="chalkline">📝</div>
+    <div class="tag" id="tsPoc">Úloha</div>
+    <div class="bx" id="tsQ"></div>
+    <div id="tsVis"></div>
+  </div>
+  <div id="tsAns" style="margin-top:14px"></div>
+  <div class="row">
+    <button class="btn sec" id="tsSkip" onclick="testDal(true)">Přeskočit</button>
+    <button class="btn" id="tsNext" onclick="testDal(false)">Další úloha →</button>
+  </div>
+  <button class="btn sec" onclick="testUkoncit()">Ukončit test a vyhodnotit</button>
+</div>
+
+<!-- ===== VÝSLEDEK TESTU ===== -->
+<div class="screen" id="s-vysledek">
+  <div class="qhead"><span id="vyNazev"></span><span class="pill" id="vyCas"></span></div>
+  <div class="board">
+    <div class="chalkline">🎯</div>
+    <div class="tskore">
+      <b id="vyBody">0</b>
+      <span id="vyZBodu">z 50 bodů</span>
+      <div><span class="tznam" id="vyZnam"></span></div>
+    </div>
+    <div class="bx" id="vySlovo" style="text-align:center;font-size:15px"></div>
+  </div>
+  <div style="font-size:13px;font-weight:700;margin:16px 0 8px">Rozbor úloh — klepni na kteroukoli a ukáže se postup</div>
+  <div id="vyList"></div>
+  <button class="btn cy" onclick="startTest(T.idx)">Zkusit test znovu</button>
+  <button class="btn sec" onclick="openTesty()">← Zpět na testy</button>
 </div>
 
 <!-- ===== VÝBĚR REŽIMU ===== -->
@@ -4356,6 +4423,325 @@ const DATA=[
 }
 ];
 
+/* ===== ZKUŠEBNÍ TESTY — původní úlohy podle formátu z minulých let =====
+   16 úloh / 50 bodů / 70 minut u matematiky, 30 úloh / 50 bodů / 60 minut u češtiny. */
+const TESTY=[
+{
+ id:"mat1", predmet:"Matematika", ikona:"📐", nazev:"Matematika — test 1",
+ cas:70, body:50, popis:"16 úloh, 50 bodů, 70 minut. Bez kalkulačky, jako u ostré zkoušky.",
+ ulohy:[
+  {q:"Vypočtěte:\\n\\n3,6 : 0,4 =",typ:"open",odp:"9",b:2,
+   kroky:[{n:"Krok 1 — zbav se desetinné čárky",d:"Vynásob dělence i dělitele deseti. Podíl se tím nezmění.",f:"36 : 4"},
+    {n:"Krok 2 — vyděl",d:"",f:"9"}],vys:"9"},
+  {q:"Vypočtěte:\\n\\n2/3 + 1/6 =",typ:"open",odp:"5/6",b:2,
+   kroky:[{n:"Krok 1 — společný jmenovatel",d:"Nejmenší společný násobek 3 a 6 je 6.",f:"2/3 = 4/6"},
+    {n:"Krok 2 — sečti čitatele",d:"",f:"4/6 + 1/6 = 5/6"}],vys:"5/6"},
+  {q:"Řešte rovnici:\\n\\n5x − 12 = 2x + 9",typ:"open",odp:"7",b:4,
+   kroky:[{n:"Krok 1 — neznámé doleva",d:"Odečti 2x od obou stran.",f:"3x − 12 = 9"},
+    {n:"Krok 2 — čísla doprava",d:"Přičti 12.",f:"3x = 21"},
+    {n:"Krok 3 — vyděl třemi",d:"",f:"x = 7"},
+    {n:"Zkouška",d:"",f:"L = 5·7 − 12 = 23\\nP = 2·7 + 9 = 23  ✓"}],vys:"x = 7"},
+  {q:"Zjednodušte výraz:\\n\\n(x + 4)² − x²",typ:"open",odp:"8x+16",b:4,
+   kroky:[{n:"Krok 1 — umocni podle vzorce",d:"(a + b)² = a² + 2ab + b².",f:"x² + 8x + 16 − x²"},
+    {n:"Krok 2 — x² se odečte",d:"",f:"8x + 16"}],vys:"8x + 16"},
+  {q:"Kolik procent je 36 ze 240?",typ:"open",odp:"15",b:3,
+   kroky:[{n:"Krok 1 — jedno procento",d:"Základ je 240.",f:"240 : 100 = 2,4"},
+    {n:"Krok 2 — kolikrát se vejde",d:"",f:"36 : 2,4 = 15 %"}],vys:"15 %"},
+  {q:"SLOVNÍ ÚLOHA\\n\\nSvetr stál 1 400 Kč. Nejdřív zdražil o 10 %, potom zlevnil o 25 %.\\nKolik korun stojí nyní?",typ:"open",odp:"1155",b:4,
+   kroky:[{n:"Krok 1 — zdražení o 10 %",d:"Nová cena je 110 % původní.",f:"1 400 · 1,1 = 1 540 Kč"},
+    {n:"Krok 2 — sleva 25 % z NOVÉ ceny",d:"Zbude 75 %. Pozor, počítá se z 1 540, ne z původní ceny.",f:"1 540 · 0,75"},
+    {n:"Krok 3 — dopočítej",d:"",f:"1 155 Kč"}],vys:"1 155 Kč"},
+  {q:"SLOVNÍ ÚLOHA\\n\\nPět kadeřnic ostříhá 40 zákaznic za jeden den.\\nKolik zákaznic ostříhá osm kadeřnic za stejnou dobu při stejném tempu?",typ:"open",odp:"64",b:3,
+   kroky:[{n:"Krok 1 — typ úměrnosti",d:"Víc kadeřnic, víc zákaznic. Přímá úměrnost.",f:"přímá"},
+    {n:"Krok 2 — kolik zvládne jedna",d:"",f:"40 : 5 = 8"},
+    {n:"Krok 3 — osm kadeřnic",d:"",f:"8 · 8 = 64"}],vys:"64 zákaznic"},
+  {q:"Obdélník má strany 8 cm a 15 cm.\\nJak dlouhá je jeho úhlopříčka? (v cm)",typ:"open",odp:"17",b:4,
+   kroky:[{n:"Krok 1 — úhlopříčka je přepona",d:"Strany obdélníku jsou odvěsny pravoúhlého trojúhelníku.",f:"u² = 8² + 15²"},
+    {n:"Krok 2 — umocni a sečti",d:"",f:"u² = 64 + 225 = 289"},
+    {n:"Krok 3 — odmocni",d:"Trojice 8–15–17 je jedna z těch, které se vyplatí znát.",f:"u = 17 cm"}],vys:"17 cm"},
+  {q:"Kruh má průměr 12 cm.\\nJaký je jeho obsah? (π ≈ 3,14, v cm²)",typ:"open",odp:"113.04",b:3,
+   kroky:[{n:"Krok 1 — z průměru poloměr",d:"Do vzorce patří poloměr, ne průměr.",f:"r = 6 cm"},
+    {n:"Krok 2 — dosaď do vzorce",d:"",f:"S = 3,14 · 6² = 3,14 · 36"},
+    {n:"Krok 3 — dopočítej",d:"",f:"S = 113,04 cm²"}],vys:"113,04 cm²"},
+  {q:"Krychle má povrch 150 cm².\\nJaký je její objem? (v cm³)",typ:"open",odp:"125",b:4,
+   kroky:[{n:"Krok 1 — obsah jedné stěny",d:"Krychle má šest stejných čtvercových stěn.",f:"150 : 6 = 25 cm²"},
+    {n:"Krok 2 — délka hrany",d:"",f:"a = √25 = 5 cm"},
+    {n:"Krok 3 — objem",d:"",f:"V = 5³ = 125 cm³"}],vys:"125 cm³"},
+  {q:"Na mapě s měřítkem 1 : 50 000 je vzdálenost 6 cm.\\nKolik je to ve skutečnosti v kilometrech?",typ:"open",odp:"3",b:3,
+   kroky:[{n:"Krok 1 — z mapy do skutečnosti se násobí",d:"",f:"6 · 50 000 = 300 000 cm"},
+    {n:"Krok 2 — převeď na kilometry",d:"Sto tisíc centimetrů je jeden kilometr.",f:"300 000 : 100 000 = 3 km"}],vys:"3 km"},
+  {q:"Aritmetický průměr čtyř čísel je 15.\\nTři z nich jsou 11, 14 a 20. Jaké je čtvrté číslo?",typ:"open",odp:"15",b:3,
+   kroky:[{n:"Krok 1 — celkový součet",d:"Průměr krát počet.",f:"15 · 4 = 60"},
+    {n:"Krok 2 — součet známých",d:"",f:"11 + 14 + 20 = 45"},
+    {n:"Krok 3 — odečti",d:"",f:"60 − 45 = 15"}],vys:"15"},
+  {q:"Které z tvrzení je chybné, jestliže pro úhly v trojúhelníku platí α : β : γ = 2 : 3 : 4?",typ:"choice",
+   moz:["Úhel γ je tupý","α = 40°","β = 60°","γ = 80°"],spr:0,b:4,
+   kroky:[{n:"Krok 1 — spočítej díly",d:"Součet úhlů je 180°.",f:"2 + 3 + 4 = 9 dílů"},
+    {n:"Krok 2 — jeden díl",d:"",f:"180 : 9 = 20°"},
+    {n:"Krok 3 — jednotlivé úhly",d:"",f:"α = 40°, β = 60°, γ = 80°"},
+    {n:"Krok 4 — najdi chybu",d:"Úhel 80° je menší než 90°, takže je ostrý, ne tupý. To je chybné tvrzení.",f:"γ je ostrý  →  chyba"}],vys:"Chybné je tvrzení, že úhel γ je tupý"},
+  {q:"Kolik cm³ je 2,5 litru?",typ:"open",odp:"2500",b:2,
+   kroky:[{n:"Krok 1 — vztah jednotek",d:"Jeden litr je tisíc centimetrů krychlových.",f:"1 l = 1 000 cm³"},
+    {n:"Krok 2 — vynásob",d:"",f:"2,5 · 1 000 = 2 500 cm³"}],vys:"2 500 cm³"},
+  {q:"Řešte soustavu a napište hodnotu y:\\n\\nx + y = 15\\n2x − y = 6",typ:"open",odp:"8",b:3,
+   kroky:[{n:"Krok 1 — sečti rovnice",d:"U y jsou koeficienty +1 a −1, po sečtení se vyruší.",f:"3x = 21"},
+    {n:"Krok 2 — dopočítej x",d:"",f:"x = 7"},
+    {n:"Krok 3 — dosaď pro y",d:"",f:"7 + y = 15  →  y = 8"}],vys:"x = 7, y = 8"},
+  {q:"Kolikrát se zvětší objem krychle, zvětší-li se délka její hrany třikrát?",typ:"choice",
+   moz:["27krát","9krát","3krát","6krát"],spr:0,b:2,
+   kroky:[{n:"Krok 1 — zkus to na číslech",d:"Hrana 2 → objem 8. Hrana 6 → objem 216.",f:"216 : 8 = 27"},
+    {n:"Krok 2 — proč to tak je",d:"Objem závisí na třetí mocnině hrany.",f:"3³ = 27"}],vys:"27krát"}
+ ]
+},
+{
+ id:"mat2", predmet:"Matematika", ikona:"📐", nazev:"Matematika — test 2",
+ cas:70, body:50, popis:"16 úloh, 50 bodů, 70 minut. Druhá sada, jiné úlohy i jiná témata.",
+ ulohy:[
+  {q:"Vypočtěte:\\n\\n(−4) · 7 + 30 =",typ:"open",odp:"2",b:2,
+   kroky:[{n:"Krok 1 — nejdřív násobení",d:"Plus krát mínus je mínus.",f:"−28 + 30"},
+    {n:"Krok 2 — sečti",d:"",f:"2"}],vys:"2"},
+  {q:"Vypočtěte:\\n\\n3/4 · 8/9 =",typ:"open",odp:"2/3",b:2,
+   kroky:[{n:"Krok 1 — krať před násobením",d:"Trojka se čtvrtou a devítkou, osmička se čtyřkou.",f:"(3·8)/(4·9)"},
+    {n:"Krok 2 — dopočítej",d:"",f:"24/36 = 2/3"}],vys:"2/3"},
+  {q:"Řešte rovnici:\\n\\n(x − 3)/2 + 1 = 4",typ:"open",odp:"9",b:4,
+   kroky:[{n:"Krok 1 — odečti 1",d:"",f:"(x − 3)/2 = 3"},
+    {n:"Krok 2 — vynásob dvěma",d:"",f:"x − 3 = 6"},
+    {n:"Krok 3 — přičti 3",d:"",f:"x = 9"},
+    {n:"Zkouška",d:"",f:"(9 − 3)/2 + 1 = 3 + 1 = 4  ✓"}],vys:"x = 9"},
+  {q:"Rozložte na součin:\\n\\n3a² − 12a",typ:"open",odp:"3a(a-4)",b:3,
+   kroky:[{n:"Krok 1 — najdi společné",d:"Obě čísla dělí trojka, obě části obsahují a.",f:"společné: 3a"},
+    {n:"Krok 2 — vytkni",d:"",f:"3a(a − 4)"},
+    {n:"Zkouška",d:"Roznásob zpátky.",f:"3a·a − 3a·4 = 3a² − 12a  ✓"}],vys:"3a(a − 4)"},
+  {q:"Cena po slevě 40 % je 540 Kč.\\nKolik korun stálo zboží před slevou?",typ:"open",odp:"900",b:4,
+   kroky:[{n:"Krok 1 — co je základ",d:"Původní cena je 100 %. Po slevě zbylo 60 %.",f:"540 Kč = 60 %"},
+    {n:"Krok 2 — jedno procento",d:"",f:"540 : 60 = 9 Kč"},
+    {n:"Krok 3 — sto procent",d:"",f:"100 · 9 = 900 Kč"},
+    {n:"Zkouška",d:"40 % z 900 je 360. A 900 − 360 = 540. Sedí.",f:"900 Kč"}],vys:"900 Kč"},
+  {q:"SLOVNÍ ÚLOHA\\n\\nV kadeřnictví trvá dámský střih 45 minut, pánský 20 minut.\\nKadeřnice odpracovala 5 hodin a udělala 4 dámské střihy. Kolik pánských střihů stihla ve zbylém čase?",typ:"open",odp:"6",b:4,
+   kroky:[{n:"Krok 1 — převeď na minuty",d:"",f:"5 h = 300 minut"},
+    {n:"Krok 2 — čas na dámské střihy",d:"",f:"4 · 45 = 180 minut"},
+    {n:"Krok 3 — zbylý čas",d:"",f:"300 − 180 = 120 minut"},
+    {n:"Krok 4 — kolik pánských",d:"",f:"120 : 20 = 6"}],vys:"6 pánských střihů"},
+  {q:"Uložíte 15 000 Kč na rok při úrokové míře 3 %.\\nKolik korun je úrok před zdaněním?",typ:"open",odp:"450",b:3,
+   kroky:[{n:"Krok 1 — jistina je základ",d:"",f:"1 % z 15 000 = 150 Kč"},
+    {n:"Krok 2 — tři procenta",d:"",f:"3 · 150 = 450 Kč"}],vys:"450 Kč"},
+  {q:"Žebřík dlouhý 13 m je opřený o zeď, jeho pata je 5 m od zdi.\\nDo jaké výšky sahá? (v m)",typ:"open",odp:"12",b:4,
+   kroky:[{n:"Krok 1 — žebřík je přepona",d:"Zeď a země svírají pravý úhel.",f:"c = 13, a = 5"},
+    {n:"Krok 2 — hledáme odvěsnu, odčítáme",d:"",f:"b² = 169 − 25 = 144"},
+    {n:"Krok 3 — odmocni",d:"",f:"b = 12 m"}],vys:"12 m"},
+  {q:"Válec má poloměr podstavy 5 cm a výšku 8 cm.\\nJaký je jeho objem? (π ≈ 3,14, v cm³)",typ:"open",odp:"628",b:4,
+   kroky:[{n:"Krok 1 — obsah podstavy",d:"Podstava je kruh.",f:"S = 3,14 · 25 = 78,5 cm²"},
+    {n:"Krok 2 — vynásob výškou",d:"",f:"V = 78,5 · 8"},
+    {n:"Krok 3 — výsledek",d:"",f:"V = 628 cm³"}],vys:"628 cm³"},
+  {q:"Lichoběžník má rovnoběžné strany 6 cm a 10 cm a výšku 7 cm.\\nJaký je jeho obsah? (v cm²)",typ:"open",odp:"56",b:3,
+   kroky:[{n:"Krok 1 — vzorec",d:"",f:"S = (a + c) · v / 2"},
+    {n:"Krok 2 — sečti základny",d:"",f:"6 + 10 = 16"},
+    {n:"Krok 3 — dopočítej",d:"",f:"S = 16 · 7 / 2 = 56 cm²"}],vys:"56 cm²"},
+  {q:"Poměr chlapců a dívek ve třídě je 2 : 3, dívek je 18.\\nKolik je ve třídě žáků celkem?",typ:"open",odp:"30",b:3,
+   kroky:[{n:"Krok 1 — hodnota dílu",d:"Dívky mají tři díly.",f:"18 : 3 = 6"},
+    {n:"Krok 2 — chlapci mají dva díly",d:"",f:"2 · 6 = 12"},
+    {n:"Krok 3 — celkem",d:"",f:"12 + 18 = 30 žáků"}],vys:"30 žáků"},
+  {q:"Vypočtěte hodnotu výrazu 2a² − 3b pro a = 3 a b = −2.",typ:"open",odp:"24",b:3,
+   kroky:[{n:"Krok 1 — dosaď do závorek",d:"",f:"2·3² − 3·(−2)"},
+    {n:"Krok 2 — nejdřív mocnina",d:"",f:"2·9 + 6"},
+    {n:"Krok 3 — dopočítej",d:"Mínus krát mínus dá plus.",f:"18 + 6 = 24"}],vys:"24"},
+  {q:"Které tvrzení o funkci y = −2x + 6 je pravdivé?",typ:"choice",
+   moz:["Funkce je klesající a protíná osu y v bodě 6","Funkce je rostoucí","Grafem je parabola","Funkce prochází počátkem"],spr:0,b:4,
+   kroky:[{n:"Krok 1 — sklon",d:"Koeficient u x je −2, tedy záporný. Funkce klesá.",f:"a = −2  →  klesající"},
+    {n:"Krok 2 — průsečík s osou y",d:"Dosaď x = 0.",f:"y = 6"},
+    {n:"Krok 3 — ověř ostatní",d:"Grafem lineární funkce je přímka, ne parabola. Počátkem prochází jen když chybí absolutní člen.",f:"klesající, protíná v bodě 6  ✓"}],vys:"Funkce je klesající a protíná osu y v bodě 6"},
+  {q:"Kolik m² je 35 000 cm²?",typ:"open",odp:"3.5",b:2,
+   kroky:[{n:"Krok 1 — vztah jednotek",d:"Plošné jednotky se převádějí deseti tisíci.",f:"1 m² = 10 000 cm²"},
+    {n:"Krok 2 — vyděl",d:"",f:"35 000 : 10 000 = 3,5 m²"}],vys:"3,5 m²"},
+  {q:"Urči medián souboru:\\n\\n7, 3, 12, 5, 9, 3",typ:"open",odp:"6",b:3,
+   kroky:[{n:"Krok 1 — seřaď",d:"Bez seřazení medián určit nelze.",f:"3, 3, 5, 7, 9, 12"},
+    {n:"Krok 2 — sudý počet",d:"Čísel je šest, prostřední jsou 5 a 7.",f:"5 a 7"},
+    {n:"Krok 3 — jejich průměr",d:"",f:"(5 + 7) : 2 = 6"}],vys:"6"},
+  {q:"Kolik řešení má rovnice 4(x − 2) = 4x − 8?",typ:"choice",
+   moz:["Nekonečně mnoho","Právě jedno","Žádné","Právě dvě"],spr:0,b:2,
+   kroky:[{n:"Krok 1 — roznásob závorku",d:"",f:"4x − 8 = 4x − 8"},
+    {n:"Krok 2 — obě strany jsou stejné",d:"Po odečtení 4x zbude 0 = 0, tedy pravda.",f:"0 = 0"},
+    {n:"Krok 3 — závěr",d:"Rovnice platí pro každé x.",f:"nekonečně mnoho řešení"}],vys:"Nekonečně mnoho řešení"}
+ ]
+}
+,
+{
+ id:"cj1", predmet:"Čeština", ikona:"✍️", nazev:"Čeština — test 1",
+ cas:60, body:50, popis:"30 úloh, 50 bodů, 60 minut. Pravopis, mluvnice i práce s textem.",
+ ulohy:[
+  {q:"Doplňte i/y:\\n\\nChlapci na dvoře hlasitě křičel__.",typ:"choice",moz:["křičeli","křičely"],spr:0,b:1,
+   kroky:[{n:"Podmět",d:"Kdo křičel? Chlapci — mužský rod životný, množné číslo.",f:"M životný, mn. č. → -i"}],vys:"křičeli"},
+  {q:"Doplňte i/y:\\n\\nStromy podél cesty se ohýbal__.",typ:"choice",moz:["ohýbaly","ohýbali"],spr:0,b:1,
+   kroky:[{n:"Podmět",d:"Stromy jsou mužský rod NEŽIVOTNÝ. Tam se píše -y stejně jako u ženského rodu.",f:"M neživotný → -y"}],vys:"ohýbaly"},
+  {q:"Doplňte i/y:\\n\\nDěti si na zahradě hrál__.",typ:"choice",moz:["hrály","hráli"],spr:0,b:1,
+   kroky:[{n:"Past",d:"Děti jsou v množném čísle rodu ženského, i když jsou mezi nimi kluci.",f:"ženský rod → -y"}],vys:"hrály"},
+  {q:"Doplňte i/y:\\n\\nKoně se pásl__ na louce.",typ:"choice",moz:["pásli","pásly"],spr:0,b:1,
+   kroky:[{n:"Past",d:"Slovo koně vypadá žensky, ale kůň je mužský rod životný.",f:"M životný → -i"}],vys:"pásli"},
+  {q:"Doplňte i/y:\\n\\nNa stole ležel kus s__ra.",typ:"choice",moz:["sýra","síra"],spr:0,b:1,
+   kroky:[{n:"Význam",d:"Na stole je potravina, tedy sýr — vyjmenované slovo po S.",f:"sýr → y"}],vys:"sýra"},
+  {q:"Doplňte i/y:\\n\\nMusíš si um__t ruce.",typ:"choice",moz:["umýt","umít"],spr:0,b:1,
+   kroky:[{n:"Význam",d:"Ruce se myjí. Mýt je vyjmenované slovo.",f:"mýt → y"}],vys:"umýt"},
+  {q:"Doplňte mě/mně:\\n\\nPodej __ tu knihu.",typ:"choice",moz:["mně","mě"],spr:0,b:1,
+   kroky:[{n:"Zkouška zájmenem",d:"Podej TOBĚ — sedí. Tobě má tři písmena, tedy mně.",f:"3. pád → mně"}],vys:"mně"},
+  {q:"Doplňte mě/mně:\\n\\nVčera __ viděl ve městě.",typ:"choice",moz:["mě","mně"],spr:0,b:1,
+   kroky:[{n:"Zkouška zájmenem",d:"Viděl TEBE — sedí. Tebe má dvě písmena.",f:"4. pád → mě"}],vys:"mě"},
+  {q:"Doplňte s/z:\\n\\nListy na podzim __ežloutly.",typ:"choice",moz:["zežloutly","sežloutly"],spr:0,b:1,
+   kroky:[{n:"Význam předpony",d:"Změna stavu — staly se žlutými. To je předpona z-.",f:"změna stavu → z-"}],vys:"zežloutly"},
+  {q:"Doplňte s/z:\\n\\nMusíme __balit kufry.",typ:"choice",moz:["sbalit","zbalit"],spr:0,b:1,
+   kroky:[{n:"Význam předpony",d:"Dáváme věci dohromady. To je předpona s-.",f:"dohromady → s-"}],vys:"sbalit"},
+  {q:"Který zápis je pravopisně správný?",typ:"choice",
+   moz:["Václavské náměstí","Václavské Náměstí","václavské náměstí","Václavské-náměstí"],spr:0,b:2,
+   kroky:[{n:"Pravidlo",d:"U víceslovných názvů se velké píše jen první slovo. Náměstí je obecné slovo.",f:"Václavské náměstí"}],vys:"Václavské náměstí"},
+  {q:"Který zápis je pravopisně správný?",typ:"choice",
+   moz:["Češi a Slováci","češi a slováci","Češi a slováci","češi a Slováci"],spr:0,b:2,
+   kroky:[{n:"Pravidlo",d:"Jména národů jsou vlastní jména, píší se velkým. Přídavná jména od nich už malým.",f:"Češi × český"}],vys:"Češi a Slováci"},
+  {q:"Určete slovní druh slova RYCHLE ve větě:\\n\\nAuto jelo rychle.",typ:"choice",
+   moz:["příslovce","přídavné jméno","sloveso","částice"],spr:0,b:2,
+   kroky:[{n:"Otázka",d:"Jelo JAK? Rychle. Patří ke slovesu, ne k podstatnému jménu.",f:"jak? → příslovce"}],vys:"Příslovce"},
+  {q:"Určete slovní druh slova AŤ ve větě:\\n\\nAť už konečně přijde!",typ:"choice",
+   moz:["částice","spojka","citoslovce","příslovce"],spr:0,b:2,
+   kroky:[{n:"Rozbor",d:"Nic nespojuje, jen uvozuje větu a vyjadřuje přání.",f:"částice"}],vys:"Částice"},
+  {q:"Určete pád podtrženého slova:\\n\\nBojím se TMY.",typ:"choice",
+   moz:["2. pád","4. pád","3. pád","7. pád"],spr:0,b:2,
+   kroky:[{n:"Otázka",d:"Bojím se koho, čeho? To je 2. pád.",f:"koho? čeho? → 2. pád"}],vys:"2. pád"},
+  {q:"Podle kterého vzoru se skloňuje slovo KOST?",typ:"choice",
+   moz:["kost","píseň","žena","růže"],spr:0,b:2,
+   kroky:[{n:"Rozlišení",d:"Ve 2. pádě je bez kosti (koncovka -i). Vzor píseň by měl písně.",f:"vzor kost"}],vys:"Vzor kost"},
+  {q:"V jakém čase je sloveso NAPÍŠU?",typ:"choice",
+   moz:["budoucí","přítomný","minulý","podmiňovací"],spr:0,b:2,
+   kroky:[{n:"Vid",d:"Napsat je sloveso dokonavé, a ta nemají přítomný čas.",f:"„Napíšu to zítra.“ → budoucí"}],vys:"Čas budoucí"},
+  {q:"Určete podmět ve větě:\\n\\nNa louce kvetly bílé sedmikrásky.",typ:"choice",
+   moz:["sedmikrásky","louce","bílé","kvetly"],spr:0,b:2,
+   kroky:[{n:"Postup",d:"Přísudek je kvetly. Co kvetlo? Sedmikrásky. Louka jen říká kde.",f:"podmět: sedmikrásky"}],vys:"sedmikrásky"},
+  {q:"Jaký přísudek je ve větě:\\n\\nMůj dědeček byl učitel.",typ:"choice",
+   moz:["jmenný se sponou","slovesný","žádný","několikanásobný"],spr:0,b:2,
+   kroky:[{n:"Rozbor",d:"Sloveso být je spona, jméno učitel je jmenná část.",f:"byl + učitel → jmenný se sponou"}],vys:"Přísudek jmenný se sponou"},
+  {q:"Ve které větě je čárka správně?",typ:"choice",
+   moz:["Nepřišel, protože byl nemocný.","Nepřišel protože, byl nemocný.","Nepřišel protože byl nemocný.","Nepřišel, protože, byl nemocný."],spr:0,b:2,
+   kroky:[{n:"Pravidlo",d:"Před spojkou protože se čárka píše vždy, a to PŘED ni, ne za ni.",f:"Nepřišel, protože…"}],vys:"Nepřišel, protože byl nemocný."},
+  {q:"Ve které větě čárka NEPATŘÍ?",typ:"choice",
+   moz:["Přišel domů a uvařil si večeři.","Chtěl přijít, ale zapomněl.","Řekl mi, že přijde.","Kniha, kterou jsi mi půjčil, byla dobrá."],spr:0,b:2,
+   kroky:[{n:"Pravidlo",d:"Před slučovací spojkou a se čárka nepíše.",f:"a, i, ani, nebo → bez čárky"}],vys:"Přišel domů a uvařil si večeři."},
+  {q:"Kolik vět je v souvětí?\\n\\nKdyž se ráno probudila, zjistila, že venku sněží.",typ:"open",odp:"3",b:2,
+   kroky:[{n:"Postup",d:"Spočítej slovesa v určitém tvaru: probudila, zjistila, sněží.",f:"3 přísudky → 3 věty"}],vys:"3 věty"},
+  {q:"Určete kořen slova:\\n\\nPŘEDŠKOLNÍ",typ:"choice",
+   moz:["škol","před","ní","předškol"],spr:0,b:2,
+   kroky:[{n:"Postup",d:"Příbuzná slova: škola, školák, školní. Společná část je škol-.",f:"před-škol-n-í"}],vys:"škol-"},
+  {q:"Které slovo NENÍ příbuzné se slovem VODA?",typ:"choice",
+   moz:["vodit","vodní","vodník","povodeň"],spr:0,b:2,
+   kroky:[{n:"Postup",d:"Vodit znamená vést za ruku — s vodou to nesouvisí. Rozhoduje význam, ne podobný zvuk.",f:"vodit ✗"}],vys:"vodit"},
+  {q:"Jak vzniklo slovo ZEMĚPIS?",typ:"choice",
+   moz:["skládáním","odvozováním","zkracováním","přejetím z cizího jazyka"],spr:0,b:2,
+   kroky:[{n:"Rozbor",d:"Spojila se dvě slova — země a psát.",f:"skládání"}],vys:"Skládáním"},
+  {q:"Které slovo je antonymem ke slovu ŠIROKÝ?",typ:"choice",
+   moz:["úzký","dlouhý","vysoký","velký"],spr:0,b:1,
+   kroky:[{n:"Rozbor",d:"Antonymum je opak. Dlouhý a vysoký jsou jiné rozměry, ne opaky.",f:"úzký"}],vys:"úzký"},
+  {q:"Co znamená rčení MÍT MÁSLO NA HLAVĚ?",typ:"choice",
+   moz:["Mít něco na svědomí","Být zamaštěný","Být hloupý","Mít hlad"],spr:0,b:2,
+   kroky:[{n:"Význam",d:"Kdo se provinil, radši o tom nemluví — jako by neměl chodit na slunce.",f:"mít něco na svědomí"}],vys:"Mít něco na svědomí"},
+  {q:"VÝCHOZÍ TEXT\\n\\nKadeřnické služby patří mezi řemesla s dlouhou tradicí. Učební obor kadeřník trvá tři roky a končí výučním listem. Kdo chce získat maturitu, může pokračovat dvouletým nástavbovým studiem.\\n\\nJak dlouho trvá učební obor kadeřník?",typ:"choice",
+   moz:["tři roky","dva roky","čtyři roky","pět let"],spr:0,b:2,
+   kroky:[{n:"Postup",d:"Odpověď je přímo v textu: „trvá tři roky“.",f:"tři roky"}],vys:"Tři roky"},
+  {q:"VÝCHOZÍ TEXT (viz předchozí úloha)\\n\\nKteré tvrzení z textu NEVYPLÝVÁ?",typ:"choice",
+   moz:["Kadeřnice musí složit jednotnou přijímací zkoušku","Obor končí výučním listem","Maturitu lze získat nástavbou","Kadeřnictví je řemeslo s tradicí"],spr:0,b:3,
+   kroky:[{n:"Postup",d:"Projdi text a hledej každé tvrzení. O přijímacích zkouškách tam není ani slovo.",f:"nevyplývá"},
+    {n:"Pozor",d:"Otázka se ptá na text, ne na to, co víš odjinud.",f:"rozhoduje jen text"}],vys:"Kadeřnice musí složit jednotnou přijímací zkoušku"},
+  {q:"Do kterého funkčního stylu patří text?\\n\\n„Vážená paní ředitelko, žádám Vás o uvolnění dcery z výuky dne 15. května.“",typ:"choice",
+   moz:["administrativní","umělecký","publicistický","odborný"],spr:0,b:2,
+   kroky:[{n:"Rozbor",d:"Úřední žádost, ustálené obraty, vykání s velkým V, žádné obrazy.",f:"administrativní"}],vys:"Administrativní styl"}
+ ]
+},
+{
+ id:"cj2", predmet:"Čeština", ikona:"✍️", nazev:"Čeština — test 2",
+ cas:60, body:50, popis:"30 úloh, 50 bodů, 60 minut. Druhá sada s delší prací s textem.",
+ ulohy:[
+  {q:"Doplňte i/y:\\n\\nRybáři u řeky trpělivě seděl__.",typ:"choice",moz:["seděli","seděly"],spr:0,b:1,
+   kroky:[{n:"Podmět",d:"Kdo seděl? Rybáři — mužský rod životný. Slovo řeky tě nemá zmást.",f:"M životný → -i"}],vys:"seděli"},
+  {q:"Doplňte i/y:\\n\\nAuta na parkovišti stál__ v řadě.",typ:"choice",moz:["stála","stály"],spr:0,b:1,
+   kroky:[{n:"Podmět",d:"Auto je rod střední, v množném čísle se píše -a.",f:"střední rod → -a"}],vys:"stála"},
+  {q:"Doplňte i/y:\\n\\nJejí oči se v šeru leskl__.",typ:"choice",moz:["leskly","leskli"],spr:0,b:1,
+   kroky:[{n:"Past",d:"Oči jsou v množném čísle rodu ženského, stejně jako děti a uši.",f:"ženský rod → -y"}],vys:"leskly"},
+  {q:"Doplňte i/y:\\n\\nMaminka, teta a strýc přijel__ na oběd.",typ:"choice",moz:["přijeli","přijely"],spr:0,b:2,
+   kroky:[{n:"Několikanásobný podmět",d:"Stačí jediný mužský životný — strýc — a přísudek dostane -i.",f:"jeden M životný rozhoduje"}],vys:"přijeli"},
+  {q:"Doplňte i/y:\\n\\nV lese jsme viděli v__ra velkého.",typ:"choice",moz:["výra","víra"],spr:0,b:1,
+   kroky:[{n:"Význam",d:"Výr velký je sova. Vír s měkkým i je točící se voda.",f:"výr → vyjmenované po V"}],vys:"výra"},
+  {q:"Doplňte i/y:\\n\\nZ__mní počasí nás překvapilo.",typ:"choice",moz:["Zimní","Zymní"],spr:0,b:1,
+   kroky:[{n:"Postup",d:"Po Z jsou vyjmenovaná jen brzy, jazyk, nazývat se, Ruzyně. Zima mezi nimi není.",f:"zimní → i"}],vys:"Zimní"},
+  {q:"Doplňte mě/mně:\\n\\nO __ se nikdo nezajímal.",typ:"choice",moz:["mně","mě"],spr:0,b:1,
+   kroky:[{n:"Zkouška",d:"O TOBĚ — sedí, tedy mně. Je to 6. pád.",f:"6. pád → mně"}],vys:"mně"},
+  {q:"Doplňte:\\n\\nZapo__l jsem si klíče doma.",typ:"choice",moz:["Zapomněl","Zapoměl"],spr:0,b:2,
+   kroky:[{n:"Pravidlo uvnitř slova",d:"Hledáme příbuzné slovo: paměť, zapomnětlivý — je tam n, píšeme mně.",f:"zapomněl"}],vys:"Zapomněl"},
+  {q:"Doplňte předložku s/z:\\n\\nVrátil se __ školy.",typ:"choice",moz:["ze","se"],spr:0,b:1,
+   kroky:[{n:"Otázka",d:"Odkud? To je 2. pád, ten se pojí s předložkou z.",f:"ze školy"}],vys:"ze školy"},
+  {q:"Doplňte s/z:\\n\\nLyžař __jel ze svahu.",typ:"choice",moz:["sjel","zjel"],spr:0,b:1,
+   kroky:[{n:"Význam předpony",d:"Směr shora dolů znamená předponu s-.",f:"dolů → s-"}],vys:"sjel"},
+  {q:"Který zápis je pravopisně správný?",typ:"choice",
+   moz:["ulice Na Příkopě","Ulice Na Příkopě","ulice na příkopě","Ulice na Příkopě"],spr:0,b:2,
+   kroky:[{n:"Pravidlo",d:"Slovo ulice je obecné a píše se malým. Vlastní název pak velkým.",f:"ulice Na Příkopě"}],vys:"ulice Na Příkopě"},
+  {q:"Který zápis je pravopisně správný?",typ:"choice",
+   moz:["Nový rok","nový rok","Nový Rok","nový Rok"],spr:0,b:2,
+   kroky:[{n:"Pravidlo",d:"Jako název svátku velké první slovo. Ve významu „začal nový rok“ by bylo vše malé.",f:"Nový rok"}],vys:"Nový rok"},
+  {q:"Určete slovní druh slova PĚT ve větě:\\n\\nKoupili jsme pět rohlíků.",typ:"choice",
+   moz:["číslovka","podstatné jméno","zájmeno","příslovce"],spr:0,b:1,
+   kroky:[{n:"Otázka",d:"Kolik? Pět. Vyjadřuje počet.",f:"kolik? → číslovka"}],vys:"Číslovka"},
+  {q:"Určete slovní druh slova KTERÝ ve větě:\\n\\nKniha, kterou jsem četla, byla dlouhá.",typ:"choice",
+   moz:["zájmeno","přídavné jméno","spojka","částice"],spr:0,b:2,
+   kroky:[{n:"Rozbor",d:"Zastupuje podstatné jméno kniha. Je to zájmeno vztažné.",f:"zájmeno"}],vys:"Zájmeno"},
+  {q:"Určete pád:\\n\\nS BRATREM jsme šli na výlet.",typ:"choice",
+   moz:["7. pád","4. pád","6. pád","2. pád"],spr:0,b:2,
+   kroky:[{n:"Otázka",d:"S kým, s čím? Předložka s se pojí se 7. pádem.",f:"7. pád"}],vys:"7. pád"},
+  {q:"Podle kterého vzoru se skloňuje slovo PŘEDSEDA?",typ:"choice",
+   moz:["předseda","pán","žena","muž"],spr:0,b:2,
+   kroky:[{n:"Past",d:"Slovo končí na -a jako ženská jména, ale je to mužský rod životný.",f:"vzor předseda"}],vys:"Vzor předseda"},
+  {q:"Ve kterém slovesném způsobu je tvar PŘIŠEL BY?",typ:"choice",
+   moz:["podmiňovací","oznamovací","rozkazovací","trpný"],spr:0,b:1,
+   kroky:[{n:"Poznávací znak",d:"Slůvko by je jistá známka podmiňovacího způsobu.",f:"by → podmiňovací"}],vys:"Podmiňovací"},
+  {q:"Určete předmět ve větě:\\n\\nDěti kreslily obrázek.",typ:"choice",
+   moz:["obrázek","děti","kreslily","žádný"],spr:0,b:2,
+   kroky:[{n:"Postup",d:"Děti je podmět, kreslily přísudek. Kreslily co? Obrázek — to je předmět.",f:"předmět: obrázek"}],vys:"obrázek"},
+  {q:"Určete podmět ve větě:\\n\\nBylo nám veselo.",typ:"choice",
+   moz:["věta je bezpodmětá","nám","veselo","bylo"],spr:0,b:2,
+   kroky:[{n:"Rozbor",d:"Nelze se zeptat kdo nebo co. Věta popisuje stav a podmět nemá.",f:"bezpodmětá"}],vys:"Věta je bezpodmětá"},
+  {q:"Doplňte čárky:\\n\\nKniha kterou jsi mi půjčil byla výborná.",typ:"choice",
+   moz:["Kniha, kterou jsi mi půjčil, byla výborná.","Kniha kterou jsi mi půjčil, byla výborná.","Kniha, kterou jsi mi půjčil byla výborná.","Bez čárek"],spr:0,b:3,
+   kroky:[{n:"Pravidlo",d:"Vedlejší věta vložená doprostřed se odděluje čárkami z obou stran.",f:"dvě čárky"},
+    {n:"Nejčastější chyba",d:"Zapomenout tu druhou. Vždycky si zkontroluj obě.",f:"Kniha, kterou…, byla výborná"}],vys:"Kniha, kterou jsi mi půjčil, byla výborná."},
+  {q:"Doplňte čárky ve výčtu:\\n\\nKoupili jsme chleba máslo sýr a mléko.",typ:"choice",
+   moz:["Koupili jsme chleba, máslo, sýr a mléko.","Koupili jsme chleba, máslo, sýr, a mléko.","Koupili jsme chleba máslo, sýr a mléko.","Bez čárek"],spr:0,b:2,
+   kroky:[{n:"Pravidlo",d:"Mezi položkami výčtu čárky ano, před poslední spojkou a ne.",f:"chleba, máslo, sýr a mléko"}],vys:"Koupili jsme chleba, máslo, sýr a mléko."},
+  {q:"Kolik přísudků má věta jednoduchá?",typ:"open",odp:"1",b:1,
+   kroky:[{n:"Definice",d:"Jedno sloveso v určitém tvaru. Podle počtu přísudků poznáš i počet vět v souvětí.",f:"1"}],vys:"1"},
+  {q:"Určete předponu ve slově:\\n\\nNEJKRÁSNĚJŠÍ",typ:"choice",
+   moz:["nej-","ne-","krás-","-ší"],spr:0,b:1,
+   kroky:[{n:"Rozbor",d:"Předpona nej- tvoří třetí stupeň přídavných jmen. Není to zápor ne-.",f:"nej-krás-něj-ší"}],vys:"nej-"},
+  {q:"Ve které dvojici jde o homonyma?",typ:"choice",
+   moz:["kolej (na trati) – kolej (ubytovna)","dům – stavení","velký – malý","pes – pejsek"],spr:0,b:2,
+   kroky:[{n:"Rozbor",d:"Homonyma znějí stejně, ale významem spolu vůbec nesouvisejí.",f:"kolej – kolej"}],vys:"kolej (na trati) – kolej (ubytovna)"},
+  {q:"V jakém významu je slovo ZLATÉ ve spojení ZLATÉ RUCE?",typ:"choice",
+   moz:["přeneseném","přímém","zdrobnělém","hanlivém"],spr:0,b:2,
+   kroky:[{n:"Rozbor",d:"Ruce nejsou ze zlata — znamená to šikovné. Přeneseno podle hodnoty.",f:"přenesený význam"}],vys:"V přeneseném"},
+  {q:"Do kterého literárního druhu patří báseň bez děje, která vyjadřuje pocity?",typ:"choice",
+   moz:["lyrika","epika","drama","publicistika"],spr:0,b:1,
+   kroky:[{n:"Rozbor",d:"Bez děje a s pocity — to je lyrika. Epika by měla příběh.",f:"lyrika"}],vys:"Lyrika"},
+  {q:"Jaký je rýmový vzorec u rýmu střídavého?",typ:"choice",
+   moz:["ABAB","AABB","ABBA","ABCB"],spr:0,b:1,
+   kroky:[{n:"Rozbor",d:"Střídavý rým rýmuje první se třetím a druhý se čtvrtým veršem.",f:"ABAB"},
+    {n:"Pro srovnání",d:"AABB je sdružený, ABBA obkročný.",f:"ABAB"}],vys:"ABAB"},
+  {q:"VÝCHOZÍ TEXT\\n\\nKadeřník pracuje s vlasy, ale jeho práce zdaleka nekončí u nůžek. Musí rozumět chemii barev, znát stavbu vlasu a umět poradit zákazníkovi, co jeho vlasům prospěje. Dobrý kadeřník je zároveň trochu psycholog — do křesla si k němu lidé sedají i proto, aby si popovídali.\\n\\nCo je hlavní myšlenkou textu?",typ:"choice",
+   moz:["Kadeřnická práce je náročnější, než se zdá","Návod, jak stříhat vlasy","Historie kadeřnictví","Porovnání kadeřníka a psychologa"],spr:0,b:3,
+   kroky:[{n:"Postup",d:"Text vyjmenovává, co všechno kadeřník musí umět — chemii, stavbu vlasu, poradenství i jednání s lidmi.",f:"náročnost profese"},
+    {n:"Vyluč ostatní",d:"Není to návod ani historie. Psycholog je jen přirovnání, ne téma.",f:"náročnější, než se zdá"}],vys:"Kadeřnická práce je náročnější, než se zdá"},
+  {q:"VÝCHOZÍ TEXT (viz předchozí úloha)\\n\\nKterý slohový postup autor použil?",typ:"choice",
+   moz:["výkladový","vyprávěcí","administrativní","úvahový popis děje"],spr:0,b:3,
+   kroky:[{n:"Rozbor",d:"Text vysvětluje, co profese obnáší a proč. Nemá děj ani postavy.",f:"výkladový"},
+    {n:"Pro srovnání",d:"Vyprávění by mělo hrdinu a sled událostí.",f:"výkladový postup"}],vys:"Výkladový"},
+  {q:"Které z tvrzení je NÁZOR, nikoli fakt?",typ:"choice",
+   moz:["Kadeřnictví je nejkrásnější řemeslo.","Učební obor kadeřník trvá tři roky.","Vlas se skládá z kořene a stvolu.","Barvení vlasů využívá chemické reakce."],spr:0,b:3,
+   kroky:[{n:"Postup",d:"Fakt se dá ověřit. Slovo nejkrásnější vyjadřuje osobní postoj.",f:"hodnotící slovo → názor"}],vys:"Kadeřnictví je nejkrásnější řemeslo."}
+ ]
+}
+];
+
 /* ================= STAV ================= */
 const $=id=>document.getElementById(id);
 let S={done:{},ok:0,total:0};
@@ -4491,8 +4877,20 @@ function hotovo(spravne){
   $("ulNext").textContent=spravne?"Pokračovat na další úlohu →":"Přeskočit a jít dál →";
 }
 /* ================= TABULE ================= */
+let tbU=null,tbZpet=null;
+function showTabuleFor(u,popis,zpet){
+  tbU=u;tbZpet=zpet||null;
+  $("tbOkruh").textContent=popis;
+  $("tbPoc").textContent="Rozbor";
+  $("tbQ").textContent=u.q;
+  $("tbSteps").innerHTML="";$("tbRes").innerHTML="";
+  ki=0;$("tbNext").style.display="block";$("tbNext").textContent="Začni psát →";
+  $("tbDone").style.display="none";
+  go("tabule");
+}
 function showTabule(){
   const u=O.ulohy[ui];
+  tbU=u;tbZpet=null;
   $("tbOkruh").textContent=O.ikona+" "+O.nazev;
   $("tbPoc").textContent="Úloha "+(ui+1)+"/"+O.ulohy.length;
   $("tbQ").textContent=u.q;
@@ -4501,7 +4899,7 @@ function showTabule(){
   go("tabule");
 }
 function krok(){
-  const u=O.ulohy[ui];
+  const u=tbU||O.ulohy[ui];
   if(ki<u.kroky.length){
     const k=u.kroky[ki];
     $("tbSteps").insertAdjacentHTML("beforeend",
@@ -4514,16 +4912,133 @@ function krok(){
   }else{
     $("tbRes").innerHTML='<div class="result">'+u.vys+"</div>";
     $("tbNext").style.display="none";$("tbDone").style.display="block";
+    $("tbDone").textContent=tbZpet?"← Zpět na rozbor":"Další úloha →";
     window.scrollTo(0,document.body.scrollHeight);
   }
 }
 function dalsiUloha(){
+  if(tbZpet){const f=tbZpet;tbZpet=null;tbU=null;f();return;}
   if(ui+1>=O.ulohy.length){
     alert("🎉 Hotovo! Prošla jsi celý okruh "+O.nazev+". Můžeš si ho dát znovu, nebo zkusit jiný.");
     renderMenu();go("menu");return;
   }
   ui++;renderUloha();go("uloha");
 }
+/* ================= ZKUŠEBNÍ TESTY ================= */
+let T=null;
+function dvojcif(n){return (n<10?"0":"")+n;}
+function openTesty(){
+  if(T&&T.tik){clearInterval(T.tik);T.tik=null;}
+  let h="";
+  TESTY.forEach(function(t,i){
+    const r=(S.testy||{})[t.id];
+    h+='<button class="card" onclick="startTest('+i+')"><b>'+t.ikona+' '+t.nazev+'</b><span>'+t.popis+'</span>'
+      +'<span style="display:block;margin-top:7px;font-size:11.5px">'
+      +(r?("Nejlepší výsledek: "+r.body+" z "+t.body+" bodů ("+Math.round(100*r.body/t.body)+" %)"):"Zatím nezkoušeno")
+      +'</span></button>';
+  });
+  $("testyList").innerHTML=h;
+  go("testy");
+}
+function startTest(i){
+  const t=TESTY[i];
+  T={idx:i,t:t,i:0,odp:new Array(t.ulohy.length).fill(null),zbyva:t.cas*60,tik:null};
+  T.tik=setInterval(function(){
+    T.zbyva--;kresliCas();
+    if(T.zbyva<=0){clearInterval(T.tik);T.tik=null;vyhodnotit(true);}
+  },1000);
+  renderTestUloha();
+  go("test");
+}
+function kresliCas(){
+  const el=$("tsCas");if(!el||!T)return;
+  const m=Math.floor(Math.max(0,T.zbyva)/60),s=Math.max(0,T.zbyva)%60;
+  el.textContent=dvojcif(m)+":"+dvojcif(s);
+  el.classList.toggle("malo",T.zbyva<=300&&T.zbyva>60);
+  el.classList.toggle("dochazi",T.zbyva<=60);
+}
+function renderTestUloha(){
+  const t=T.t,u=t.ulohy[T.i];
+  $("tsNazev").textContent=t.ikona+" "+t.nazev;
+  $("tsPoc").textContent="Úloha "+(T.i+1)+" z "+t.ulohy.length+" · "+u.b+(u.b===1?" bod":(u.b<5?" body":" bodů"));
+  $("tsQ").textContent=u.q;
+  $("tsVis").innerHTML=u.svg||"";
+  $("tsBar").style.width=Math.round(100*T.i/t.ulohy.length)+"%";
+  kresliCas();
+  const dosud=T.odp[T.i];
+  if(u.typ==="choice"){
+    $("tsAns").innerHTML=u.moz.map(function(m,k){
+      return '<button class="ans'+(dosud===k?" ok":"")+'" data-i="'+k+'"><span class="k">'+"ABCDE"[k]+'</span>'+m+'</button>';
+    }).join("");
+    document.querySelectorAll("#tsAns .ans").forEach(function(b){
+      b.addEventListener("click",function(){
+        T.odp[T.i]=+b.dataset.i;
+        document.querySelectorAll("#tsAns .ans").forEach(function(x){x.classList.remove("ok")});
+        b.classList.add("ok");
+      });
+    });
+  }else{
+    $("tsAns").innerHTML='<input type="text" id="tsIn" autocomplete="off" placeholder="sem napiš výsledek" value="'+(dosud==null?"":String(dosud).replace(/"/g,"&quot;"))+'">'
+      +'<div class="hintline">Stačí samotný výsledek, například 6 nebo 30</div>';
+    $("tsIn").addEventListener("input",function(){T.odp[T.i]=$("tsIn").value;});
+    $("tsIn").addEventListener("keydown",function(e){if(e.key==="Enter")testDal(false);});
+  }
+  $("tsNext").textContent=(T.i+1>=t.ulohy.length)?"Odevzdat test 🎯":"Další úloha →";
+}
+function testDal(preskocit){
+  if(preskocit)T.odp[T.i]=null;
+  if(T.i+1>=T.t.ulohy.length){testUkoncit();return;}
+  T.i++;renderTestUloha();window.scrollTo(0,0);
+}
+function testUkoncit(){
+  const chybi=T.odp.filter(function(x){return x==null||String(x).trim()===""}).length;
+  if(chybi&&!confirm("Ještě máš nevyplněných úloh: "+chybi+". Opravdu chceš test odevzdat?"))return;
+  if(T.tik){clearInterval(T.tik);T.tik=null;}
+  vyhodnotit(false);
+}
+function spravneT(u,odp){
+  if(odp==null)return false;
+  if(u.typ==="choice")return odp===u.spr;
+  return norm(odp)===norm(u.odp);
+}
+function vyhodnotit(vyprselCas){
+  if(T.tik){clearInterval(T.tik);T.tik=null;}
+  const t=T.t;
+  let body=0;
+  t.ulohy.forEach(function(u,i){if(spravneT(u,T.odp[i]))body+=u.b;});
+  T.body=body;
+  if(!S.testy)S.testy={};
+  const st=S.testy[t.id];
+  if(!st||body>st.body)S.testy[t.id]={body:body,celkem:t.body};
+  save();
+  const pct=Math.round(100*body/t.body);
+  $("vyNazev").textContent=t.ikona+" "+t.nazev;
+  const spotr=t.cas*60-Math.max(0,T.zbyva);
+  $("vyCas").textContent="⏱ "+dvojcif(Math.floor(spotr/60))+":"+dvojcif(spotr%60);
+  $("vyBody").textContent=body;
+  $("vyZBodu").textContent="z "+t.body+" bodů · "+pct+" %";
+  let zn,barva,slovo;
+  if(pct>=85){zn="výborně";barva="rgba(110,231,160,.22);color:#6ee7a0";slovo="Tohle je výsledek, se kterým se na maturitní obor dostaneš.";}
+  else if(pct>=65){zn="dobré";barva="rgba(127,227,255,.2);color:#7fe3ff";slovo="Solidní základ. Projdi si rozbor u úloh, které nevyšly, a příště to bude lepší.";}
+  else if(pct>=45){zn="je co dohánět";barva="rgba(255,216,77,.18);color:#ffd84d";slovo="Půlka je doma. Vrať se k okruhům, kde se ti nedařilo, a test si dej znovu.";}
+  else{zn="zatím málo";barva="rgba(255,128,128,.18);color:#ff8080";slovo="Nevěš hlavu, času je dost. Nejdřív projdi výklad v okruzích, pak zkus test znovu.";}
+  $("vyZnam").textContent=zn;$("vyZnam").setAttribute("style","background:"+barva);
+  $("vySlovo").textContent=(vyprselCas?"Vypršel čas — vyhodnotil jsem, cos stihla. ":"")+slovo;
+  let hh="";
+  t.ulohy.forEach(function(u,i){
+    const ok=spravneT(u,T.odp[i]);
+    hh+='<button class="trow" onclick="rozbor('+i+')"><span class="zn '+(ok?"ok":"no")+'">'+(ok?"✓":"✗")+'</span>'
+      +'<span class="tx">'+(i+1)+". "+u.q.split("\\n")[0].slice(0,52)+'</span>'
+      +'<span class="bd">'+(ok?u.b:0)+"/"+u.b+'</span></button>';
+  });
+  $("vyList").innerHTML=hh;
+  go("vysledek");
+}
+function rozbor(i){
+  const u=T.t.ulohy[i];
+  showTabuleFor(u,T.t.ikona+" úloha "+(i+1),function(){go("vysledek");});
+}
+
 renderMenu();
 <\/script>
 </body>
