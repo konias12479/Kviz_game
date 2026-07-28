@@ -2499,6 +2499,9 @@ svg.vis{display:block;width:100%;max-width:520px;height:auto;margin:16px auto}
 .dots i{width:7px;height:7px;border-radius:50%;background:rgba(255,255,255,.25)}
 .dots i.on{background:var(--gold);width:20px;border-radius:4px}
 .foot{text-align:center;font-size:11px;color:#5d6f68;margin-top:26px}
+.predmety{display:grid;grid-template-columns:1fr;gap:0 18px}
+@media (min-width:760px){.predmety{grid-template-columns:1fr 1fr}}
+.predmety .sloupec{min-width:0}
 .tcas{font-variant-numeric:tabular-nums;font-weight:800}
 .tcas.malo{color:var(--gold)}
 .tcas.dochazi{color:var(--red);animation:tik 1s infinite}
@@ -5713,12 +5716,13 @@ function renderMenu(){
   $("stOk").textContent=(S.total?Math.round(100*S.ok/S.total):0)+" %";
   if($("mnRocnik"))$("mnRocnik").textContent=ROCPOPIS[rocnik()];
   const IK={"Čeština":"✍️","Matematika":"📐"};
-  let h="";
+  let h='<div class="predmety">';
   ["Čeština","Matematika"].forEach(function(p){
     const ok=DATA.filter(function(o){return o.predmet===p&&proRocnik(o);});
     const te=TESTY.filter(function(t){return t.predmet===p&&proRocnik(t);});
     const hot=ok.reduce(function(a,o){return a+(S.done[o.id]||[]).length;},0);
     const cel=ok.reduce(function(a,o){return a+o.ulohy.length;},0);
+    h+='<div class="sloupec">';
     h+='<div style="font-size:15px;letter-spacing:1.5px;text-transform:uppercase;color:var(--pink);font-weight:800;margin:22px 0 10px">'
       +IK[p]+" "+p+'</div>';
     h+='<button class="card" onclick="openTesty(\\''+p+'\\',false)" style="border-color:rgba(255,216,77,.45)">'
@@ -5730,7 +5734,9 @@ function renderMenu(){
     h+='<button class="card" onclick="openVyuka(\\''+p+'\\')" style="border-color:rgba(255,138,209,.4)">'
       +'<b>📚 Výuka</b><span>Výklad na tabuli po okruzích a k němu úlohy s rozepsaným postupem. Sem se vracej, když něčemu nerozumíš.</span>'
       +'<span style="display:block;margin-top:6px;font-size:11.5px">'+ok.length+" okruhů · "+hot+" z "+cel+' úloh hotovo</span></button>';
+    h+='</div>';
   });
+  h+='</div>';
   h+='<div style="font-size:15px;letter-spacing:1.5px;text-transform:uppercase;color:var(--pink);font-weight:800;margin:22px 0 10px">💀 Výzva</div>';
   h+='<button class="card" onclick="startZab()" style="border-color:rgba(255,128,128,.45)">'
     +'<b>💀 Zabijáci</b><span>Osm nejtěžších úloh napříč testy, dvanáct minut, žádná nápověda. Pokaždé jiný výběr.</span>'
