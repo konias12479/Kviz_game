@@ -3553,14 +3553,33 @@ function dalsiUloha(){
 /* Tichý déšť nebo les s ptáčky — generované, žádné soubory ke stažení. */
 let ambCtx=null,ambUzly=[],ambPtaciTO=null;
 function ambAc(){try{ambCtx=ambCtx||new (window.AudioContext||window.webkitAudioContext)();return ambCtx;}catch(e){return null;}}
-function sumBuffer(c,sek){ // jemný šum s náhodnou procházkou (zní měkčeji než bílý)
+function sumBuffer(c,sek,hladky){ // hladky=1 tlumený šum (vítr), jinak jemný bílý (déšť)
   const b=c.createBuffer(1,c.sampleRate*sek,c.sampleRate),d=b.getChannelData(0);
-  let v=0;
-  for(let i=0;i<d.length;i++){v=v*0.98+(Math.random()*2-1)*0.05;d[i]=v*3;}
+  if(hladky){let v=0;for(let i=0;i<d.length;i++){v=v*0.98+(Math.random()*2-1)*0.05;d[i]=v*3;}}
+  else{for(let i=0;i<d.length;i++)d[i]=Math.random()*2-1;}
   return b;
+}
+function kapka(c){ // ojedinělé tiché ťuknutí kapky o parapet
+  const t=c.currentTime+Math.random()*0.05;
+  const o=c.createOscillator(),g=c.createGain();
+  o.type="sine";
+  const f0=900+Math.random()*900;
+  o.frequency.setValueAtTime(f0,t);
+  o.frequency.exponentialRampToValueAtTime(f0*0.6,t+0.05);
+  g.gain.setValueAtTime(0.0001,t);
+  g.gain.exponentialRampToValueAtTime(0.014,t+0.008);
+  g.gain.exponentialRampToValueAtTime(0.0001,t+0.06);
+  o.connect(g);g.connect(c.destination);o.start(t);o.stop(t+0.08);
+}
+let ambKapkyTO=null;
+function naplanujKapku(){
+  ambKapkyTO=setTimeout(function(){
+    if(ambCtx&&S.ambient==="dest"){kapka(ambCtx);naplanujKapku();}
+  },700+Math.random()*2300);
 }
 function destStop(){
   if(ambPtaciTO){clearTimeout(ambPtaciTO);ambPtaciTO=null;}
+  if(ambKapkyTO){clearTimeout(ambKapkyTO);ambKapkyTO=null;}
   ambUzly.forEach(function(u){try{u.stop?u.stop():u.disconnect()}catch(e){}});
   ambUzly=[];
 }
@@ -3570,20 +3589,26 @@ function destStart(typ){
   const c=ambAc();if(!c)return;
   if(c.state==="suspended")c.resume();
   if(typ==="dest"){
-    const s=c.createBufferSource(),f=c.createBiquadFilter(),g=c.createGain();
-    s.buffer=sumBuffer(c,4);s.loop=true;
-    f.type="lowpass";f.frequency.value=1500;
-    g.gain.value=0.13;
-    s.connect(f);f.connect(g);g.connect(c.destination);s.start();
-    ambUzly.push(s,g);
+    // skutečný tichý déšť = vysoký jemný šelest bez basů
+    const s=c.createBufferSource(),hp=c.createBiquadFilter(),lp=c.createBiquadFilter(),g=c.createGain();
+    s.buffer=sumBuffer(c,4,0);s.loop=true;
+    hp.type="highpass";hp.frequency.value=900;   // uřízne dunění, které znělo jako bouřka
+    lp.type="lowpass";lp.frequency.value=5200;   // a srovná ostré syčení
+    g.gain.value=0.035;
+    const lfo=c.createOscillator(),lg=c.createGain();
+    lfo.frequency.value=0.07;lg.gain.value=0.012; // sotva znatelné vlnění, jako když se déšť nadechne
+    lfo.connect(lg);lg.connect(g.gain);lfo.start();
+    s.connect(hp);hp.connect(lp);lp.connect(g);g.connect(c.destination);s.start();
+    ambUzly.push(s,g,lfo);
+    naplanujKapku();
   }else if(typ==="les"){
     // vítr ve stromech: hluboko filtrovaný šum s pomalým vlněním hlasitosti
     const s=c.createBufferSource(),f=c.createBiquadFilter(),g=c.createGain();
     s.buffer=sumBuffer(c,4);s.loop=true;
-    f.type="lowpass";f.frequency.value=550;
-    g.gain.value=0.10;
+    f.type="lowpass";f.frequency.value=480;
+    g.gain.value=0.055;
     const lfo=c.createOscillator(),lg=c.createGain();
-    lfo.frequency.value=0.13;lg.gain.value=0.05;
+    lfo.frequency.value=0.11;lg.gain.value=0.028;
     lfo.connect(lg);lg.connect(g.gain);lfo.start();
     s.connect(f);f.connect(g);g.connect(c.destination);s.start();
     ambUzly.push(s,g,lfo);
