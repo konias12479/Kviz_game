@@ -2331,7 +2331,10 @@ const BGM_START=23; // přeskočení tichého úvodu skladby
 let bgAudio=new Audio("initial.mp3");
 bgAudio.volume=0.12; // podkres (−30 %)
 bgAudio.addEventListener("loadedmetadata",()=>{try{bgAudio.currentTime=BGM_START}catch(e){}});
-bgAudio.addEventListener("ended",()=>{bgAudio.currentTime=BGM_START;bgAudio.play().catch(()=>{});}); // smyčka od 13 s
+bgAudio.addEventListener("ended",()=>{ // smyčka — ale ne ve Verunce
+  const vo=document.getElementById("vOverlay");
+  if(vo&&vo.classList.contains("show"))return;
+  bgAudio.currentTime=BGM_START;bgAudio.play().catch(()=>{});});
 let vlastniAudio=new Audio("vlastni-otazky.mp3"); // hudba jen pro mód Moje otázky
 vlastniAudio.volume=0.084;vlastniAudio.loop=true; // při hře tišší
 let hraAudio=new Audio("hra.mp3"); // hudba během hraní (ostatní módy)
@@ -2539,6 +2542,11 @@ border:1px solid rgba(255,216,77,.3);border-radius:11px;padding:12px;margin:14px
     <div><b id="stDone">0</b><span>vyřešených úloh</span></div>
     <div><b id="stOk">0 %</b><span>úspěšnost</span></div>
     <div><b id="stDays">–</b><span>dní do zkoušky</span></div>
+  </div>
+  <div style="display:flex;gap:7px;margin-bottom:12px">
+    <button class="btn sec" style="flex:1;padding:9px;font-size:12.5px;margin:0" id="ambTicho" onclick="setAmbient('ticho')">🔇 Ticho</button>
+    <button class="btn sec" style="flex:1;padding:9px;font-size:12.5px;margin:0" id="ambDest" onclick="setAmbient('dest')">🌧️ Tichý déšť</button>
+    <button class="btn sec" style="flex:1;padding:9px;font-size:12.5px;margin:0" id="ambLes" onclick="setAmbient('les')">🌲 Les</button>
   </div>
   <button class="card" onclick="go('rocnik')" style="border-color:rgba(127,227,255,.4)">
     <b>🎓 <span id="mnRocnik"></span></b>
@@ -5709,6 +5717,7 @@ function renderMenu(){
   $("stDone").textContent=S.total||0;
   $("stOk").textContent=(S.total?Math.round(100*S.ok/S.total):0)+" %";
   if($("mnRocnik"))$("mnRocnik").textContent=ROCPOPIS[rocnik()];
+  kresliAmbient();
   const IK={"Čeština":"✍️","Matematika":"📐"};
   let h="";
   ["Čeština","Matematika"].forEach(function(p){
@@ -5929,6 +5938,86 @@ function dalsiUloha(){
   }
   ui++;renderUloha();go("uloha");
 }
+/* ================= ZVUKOVÉ POZADÍ PRO UČENÍ ================= */
+/* Tichý déšť nebo les s ptáčky — generované, žádné soubory ke stažení. */
+let ambCtx=null,ambUzly=[],ambPtaciTO=null;
+function ambAc(){try{ambCtx=ambCtx||new (window.AudioContext||window.webkitAudioContext)();return ambCtx;}catch(e){return null;}}
+function sumBuffer(c,sek){ // jemný šum s náhodnou procházkou (zní měkčeji než bílý)
+  const b=c.createBuffer(1,c.sampleRate*sek,c.sampleRate),d=b.getChannelData(0);
+  let v=0;
+  for(let i=0;i<d.length;i++){v=v*0.98+(Math.random()*2-1)*0.05;d[i]=v*3;}
+  return b;
+}
+function destStop(){
+  if(ambPtaciTO){clearTimeout(ambPtaciTO);ambPtaciTO=null;}
+  ambUzly.forEach(function(u){try{u.stop?u.stop():u.disconnect()}catch(e){}});
+  ambUzly=[];
+}
+window.destStop=destStop;
+function destStart(typ){
+  destStop();
+  const c=ambAc();if(!c)return;
+  if(c.state==="suspended")c.resume();
+  if(typ==="dest"){
+    const s=c.createBufferSource(),f=c.createBiquadFilter(),g=c.createGain();
+    s.buffer=sumBuffer(c,4);s.loop=true;
+    f.type="lowpass";f.frequency.value=1500;
+    g.gain.value=0.13;
+    s.connect(f);f.connect(g);g.connect(c.destination);s.start();
+    ambUzly.push(s,g);
+  }else if(typ==="les"){
+    // vítr ve stromech: hluboko filtrovaný šum s pomalým vlněním hlasitosti
+    const s=c.createBufferSource(),f=c.createBiquadFilter(),g=c.createGain();
+    s.buffer=sumBuffer(c,4);s.loop=true;
+    f.type="lowpass";f.frequency.value=550;
+    g.gain.value=0.10;
+    const lfo=c.createOscillator(),lg=c.createGain();
+    lfo.frequency.value=0.13;lg.gain.value=0.05;
+    lfo.connect(lg);lg.connect(g.gain);lfo.start();
+    s.connect(f);f.connect(g);g.connect(c.destination);s.start();
+    ambUzly.push(s,g,lfo);
+    naplanujPtaka();
+  }
+}
+function naplanujPtaka(){ // občasné zacvrlikání
+  ambPtaciTO=setTimeout(function(){
+    const c=ambCtx;
+    if(c&&(S.ambient==="les")){
+      const t=c.currentTime;
+      for(let k=0;k<2+Math.floor(Math.random()*3);k++){
+        const o=c.createOscillator(),g=c.createGain();
+        const f0=2200+Math.random()*1800,t0=t+k*0.14+Math.random()*0.05;
+        o.type="sine";
+        o.frequency.setValueAtTime(f0,t0);
+        o.frequency.exponentialRampToValueAtTime(f0*(1.25+Math.random()*0.3),t0+0.06);
+        o.frequency.exponentialRampToValueAtTime(f0*0.9,t0+0.12);
+        g.gain.setValueAtTime(0.0001,t0);
+        g.gain.exponentialRampToValueAtTime(0.05,t0+0.02);
+        g.gain.exponentialRampToValueAtTime(0.0001,t0+0.13);
+        o.connect(g);g.connect(c.destination);o.start(t0);o.stop(t0+0.15);
+      }
+      naplanujPtaka();
+    }
+  },2500+Math.random()*6500);
+}
+function setAmbient(typ){
+  S.ambient=typ;save();
+  if(typ==="ticho")destStop();else destStart(typ);
+  kresliAmbient();
+}
+function kresliAmbient(){
+  const akt=S.ambient||"ticho";
+  [["ambTicho","ticho"],["ambDest","dest"],["ambLes","les"]].forEach(function(p){
+    const b=$(p[0]);if(!b)return;
+    b.style.borderColor=akt===p[1]?"rgba(127,227,255,.8)":"rgba(244,241,232,.35)";
+    b.style.background=akt===p[1]?"rgba(127,227,255,.14)":"none";
+  });
+}
+// po návratu do aplikace stačí jedno klepnutí kamkoli a zvolené pozadí naběhne
+document.addEventListener("click",function(){
+  if((S.ambient==="dest"||S.ambient==="les")&&ambUzly.length===0)destStart(S.ambient);
+},true);
+
 /* ================= TŘÍDA SE ZVUKY UČITELE ================= */
 /* Atmosféra ostré zkoušky: učitel občas něco prohodí, zavržou dveře,
    někdo si odkašle. Jen v testech načisto a jde kdykoli vypnout. */
@@ -6319,6 +6408,7 @@ function openVerunka(){
 function closeVerunka(){
   $("vOverlay").classList.remove("show");
   $("vClose").style.display="none";
+  try{const w=$("vFrame").contentWindow;if(w&&w.destStop)w.destStop();}catch(e){}  // ztlumit déšť ve Verunce
   tryMusic();
 }
 $("verunkaBtn").addEventListener("click",openVerunka);
