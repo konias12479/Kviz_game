@@ -2361,6 +2361,8 @@ function showEnterOverlay(){ // prohlížeč blokuje zvuk do prvního kliknutí 
 }
 function tryMusic(first){
   if(!musicWanted)return;
+  const vo=document.getElementById("vOverlay");
+  if(vo&&vo.classList.contains("show"))return;   // ve Verunce se učí, žádná hudba
   const want=currentTrack();
   ALL_TRACKS.forEach(a=>{if(a!==want&&!a.paused)a.pause();});
   if(want.paused){
@@ -6311,6 +6313,7 @@ function openVerunka(){
   $("vOverlay").classList.add("show");
   $("vClose").style.display="block";
   ALL_TRACKS.forEach(a=>{if(!a.paused)a.pause()});   // učení bez herní hudby
+  const eo=document.getElementById("enterOv");if(eo)eo.remove();  // uvítací brána by hudbu spustila
   document.body.style.overflow="hidden";
 }
 function closeVerunka(){
