@@ -72,6 +72,12 @@ border-radius:12px;padding:14px;color:var(--chalk);font-family:inherit;font-size
 text-align:center;letter-spacing:.5px}
 input[type=text]:focus{outline:none;border-color:var(--gold)}
 .hintline{font-size:12px;color:var(--chalk-dim);text-align:center;margin-top:7px}
+.klav{display:flex;flex-wrap:wrap;gap:6px;justify-content:center;margin-top:9px}
+.klav button{background:rgba(127,227,255,.12);border:1px solid rgba(127,227,255,.42);
+border-radius:9px;min-width:44px;padding:9px 10px;color:var(--chalk);font-family:inherit;
+font-size:16px;font-weight:700;cursor:pointer;line-height:1}
+.klav button:active{background:rgba(127,227,255,.28)}
+.klav button.sm{font-size:13px;min-width:52px}
 /* ===== HLAVIČKA ÚLOHY ===== */
 .qhead{display:flex;justify-content:space-between;align-items:center;font-size:12.5px;
 color:var(--chalk-dim);margin-bottom:10px}
@@ -2624,13 +2630,59 @@ function renderUloha(){
     document.querySelectorAll("#ulAns .ans").forEach(b=>b.addEventListener("click",()=>volba(+b.dataset.i)));
   }else{
     $("ulAns").innerHTML='<input type="text" id="ulIn" inputmode="text" autocomplete="off" placeholder="sem napiš výsledek">'
-      +'<div class="hintline">Stačí samotné číslo, například 6 nebo 30</div>'
+      +(O.predmet==="Matematika"?klavesnice("ulIn"):"")
+      +'<div class="hintline">Nezáleží na mezerách. Můžeš psát x² i x^2, desetinné číslo i zlomek.</div>'
       +'<button class="btn" id="ulChk">'+(S.rychly?"Zkontrolovat a pokračovat ⏩":"Zkontrolovat")+'</button>';
     $("ulChk").addEventListener("click",kontrola);
     $("ulIn").addEventListener("keydown",e=>{if(e.key==="Enter")kontrola()});
   }
 }
-function norm(s){return String(s).toLowerCase().trim().replace(/\s+/g,"").replace(/,/g,".").replace(/^x=/,"").replace(/(cm|minut|min)$/,"");}
+/* Odpověď se dá napsat všelijak — sjednotíme zápis, ať Verunku netrápí,
+   jestli napsala x^2 nebo x², 0,5 nebo 1/2, s mezerou nebo bez. */
+function norm(s){
+  let t=String(s).toLowerCase().trim();
+  t=t.replace(/[−–—]/g,"-");                 // různé druhy pomlček
+  t=t.replace(/[·×]/g,"*");                  // znaky násobení
+  t=t.replace(/²/g,"^2").replace(/³/g,"^3"); // horní indexy
+  t=t.replace(/√/g,"odm");                   // odmocnina
+  t=t.replace(/\s+/g,"");
+  t=t.replace(/,/g,".");
+  t=t.replace(/^[xy]=/,"");
+  t=t.replace(/(cm\^?[23]|m\^?[23]|dm\^?[23]|cm|mm|km|dm|kč|minut|min|hodin|litr[ůyu]?|stupňů|°|%)$/,"");
+  t=t.replace(/\*/g,"");                     // 3*a i 3a berem stejně
+  return t;
+}
+function cislo(t){
+  if(/^-?\d+(\.\d+)?$/.test(t))return parseFloat(t);
+  const m=t.match(/^(-?\d+(?:\.\d+)?)\/(\d+(?:\.\d+)?)$/);
+  if(m&&parseFloat(m[2])!==0)return parseFloat(m[1])/parseFloat(m[2]);
+  return null;
+}
+function stejne(a,b){                        // 0,5 = 1/2 = .5
+  const na=norm(a),nb=norm(b);
+  if(na===nb)return true;
+  const ca=cislo(na),cb=cislo(nb);
+  return (ca!==null&&cb!==null)&&Math.abs(ca-cb)<1e-9;
+}
+function klavesnice(idInput){
+  const zn=["²","³","√","π","(",")","/","-"];
+  return '<div class="klav">'
+    +zn.map(function(z){return '<button type="button" onclick="vloz(\''+idInput+'\',\''+z+'\')">'+z+'</button>';}).join("")
+    +'<button type="button" class="sm" onclick="smaz(\''+idInput+'\')">⌫ smazat</button></div>';
+}
+function vloz(id,znak){
+  const el=$(id);if(!el)return;
+  const s=el.selectionStart==null?el.value.length:el.selectionStart;
+  const e=el.selectionEnd==null?el.value.length:el.selectionEnd;
+  el.value=el.value.slice(0,s)+znak+el.value.slice(e);
+  el.focus();
+  try{el.setSelectionRange(s+znak.length,s+znak.length)}catch(x){}
+  el.dispatchEvent(new Event("input"));
+}
+function smaz(id){
+  const el=$(id);if(!el)return;
+  el.value="";el.focus();el.dispatchEvent(new Event("input"));
+}
 function zapis(spravne){
   if(odpovezeno)return;odpovezeno=true;
   const d=S.done[O.id]||(S.done[O.id]=[]);
@@ -2648,7 +2700,7 @@ function kontrola(){
   if(odpovezeno)return;
   const u=O.ulohy[ui],v=$("ulIn").value;
   if(!v.trim()){$("ulIn").focus();return;}
-  hotovo(norm(v)===norm(u.odp));
+  hotovo(stejne(v,u.odp));
 }
 function hotovo(spravne){
   zapis(spravne);
@@ -2769,7 +2821,8 @@ function renderTestUloha(){
     });
   }else{
     $("tsAns").innerHTML='<input type="text" id="tsIn" autocomplete="off" placeholder="sem napiš výsledek" value="'+(dosud==null?"":String(dosud).replace(/"/g,"&quot;"))+'">'
-      +'<div class="hintline">Stačí samotný výsledek, například 6 nebo 30</div>';
+      +(t.predmet==="Matematika"?klavesnice("tsIn"):"")
+      +'<div class="hintline">Nezáleží na mezerách. Můžeš psát x² i x^2, desetinné číslo i zlomek.</div>';
     $("tsIn").addEventListener("input",function(){T.odp[T.i]=$("tsIn").value;});
     $("tsIn").addEventListener("keydown",function(e){if(e.key==="Enter")testDal(false);});
   }
@@ -2789,7 +2842,7 @@ function testUkoncit(){
 function spravneT(u,odp){
   if(odp==null)return false;
   if(u.typ==="choice")return odp===u.spr;
-  return norm(odp)===norm(u.odp);
+  return stejne(odp,u.odp);
 }
 function vyhodnotit(vyprselCas){
   if(T.tik){clearInterval(T.tik);T.tik=null;}
