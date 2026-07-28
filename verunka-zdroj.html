@@ -158,13 +158,17 @@ border:1px solid rgba(255,216,77,.3);border-radius:11px;padding:12px;margin:14px
     <b>🎓 <span id="mnRocnik"></span></b>
     <span>Klepni, pokud se hlásíš jinam — učivo i testy se tomu přizpůsobí.</span>
   </button>
-  <button class="card" onclick="openTesty()" style="border-color:rgba(255,216,77,.45)">
-    <b>📝 Zkušební testy</b>
-    <span>V podmínkách ostré zkoušky — na čas, na body, s rozborem na konci.</span>
-  </button>
   <div id="okruhy"></div>
   <button class="btn sec" onclick="resetProgress()">Vynulovat postup</button>
   <div class="foot">© 2026 Petr Poslušný — všechna práva vyhrazena</div>
+</div>
+
+<!-- ===== VÝUKA JEDNOHO PŘEDMĚTU ===== -->
+<div class="screen" id="s-vyuka">
+  <h1 id="vyNadpis"></h1>
+  <div class="sub">Ke každému okruhu je výklad na tabuli a k němu úlohy s rozepsaným postupem.</div>
+  <div id="vyukaList"></div>
+  <button class="btn sec" onclick="go('menu')">← Zpět</button>
 </div>
 
 <!-- ===== KAM SE HLÁSÍ ===== -->
@@ -187,15 +191,9 @@ border:1px solid rgba(255,216,77,.3);border-radius:11px;padding:12px;margin:14px
 
 <!-- ===== SEZNAM TESTŮ ===== -->
 <div class="screen" id="s-testy">
-  <h1>📝 Zkušební testy</h1>
-  <div class="sub">Stejná stavba jako u ostré zkoušky — počet úloh, body i čas. Úlohy jsou původní, napsané podle formátu z minulých let.</div>
-  <div style="font-size:13px;letter-spacing:1.4px;text-transform:uppercase;color:var(--pink);font-weight:800;margin:4px 0 4px">🧑‍🏫 S vysvětlením</div>
-  <div class="sub" style="margin-bottom:10px">Bez časomíry. Po každé odpovědi se hned dozvíš, jestli je správně, a můžeš si nechat rozepsat postup na tabuli. Tudy začni, když test píšeš poprvé.</div>
-  <div id="testyUcebni"></div>
-
-  <div style="font-size:13px;letter-spacing:1.4px;text-transform:uppercase;color:var(--pink);font-weight:800;margin:24px 0 4px">🎯 Načisto</div>
-  <div class="sub" style="margin-bottom:10px">Na čas a bez nápovědy, přesně jako u ostré zkoušky. Správnost i body se dozvíš až po odevzdání — pak si projdeš rozbor všech úloh.</div>
-  <div id="testyOstre"></div>
+  <h1 id="tyNadpis"></h1>
+  <div class="sub" id="tyPopis"></div>
+  <div id="testyList"></div>
 
   <div style="font-size:13px;font-weight:700;margin:22px 0 8px">📄 Ostré testy z minulých let přímo od CERMATu</div>
   <div class="upoz">Tyhle testy si nesmím zkopírovat k sobě do aplikace — CERMAT to dovoluje jen školám zapsaným v rejstříku MŠMT. Odkazovat na ně ale smí kdokoli, a stáhnout a vytisknout si je pro sebe taky. Tak si je otevři u zdroje.</div>
@@ -215,7 +213,7 @@ border:1px solid rgba(255,216,77,.3);border-radius:11px;padding:12px;margin:14px
     <b>🗓️ Termíny a přihlášky</b>
     <span>Kdy se podávají přihlášky, kdy jsou řádné a náhradní termíny, jak se počítají výsledky.</span></a>
 
-  <button class="btn sec" onclick="go('menu')">← Zpět na okruhy</button>
+  <button class="btn sec" onclick="go('menu')">← Zpět</button>
 </div>
 
 <!-- ===== BĚŽÍCÍ TEST ===== -->
@@ -253,7 +251,7 @@ border:1px solid rgba(255,216,77,.3);border-radius:11px;padding:12px;margin:14px
   <div style="font-size:13px;font-weight:700;margin:16px 0 8px">Rozbor úloh — klepni na kteroukoli a ukáže se postup</div>
   <div id="vyList"></div>
   <button class="btn cy" onclick="startTest(T.idx,T.uc)">Zkusit test znovu</button>
-  <button class="btn sec" onclick="openTesty()">← Zpět na testy</button>
+  <button class="btn sec" onclick="openTesty(T.t.predmet,T.uc)">← Zpět na testy</button>
 </div>
 
 <!-- ===== VÝBĚR REŽIMU ===== -->
@@ -268,7 +266,7 @@ border:1px solid rgba(255,216,77,.3);border-radius:11px;padding:12px;margin:14px
     <b>✏️ Chci to zkusit</b>
     <span>Jdeš rovnou na úlohy. Po odpovědi si můžeš nechat ukázat postup na tabuli — nebo rovnou pokračovat dál. Když látku umíš, zapni si u úloh ⏩ rychlý režim a poletíš.</span>
   </button>
-  <button class="btn sec" onclick="go('menu')">← Zpět na okruhy</button>
+  <button class="btn sec" onclick="go('menu')">← Zpět</button>
 </div>
 
 <!-- ===== VÝKLAD ===== -->
@@ -2619,25 +2617,41 @@ function renderMenu(){
   $("stDone").textContent=S.total||0;
   $("stOk").textContent=(S.total?Math.round(100*S.ok/S.total):0)+" %";
   if($("mnRocnik"))$("mnRocnik").textContent=ROCPOPIS[rocnik()];
+  const IK={"Čeština":"✍️","Matematika":"📐"};
   let h="";
-  const VID=DATA.map((o,i)=>({o,i})).filter(x=>proRocnik(x.o));
-  const predmety=[];
-  VID.forEach(x=>{if(!predmety.includes(x.o.predmet))predmety.push(x.o.predmet)});
-  predmety.forEach(p=>{
-    const sk=VID.filter(x=>x.o.predmet===p);
-    const hot=sk.reduce((a,x)=>a+(S.done[x.o.id]||[]).length,0);
-    const cel=sk.reduce((a,x)=>a+x.o.ulohy.length,0);
-    h+='<div style="font-size:13px;letter-spacing:1.5px;text-transform:uppercase;color:var(--pink);font-weight:800;margin:18px 0 9px">'
-      +p+' <span style="opacity:.6;font-weight:600;letter-spacing:0;text-transform:none">· '+sk.length+' okruhů, '+hot+'/'+cel+' úloh</span></div>';
-    sk.forEach(function(x){
-      const o=x.o,i=x.i,d=(S.done[o.id]||[]).length,c=o.ulohy.length,pr=Math.round(100*d/c);
-      h+='<button class="card" onclick="otevri('+i+')"><b>'+o.ikona+' '+o.nazev+'</b><span>'+o.popis+'</span>'
-        +'<div class="bar"><i style="width:'+pr+'%"></i></div>'
-        +'<span style="display:block;margin-top:6px;font-size:11.5px">'+d+' z '+c+' úloh hotovo · '+o.vyklad.length+' stran výkladu</span></button>';
-    });
+  ["Čeština","Matematika"].forEach(function(p){
+    const ok=DATA.filter(function(o){return o.predmet===p&&proRocnik(o);});
+    const te=TESTY.filter(function(t){return t.predmet===p&&proRocnik(t);});
+    const hot=ok.reduce(function(a,o){return a+(S.done[o.id]||[]).length;},0);
+    const cel=ok.reduce(function(a,o){return a+o.ulohy.length;},0);
+    h+='<div style="font-size:15px;letter-spacing:1.5px;text-transform:uppercase;color:var(--pink);font-weight:800;margin:22px 0 10px">'
+      +IK[p]+" "+p+'</div>';
+    h+='<button class="card" onclick="openTesty(\''+p+'\',false)" style="border-color:rgba(255,216,77,.45)">'
+      +'<b>🎯 Testy načisto</b><span>Na čas a bez nápovědy, přesně jako u ostré zkoušky. Body se dozvíš až po odevzdání — a pak si u každé úlohy můžeš nechat rozepsat, proč a jak.</span>'
+      +'<span style="display:block;margin-top:6px;font-size:11.5px">'+(te.length?te.length+" testů":"zatím žádný test")+'</span></button>';
+    h+='<button class="card" onclick="openTesty(\''+p+'\',true)" style="border-color:rgba(127,227,255,.4)">'
+      +'<b>🧑‍🏫 Testy s vysvětlením</b><span>Bez časomíry. Po každé odpovědi se hned dozvíš, jestli je správně, a rovnou si můžeš nechat ukázat postup na tabuli.</span>'
+      +'<span style="display:block;margin-top:6px;font-size:11.5px">'+(te.length?te.length+" testů":"zatím žádný test")+'</span></button>';
+    h+='<button class="card" onclick="openVyuka(\''+p+'\')" style="border-color:rgba(255,138,209,.4)">'
+      +'<b>📚 Výuka</b><span>Výklad na tabuli po okruzích a k němu úlohy s rozepsaným postupem. Sem se vracej, když něčemu nerozumíš.</span>'
+      +'<span style="display:block;margin-top:6px;font-size:11.5px">'+ok.length+" okruhů · "+hot+" z "+cel+' úloh hotovo</span></button>';
   });
-  if(rocnik()!==9)h+='<div class="upoz" style="margin-top:16px">Pro tuhle variantu mám zatím jen okruhy, které se s devátou třídou překrývají. Vyhrazené učivo i testy k ní teprve chystám — zatím koukni na oficiální zadání CERMATu v sekci testů.</div>';
+  if(rocnik()!==9)h+='<div class="upoz" style="margin-top:18px">Pro tuhle variantu mám zatím jen to, co se s devátou třídou překrývá. Vyhrazené učivo i testy k ní teprve chystám — zatím koukni na oficiální zadání CERMATu v sekci testů.</div>';
   $("okruhy").innerHTML=h;
+}
+function openVyuka(p){
+  const IK={"Čeština":"✍️","Matematika":"📐"};
+  $("vyNadpis").textContent=IK[p]+" "+p+" — výuka";
+  let h="";
+  DATA.forEach(function(o,i){
+    if(o.predmet!==p||!proRocnik(o))return;
+    const d=(S.done[o.id]||[]).length,c=o.ulohy.length,pr=Math.round(100*d/c);
+    h+='<button class="card" onclick="otevri('+i+')"><b>'+o.ikona+' '+o.nazev+'</b><span>'+o.popis+'</span>'
+      +'<div class="bar"><i style="width:'+pr+'%"></i></div>'
+      +'<span style="display:block;margin-top:6px;font-size:11.5px">'+d+' z '+c+' úloh hotovo · '+o.vyklad.length+' stran výkladu</span></button>';
+  });
+  $("vyukaList").innerHTML=h||'<div class="upoz">Pro tuhle variantu zkoušky tady zatím okruhy nemám.</div>';
+  go("vyuka");
 }
 function otevri(i){O=DATA[i];$("rzName").textContent=O.ikona+" "+O.nazev;$("rzPopis").textContent=O.popis;go("rezim");}
 function resetProgress(){if(confirm("Opravdu vynulovat všechen postup?")){S={done:{},ok:0,total:0};save();renderMenu();}}
@@ -2822,21 +2836,26 @@ function dalsiUloha(){
 /* ================= ZKUŠEBNÍ TESTY ================= */
 let T=null;
 function dvojcif(n){return (n<10?"0":"")+n;}
-function openTesty(){
+function openTesty(p,ucebni){
   if(T&&T.tik){clearInterval(T.tik);T.tik=null;}
-  const vid=TESTY.map(function(t,i){return {t:t,i:i};}).filter(function(x){return proRocnik(x.t);});
-  function karta(x,ucebni){
-    const t=x.t,r=(S.testy||{})[t.id];
-    return '<button class="card" onclick="startTest('+x.i+','+(ucebni?"true":"false")+')">'
+  const IK={"Čeština":"✍️","Matematika":"📐"};
+  T={predmet:p,uc:!!ucebni};
+  $("tyNadpis").textContent=IK[p]+" "+p+(ucebni?" — testy s vysvětlením":" — testy načisto");
+  $("tyPopis").textContent=ucebni
+    ? "Bez časomíry. Po každé odpovědi se hned dozvíš, jestli je správně, a můžeš si nechat rozepsat postup na tabuli. Tudy začni, když test píšeš poprvé."
+    : "Na čas a bez nápovědy, stejná stavba jako u ostré zkoušky. Body se dozvíš až po odevzdání a pak si u každé úlohy můžeš nechat vysvětlit, proč a jak.";
+  let h="";
+  TESTY.forEach(function(t,i){
+    if(t.predmet!==p||!proRocnik(t))return;
+    const r=(S.testy||{})[t.id];
+    h+='<button class="card" onclick="startTest('+i+','+(ucebni?"true":"false")+')">'
       +'<b>'+t.ikona+' '+t.nazev+'</b><span>'+t.popis+'</span>'
       +'<span style="display:block;margin-top:7px;font-size:11.5px">'
       +(ucebni?"Bez časomíry, vysvětlení po každé úloze."
               :(r?("Nejlepší výsledek: "+r.body+" z "+t.body+" bodů ("+Math.round(100*r.body/t.body)+" %)"):"Zatím nepsáno načisto"))
       +'</span></button>';
-  }
-  const prazdno='<div class="upoz">Pro tuhle variantu zkoušky ještě testy nemám. Ostrá zadání z minulých let ale najdeš níž přímo u CERMATu.</div>';
-  $("testyUcebni").innerHTML=vid.length?vid.map(function(x){return karta(x,true);}).join(""):prazdno;
-  $("testyOstre").innerHTML=vid.length?vid.map(function(x){return karta(x,false);}).join(""):"";
+  });
+  $("testyList").innerHTML=h||'<div class="upoz">Pro tuhle variantu zkoušky tady zatím testy nemám. Ostrá zadání z minulých let ale najdeš níž přímo u CERMATu.</div>';
   go("testy");
 }
 function startTest(i,ucebni){
