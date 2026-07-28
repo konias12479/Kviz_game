@@ -1,9 +1,9 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-"""Vloží obsah verunka.html do Irca-vs-kalkulator.html jako izolovaný srcdoc rámec.
-   verunka.html zůstává zdrojem pravdy — po každé úpravě spusť tenhle skript znovu."""
+"""Vloží obsah verunka-zdroj.html do Irca-vs-kalkulator.html jako izolovaný srcdoc rámec.
+   verunka-zdroj.html zůstává zdrojem pravdy — po každé úpravě spusť tenhle skript znovu."""
 import re,sys,os
-HRA="Irca-vs-kalkulator.html"; VER="verunka.html"
+HRA="Irca-vs-kalkulator.html"; VER="verunka-zdroj.html"
 ZAC="/* ==== VERUNKA-START (generováno skriptem slouc-verunku.py — needituj ručně) ==== */"
 KON="/* ==== VERUNKA-KONEC ==== */"
 

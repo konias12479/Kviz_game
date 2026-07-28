@@ -5348,6 +5348,11 @@ function closeVerunka(){
   tryMusic();
 }
 $("verunkaBtn").addEventListener("click",openVerunka);
+// odkaz .../Irca-vs-kalkulator.html#verunka otevře rovnou přípravu na přijímačky
+if(location.hash==="#verunka")setTimeout(openVerunka,0);
+$("vClose").addEventListener("click",function(){
+  if(location.hash==="#verunka"){try{history.replaceState(null,"",location.pathname)}catch(e){}}
+});
 $("vClose").addEventListener("click",closeVerunka);
 
 /* ===== OVLÁDACÍ PANEL ⚙️ BĚHEM HRY ===== */
