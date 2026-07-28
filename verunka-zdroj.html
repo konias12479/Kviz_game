@@ -160,6 +160,7 @@ border:1px solid rgba(255,216,77,.3);border-radius:11px;padding:12px;margin:14px
   <div style="text-align:center;margin:16px 0 14px;font-size:clamp(19px,2.6vw,26px);font-weight:800;
     letter-spacing:.4px;color:var(--gold);text-shadow:0 0 12px rgba(255,216,77,.35)">
     „Nebojím se. Jdu do toho.“</div>
+  <button class="btn sec" id="klidBtn" onclick="prepniKlid()" style="padding:9px;font-size:12.5px;margin:0 0 12px"></button>
   <button class="card" onclick="go('rocnik')" style="border-color:rgba(127,227,255,.4)">
     <b>🎓 <span id="mnRocnik"></span></b>
     <span>Klepni, pokud se hlásíš jinam — učivo i testy se tomu přizpůsobí.</span>
@@ -3329,6 +3330,7 @@ function renderMenu(){
   $("stDone").textContent=S.total||0;
   $("stOk").textContent=(S.total?Math.round(100*S.ok/S.total):0)+" %";
   if($("mnRocnik"))$("mnRocnik").textContent=ROCPOPIS[rocnik()];
+  kresliKlid();
   const IK={"Čeština":"✍️","Matematika":"📐"};
   let h='<div class="predmety">';
   ["Čeština","Matematika"].forEach(function(p){
@@ -3552,6 +3554,66 @@ function dalsiUloha(){
   }
   ui++;renderUloha();go("uloha");
 }
+/* ================= KLIDNÁ HUDBA NA POZADÍ =================
+   Pomalé měkké akordy laděné od A = 432 Hz. Čisté tóny umí syntéza
+   dobře — na rozdíl od deště. Tichounké, jen jako podkres. */
+let klidCtx=null,klidUzly=[],klidTO=null,klidBezi=false;
+const KLID_AKORDY=[            // frekvence od A=432: F dur, A moll, C dur, G dur
+ [171.44,216.00,257.22],
+ [216.00,257.22,324.09],
+ [128.61,162.04,192.86],
+ [192.86,242.99,288.33]
+];
+let klidKrok=0;
+function klidAc(){try{klidCtx=klidCtx||new (window.AudioContext||window.webkitAudioContext)();return klidCtx;}catch(e){return null;}}
+function klidAkord(){
+  const c=klidCtx;if(!c||!klidBezi)return;
+  const t=c.currentTime,akord=KLID_AKORDY[klidKrok%KLID_AKORDY.length];
+  klidKrok++;
+  akord.forEach(function(f,i){
+    [0,-1.5].forEach(function(rozladeni){       // dvě lehce rozladěné vrstvy = teplý zvuk
+      const o=c.createOscillator(),g=c.createGain(),lp=c.createBiquadFilter();
+      o.type=i===0?"triangle":"sine";
+      o.frequency.value=f+rozladeni*0.4;
+      lp.type="lowpass";lp.frequency.value=900;
+      g.gain.setValueAtTime(0.0001,t);
+      g.gain.linearRampToValueAtTime(0.022,t+4);   // pomalý nástup
+      g.gain.linearRampToValueAtTime(0.018,t+9);
+      g.gain.linearRampToValueAtTime(0.0001,t+14); // a pomalé doznění
+      o.connect(lp);lp.connect(g);g.connect(c.destination);
+      o.start(t);o.stop(t+14.5);
+      klidUzly.push(o);
+    });
+  });
+  klidTO=setTimeout(klidAkord,11000);              // akordy se plynule překrývají
+}
+function klidStart(){
+  const c=klidAc();if(!c)return;
+  if(c.state==="suspended")c.resume();
+  klidBezi=true;klidKrok=0;klidAkord();
+}
+function klidStop(){
+  klidBezi=false;
+  if(klidTO){clearTimeout(klidTO);klidTO=null;}
+  klidUzly.forEach(function(o){try{o.stop()}catch(e){}});
+  klidUzly=[];
+}
+window.destStop=klidStop;                          // ať ji hra umí ztlumit při odchodu
+function prepniKlid(){
+  S.klid=!S.klid;save();
+  if(S.klid)klidStart();else klidStop();
+  kresliKlid();
+}
+function kresliKlid(){
+  const b=$("klidBtn");if(!b)return;
+  b.textContent=S.klid?"🎵 Klidná hudba (432 Hz): hraje — klepni pro ticho":"🎵 Klidná hudba (432 Hz): vypnutá";
+  b.style.borderColor=S.klid?"rgba(127,227,255,.7)":"rgba(244,241,232,.35)";
+}
+// po novém otevření naběhne po prvním klepnutí (prohlížeč nedovolí spustit sám)
+document.addEventListener("click",function(){
+  if(S.klid&&!klidBezi)klidStart();
+},true);
+
 /* ================= TŘÍDA SE ZVUKY UČITELE ================= */
 /* Atmosféra ostré zkoušky: učitel občas něco prohodí, zavržou dveře,
    někdo si odkašle. Jen v testech načisto a jde kdykoli vypnout. */
