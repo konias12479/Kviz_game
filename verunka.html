@@ -108,6 +108,13 @@ color:var(--chalk);font-family:inherit;font-size:13.5px;text-align:left;cursor:p
 .trow .zn.no{background:rgba(255,128,128,.22);color:var(--red)}
 .trow .tx{flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .trow .bd{flex:0 0 auto;font-size:12px;color:var(--chalk-dim);font-weight:700}
+.odkaz{display:block;background:rgba(255,255,255,.055);border:1px solid rgba(244,241,232,.16);
+border-radius:12px;padding:12px 14px;margin-bottom:8px;color:var(--chalk);text-decoration:none}
+.odkaz:hover{background:rgba(255,255,255,.1)}
+.odkaz b{display:block;font-size:14.5px;margin-bottom:2px}
+.odkaz span{font-size:12px;color:var(--chalk-dim);line-height:1.45}
+.upoz{font-size:12.5px;line-height:1.6;background:rgba(255,216,77,.08);
+border:1px solid rgba(255,216,77,.3);border-radius:11px;padding:12px;margin:14px 0}
 .stat{display:flex;gap:9px;margin-bottom:14px}
 .stat div{flex:1;background:rgba(255,255,255,.06);border-radius:11px;padding:9px;text-align:center}
 .stat b{display:block;font-size:19px;color:var(--gold)}
@@ -140,6 +147,25 @@ color:var(--chalk);font-family:inherit;font-size:13.5px;text-align:left;cursor:p
   <h1>📝 Zkušební testy</h1>
   <div class="sub">Stejná stavba jako u ostré zkoušky — počet úloh, body i čas. Úlohy jsou původní, napsané podle formátu z minulých let.</div>
   <div id="testyList"></div>
+
+  <div style="font-size:13px;font-weight:700;margin:22px 0 8px">📄 Ostré testy z minulých let přímo od CERMATu</div>
+  <div class="upoz">Tyhle testy si nesmím zkopírovat k sobě do aplikace — CERMAT to dovoluje jen školám zapsaným v rejstříku MŠMT. Odkazovat na ně ale smí kdokoli, a stáhnout a vytisknout si je pro sebe taky. Tak si je otevři u zdroje.</div>
+  <a class="odkaz" href="https://procvicprijimacky.cermat.cz" target="_blank" rel="noopener">
+    <b>🖥️ Procvičování testů přímo od CERMATu</b>
+    <span>Oficiální aplikace, kde si projdeš ostré testy z minulých let na počítači i v mobilu. Vyhodnotí se samo.</span></a>
+  <a class="odkaz" href="https://prijimacky.cermat.cz/menu/testova-zadani-k-procvicovani/testova-zadani-v-pdf/ctyrlete-obory-matematika" target="_blank" rel="noopener">
+    <b>📐 Matematika — všechna zadání a klíče</b>
+    <span>Čtyřleté obory a nástavbová studia, roky 2015 až 2026. U novějších jsou i vzorová řešení krok za krokem.</span></a>
+  <a class="odkaz" href="https://prijimacky.cermat.cz/menu/testova-zadani-k-procvicovani/testova-zadani-v-pdf/ctyrlete-obory-cesky-jazyk-a-literatura" target="_blank" rel="noopener">
+    <b>✍️ Čeština — všechna zadání a klíče</b>
+    <span>Čtyřleté obory a nástavbová studia, stejné roky. Ke každému testu záznamový arch i klíč správných řešení.</span></a>
+  <a class="odkaz" href="https://prijimacky.cermat.cz/menu/specifikace-pozadavku-k-jpz" target="_blank" rel="noopener">
+    <b>📋 Specifikace požadavků</b>
+    <span>Co všechno se u zkoušky může objevit. Podle tohohle dokumentu jsem stavěl okruhy v aplikaci.</span></a>
+  <a class="odkaz" href="https://prijimacky.cermat.cz/menu/jednotna-prijimaci-zkouska" target="_blank" rel="noopener">
+    <b>🗓️ Termíny a přihlášky</b>
+    <span>Kdy se podávají přihlášky, kdy jsou řádné a náhradní termíny, jak se počítají výsledky.</span></a>
+
   <button class="btn sec" onclick="go('menu')">← Zpět na okruhy</button>
 </div>
 
