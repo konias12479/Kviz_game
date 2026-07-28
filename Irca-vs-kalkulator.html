@@ -299,13 +299,9 @@
   </div>
   <div class="modes">
     <button class="mode" data-mode="klasik"><span class="ic">🏆</span><div><b>Klasická hra</b><span>20 otázek od rozcvičky po zabijáky. Přežiješ všechny?</span></div></button>
-    <button class="mode" data-mode="duel"><span class="ic">⚡</span><div><b>Rychlý duel</b><span>60 sekund. Kolik toho stihneš?</span></div></button>
-    <button class="mode" data-mode="kalkulator"><span class="ic">🧮</span><div><b>Kalkulátor mód</b><span>Jen tříhvězdičkové otázky. Dvojnásobné XP.</span></div></button>
-    <button class="mode" data-mode="legendy"><span class="ic">🇨🇿</span><div><b>České legendy</b><span>Česká kultura, filmy, historie a sport. Bez lehkých otázek.</span></div></button>
-    <button class="mode" data-mode="irca"><span class="ic">👩</span><div><b>Otázky Irča</b><span>Otázky ke zkouškám — načtou se samy ze souboru.</span></div></button>
     <button class="mode" data-mode="adelka"><span class="ic">🧪</span><div><b>Adélka škola</b><span>Aplikovaná chemie, 2. ročník — vyber si okruh.</span></div></button>
     <button class="mode" id="verunkaBtn"><span class="ic">📐</span><div><b>Verunka — přijímačky</b><span>Učení s tabulí. Matematika a čeština na zkoušku 2027.</span></div></button>
-    <button class="mode" data-mode="tata"><span class="ic">👨</span><div><b>Pro Tátu</b></div></button>
+    <button class="mode" data-mode="tata"><span class="ic">👨</span><div><b>Ruda to nevzdá!</b><span>Osečany, Žatecký pluk, srpen 1968 a Praha za normalizace.</span></div></button>
   </div>
   <button class="soundtoggle" id="soundBtn">🔊 Zvuk: zapnutý</button>
   <button class="soundtoggle" id="voiceBtn">🗣️ Hlas Kalkulátora: zapnutý</button>
@@ -1878,7 +1874,7 @@ const MODES={
   adelka:{name:"Adélka škola",time:15,xpMult:1},
   irca:{name:"Otázky Irča",time:15,xpMult:1},
   ucit:{name:"Pojď se učit",time:20,xpMult:1},
-  tata:{name:"Pro Tátu",time:30,xpMult:1}
+  tata:{name:"Ruda to nevzdá!",time:30,xpMult:1}
 };
 /* ===== KALKULÁTORKA: na mobilu a tabletu (kde bývá jen ženský hlas) ===== */
 const KOSTYMY=["k-studio","k-lab","k-retro"]; // uniforma je vyhrazená módu Pro Tátu
@@ -1937,7 +1933,7 @@ function startGame(mode){
     return;
   }
   if(mode==="tata"&&!QUESTIONS.some(x=>x.k==="Pro Tátu")){
-    alert("Otázky „Pro Tátu“ se načítají ze souboru pro-tatu.txt vedle hry — na webu se načtou samy.");
+    alert("Otázky pro Rudu se načítají ze souboru pro-tatu.txt vedle hry — na webu se načtou samy.");
     return;
   }
   const c=ac(); if(c&&c.state==="suspended")c.resume();
