@@ -220,6 +220,7 @@ border:1px solid rgba(255,216,77,.3);border-radius:11px;padding:12px;margin:14px
 <div class="screen" id="s-test">
   <div class="qhead"><span id="tsNazev"></span><span class="pill">⏱ <span class="tcas" id="tsCas">00:00</span></span></div>
   <div class="tprogress"><i id="tsBar"></i></div>
+  <button class="btn sec" id="tsTrida" onclick="prepniTridu()" style="display:none;padding:8px;font-size:12.5px;margin:0 0 10px"></button>
   <div class="board">
     <div class="chalkline">📝</div>
     <div class="tag" id="tsPoc">Úloha</div>
@@ -247,10 +248,11 @@ border:1px solid rgba(255,216,77,.3);border-radius:11px;padding:12px;margin:14px
       <div><span class="tznam" id="vyZnam"></span></div>
     </div>
     <div class="bx" id="vySlovo" style="text-align:center;font-size:15px"></div>
+    <div id="vySrov"></div>
   </div>
   <div style="font-size:13px;font-weight:700;margin:16px 0 8px">Rozbor úloh — klepni na kteroukoli a ukáže se postup</div>
   <div id="vyList"></div>
-  <button class="btn cy" onclick="startTest(T.idx,T.uc)">Zkusit test znovu</button>
+  <button class="btn cy" onclick="if(T.zab)startZab();else startTest(T.idx,T.uc)">Zkusit znovu</button>
   <button class="btn sec" onclick="openTesty(T.t.predmet,T.uc)">← Zpět na testy</button>
 </div>
 
@@ -3340,6 +3342,10 @@ function renderMenu(){
       +'<b>📚 Výuka</b><span>Výklad na tabuli po okruzích a k němu úlohy s rozepsaným postupem. Sem se vracej, když něčemu nerozumíš.</span>'
       +'<span style="display:block;margin-top:6px;font-size:11.5px">'+ok.length+" okruhů · "+hot+" z "+cel+' úloh hotovo</span></button>';
   });
+  h+='<div style="font-size:15px;letter-spacing:1.5px;text-transform:uppercase;color:var(--pink);font-weight:800;margin:22px 0 10px">💀 Výzva</div>';
+  h+='<button class="card" onclick="startZab()" style="border-color:rgba(255,128,128,.45)">'
+    +'<b>💀 Zabijáci</b><span>Osm nejtěžších úloh napříč testy, dvanáct minut, žádná nápověda. Pokaždé jiný výběr.</span>'
+    +'<span style="display:block;margin-top:6px;font-size:11.5px">'+(S.zabRek?("Tvůj rekord: "+S.zabRek+" bodů"):"Zatím bez rekordu")+'</span></button>';
   if(rocnik()!==9)h+='<div class="upoz" style="margin-top:18px">Pro tuhle variantu mám zatím jen to, co se s devátou třídou překrývá. Vyhrazené učivo i testy k ní teprve chystám — zatím koukni na oficiální zadání CERMATu v sekci testů.</div>';
   $("okruhy").innerHTML=h;
 }
@@ -3537,6 +3543,106 @@ function dalsiUloha(){
   }
   ui++;renderUloha();go("uloha");
 }
+/* ================= TŘÍDA SE ZVUKY UČITELE ================= */
+/* Atmosféra ostré zkoušky: učitel občas něco prohodí, zavržou dveře,
+   někdo si odkašle. Jen v testech načisto a jde kdykoli vypnout. */
+const UCITEL=[
+ "Ticho vzadu! Píšeme.",
+ "Nekoukej sousedovi do testu!",
+ "Ty tam! Ty máš tahák? … Tak nic. Pokračuj.",
+ "Ještě jedno slovo a jsi vyloučen! … Dělám si legraci. Piš.",
+ "Kdo bude vyrušovat, půjde za dveře.",
+ "Kontroluji čas… pokračujte.",
+ "Propisky připravené? Píše se propiskou, ne tužkou!",
+ "Neťukej tou propiskou, prosím tě.",
+ "Jestli uslyším šeptání, píšeme všichni znovu.",
+ "Klid. Soustřeďte se."
+];
+let tridaCtx=null;
+function tridaAc(){try{tridaCtx=tridaCtx||new (window.AudioContext||window.webkitAudioContext)();return tridaCtx;}catch(e){return null;}}
+function zvukDvere(){ // zavrzání dveří: klouzavý pískot dolů
+  const c=tridaAc();if(!c)return;
+  const o=c.createOscillator(),g=c.createGain();
+  o.type="sawtooth";o.frequency.setValueAtTime(340,c.currentTime);
+  o.frequency.exponentialRampToValueAtTime(95,c.currentTime+0.8);
+  g.gain.setValueAtTime(0.0001,c.currentTime);
+  g.gain.exponentialRampToValueAtTime(0.06,c.currentTime+0.1);
+  g.gain.exponentialRampToValueAtTime(0.0001,c.currentTime+0.85);
+  o.connect(g);g.connect(c.destination);o.start();o.stop(c.currentTime+0.9);
+}
+function zvukKasel(){ // dvojí odkašlání: krátké šumové rázy
+  const c=tridaAc();if(!c)return;
+  for(let k=0;k<2;k++){
+    const t=c.currentTime+k*0.28;
+    const b=c.createBuffer(1,c.sampleRate*0.12,c.sampleRate),d=b.getChannelData(0);
+    for(let i=0;i<d.length;i++)d[i]=(Math.random()*2-1)*(1-i/d.length);
+    const s=c.createBufferSource(),f=c.createBiquadFilter(),g=c.createGain();
+    f.type="lowpass";f.frequency.value=900;g.gain.value=0.14;
+    s.buffer=b;s.connect(f);f.connect(g);g.connect(c.destination);s.start(t);
+  }
+}
+function mluvUcitel(txt){
+  if(!window.speechSynthesis)return;
+  try{
+    const u=new SpeechSynthesisUtterance(txt);
+    u.lang="cs-CZ";u.rate=1.0;u.pitch=0.9;u.volume=.9;
+    const v=(speechSynthesis.getVoices()||[]).find(x=>x.lang&&/^cs/i.test(x.lang));
+    if(v)u.voice=v;
+    speechSynthesis.speak(u);
+  }catch(e){}
+}
+function tridaUdalost(){
+  const r=Math.random();
+  if(r<0.55)mluvUcitel(UCITEL[Math.floor(Math.random()*UCITEL.length)]);
+  else if(r<0.78)zvukDvere();
+  else zvukKasel();
+}
+function tridaPlan(){ // další událost za 50–120 sekund
+  if(!T||T.uc||!S.trida)return;
+  T.tridaTO=setTimeout(function(){
+    if(!T||T.uc||!S.trida)return;
+    tridaUdalost();tridaPlan();
+  },50000+Math.random()*70000);
+}
+function tridaStop(){
+  if(T&&T.tridaTO){clearTimeout(T.tridaTO);T.tridaTO=null;}
+  if(window.speechSynthesis)try{speechSynthesis.cancel()}catch(e){}
+}
+function prepniTridu(){
+  S.trida=!S.trida;save();kresliTridu();
+  tridaStop();
+  if(S.trida){mluvUcitel("Píšeme. A ticho.");tridaPlan();}
+}
+function kresliTridu(){
+  const b=$("tsTrida");if(!b)return;
+  b.style.display=(T&&!T.uc)?"block":"none";
+  b.textContent=S.trida?"🏫 Třída: zapnutá — učitel hlídá, dveře vržou":"🏫 Třída: vypnutá — klepni a piš jako ve škole";
+}
+
+/* ================= ZABIJÁCI — výzva z nejtěžších úloh ================= */
+function startZab(){
+  const tezke=[];
+  TESTY.forEach(function(t){
+    if(!proRocnik(t))return;
+    t.ulohy.forEach(function(u){if(u.b>=4)tezke.push(u);});
+  });
+  if(tezke.length<5){alert("Zatím tu není dost těžkých úloh.");return;}
+  // zamíchat a vzít osm
+  const kopie=tezke.slice();
+  for(let i=kopie.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));const p=kopie[i];kopie[i]=kopie[j];kopie[j]=p;}
+  const vyber=kopie.slice(0,8);
+  const t={id:"zab",predmet:"Výzva",ikona:"💀",nazev:"Zabijáci",
+    cas:12,body:vyber.reduce(function(a,u){return a+u.b;},0),
+    popis:"Osm nejtěžších úloh, dvanáct minut.",ulohy:vyber};
+  T={idx:-1,t:t,i:0,odp:new Array(8).fill(null),zbyva:t.cas*60,tik:null,uc:false,zab:true,zkontrolovano:false};
+  T.tik=setInterval(function(){
+    T.zbyva--;kresliCas();
+    if(T.zbyva<=0){clearInterval(T.tik);T.tik=null;vyhodnotit(true);}
+  },1000);
+  renderTestUloha();
+  go("test");
+}
+
 /* ================= ZKUŠEBNÍ TESTY ================= */
 let T=null;
 function dvojcif(n){return (n<10?"0":"")+n;}
@@ -3569,8 +3675,12 @@ function startTest(i,ucebni){
   if(!T.uc){   // v učebním režimu čas neběží, ať je klid na vysvětlení
     T.tik=setInterval(function(){
       T.zbyva--;kresliCas();
+      if(S.trida&&T.zbyva===600)mluvUcitel("Zbývá deset minut.");
+      if(S.trida&&T.zbyva===60)mluvUcitel("Poslední minuta. Dopisujte.");
       if(T.zbyva<=0){clearInterval(T.tik);T.tik=null;vyhodnotit(true);}
     },1000);
+    if(S.trida){mluvUcitel("Máte před sebou test. Pište.");}
+    tridaPlan();
   }
   renderTestUloha();
   go("test");
@@ -3592,6 +3702,7 @@ function renderTestUloha(){
   T.zkontrolovano=false;
   $("tsFb").innerHTML="";$("tsShow").style.display="none";
   $("tsSkip").style.display=T.uc?"none":"block";
+  kresliTridu();
   $("tsCas").parentNode.style.display=T.uc?"none":"";
   kresliCas();
   const dosud=T.odp[T.i];
@@ -3659,16 +3770,52 @@ function spravneT(u,odp){
   if(u.typ==="choice")return odp===u.spr;
   return stejne(odp,u.odp);
 }
+/* Skutečné průměry uchazečů — JPZ 2025, čtyřleté obory (zdroj: CERMAT/MŠMT).
+   Čeština 60,2 %, matematika 43,9 %; podle typu školy gymnázia 75/61,
+   SOŠ 59/43, maturitní obory učilišť 50/35. */
+const SROVNANI={
+ "Čeština":   {prumer:60.2,gym:75,sos:59,ucil:50},
+ "Matematika":{prumer:43.9,gym:61,sos:43,ucil:35}
+};
+function srovnaniHTML(predmet,pct){
+  const d=SROVNANI[predmet];if(!d)return "";
+  let verdikt;
+  if(pct>=d.gym)verdikt="Tohle je nad průměrem uchazečů o čtyřletá gymnázia. Paráda!";
+  else if(pct>=d.prumer)verdikt="Jsi nad celkovým průměrem skutečných uchazečů.";
+  else if(pct>=d.ucil)verdikt="Držíš krok s uchazeči o maturitní obory učilišť — a je kam růst.";
+  else verdikt="Zatím pod průměrem skutečných uchazečů — ale od toho trénink je.";
+  const radek=function(n,v){
+    const ty=pct>=v;
+    return '<div style="display:flex;align-items:center;gap:8px;margin:5px 0;font-size:13px">'
+      +'<span style="flex:0 0 172px">'+n+'</span>'
+      +'<span style="flex:1;height:8px;border-radius:4px;background:rgba(255,255,255,.12);overflow:hidden">'
+      +'<i style="display:block;height:100%;width:'+Math.min(100,v)+'%;background:'+(ty?"rgba(110,231,160,.55)":"rgba(255,216,77,.55)")+'"></i></span>'
+      +'<b style="flex:0 0 44px;text-align:right">'+v+' %</b></div>';
+  };
+  return '<div style="margin-top:16px;padding:13px;border-radius:11px;background:rgba(255,255,255,.05);border:1px solid rgba(244,241,232,.16)">'
+    +'<div style="font-weight:800;font-size:13.5px;margin-bottom:7px">📊 Srovnání se skutečnými uchazeči (JPZ 2025)</div>'
+    +radek("Ty teď",Math.round(pct))
+    +radek("Průměr všech uchazečů",d.prumer)
+    +radek("Uchazeči o gymnázia",d.gym)
+    +radek("Uchazeči o SOŠ",d.sos)
+    +radek("Maturitní obory učilišť",d.ucil)
+    +'<div style="font-size:12.5px;margin-top:8px;opacity:.9">'+verdikt+'</div>'
+    +'<div style="font-size:10.5px;margin-top:6px;opacity:.55">Průměry z ostrého termínu 2025, čtyřleté obory. Zdroj: CERMAT.</div></div>';
+}
 function vyhodnotit(vyprselCas){
   if(T.tik){clearInterval(T.tik);T.tik=null;}
+  tridaStop();
+  if(S.trida&&!T.uc)setTimeout(function(){mluvUcitel("Konec. Odevzdejte testy.");},400);
   const t=T.t;
   let body=0;
   t.ulohy.forEach(function(u,i){if(spravneT(u,T.odp[i]))body+=u.b;});
   T.body=body;
-  if(!S.testy)S.testy={};
-  const st=S.testy[t.id];
-  if(!st||body>st.body)S.testy[t.id]={body:body,celkem:t.body};
-  save();
+  if(!T.zab){
+    if(!S.testy)S.testy={};
+    const st=S.testy[t.id];
+    if(!st||body>st.body)S.testy[t.id]={body:body,celkem:t.body};
+    save();
+  }
   const pct=Math.round(100*body/t.body);
   $("vyNazev").textContent=t.ikona+" "+t.nazev;
   const spotr=t.cas*60-Math.max(0,T.zbyva);
@@ -3682,6 +3829,14 @@ function vyhodnotit(vyprselCas){
   else{zn="zatím málo";barva="rgba(255,128,128,.18);color:#ff8080";slovo="Nevěš hlavu, času je dost. Nejdřív projdi výklad v okruzích, pak zkus test znovu.";}
   $("vyZnam").textContent=zn;$("vyZnam").setAttribute("style","background:"+barva);
   $("vySlovo").textContent=(vyprselCas?"Vypršel čas — vyhodnotil jsem, cos stihla. ":"")+slovo;
+  // srovnání se skutečnými lidmi jen po ostrém testu pro devítku
+  $("vySrov").innerHTML=(!T.uc&&rocnik()===9&&!T.zab)?srovnaniHTML(t.predmet,pct):"";
+  if(T.zab){
+    const st=S.zabRek||0;
+    if(body>st){S.zabRek=body;save();}
+    $("vySrov").innerHTML='<div class="upoz" style="margin-top:14px">💀 Zabijáci: tvůj rekord je <b>'+Math.max(body,st)+' bodů</b>'
+      +(body>st?' — a právě jsi ho vylepšila!':' (teď '+body+').')+'</div>';
+  }
   let hh="";
   t.ulohy.forEach(function(u,i){
     const ok=spravneT(u,T.odp[i]);
