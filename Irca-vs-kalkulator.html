@@ -281,7 +281,7 @@
   <div class="beam m" style="left:86%;animation-delay:-1s"></div>
 </div>
 <div class="flash" id="flash"></div>
-<div id="vOverlay"><iframe id="vFrame" title="Verunka — příprava na přijímačky"></iframe></div>
+<div id="vOverlay"><iframe id="vFrame" allow="autoplay" title="Verunka — příprava na přijímačky"></iframe></div>
 <button id="vClose" style="display:none">← Zpět do hry</button>
 
 <!-- ============ MENU ============ -->
@@ -5947,34 +5947,44 @@ function dalsiUloha(){
    Pomalé měkké akordy laděné od A = 432 Hz. Čisté tóny umí syntéza
    dobře — na rozdíl od deště. Tichounké, jen jako podkres. */
 let klidCtx=null,klidUzly=[],klidTO=null,klidBezi=false;
-const KLID_AKORDY=[            // frekvence od A=432: F dur, A moll, C dur, G dur
- [171.44,216.00,257.22],
- [216.00,257.22,324.09],
- [128.61,162.04,192.86],
- [192.86,242.99,288.33]
+const KLID_AKORDY=[   // o oktávu výš — hluboké tóny malé reproduktory nepřehrají
+ [342.88,432.00,514.44],
+ [432.00,514.44,648.18],
+ [257.22,324.09,385.71],
+ [385.71,485.98,576.65]
 ];
 let klidKrok=0;
 function klidAc(){try{klidCtx=klidCtx||new (window.AudioContext||window.webkitAudioContext)();return klidCtx;}catch(e){return null;}}
 function klidAkord(){
   const c=klidCtx;if(!c||!klidBezi)return;
   const t=c.currentTime,akord=KLID_AKORDY[klidKrok%KLID_AKORDY.length];
+  const prvni=klidKrok===0;
   klidKrok++;
   akord.forEach(function(f,i){
     [0,-1.5].forEach(function(rozladeni){       // dvě lehce rozladěné vrstvy = teplý zvuk
       const o=c.createOscillator(),g=c.createGain(),lp=c.createBiquadFilter();
       o.type=i===0?"triangle":"sine";
-      o.frequency.value=f+rozladeni*0.4;
-      lp.type="lowpass";lp.frequency.value=900;
+      o.frequency.value=f+rozladeni*0.5;
+      lp.type="lowpass";lp.frequency.value=2400;
+      const nastup=prvni?1.2:4;                  // první akord naskočí rychle, ať je slyšet odezva
       g.gain.setValueAtTime(0.0001,t);
-      g.gain.linearRampToValueAtTime(0.022,t+4);   // pomalý nástup
-      g.gain.linearRampToValueAtTime(0.018,t+9);
-      g.gain.linearRampToValueAtTime(0.0001,t+14); // a pomalé doznění
+      g.gain.linearRampToValueAtTime(0.055,t+nastup);
+      g.gain.linearRampToValueAtTime(0.045,t+9);
+      g.gain.linearRampToValueAtTime(0.0001,t+14);
       o.connect(lp);lp.connect(g);g.connect(c.destination);
       o.start(t);o.stop(t+14.5);
       klidUzly.push(o);
     });
   });
-  klidTO=setTimeout(klidAkord,11000);              // akordy se plynule překrývají
+  // jemný zvonek nahoře, aby melodie žila
+  const z=c.createOscillator(),zg=c.createGain();
+  z.type="sine";z.frequency.value=akord[2]*2;
+  zg.gain.setValueAtTime(0.0001,t+1);
+  zg.gain.exponentialRampToValueAtTime(0.035,t+1.15);
+  zg.gain.exponentialRampToValueAtTime(0.0001,t+4.5);
+  z.connect(zg);zg.connect(c.destination);z.start(t+1);z.stop(t+5);
+  klidUzly.push(z);
+  klidTO=setTimeout(klidAkord,11000);            // akordy se plynule překrývají
 }
 function klidStart(){
   const c=klidAc();if(!c)return;
