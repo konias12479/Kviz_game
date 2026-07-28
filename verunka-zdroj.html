@@ -154,6 +154,10 @@ border:1px solid rgba(255,216,77,.3);border-radius:11px;padding:12px;margin:14px
     <div><b id="stOk">0 %</b><span>úspěšnost</span></div>
     <div><b id="stDays">–</b><span>dní do zkoušky</span></div>
   </div>
+  <button class="card" onclick="go('rocnik')" style="border-color:rgba(127,227,255,.4)">
+    <b>🎓 <span id="mnRocnik"></span></b>
+    <span>Klepni, pokud se hlásíš jinam — učivo i testy se tomu přizpůsobí.</span>
+  </button>
   <button class="card" onclick="openTesty()" style="border-color:rgba(255,216,77,.45)">
     <b>📝 Zkušební testy</b>
     <span>V podmínkách ostré zkoušky — na čas, na body, s rozborem na konci.</span>
@@ -163,11 +167,35 @@ border:1px solid rgba(255,216,77,.3);border-radius:11px;padding:12px;margin:14px
   <div class="foot">© 2026 Petr Poslušný — všechna práva vyhrazena</div>
 </div>
 
+<!-- ===== KAM SE HLÁSÍ ===== -->
+<div class="screen" id="s-rocnik">
+  <h1>📐 Kam se hlásíš?</h1>
+  <div class="sub">Podle toho se liší učivo i podoba testů. CERMAT dělá tři různé varianty zkoušky.</div>
+  <button class="card" onclick="setRocnik(9)">
+    <b>Po 9. třídě — čtyřleté obory</b>
+    <span>Střední školy a gymnázia s maturitou, včetně učebních oborů zakončených maturitou. Nejrozšířenější varianta. Matematika 16 úloh / 70 minut, čeština 30 úloh / 60 minut.</span>
+  </button>
+  <button class="card" onclick="setRocnik(7)">
+    <b>Po 7. třídě — šestiletá gymnázia</b>
+    <span>Učivo do sedmé třídy: celá čísla, poměr, procenta, trojúhelníky a čtyřúhelníky.</span>
+  </button>
+  <button class="card" onclick="setRocnik(5)">
+    <b>Po 5. třídě — osmiletá gymnázia</b>
+    <span>Učivo prvního stupně: zlomky, desetinná čísla, obvody a obsahy, slovní úlohy úsudkem.</span>
+  </button>
+</div>
+
 <!-- ===== SEZNAM TESTŮ ===== -->
 <div class="screen" id="s-testy">
   <h1>📝 Zkušební testy</h1>
   <div class="sub">Stejná stavba jako u ostré zkoušky — počet úloh, body i čas. Úlohy jsou původní, napsané podle formátu z minulých let.</div>
-  <div id="testyList"></div>
+  <div style="font-size:13px;letter-spacing:1.4px;text-transform:uppercase;color:var(--pink);font-weight:800;margin:4px 0 4px">🧑‍🏫 S vysvětlením</div>
+  <div class="sub" style="margin-bottom:10px">Bez časomíry. Po každé odpovědi se hned dozvíš, jestli je správně, a můžeš si nechat rozepsat postup na tabuli. Tudy začni, když test píšeš poprvé.</div>
+  <div id="testyUcebni"></div>
+
+  <div style="font-size:13px;letter-spacing:1.4px;text-transform:uppercase;color:var(--pink);font-weight:800;margin:24px 0 4px">🎯 Načisto</div>
+  <div class="sub" style="margin-bottom:10px">Na čas a bez nápovědy, přesně jako u ostré zkoušky. Správnost i body se dozvíš až po odevzdání — pak si projdeš rozbor všech úloh.</div>
+  <div id="testyOstre"></div>
 
   <div style="font-size:13px;font-weight:700;margin:22px 0 8px">📄 Ostré testy z minulých let přímo od CERMATu</div>
   <div class="upoz">Tyhle testy si nesmím zkopírovat k sobě do aplikace — CERMAT to dovoluje jen školám zapsaným v rejstříku MŠMT. Odkazovat na ně ale smí kdokoli, a stáhnout a vytisknout si je pro sebe taky. Tak si je otevři u zdroje.</div>
@@ -188,21 +216,6 @@ border:1px solid rgba(255,216,77,.3);border-radius:11px;padding:12px;margin:14px
     <span>Kdy se podávají přihlášky, kdy jsou řádné a náhradní termíny, jak se počítají výsledky.</span></a>
 
   <button class="btn sec" onclick="go('menu')">← Zpět na okruhy</button>
-</div>
-
-<!-- ===== JAK CHCE TEST PSÁT ===== -->
-<div class="screen" id="s-testrezim">
-  <h1 id="trNazev"></h1>
-  <div class="sub" id="trPopis"></div>
-  <button class="card" onclick="startTest(T.idx,false)">
-    <b>🎯 Načisto</b>
-    <span>Na čas a bez nápovědy, přesně jako u ostré zkoušky. Správnost se dozvíš až po odevzdání, pak si projdeš rozbor všech úloh. Tohle je nejlepší zkouška nervů před ostrým termínem.</span>
-  </button>
-  <button class="card" onclick="startTest(T.idx,true)">
-    <b>🧑‍🏫 S vysvětlením</b>
-    <span>Bez časomíry. Po každé odpovědi se hned dozvíš, jestli je správně, a můžeš si nechat rozepsat postup na tabuli. Tudy začni, když test píšeš poprvé — pak si ho dej načisto.</span>
-  </button>
-  <button class="btn sec" onclick="openTesty()">← Zpět na testy</button>
 </div>
 
 <!-- ===== BĚŽÍCÍ TEST ===== -->
@@ -239,7 +252,7 @@ border:1px solid rgba(255,216,77,.3);border-radius:11px;padding:12px;margin:14px
   </div>
   <div style="font-size:13px;font-weight:700;margin:16px 0 8px">Rozbor úloh — klepni na kteroukoli a ukáže se postup</div>
   <div id="vyList"></div>
-  <button class="btn cy" onclick="otevriTest(T.idx)">Zkusit test znovu</button>
+  <button class="btn cy" onclick="startTest(T.idx,T.uc)">Zkusit test znovu</button>
   <button class="btn sec" onclick="openTesty()">← Zpět na testy</button>
 </div>
 
@@ -314,7 +327,7 @@ const ZKOUSKA=new Date("2027-04-13"); // orientační termín JPZ 2027
 
 const DATA=[
 {
- id:"mat-rovnice", predmet:"Matematika", ikona:"🟰",
+ id:"mat-rovnice", roc:[9], predmet:"Matematika", ikona:"🟰",
  nazev:"Lineární rovnice",
  popis:"Ekvivalentní úpravy, závorky, zlomky, zkouška i slovní úlohy. Objevuje se skoro v každém testu.",
  vyklad:[
@@ -463,7 +476,7 @@ const DATA=[
  ]
 },
 {
- id:"cj-shoda", predmet:"Čeština", ikona:"✍️",
+ id:"cj-shoda", roc:[5,7,9], predmet:"Čeština", ikona:"✍️",
  nazev:"Shoda přísudku s podmětem",
  popis:"Kdy psát v příčestí -i, -y nebo -a. Nejčastější pravopisný jev v testu — a jeden z nejzrádnějších.",
  vyklad:[
@@ -615,7 +628,7 @@ const DATA=[
  ]
 },
 {
- id:"mat-vyrazy", predmet:"Matematika", ikona:"🔤",
+ id:"mat-vyrazy", roc:[9], predmet:"Matematika", ikona:"🔤",
  nazev:"Výrazy a mnohočleny",
  popis:"Roznásobování, vytýkání a tři vzorce, které musíš znát zpaměti. Bez toho se neobejdeš u rovnic ani u slovních úloh.",
  vyklad:[
@@ -692,7 +705,7 @@ const DATA=[
  ]
 },
 {
- id:"mat-mocniny", predmet:"Matematika", ikona:"²",
+ id:"mat-mocniny", roc:[9], predmet:"Matematika", ikona:"²",
  nazev:"Mocniny a odmocniny",
  popis:"Druhé mocniny do patnácti zpaměti, počítání s mocninami desíti a odmocňování. Bez kalkulačky.",
  vyklad:[
@@ -756,7 +769,7 @@ const DATA=[
  ]
 },
 {
- id:"mat-pomer", predmet:"Matematika", ikona:"⚖️",
+ id:"mat-pomer", roc:[7,9], predmet:"Matematika", ikona:"⚖️",
  nazev:"Poměr, úměrnost a měřítko",
  popis:"Trojčlenka, dělení v poměru, měřítko mapy a plánu. Základ skoro každé slovní úlohy.",
  vyklad:[
@@ -825,7 +838,7 @@ const DATA=[
  ]
 },
 {
- id:"mat-procenta", predmet:"Matematika", ikona:"％",
+ id:"mat-procenta", roc:[7,9], predmet:"Matematika", ikona:"％",
  nazev:"Procenta a finanční matematika",
  popis:"Základ, počet procent, procentová část. Slevy, zdražení, úroky a daň z úroku — přesně jak to chce test.",
  vyklad:[
@@ -893,7 +906,7 @@ const DATA=[
  ]
 },
 {
- id:"mat-soustavy", predmet:"Matematika", ikona:"⚌",
+ id:"mat-soustavy", roc:[9], predmet:"Matematika", ikona:"⚌",
  nazev:"Soustavy dvou rovnic",
  popis:"Dosazovací a sčítací metoda. Dvě neznámé, dvě rovnice — a slovní úlohy, kde se to hodí.",
  vyklad:[
@@ -962,7 +975,7 @@ const DATA=[
  ]
 },
 {
- id:"mat-pythagoras", predmet:"Matematika", ikona:"📐",
+ id:"mat-pythagoras", roc:[9], predmet:"Matematika", ikona:"📐",
  nazev:"Pythagorova věta",
  popis:"Výpočet stran pravoúhlého trojúhelníku, úhlopříčky v obdélníku, krychli i kvádru. V testu bývá každý rok.",
  vyklad:[
@@ -1037,7 +1050,7 @@ const DATA=[
  ]
 },
 {
- id:"mat-obsahy", predmet:"Matematika", ikona:"⬜",
+ id:"mat-obsahy", roc:[7,9], predmet:"Matematika", ikona:"⬜",
  nazev:"Obvody a obsahy rovinných útvarů",
  popis:"Trojúhelník, obdélník, lichoběžník a hlavně kruh. Včetně složených obrazců, které test miluje.",
  vyklad:[
@@ -1104,7 +1117,7 @@ const DATA=[
  ]
 },
 {
- id:"mat-telesa", predmet:"Matematika", ikona:"🧊",
+ id:"mat-telesa", roc:[7,9], predmet:"Matematika", ikona:"🧊",
  nazev:"Objemy a povrchy těles",
  popis:"Krychle, kvádr, válec, jehlan, kužel a koule. Vzorce i praktické úlohy s převody jednotek.",
  vyklad:[
@@ -1173,7 +1186,7 @@ const DATA=[
  ]
 },
 {
- id:"mat-funkce", predmet:"Matematika", ikona:"📈",
+ id:"mat-funkce", roc:[9], predmet:"Matematika", ikona:"📈",
  nazev:"Funkce, závislosti a grafy",
  popis:"Lineární funkce, čtení z grafu a tabulky, přímá i nepřímá úměrnost jako funkce.",
  vyklad:[
@@ -1244,7 +1257,7 @@ const DATA=[
  ]
 },
 {
- id:"mat-statistika", predmet:"Matematika", ikona:"📊",
+ id:"mat-statistika", roc:[7,9], predmet:"Matematika", ikona:"📊",
  nazev:"Statistika a práce s daty",
  popis:"Aritmetický průměr, četnost, medián a čtení z tabulek a diagramů. Bodově vděčná část testu.",
  vyklad:[
@@ -1307,7 +1320,7 @@ const DATA=[
  ]
 },
 {
- id:"mat-geometrie", predmet:"Matematika", ikona:"🧭",
+ id:"mat-geometrie", roc:[9], predmet:"Matematika", ikona:"🧭",
  nazev:"Konstrukce, kružnice a podobnost",
  popis:"Thaletova kružnice, osy, tečny, shodnost a podobnost trojúhelníků. Rýsovací část testu.",
  vyklad:[
@@ -1376,7 +1389,7 @@ const DATA=[
  ]
 },
 {
- id:"cj-vyjmenovana", predmet:"Čeština", ikona:"🅱️",
+ id:"cj-vyjmenovana", roc:[5,7,9], predmet:"Čeština", ikona:"🅱️",
  nazev:"Vyjmenovaná slova a i/y po obojetných",
  popis:"Kde psát tvrdé y a kde měkké i. Nejzákladnější pravopisný jev — a v testu bývá schovaný v delším textu.",
  vyklad:[
@@ -1451,7 +1464,7 @@ const DATA=[
  ]
 },
 {
- id:"cj-memne", predmet:"Čeština", ikona:"✏️",
+ id:"cj-memne", roc:[5,7,9], predmet:"Čeština", ikona:"✏️",
  nazev:"Mě / mně, s / z a předpony",
  popis:"Klasické chytáky: kdy mě a kdy mně, předpona s- nebo z-, předložky s a z. Test se na ně ptá skoro vždy.",
  vyklad:[
@@ -1517,7 +1530,7 @@ const DATA=[
  ]
 },
 {
- id:"cj-velkapismena", predmet:"Čeština", ikona:"🔠",
+ id:"cj-velkapismena", roc:[5,7,9], predmet:"Čeština", ikona:"🔠",
  nazev:"Velká písmena",
  popis:"Názvy měst, ulic, států, svátků a institucí. Pravidlo je jednodušší, než se zdá — jde o vlastní jméno.",
  vyklad:[
@@ -1580,7 +1593,7 @@ const DATA=[
  ]
 },
 {
- id:"cj-slovnidruhy", predmet:"Čeština", ikona:"🔟",
+ id:"cj-slovnidruhy", roc:[5,7,9], predmet:"Čeština", ikona:"🔟",
  nazev:"Slovní druhy",
  popis:"Deset druhů, poznávací otázky a slova, která se snadno pletou. Základ pro skladbu i tvarosloví.",
  vyklad:[
@@ -1642,7 +1655,7 @@ const DATA=[
  ]
 },
 {
- id:"cj-tvaroslovi", predmet:"Čeština", ikona:"🧩",
+ id:"cj-tvaroslovi", roc:[5,7,9], predmet:"Čeština", ikona:"🧩",
  nazev:"Tvarosloví — pády, vzory a slovesa",
  popis:"Sedm pádů, vzory podstatných jmen, osoba a čas u sloves. Testové otázky bývají přesně na tohle.",
  vyklad:[
@@ -1703,7 +1716,7 @@ const DATA=[
  ]
 },
 {
- id:"cj-skladba", predmet:"Čeština", ikona:"🌳",
+ id:"cj-skladba", roc:[7,9], predmet:"Čeština", ikona:"🌳",
  nazev:"Větné členy a skladba",
  popis:"Podmět, přísudek, předmět, přívlastek a příslovečné určení. Základní stavba věty.",
  vyklad:[
@@ -1768,7 +1781,7 @@ const DATA=[
  ]
 },
 {
- id:"cj-carky", predmet:"Čeština", ikona:"➰",
+ id:"cj-carky", roc:[7,9], predmet:"Čeština", ikona:"➰",
  nazev:"Souvětí a čárky",
  popis:"Kdy se píše čárka a kdy ne. Věta hlavní a vedlejší, spojky, oslovení a vsuvky.",
  vyklad:[
@@ -1838,7 +1851,7 @@ const DATA=[
  ]
 },
 {
- id:"cj-slovotvorba", predmet:"Čeština", ikona:"🧱",
+ id:"cj-slovotvorba", roc:[7,9], predmet:"Čeština", ikona:"🧱",
  nazev:"Stavba slova a slovotvorba",
  popis:"Kořen, předpona, přípona a koncovka. Jak slova vznikají a jak najít slova příbuzná.",
  vyklad:[
@@ -1902,7 +1915,7 @@ const DATA=[
  ]
 },
 {
- id:"cj-vyznam", predmet:"Čeština", ikona:"💭",
+ id:"cj-vyznam", roc:[7,9], predmet:"Čeština", ikona:"💭",
  nazev:"Význam slov a frazémy",
  popis:"Synonyma, antonyma, homonyma, přenesený význam a ustálená spojení. Test je má rád.",
  vyklad:[
@@ -1966,7 +1979,7 @@ const DATA=[
  ]
 },
 {
- id:"cj-text", predmet:"Čeština", ikona:"📖",
+ id:"cj-text", roc:[5,7,9], predmet:"Čeština", ikona:"📖",
  nazev:"Práce s textem",
  popis:"Čtenářská gramotnost — hlavní myšlenka, informace v textu, styl a záměr autora. Největší část testu.",
  vyklad:[
@@ -2041,7 +2054,7 @@ const DATA=[
  ]
 },
 {
- id:"cj-literatura", predmet:"Čeština", ikona:"🎭",
+ id:"cj-literatura", roc:[7,9], predmet:"Čeština", ikona:"🎭",
  nazev:"Literární pojmy",
  popis:"Druhy a žánry, poezie a próza, verš a rým, postava a vypravěč. Menší, ale bodovaná část testu.",
  vyklad:[
@@ -2107,7 +2120,7 @@ const DATA=[
    16 úloh / 50 bodů / 70 minut u matematiky, 30 úloh / 50 bodů / 60 minut u češtiny. */
 const TESTY=[
 {
- id:"mat1", predmet:"Matematika", ikona:"📐", nazev:"Matematika — test 1",
+ id:"mat1", roc:[9], predmet:"Matematika", ikona:"📐", nazev:"Matematika — test 1",
  cas:70, body:50, popis:"16 úloh, 50 bodů, 70 minut. Bez kalkulačky, jako u ostré zkoušky.",
  ulohy:[
   {q:"Vypočtěte:\n\n3,6 : 0,4 =",typ:"open",odp:"9",b:2,
@@ -2174,7 +2187,7 @@ const TESTY=[
  ]
 },
 {
- id:"mat2", predmet:"Matematika", ikona:"📐", nazev:"Matematika — test 2",
+ id:"mat2", roc:[9], predmet:"Matematika", ikona:"📐", nazev:"Matematika — test 2",
  cas:70, body:50, popis:"16 úloh, 50 bodů, 70 minut. Druhá sada, jiné úlohy i jiná témata.",
  ulohy:[
   {q:"Vypočtěte:\n\n(−4) · 7 + 30 =",typ:"open",odp:"2",b:2,
@@ -2246,7 +2259,7 @@ const TESTY=[
 }
 ,
 {
- id:"cj1", predmet:"Čeština", ikona:"✍️", nazev:"Čeština — test 1",
+ id:"cj1", roc:[9], predmet:"Čeština", ikona:"✍️", nazev:"Čeština — test 1",
  cas:60, body:50, popis:"30 úloh, 50 bodů, 60 minut. Pravopis, mluvnice i práce s textem.",
  ulohy:[
   {q:"Doplňte i/y:\n\nChlapci na dvoře hlasitě křičel__.",typ:"choice",moz:["křičeli","křičely"],spr:0,b:1,
@@ -2332,7 +2345,7 @@ const TESTY=[
  ]
 },
 {
- id:"cj2", predmet:"Čeština", ikona:"✍️", nazev:"Čeština — test 2",
+ id:"cj2", roc:[9], predmet:"Čeština", ikona:"✍️", nazev:"Čeština — test 2",
  cas:60, body:50, popis:"30 úloh, 50 bodů, 60 minut. Druhá sada s delší prací s textem.",
  ulohy:[
   {q:"Doplňte i/y:\n\nRybáři u řeky trpělivě seděl__.",typ:"choice",moz:["seděli","seděly"],spr:0,b:1,
@@ -2422,7 +2435,7 @@ const TESTY=[
 }
 ,
 {
- id:"mat2026A", predmet:"Matematika", ikona:"🎯", nazev:"Matematika — dvojník testu 2026",
+ id:"mat2026A", roc:[9], predmet:"Matematika", ikona:"🎯", nazev:"Matematika — dvojník testu 2026",
  cas:70, body:50,
  popis:"Postavený úloha po úloze podle ostrého testu z 1. řádného termínu 2026. Stejné typy, stejné body, jiná čísla a zadání.",
  ulohy:[
@@ -2576,6 +2589,11 @@ let S={done:{},ok:0,total:0};
 try{const s=localStorage.getItem("verunka_save");if(s)S=JSON.parse(s);}catch(e){}
 function save(){try{localStorage.setItem("verunka_save",JSON.stringify(S))}catch(e){}}
 let O=null,ui=0,vi=0,ki=0,odpovezeno=false;
+/* Kam se hlásí — podle toho se filtruje učivo i testy. */
+const ROCPOPIS={9:"Hlásím se po 9. třídě — čtyřleté obory",7:"Hlásím se po 7. třídě — šestiletá gymnázia",5:"Hlásím se po 5. třídě — osmiletá gymnázia"};
+function rocnik(){return S.rocnik||9;}
+function setRocnik(r){S.rocnik=r;save();renderMenu();go("menu");}
+function proRocnik(x){return !x.roc||x.roc.indexOf(rocnik())>=0;}
 // každý příklad na vlastní řádek s odsazením, ať se navzájem nelepí
 function radky(s){
   return String(s).split(/\n/).map(function(l){
@@ -2600,11 +2618,13 @@ function renderMenu(){
   $("stDays").textContent=dny;
   $("stDone").textContent=S.total||0;
   $("stOk").textContent=(S.total?Math.round(100*S.ok/S.total):0)+" %";
+  if($("mnRocnik"))$("mnRocnik").textContent=ROCPOPIS[rocnik()];
   let h="";
+  const VID=DATA.map((o,i)=>({o,i})).filter(x=>proRocnik(x.o));
   const predmety=[];
-  DATA.forEach(o=>{if(!predmety.includes(o.predmet))predmety.push(o.predmet)});
+  VID.forEach(x=>{if(!predmety.includes(x.o.predmet))predmety.push(x.o.predmet)});
   predmety.forEach(p=>{
-    const sk=DATA.map((o,i)=>({o,i})).filter(x=>x.o.predmet===p);
+    const sk=VID.filter(x=>x.o.predmet===p);
     const hot=sk.reduce((a,x)=>a+(S.done[x.o.id]||[]).length,0);
     const cel=sk.reduce((a,x)=>a+x.o.ulohy.length,0);
     h+='<div style="font-size:13px;letter-spacing:1.5px;text-transform:uppercase;color:var(--pink);font-weight:800;margin:18px 0 9px">'
@@ -2616,6 +2636,7 @@ function renderMenu(){
         +'<span style="display:block;margin-top:6px;font-size:11.5px">'+d+' z '+c+' úloh hotovo · '+o.vyklad.length+' stran výkladu</span></button>';
     });
   });
+  if(rocnik()!==9)h+='<div class="upoz" style="margin-top:16px">Pro tuhle variantu mám zatím jen okruhy, které se s devátou třídou překrývají. Vyhrazené učivo i testy k ní teprve chystám — zatím koukni na oficiální zadání CERMATu v sekci testů.</div>';
   $("okruhy").innerHTML=h;
 }
 function otevri(i){O=DATA[i];$("rzName").textContent=O.ikona+" "+O.nazev;$("rzPopis").textContent=O.popis;go("rezim");}
@@ -2803,23 +2824,20 @@ let T=null;
 function dvojcif(n){return (n<10?"0":"")+n;}
 function openTesty(){
   if(T&&T.tik){clearInterval(T.tik);T.tik=null;}
-  let h="";
-  TESTY.forEach(function(t,i){
-    const r=(S.testy||{})[t.id];
-    h+='<button class="card" onclick="otevriTest('+i+')"><b>'+t.ikona+' '+t.nazev+'</b><span>'+t.popis+'</span>'
+  const vid=TESTY.map(function(t,i){return {t:t,i:i};}).filter(function(x){return proRocnik(x.t);});
+  function karta(x,ucebni){
+    const t=x.t,r=(S.testy||{})[t.id];
+    return '<button class="card" onclick="startTest('+x.i+','+(ucebni?"true":"false")+')">'
+      +'<b>'+t.ikona+' '+t.nazev+'</b><span>'+t.popis+'</span>'
       +'<span style="display:block;margin-top:7px;font-size:11.5px">'
-      +(r?("Nejlepší výsledek: "+r.body+" z "+t.body+" bodů ("+Math.round(100*r.body/t.body)+" %)"):"Zatím nezkoušeno")
+      +(ucebni?"Bez časomíry, vysvětlení po každé úloze."
+              :(r?("Nejlepší výsledek: "+r.body+" z "+t.body+" bodů ("+Math.round(100*r.body/t.body)+" %)"):"Zatím nepsáno načisto"))
       +'</span></button>';
-  });
-  $("testyList").innerHTML=h;
+  }
+  const prazdno='<div class="upoz">Pro tuhle variantu zkoušky ještě testy nemám. Ostrá zadání z minulých let ale najdeš níž přímo u CERMATu.</div>';
+  $("testyUcebni").innerHTML=vid.length?vid.map(function(x){return karta(x,true);}).join(""):prazdno;
+  $("testyOstre").innerHTML=vid.length?vid.map(function(x){return karta(x,false);}).join(""):"";
   go("testy");
-}
-function otevriTest(i){
-  const t=TESTY[i];
-  T={idx:i,t:t};
-  $("trNazev").textContent=t.ikona+" "+t.nazev;
-  $("trPopis").textContent=t.popis;
-  go("testrezim");
 }
 function startTest(i,ucebni){
   const t=TESTY[i];
@@ -2957,6 +2975,7 @@ function rozbor(i){
 }
 
 renderMenu();
+if(!S.rocnik)go("rocnik");   // při prvním otevření se zeptáme, kam se hlásí
 </script>
 </body>
 </html>
