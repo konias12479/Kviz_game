@@ -57,11 +57,14 @@ Soubor se pak jmenuje `o-<hash>.mp3` (otázka), `v-<hash>.mp3` (vysvětlení), `
 - `extract_adelka_all.py` / `extract_tata_texts.py` — vytáhnou texty z .txt a hry do JSON.
 - `gen_adelka_all.py`, `gen_tata_hlas.py`, `gen_kviz_hlas.py` — generují po dávkách 15, po každé dávce commit+push (dá se kdykoli přerušit a spustit znovu, hotové soubory přeskočí).
 - `list_voices.py` — vypíše dostupné hlasy na účtu.
-- **Pozor:** skripty dělají `git push`. Když do repa mezitím pushne někdo jiný (nebo ty z jiného klonu), push selže a skript spadne. Před spuštěním udělej `git pull` a během běhu do repa nepushuj.
+- Skripty se pouštějí **ze složky `nastroje/`** (`cd nastroje && python gen_adelka_all.py`) — cestu k repu si dopočítají z umístění souboru.
+- **Pozor na souběžný push:** skripty po každé dávce commitují a pushují. Když mezitím pushne někdo jiný, `gen_adelka_all.py` si udělá `pull --rebase` a zkusí to znovu (max 4×); ostatní skripty tuhle pojistku zatím nemají a spadly by. Před spuštěním udělej `git pull` a během běhu do repa raději nepushuj.
 
 ## Stav k 1. 9. 2026
-Hotovo: 184 klipů Verunka-přijímačky, 518 klipů biologie, 583 klipů Ruda, 3 opravné klipy (poměr „ku").
-**Rozpracováno:** velká dávka chemie a ostatních předmětů pro Adélku (~4850 klipů celkem, hotovo bylo ~705 když se to naposled přerušilo). Restartovat: `cd nastroje && python gen_adelka_all.py`. Ubývají tím ElevenLabs kredity — před spuštěním se zeptej Petra.
+Hotovo: 184 klipů Verunka-přijímačky, 518 klipů biologie, 583 klipů Ruda, 3 opravné klipy (poměr „ku"), a velká část chemie a ostatních předmětů pro Adélku.
+**Rozpracováno:** zbytek Adélčiny sady (celkem 4850 klipů = 2430 otázek + 2420 vysvětlení). První běh vyčerpal kvótu ElevenLabs (`quota_exceeded` po 4018 klipech), Petr 1. 9. dokoupil kredity a dávka běží dál — zbývalo 734 klipů.
+Kolik ještě chybí zjistíš kdykoli: `cd nastroje && python extract_adelka_all.py` (vypíše „chybí vygenerovat"). Dogenerovat: `python gen_adelka_all.py` — přeskočí hotové, takže se dá pouštět opakovaně.
+**Kredity ubývají rychle** (~130 k znaků na ~4000 klipů) — před velkým během se Petra zeptej.
 
 ## Poslední změny (kontext, ne úkoly)
 - Sekce Ruda dostala nahraný hlas místo syntézy (otázky, vysvětlení i hlášky majora).
