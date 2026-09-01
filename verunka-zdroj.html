@@ -3583,6 +3583,8 @@ function ctiText(t){
   try{
     speechSynthesis.cancel();
     let txt=String(t).replace(/\s+/g," ").trim();
+    // velká písmena (zvýraznění, ne zkratka) by syntéza hláskovala písmeno po písmenu — čti jako běžné slovo
+    txt=txt.replace(/(?<![\p{L}])\p{Lu}{2,}(?![\p{L}])/gu,m=>m.toLowerCase());
     // matematický zápis do řeči: poměry „ku“, jinde dvojtečka jako dělení
     if(O&&O.predmet==="Matematika"){
       const ku=(O.id==="mat-pomer")?" ku ":" děleno ";
