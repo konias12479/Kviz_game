@@ -1,0 +1,189 @@
+# Texty k namluvení pro aplikaci Verunka — přijímačky
+# Formát: NÁZEV SOUBORU<TAB>TEXT (jeden řádek = jedna nahrávka)
+# Soubory patří do složky hlas/ v repozitáři konias12479/Kviz_game
+# Formát MP3, čeština. Celkem stran: 184
+
+hlas/mat-rovnice-1.mp3	Co je vlastně rovnice?. Rovnice je tvrzení, že se dvě strany rovnají. Uprostřed je rovnítko a někde se schovává neznámá — obvykle x. Tvůj úkol je jediný: dostat x samotné na jednu stranu. Všechno ostatní musí odejít na druhou.
+hlas/mat-rovnice-2.mp3	Rovnice jsou jako váhy. Představ si rovnítko jako střed vah. Obě strany jsou v rovnováze. Když něco přidáš vlevo, musíš to samé přidat i vpravo — jinak se váhy překlopí. Přesně to znamená ekvivalentní úprava.
+hlas/mat-rovnice-3.mp3	Úprava 1 — přičítání a odčítání. Chceš dostat x doleva a čísla doprava. Pravidlo do kapsy: co přechází přes rovnítko, mění znaménko. Plus se změní na minus a naopak.
+hlas/mat-rovnice-4.mp3	Úprava 2 — násobení a dělení. Když u x zůstane číslo, celou rovnici tím číslem vyděl. Zase obě strany! Jediný zákaz: nikdy nesmíš dělit nulou.
+hlas/mat-rovnice-5.mp3	Závorky roznásob jako první. Máš-li v rovnici závorku, nejdřív ji odstraň. Číslo před závorkou vynásobíš každý člen uvnitř. Pozor na minus před závorkou — to obrátí znaménka všech členů uvnitř.
+hlas/mat-rovnice-6.mp3	Zlomky? Vynásob a zmizí. Zlomky v rovnici jsou jen strašák. Najdi nejmenší společný jmenovatel a jím vynásob celou rovnici — každý člen na obou stranách. Zlomky se zkrátí a zbude ti obyčejná rovnice.
+hlas/mat-rovnice-7.mp3	Zkouška — a máš jistotu. Zkouška není otrava, je to tvoje pojistka. Za body v testu se často počítá i ona. Důležité: dosazuj vždy do PŮVODNÍ rovnice, ne do té upravené. Kdybys totiž udělala chybu při úpravě, zkouška by ti ji neodhalila.
+hlas/mat-rovnice-8.mp3	Dva zvláštní případy. Občas se x vykrátí úplně. Nezpanikař, jsou jen dvě možnosti: • Zbude pravdivé tvrzení (třeba 0 = 0) → rovnice má nekonečně mnoho řešení. • Zbude nesmysl (třeba 0 = 5) → rovnice nemá žádné řešení.
+hlas/cj-shoda-1.mp3	O co vlastně jde?. V minulém čase se sloveso musí přizpůsobit podmětu. Tomu se říká shoda přísudku s podmětem. Rozhoduje se poslední písmeno slovesa — a to podle toho, jakého rodu a čísla je podmět.
+hlas/cj-shoda-2.mp3	Vždycky postupuj v těchto třech krocích. Nikdy nehádej podle citu. Vždycky si projdi tyhle tři otázky — nikdy tě nezradí: 1. Najdi podmět. Zeptej se: KDO nebo CO to dělal? 2. Urči jeho rod a číslo. 3. Podle tabulky doplň koncovku.
+hlas/cj-shoda-3.mp3	Množné číslo — hlavní tabulka. Tuhle tabulku si zapamatuj a máš vyhráno. Platí pro množné číslo: • rod mužský ŽIVOTNÝ → -i • rod mužský NEŽIVOTNÝ → -y • rod ŽENSKÝ → -y • rod STŘEDNÍ → -a
+hlas/cj-shoda-4.mp3	Jednotné číslo je jednodušší. V jednotném čísle se koncovka řídí rodem takto: • rod mužský → -l (chlapec běžel) • rod ženský → -la (dívka běžela) • rod střední → -lo (kotě běželo) Tady chybu skoro nikdo neudělá, sluch si poradí sám.
+hlas/cj-shoda-5.mp3	Zrádná slova, na kterých se propadá. Některá podstatná jména vypadají jako ženský rod, ale jsou mužská životná — nebo naopak. Ta si zapamatuj zvlášť: • koně, lidé, hosté, rodiče → mužský ŽIVOTNÝ → -i • děti, oči, uši → rod ŽENSKÝ → -y • housata, koťata, děvčata → rod STŘEDNÍ → -a
+hlas/cj-shoda-6.mp3	Několikanásobný podmět. Když je podmětů víc, platí jednoduché pravidlo: stačí jediný mužský životný a celý přísudek dostane -i. Je úplně jedno, kolik je tam ženských nebo středních — ten jeden mužský životný rozhodne.
+hlas/cj-shoda-7.mp3	Podmět nevyjádřený. Někdy podmět ve větě vůbec není napsaný. Pak ho musíš najít z předchozí věty nebo z tvaru slovesa. Nejjistější je dosadit si zájmeno oni / ony / ona a podívat se, koho zastupuje.
+hlas/cj-shoda-8.mp3	Pozor na past: podmět není to nejbližší slovo. Tvůrci testů schválně dají těsně před sloveso slovo jiného rodu, aby tě zmátli. Podmět ale může být daleko vepředu. Proto se vždycky ptej KDO / CO, ne co je nejblíž slovesu.
+hlas/mat-vyrazy-1.mp3	Co je výraz a co proměnná. Výraz je zápis složený z čísel, písmen a znamének. Písmenu se říká proměnná — může za ni přijít jakékoli číslo. Člen výrazu je každá část oddělená plusem nebo mínusem. Ve výrazu 3x + 5y − 2 jsou tři členy.
+hlas/mat-vyrazy-2.mp3	Sčítat smíš jen stejné členy. Stejné členy mají úplně stejné písmeno i mocninu. Jen ty se dají sečíst. 3x a 5x sečteš na 8x. Ale 3x a 5x² sečíst nejde — to jsou různé věci a musí zůstat vedle sebe.
+hlas/mat-vyrazy-3.mp3	Roznásobování závorky. Číslo před závorkou vynásobíš s každým členem uvnitř. Na žádný nesmíš zapomenout. Je-li před závorkou mínus, obrátí znaménka všech členů uvnitř. Tady se chybuje nejvíc.
+hlas/mat-vyrazy-4.mp3	Závorka krát závorka. Každý člen první závorky vynásobíš s každým členem druhé. U dvoučlenů to jsou čtyři součiny. Pomůcka: postupuj vždy stejně — první s prvním, první s druhým, druhý s prvním, druhý s druhým.
+hlas/mat-vyrazy-5.mp3	Tři vzorce, které musíš umět nazpaměť. Tyhle tři se v testu objevují pořád. Naučit se je vyplatí víc než cokoli jiného v tomhle okruhu. Třetí z nich — rozdíl druhých mocnin — se hodí i obráceně, k rozkladu na součin.
+hlas/mat-vyrazy-6.mp3	Vytýkání — vzorce naruby. Vytýkání je opak roznásobování. Najdeš, co mají všechny členy společné, a dáš to před závorku. Zkouška je snadná: roznásob to zpátky a musíš dostat původní výraz.
+hlas/mat-vyrazy-7.mp3	Hodnota výrazu. Dosadit číslo za proměnnou umí každý. Pozor jen na dvě věci: Záporné číslo dosazuj vždy do závorky. A nezapomeň na pořadí operací — nejdřív mocniny, pak násobení, až nakonec sčítání.
+hlas/mat-mocniny-1.mp3	Co je mocnina. Mocnina je zkrácený zápis opakovaného násobení. Číslo dole se jmenuje základ, číslo nahoře exponent. 5³ znamená 5·5·5, tedy 125. Rozhodně to neznamená 5·3.
+hlas/mat-mocniny-2.mp3	Druhé mocniny do patnácti — nauč se je. Tyhle hodnoty musíš znát zpaměti, v testu na ně nemáš kalkulačku a šetří spoustu času. 1, 4, 9, 16, 25, 36, 49, 64, 81, 100, 121, 144, 169, 196, 225
+hlas/mat-mocniny-3.mp3	Odmocnina je opačný pohyb. Druhá odmocnina hledá číslo, které po umocnění na druhou dá ten výsledek. Když znáš mocniny do patnácti nazpaměť, umíš i odmocniny — jen se díváš na tabulku obráceně.
+hlas/mat-mocniny-4.mp3	Mocniny desíti a posouvání čárky. Mocnina desíti říká, o kolik míst se posune desetinná čárka. Kladný exponent doprava, záporný doleva. Tohle využiješ u převodů jednotek i u velkých čísel.
+hlas/mat-mocniny-5.mp3	Součin a podíl pod odmocninou. Odmocnit součin můžeš po částech — odmocníš každého činitele zvlášť. Totéž platí pro podíl. Pozor: u součtu to NEPLATÍ. √(9 + 16) není 3 + 4, ale √25 = 5.
+hlas/mat-mocniny-6.mp3	Geometrický význam druhé mocniny. Druhá mocnina je obsah čtverce o dané straně. Odmocnina naopak najde stranu ze známého obsahu. Proto se jí říká druhá — souvisí s plochou, tedy se dvěma rozměry.
+hlas/mat-pomer-1.mp3	Co je poměr. Poměr porovnává dvě veličiny. Zapisuje se dvojtečkou a čte se „ku“. Poměr se dá krátit i rozšiřovat jako zlomek — 6 : 9 je totéž co 2 : 3.
+hlas/mat-pomer-2.mp3	Dělení v daném poměru. Musíš rozdělit celek v poměru? Spočítej nejdřív, kolik je dohromady dílů. Pak zjisti hodnotu jednoho dílu a tou násob. Tenhle postup funguje vždycky, i pro tři a víc částí.
+hlas/mat-pomer-3.mp3	Přímá úměrnost. Když jedna veličina roste, druhá roste stejně rychle. Dvakrát víc rohlíků stojí dvakrát tolik. Poznávací znamení: podíl obou veličin je pořád stejný. Grafem je přímka procházející počátkem.
+hlas/mat-pomer-4.mp3	Nepřímá úměrnost. Když jedna veličina roste, druhá klesá. Dvakrát víc dělníků udělá práci za poloviční čas. Poznávací znamení: součin obou veličin je pořád stejný. Grafem je hyperbola.
+hlas/mat-pomer-5.mp3	Trojčlenka — a hlavně šipky. Napiš si zadání do dvou řádků pod sebe a udělej šipky. U přímé úměrnosti míří obě šipky stejným směrem. U nepřímé opačným — a to znamená, že jednu stranu zlomku otočíš.
+hlas/mat-pomer-6.mp3	Měřítko mapy a plánu. Měřítko 1 : 50 000 znamená, že 1 cm na mapě je 50 000 cm ve skutečnosti. Nejčastější chyba je zapomenout převést jednotky. Vždycky nakonec převeď centimetry na metry nebo kilometry.
+hlas/mat-pomer-7.mp3	Postup u měřítka. Z mapy do skutečnosti se násobí, ze skutečnosti na mapu se dělí. Vždycky číslem z měřítka. Je-li měřítko zvětšovací (třeba 2 : 1 u drobné součástky), platí to obráceně.
+hlas/mat-procenta-1.mp3	Tři pojmy, které stačí rozlišit. Základ je celek, tedy sto procent. Počet procent říká, kolik z něj bereme. Procentová část je výsledné množství. V každé úloze si nejdřív pojmenuj, co je co. Tím je půlka práce hotová.
+hlas/mat-procenta-2.mp3	Jedno procento je klíč. Nejjistější postup: spočítej si jedno procento a pak jím násob. Jedno procento získáš vydělením základu stem. Pak už jen násobíš, kolik procent potřebuješ.
+hlas/mat-procenta-3.mp3	Sleva — pozor na dvě cesty. Sleva 20 % se dá spočítat dvěma způsoby. Druhý je rychlejší a méně chybový. Buď spočítáš slevu a odečteš ji. Nebo rovnou spočítáš, kolik zbude — tedy 80 %.
+hlas/mat-procenta-4.mp3	Zdražení funguje stejně. Zdraží-li se o 15 %, platíš 115 % původní ceny. Rychlý převod: 115 % je 1,15. Původní cenu prostě vynásob tímto číslem.
+hlas/mat-procenta-5.mp3	Jistina, úrok a úroková míra. Jistina je vložená částka. Úroková míra je procento za rok. Úrok je to, co ti banka připíše. Úrok za jeden rok spočítáš jako procento z jistiny — přesně jako každá jiná procentová úloha.
+hlas/mat-procenta-6.mp3	Daň z úroku. Z připsaného úroku si stát bere daň — u nás 15 %. Daň se počítá z úroku, ne z jistiny. Na účet ti tedy dorazí jen 85 % úroku.
+hlas/mat-procenta-7.mp3	Inflace jednoduše. Inflace znamená, že ceny rostou a za stejné peníze koupíš míň. Při inflaci 5 % stojí zboží za 100 Kč o rok později 105 Kč. Počítá se úplně stejně jako zdražení.
+hlas/mat-soustavy-1.mp3	Proč dvě rovnice. Máš-li dvě neznámé, jedna rovnice ti nestačí — řešení by bylo nekonečně mnoho. Potřebuješ dvě nezávislé informace. Cíl je vždycky stejný: zbavit se jedné neznámé a dostat obyčejnou rovnici.
+hlas/mat-soustavy-2.mp3	Dosazovací metoda. Z jedné rovnice vyjádři jednu neznámou a dosaď ji do druhé rovnice. Hodí se, když už je někde neznámá osamocená nebo má koeficient 1.
+hlas/mat-soustavy-3.mp3	Sčítací metoda. Rovnice sečti nebo odečti tak, aby se jedna neznámá vyrušila. Často musíš jednu rovnici nejdřív vynásobit, aby koeficienty vyšly opačné.
+hlas/mat-soustavy-4.mp3	Kdy je nutné násobit. Když se koeficienty samy nevyruší, vynásob celou rovnici vhodným číslem. Cílem je dostat u jedné neznámé stejná čísla s opačným znaménkem.
+hlas/mat-soustavy-5.mp3	Nezapomeň na druhou neznámou. Když najdeš x, ještě nejsi hotová. Dosaď ho zpátky do kterékoli původní rovnice a dopočítej y. Řešením soustavy je vždycky dvojice čísel.
+hlas/mat-soustavy-6.mp3	Zkouška do obou rovnic. Zkouška musí projít v OBOU rovnicích. Kdyby platila jen v jedné, řešení je špatně. Tohle je nejjistější způsob, jak odhalit chybu.
+hlas/mat-soustavy-7.mp3	Slovní úlohy o dvou neznámých. Postup je vždy stejný: pojmenuj obě neznámé, napiš dvě rovnice podle dvou informací ze zadání, vyřeš. Typicky jedna rovnice popisuje počty a druhá ceny nebo hmotnosti.
+hlas/mat-pythagoras-1.mp3	Kdy ji smíš použít. Pythagorova věta platí JEN v pravoúhlém trojúhelníku. Nikde jinde. Nejdřív se vždycky ujisti, že v úloze pravý úhel opravdu je — často je schovaný v obdélníku, ve čtverci nebo ve výšce trojúhelníku.
+hlas/mat-pythagoras-2.mp3	Odvěsny a přepona. Přepona je nejdelší strana a leží vždycky NAPROTI pravému úhlu. Zbylé dvě strany jsou odvěsny. Záměna přepony a odvěsny je nejčastější chyba v celém okruhu. Než začneš počítat, najdi si pravý úhel a podívej se naproti.
+hlas/mat-pythagoras-3.mp3	Samotná věta. Obsah čtverce nad přeponou se rovná součtu obsahů čtverců nad oběma odvěsnami. Jinými slovy: druhá mocnina přepony je součet druhých mocnin odvěsen.
+hlas/mat-pythagoras-4.mp3	Hledáš přeponu — sčítáš. Známe obě odvěsny a hledáme přeponu? Umocni je, sečti a odmocni. Výsledek musí být větší než každá odvěsna. Když ti vyjde menší, něco je špatně.
+hlas/mat-pythagoras-5.mp3	Hledáš odvěsnu — odčítáš. Známe přeponu a jednu odvěsnu? Pak od čtverce přepony ODEČTI čtverec známé odvěsny. Tady se plete znaménko nejčastěji. Pomůcka: odvěsna musí vyjít menší než přepona.
+hlas/mat-pythagoras-6.mp3	Slavné trojice, které se vyplatí znát. Některé trojice čísel vycházejí pěkně a v testech se objevují pořád dokola. Znáš-li je, ušetříš čas i chyby. Platí i jejich násobky — třeba 6, 8, 10.
+hlas/mat-pythagoras-7.mp3	Úhlopříčka obdélníku. Úhlopříčka rozdělí obdélník na dva pravoúhlé trojúhelníky. Strany obdélníku jsou odvěsny, úhlopříčka je přepona. U čtverce se strany rovnají, takže úhlopříčka je strana krát odmocnina ze dvou.
+hlas/mat-pythagoras-8.mp3	Tělesová úhlopříčka kvádru. V kvádru se věta používá dvakrát za sebou. Nejdřív spočítáš úhlopříčku podstavy, ta se pak stane odvěsnou. Existuje i zkratka — jeden vzorec pro všechny tři hrany najednou.
+hlas/mat-obsahy-1.mp3	Obvod versus obsah. Obvod je délka čáry kolem dokola — měří se v centimetrech. Obsah je plocha uvnitř — měří se v centimetrech čtverečních. Když si spleteš jednotku, poznáš, že jsi spletla i vzorec.
+hlas/mat-obsahy-2.mp3	Obdélník a čtverec. U obdélníku obvod sečteš dvě strany a vynásobíš dvěma, obsah vynásobíš strany. Čtverec je jen zvláštní obdélník, kde jsou obě strany stejné.
+hlas/mat-obsahy-3.mp3	Trojúhelník. Obsah trojúhelníku je polovina součinu strany a výšky K TÉ STRANĚ. Výška musí být kolmá právě k té straně, kterou jsi použila. Tady se chybuje.
+hlas/mat-obsahy-4.mp3	Rovnoběžník a lichoběžník. U rovnoběžníku je obsah strana krát výška — bez dělení dvěma. U lichoběžníku sečteš obě rovnoběžné strany, vynásobíš výškou a vydělíš dvěma.
+hlas/mat-obsahy-5.mp3	Kruh a kružnice. Kružnice je jen ta čára, kruh je i s vnitřkem. Proto má kružnice délku a kruh obsah. Číslo π je přibližně 3,14. Průměr je dvojnásobek poloměru.
+hlas/mat-obsahy-6.mp3	Pozor na poloměr a průměr. Nejčastější chyba v celém okruhu: do vzorce dosadíš průměr místo poloměru. Když zadání říká „kruh o průměru 10 cm“, do vzorce patří pětka, ne desítka.
+hlas/mat-obsahy-7.mp3	Složené obrazce. Složitý tvar rozděl na jednoduché části — obdélníky, trojúhelníky, půlkruhy. Obsahy pak sečti. Když je v obrazci díra, obsah díry naopak odečti.
+hlas/mat-obsahy-8.mp3	Vztah mezi rozměry a obsahem. Zvětšíš-li stranu dvakrát, obsah se zvětší čtyřikrát. Trojnásobná strana znamená devítinásobný obsah. Je to proto, že obsah závisí na druhé mocnině rozměru.
+hlas/mat-telesa-1.mp3	Objem a povrch — dvě různé věci. Objem říká, kolik se dovnitř vejde. Měří se v krychlových jednotkách. Povrch je součet obsahů všech ploch zvenku. Měří se ve čtverečních jednotkách — je to vlastně rozbalená síť tělesa.
+hlas/mat-telesa-2.mp3	Krychle a kvádr. U kvádru vynásobíš všechny tři hrany. Povrch je součet obsahů šesti stěn, které jsou po dvou stejné. Krychle je kvádr se všemi hranami stejnými.
+hlas/mat-telesa-3.mp3	Válec. Válec má dvě kruhové podstavy a jeden zakřivený plášť. Objem je obsah podstavy krát výška. Plášť po rozvinutí tvoří obdélník, jehož jedna strana je obvod kruhu.
+hlas/mat-telesa-4.mp3	Jehlan a kužel — nezapomeň na třetinu. Špičatá tělesa mají objem přesně třikrát menší než hranol nebo válec se stejnou podstavou a výškou. Ta třetina je to, co se u nich nejčastěji zapomíná.
+hlas/mat-telesa-5.mp3	Výška versus strana u kužele. U kužele rozlišuj výšku (kolmo od vrcholu do středu podstavy) a stranu (od vrcholu k okraji podstavy). Jsou spojené Pythagorovou větou. Do objemu patří výška, do pláště strana.
+hlas/mat-telesa-6.mp3	Koule. U koule si stačí zapamatovat dva vzorce. Oba obsahují poloměr na třetí, respektive na druhou. Pomůcka na objem: čtyři třetiny pí er na třetí.
+hlas/mat-telesa-7.mp3	Převody objemových jednotek. Tohle je v testu častější zdroj chyb než samotné vzorce. Jeden litr je krychle o hraně 10 cm, tedy tisíc centimetrů krychlových. Krychlový metr je tisíc litrů.
+hlas/mat-telesa-8.mp3	Síť tělesa. Síť je těleso rozstřižené a rozložené do roviny. Její obsah je přesně povrch tělesa. U válce se plášť rozvine na obdélník o rozměrech 2πr a v — to je dobré si představit.
+hlas/mat-funkce-1.mp3	Co je funkce. Funkce je předpis, který každé hodnotě x přiřadí právě jednu hodnotu y. Může být zapsaná rovnicí, tabulkou nebo grafem. Všechny tři zápisy říkají totéž.
+hlas/mat-funkce-2.mp3	Lineární funkce a její graf. Lineární funkce má tvar y = ax + b a jejím grafem je vždycky přímka. Číslo a určuje sklon, číslo b říká, kde přímka protíná svislou osu.
+hlas/mat-funkce-3.mp3	Rostoucí, nebo klesající?. Rozhoduje znaménko u čísla a. Kladné a znamená, že přímka stoupá zleva doprava. Záporné a znamená, že klesá. Nulové a dá vodorovnou přímku.
+hlas/mat-funkce-4.mp3	Jak sestrojit graf. Přímka je určená dvěma body. Vyber si dvě jednoduchá x, dopočítej y a body spoj. Nejjednodušší bývá x = 0 a x = 1, případně x = 0 a takové x, kde vyjde y = 0.
+hlas/mat-funkce-5.mp3	Leží bod na grafu?. Souřadnice bodu prostě dosaď do rovnice. Vyjde-li pravdivá rovnost, bod na grafu leží. První číslo v hranaté závorce je x, druhé y.
+hlas/mat-funkce-6.mp3	Přímá a nepřímá úměrnost jako funkce. Přímá úměrnost je zvláštní lineární funkce y = kx — bez absolutního členu, takže prochází počátkem. Nepřímá úměrnost má tvar y = k/x a jejím grafem je hyperbola.
+hlas/mat-funkce-7.mp3	Čtení z grafu. V testu se často jen odečítá. Hledáš-li y pro dané x, jdi od osy x nahoru ke grafu a pak doleva na osu y. Opačným směrem to funguje stejně.
+hlas/mat-statistika-1.mp3	Základní pojmy. Statistický soubor je skupina, kterou zkoumáme — třeba všichni žáci ve třídě. Statistický znak je to, co na nich sledujeme — třeba známka z matematiky.
+hlas/mat-statistika-2.mp3	Četnost. Četnost říká, kolikrát se daná hodnota v souboru objevila. Relativní četnost je podíl z celku, obvykle v procentech. Součet všech četností musí dát velikost souboru.
+hlas/mat-statistika-3.mp3	Aritmetický průměr. Sečti všechny hodnoty a vyděl jejich počtem. To je celé. Pozor: průměr je citlivý na jednu extrémní hodnotu, která ho umí hodně vychýlit.
+hlas/mat-statistika-4.mp3	Vážený průměr. Když se některá hodnota opakuje, nemusíš ji psát pořád dokola. Vynásob ji četností. Na konci děl celkovým počtem, ne počtem různých hodnot.
+hlas/mat-statistika-5.mp3	Medián. Medián je prostřední hodnota, když čísla seřadíš od nejmenšího po největší. Je-li čísel sudý počet, medián je průměr dvou prostředních. Na rozdíl od průměru ho jedna extrémní hodnota nerozhodí.
+hlas/mat-statistika-6.mp3	Modus. Modus je hodnota, která se v souboru vyskytuje nejčastěji. Může jich být i víc než jeden, nebo nemusí být žádný, když se všechno vyskytuje stejně často.
+hlas/mat-statistika-7.mp3	Který diagram na co. Sloupcový diagram porovnává hodnoty mezi sebou. Kruhový výsečový ukazuje podíly z celku. Spojnicový se hodí na vývoj v čase. Test se často ptá právě na volbu vhodného grafu.
+hlas/mat-geometrie-1.mp3	Množina bodů dané vlastnosti. Spousta konstrukcí stojí na jediné myšlence: najít všechny body, které splňují nějakou podmínku. Osa úsečky jsou všechny body stejně vzdálené od obou krajních bodů. Osa úhlu jsou body stejně vzdálené od obou ramen.
+hlas/mat-geometrie-2.mp3	Kružnice opsaná a vepsaná. Střed kružnice OPSANÉ najdeš jako průsečík os stran. Prochází všemi vrcholy. Střed kružnice VEPSANÉ je průsečík os úhlů. Dotýká se všech stran zevnitř.
+hlas/mat-geometrie-3.mp3	Thaletova kružnice. Nad průměrem kružnice vidíš každý bod na kružnici pod pravým úhlem. Je to nejrychlejší způsob, jak sestrojit pravý úhel — a v testech se objevuje pořád.
+hlas/mat-geometrie-4.mp3	Kružnice a přímka. Přímka může kružnici protnout ve dvou bodech, dotknout se jí v jednom, nebo ji minout. Tečna je vždycky KOLMÁ na poloměr v bodě dotyku. To je klíč k jejímu sestrojení.
+hlas/mat-geometrie-5.mp3	Tečna z bodu vně kružnice. Postup se opírá o Thaletovu kružnici. Spoj střed s daným bodem, najdi střed té úsečky a opiš Thaletovu kružnici. Kde protne původní kružnici, tam jsou body dotyku. Řešení jsou vždycky dvě.
+hlas/mat-geometrie-6.mp3	Shodnost trojúhelníků. Shodné trojúhelníky mají stejné rozměry — dají se na sebe položit. Stačí ověřit jednu ze čtyř vět: sss, sus, usu nebo Ssu.
+hlas/mat-geometrie-7.mp3	Podobnost trojúhelníků. Podobné trojúhelníky mají stejný tvar, ale jinou velikost. Úhly jsou stejné, strany ve stejném poměru. Tomu poměru se říká koeficient podobnosti.
+hlas/mat-geometrie-8.mp3	Kdy se podobnost hodí. Podobnost se používá u map, plánů a všude, kde je něco zmenšené či zvětšené. Zvětšíš-li rozměry k-krát, obsah se změní k²-krát a objem k³-krát. To se v testu ptají rádi.
+hlas/cj-vyjmenovana-1.mp3	Tři skupiny souhlásek. Po tvrdých souhláskách h, ch, k, r, d, t, n se píše tvrdé y. Po měkkých ž, š, č, ř, c, j, ď, ť, ň se píše měkké i. Problém dělají jen obojetné: b, f, l, m, p, s, v, z.
+hlas/cj-vyjmenovana-2.mp3	Jak se rozhodnout u obojetných. Po obojetné souhlásce píšeme y jen ve vyjmenovaných slovech a ve slovech, která jsou od nich odvozená. Ve všech ostatních případech se píše i. Když si nejsi jistá, zkus najít příbuzné vyjmenované slovo.
+hlas/cj-vyjmenovana-3.mp3	Vyjmenovaná po B a po L. Po B: být, bydlit, obyvatel, byt, příbytek, nábytek, dobytek, obyčej, bystrý, bylina, kobyla, býk, Přibyslav. Po L: slyšet, mlýn, blýskat se, polykat, plynout, plýtvat, vzlykat, lysý, lýtko, lýko, lyže, pelyněk, plyš.
+hlas/cj-vyjmenovana-4.mp3	Vyjmenovaná po M a po P. Po M: my, mýt, myslit, mýlit se, hmyz, myš, hlemýžď, mýtit, zamykat, smýkat, dmýchat, chmýří, nachomýtnout se, Litomyšl. Po P: pýcha, pytel, pysk, netopýr, slepýš, pyl, kopyto, klopýtat, třpytit se, zpytovat, pykat, pýr, pýřit se, čepýřit se.
+hlas/cj-vyjmenovana-5.mp3	Vyjmenovaná po S, V a Z. Po S: syn, sytý, sýr, syrový, sychravý, usychat, sýkora, sýček, sysel, syčet, sypat. Po V: vy, vysoký, výt, výskat, zvykat, žvýkat, vydra, výr, vyžle, povyk, výheň, cavyky, klavír. Po Z: brzy, jazyk, nazývat se, Ruzyně.
+hlas/cj-vyjmenovana-6.mp3	Dvojice, na kterých to stojí. Některá slova zní stejně, ale znamenají něco jiného a píšou se jinak. Rozhoduje význam. Tohle je přesně to, na co se test ptá — vždycky si přelož, co věta říká.
+hlas/cj-vyjmenovana-7.mp3	Další zrádné dvojice. Zapamatuj si i tyhle. V testu se objevují pravidelně, protože obě varianty jsou správně — jen v jiné větě.
+hlas/cj-vyjmenovana-8.mp3	Odvozená slova. Y se drží i ve slovech, která z vyjmenovaného vznikla — i když už vypadají jinak. Proto zkoušej hledat příbuzné slovo. Když najdeš vyjmenované, píšeš y.
+hlas/cj-memne-1.mp3	Mě a mně — pomůcka s tebou. Nejspolehlivější trik: dosaď do věty místo mě/mně slovo TEBE nebo TOBĚ. Sedí-li tebe, píšeš mě (obojí má dvě písmena). Sedí-li tobě, píšeš mně (obojí má tři).
+hlas/cj-memne-2.mp3	Proč to tak funguje. Mě je tvar 2. a 4. pádu — koho, čeho / koho, co. Odpovídá tvaru tebe. Mně je tvar 3. a 6. pádu — komu, čemu / o kom, o čem. Odpovídá tvaru tobě.
+hlas/cj-memne-3.mp3	Mě uvnitř slova. Uvnitř slov se rozhoduje jinak — podle toho, z čeho slovo vzniklo. Je-li v příbuzném slově n, píše se mně. Není-li tam, píše se mě.
+hlas/cj-memne-4.mp3	Předpony s- a z- podle významu. Předpona s- znamená pohyb dohromady, shora dolů nebo zmenšení. Předpona z- znamená změnu stavu nebo dokončení děje.
+hlas/cj-memne-5.mp3	Dvojice, kde rozhoduje význam. U některých slov jsou obě předpony správně — ale znamenají něco úplně jiného. Tyhle dvojice se v testu objevují nejčastěji.
+hlas/cj-memne-6.mp3	Předložky s a z. Předložka s se pojí se 7. pádem — s kým, s čím. Znamená společně. Předložka z se pojí s 2. pádem — z koho, z čeho. Znamená odkud.
+hlas/cj-memne-7.mp3	Zrádné případy u předložek. Sejít se stolu znamená slézt z jeho povrchu — ale spisovně se říká ze stolu. Pomůcka: můžeš-li se zeptat ODKUD, je to z. Můžeš-li se zeptat S KÝM nebo S ČÍM, je to s.
+hlas/cj-memne-8.mp3	Předložka nebo předpona?. Předložka stojí samostatně před slovem a dá se mezi ně vložit jiné slovo. Předpona je pevnou součástí slova a oddělit se nedá.
+hlas/cj-velkapismena-1.mp3	Jediné hlavní pravidlo. Velké písmeno patří vlastním jménům — tedy názvům, které označují jednu konkrétní věc, osobu nebo místo. Obecná pojmenování se píší malým písmenem, i když zní důležitě.
+hlas/cj-velkapismena-2.mp3	Víceslovné názvy. U víceslovných názvů se velké píše zpravidla jen první slovo. Zbytek malým, pokud to není samo o sobě vlastní jméno. Tohle je nejčastější zdroj chyb.
+hlas/cj-velkapismena-3.mp3	Ulice a náměstí. Slovo ulice se píše malým písmenem, protože je obecné. Velké se píše až vlastní název. Je-li ale slovo náměstí součástí názvu na začátku, píše se velkým.
+hlas/cj-velkapismena-4.mp3	Státy a jejich obyvatelé. Názvy států mají velké první slovo. Obyvatelská jména se píší velkým, protože jsou to vlastní jména národů. Přídavná jména od nich odvozená se ale píší malým.
+hlas/cj-velkapismena-5.mp3	Svátky a významné dny. Názvy svátků se píší s velkým počátečním písmenem. Obecné označení jako vánoční svátky nebo velikonoční prázdniny se ale píše malým.
+hlas/cj-velkapismena-6.mp3	Instituce a organizace. Oficiální názvy institucí mají velké první slovo. Když mluvíš obecně o typu instituce, píšeš malé.
+hlas/cj-velkapismena-7.mp3	Zeměpisné názvy. Pohoří, řeky, hory a oblasti mají velké písmeno. Obecné slovo před nimi zůstává malé.
+hlas/cj-velkapismena-8.mp3	Když si nejsi jistá. Polož si otázku: je to název JEDNÉ konkrétní věci, nebo označení celého druhu? Jedna konkrétní věc → velké. Celý druh → malé.
+hlas/cj-slovnidruhy-1.mp3	Deset slovních druhů. 1. podstatná jména, 2. přídavná jména, 3. zájmena, 4. číslovky, 5. slovesa, 6. příslovce, 7. předložky, 8. spojky, 9. částice, 10. citoslovce. Prvních pět se ohýbá (skloňuje nebo časuje), zbylých pět ne.
+hlas/cj-slovnidruhy-2.mp3	Podstatná a přídavná jména. Podstatné jméno pojmenovává osobu, zvíře, věc nebo vlastnost. Ptáš se KDO nebo CO. Přídavné jméno popisuje vlastnost. Ptáš se JAKÝ, KTERÝ, ČÍ.
+hlas/cj-slovnidruhy-3.mp3	Zájmena a číslovky. Zájmeno zastupuje jméno — místo Petr řekneš on. Číslovka vyjadřuje počet nebo pořadí. Ptáš se KOLIK nebo KOLIKÁTÝ.
+hlas/cj-slovnidruhy-4.mp3	Slovesa. Sloveso vyjadřuje děj nebo stav. Ptáš se CO DĚLÁ. Poznáš je snadno — dají se časovat a mají osobu, číslo a čas.
+hlas/cj-slovnidruhy-5.mp3	Příslovce. Příslovce určuje okolnost děje. Ptáš se KDE, KDY, JAK, PROČ. Často se plete s přídavným jménem. Rozdíl: přídavné jméno patří ke jménu, příslovce ke slovesu.
+hlas/cj-slovnidruhy-6.mp3	Předložky a spojky. Předložka stojí před jménem a určuje jeho pád — na stole, do školy, s bratrem. Spojka spojuje slova nebo věty — a, ale, protože, když, že.
+hlas/cj-slovnidruhy-7.mp3	Částice a citoslovce. Částice uvozuje větu nebo vyjadřuje postoj — ať, kéž, snad, asi, prý. Citoslovce napodobuje zvuk nebo vyjadřuje cit — bum, haf, ach, jé.
+hlas/cj-slovnidruhy-8.mp3	Pozor na slova, která mění druh. Stejné slovo může být podle věty různým slovním druhem. Vždycky se rozhoduj podle konkrétní věty, ne podle slova samotného.
+hlas/cj-tvaroslovi-1.mp3	Sedm pádů a jejich otázky. 1. kdo, co · 2. koho, čeho · 3. komu, čemu · 4. koho, co · 5. oslovujeme, voláme · 6. o kom, o čem · 7. s kým, s čím Otázky se vyplatí umět odříkat. Bez nich pád neurčíš.
+hlas/cj-tvaroslovi-2.mp3	Jak pád určit. Najdi si slovo ve větě a polož si na něj otázku. Ta otázka ti pád prozradí. Pozor na 2. a 4. pád — u neživotných se tvary často shodují. Pomůže dosadit životné slovo.
+hlas/cj-tvaroslovi-3.mp3	Rod a vzory podstatných jmen. Rod mužský životný: pán, muž, předseda, soudce. Rod mužský neživotný: hrad, stroj. Rod ženský: žena, růže, píseň, kost. Rod střední: město, moře, kuře, stavení.
+hlas/cj-tvaroslovi-4.mp3	Jak najít vzor. Dej slovo do 1. pádu jednotného čísla, urči rod a pak porovnej koncovku ve 2. pádu. Práve 2. pád rozliší podobné vzory nejlépe.
+hlas/cj-tvaroslovi-5.mp3	Osoba, číslo a čas u sloves. Osoby jsou tři a každá má jednotné i množné číslo. Časy jsou minulý, přítomný a budoucí. U dokonavých sloves přítomný čas neexistuje.
+hlas/cj-tvaroslovi-6.mp3	Slovesný způsob. Oznamovací říká, co se děje. Rozkazovací přikazuje. Podmiňovací vyjadřuje podmínku nebo přání a poznáš ho podle by.
+hlas/cj-tvaroslovi-7.mp3	Vid dokonavý a nedokonavý. Dokonavé sloveso vyjadřuje děj ukončený a nemá přítomný čas — napsal, napíšu (to je budoucnost). Nedokonavé vyjadřuje děj probíhající — psal, píšu, budu psát.
+hlas/cj-tvaroslovi-8.mp3	Nejčastější past v testu. Otázka „v jakém čase je sloveso napíšu“ svádí odpovědět přítomný. Je ale budoucí, protože sloveso je dokonavé. Zkus si to: „Napíšu to zítra“ — dneska to ještě není hotové.
+hlas/cj-skladba-1.mp3	Základní skladební dvojice. Každá věta stojí na dvojici podmět a přísudek. To je její kostra. Podmět říká, KDO nebo CO. Přísudek říká, CO DĚLÁ nebo JAKÝ JE.
+hlas/cj-skladba-2.mp3	Podmět a jeho druhy. Vyjádřený podmět je ve větě napsaný. Nevyjádřený se pozná z tvaru slovesa. Několikanásobný podmět má víc částí spojených spojkou.
+hlas/cj-skladba-3.mp3	Přísudek slovesný a jmenný. Slovesný přísudek je tvořený jen slovesem — běží, spal, bude psát. Jmenný se sponou je spojení slovesa být, bývat, stát se a jména — je hodný, stal se lékařem.
+hlas/cj-skladba-4.mp3	Předmět. Předmět doplňuje sloveso. Ptáš se na něj pádovými otázkami kromě 1. a 5. pádu. Často je to ten, na koho děj směřuje.
+hlas/cj-skladba-5.mp3	Přívlastek. Přívlastek rozvíjí podstatné jméno. Ptáš se JAKÝ, KTERÝ, ČÍ. Shodný stojí většinou před jménem a shoduje se s ním v pádě. Neshodný stojí za ním a neshoduje se.
+hlas/cj-skladba-6.mp3	Příslovečné určení. Rozvíjí sloveso a určuje okolnost. Ptáš se KDE, KDY, JAK, PROČ. Podle otázky rozlišujeme určení místa, času, způsobu a příčiny.
+hlas/cj-skladba-7.mp3	Jak rozebírat větu. Postupuj vždy stejně. Najdi přísudek — je to nejjistější orientační bod, protože je v každé větě. Pak se na něj zeptej KDO nebo CO a máš podmět. Ostatní členy dohledáš otázkami.
+hlas/cj-skladba-8.mp3	Nejčastější past. Podmět nemusí stát na začátku věty a nemusí být hned u slovesa. Proto se vždycky ptej, ne hádej podle pořadí slov.
+hlas/cj-carky-1.mp3	Věta jednoduchá a souvětí. Věta jednoduchá má jeden přísudek. Souvětí má přísudků víc — tolik vět, kolik je sloves v určitém tvaru. Počet přísudků je nejjistější způsob, jak větu od souvětí odlišit.
+hlas/cj-carky-2.mp3	Základní pravidlo. Mezi větami v souvětí se zpravidla píše čárka. Výjimka je, když jsou věty spojené spojkami a, i, ani, nebo, či ve významu prostého slučování.
+hlas/cj-carky-3.mp3	Před kterými spojkami se čárka píše vždy. Ale, avšak, však, nýbrž, protože, poněvadž, jelikož, aby, že, když, kdyby, přestože, ačkoli, jestliže. Tyhle spojky uvozují vedlejší větu nebo odporují — čárka před nimi patří.
+hlas/cj-carky-4.mp3	Kdy se před A čárka přece píše. Spojka a obvykle čárku nemá. Ale je-li ve významu odporovacím nebo následuje-li po ní jiná spojka, čárka tam patří.
+hlas/cj-carky-5.mp3	Vedlejší věta uvnitř. Je-li vedlejší věta vložená doprostřed, odděluje se čárkami z OBOU stran. Zapomenutá druhá čárka je jedna z nejčastějších chyb vůbec.
+hlas/cj-carky-6.mp3	Oslovení a citoslovce. Oslovení se vždycky odděluje čárkou. Stojí-li uprostřed věty, čárkami z obou stran. Stejně tak citoslovce.
+hlas/cj-carky-7.mp3	Vsuvka a přístavek. Vsuvka je poznámka vložená do věty. Odděluje se čárkami z obou stran. Přístavek je jiné pojmenování téhož a odděluje se také.
+hlas/cj-carky-8.mp3	Několikanásobné větné členy. Ve výčtu se čárky píší mezi jednotlivými položkami — kromě té, před kterou je spojka a, i, nebo.
+hlas/cj-slovotvorba-1.mp3	Části slova. Kořen nese základní význam a je společný všem příbuzným slovům. Předpona stojí před kořenem, přípona za ním, koncovka je úplně na konci a mění se při ohýbání.
+hlas/cj-slovotvorba-2.mp3	Jak najít kořen. Vypiš si několik příbuzných slov pod sebe a najdi část, kterou mají všechna společnou. Pozor — v kořeni se může střídat hláska. Uč / ouč / úč je pořád jeden kořen.
+hlas/cj-slovotvorba-3.mp3	Slova příbuzná. Příbuzná slova mají stejný kořen A souvisejí i významem. Samotná podobnost nestačí. Voda a vodit vypadají podobně, ale významem spolu nesouvisí — příbuzná nejsou.
+hlas/cj-slovotvorba-4.mp3	Odvozování. Nejčastější způsob tvoření slov. Ke kořeni se přidá předpona, přípona nebo obojí. Tím vznikne nové slovo s posunutým významem.
+hlas/cj-slovotvorba-5.mp3	Skládání. Dvě slova se spojí do jednoho, obvykle spojovací samohláskou. Výsledek nese význam obou částí.
+hlas/cj-slovotvorba-6.mp3	Zkracování. Ze začátečních písmen nebo slabik vznikne zkratka nebo zkratkové slovo. Zkratkové slovo se dá skloňovat jako běžné podstatné jméno.
+hlas/cj-slovotvorba-7.mp3	Předpona nebo předložka?. Předpona je pevnou součástí slova a nedá se oddělit. Předložka stojí samostatně. Zkouška: dá se mezi ně vložit další slovo? Pak je to předložka.
+hlas/cj-slovotvorba-8.mp3	K čemu je to dobré. Znalost stavby slova ti pomůže s pravopisem. Když víš, že se slovo skládá z předpony a kořene, poznáš, kde se zdvojuje souhláska.
+hlas/cj-vyznam-1.mp3	Synonyma. Slova se stejným nebo velmi podobným významem. Nejsou ale úplně zaměnitelná — liší se citovým zabarvením nebo tím, kde se hodí.
+hlas/cj-vyznam-2.mp3	Antonyma. Slova opačného významu. Často se tvoří předponou ne-, ale ne vždycky.
+hlas/cj-vyznam-3.mp3	Homonyma. Slova, která zní i píší se stejně, ale znamenají něco úplně jiného. Význam pozná jen z kontextu — z toho, jak je slovo použito ve větě.
+hlas/cj-vyznam-4.mp3	Slova jednoznačná a mnohoznačná. Jednoznačné slovo má jediný význam — obvykle odborné termíny. Mnohoznačné má významů víc, které spolu ale souvisejí.
+hlas/cj-vyznam-5.mp3	Význam přímý a přenesený. Přímý význam je ten původní a doslovný. Přenesený vznikl na základě podobnosti. Přenesené významy dávají jazyku barvu — a v testu se na ně ptají.
+hlas/cj-vyznam-6.mp3	Metafora a metonymie. Metafora přenáší význam podle podobnosti — hlava člověka a hlava státu. Metonymie podle věcné souvislosti — číst Čapka znamená číst jeho knihu.
+hlas/cj-vyznam-7.mp3	Rčení a přísloví. Rčení je ustálené obrazné spojení, které se ohýbá podle věty — chodit kolem horké kaše. Přísloví je celá věta s poučením — Kdo šetří, má za tři.
+hlas/cj-vyznam-8.mp3	Slova citově zabarvená. Zdrobněliny vyjadřují náklonnost, zveličelá slova naopak. Hanlivá slova vyjadřují odpor. Neutrální slovo je bez zabarvení.
+hlas/cj-text-1.mp3	Proč je tenhle okruh nejdůležitější. Test z češtiny ověřuje hlavně čtenářskou gramotnost. Otázek k výchozím textům bývá víc než na pravopis. Dobrá zpráva: odpověď je skoro vždycky přímo v textu. Nemusíš nic vědět předem.
+hlas/cj-text-2.mp3	Nejdřív si přečti otázku. Než začneš číst dlouhý text, projdi si otázky. Budeš vědět, co v textu hledat, a nebudeš ho číst nadarmo dvakrát.
+hlas/cj-text-3.mp3	Hlavní myšlenka. Ptej se: o čem to celé je? Co by zůstalo, kdybych to měla shrnout jednou větou? Hlavní myšlenka bývá v úvodu nebo v závěru odstavce. Detaily a příklady hlavní myšlenkou nejsou.
+hlas/cj-text-4.mp3	Rozliš fakt od názoru. Fakt se dá ověřit — je to tvrzení o skutečnosti. Názor vyjadřuje postoj a poznáš ho podle slov jako myslím, podle mě, nejlepší, krásný.
+hlas/cj-text-5.mp3	Co text NEŘÍKÁ. Častá otázka zní, které tvrzení z textu nevyplývá. Pozor na možnosti, které znějí rozumně a pravdivě — ale v textu nejsou. Rozhoduje jen text, ne to, co víš odjinud.
+hlas/cj-text-6.mp3	Funkční styly. Prostěsdělovací — běžná komunikace, dopis, vzkaz. Odborný — učebnice, encyklopedie, přesné termíny. Publicistický — noviny, zpravodajství. Umělecký — próza a poezie, obrazná vyjádření. Administrativní — úřední dopisy, formuláře.
+hlas/cj-text-7.mp3	Jak styl poznat. Podívej se na slovní zásobu a účel. Odborný text má termíny a poučuje. Umělecký má obrazná vyjádření a působí na city. Publicistický informuje o aktuálním dění.
+hlas/cj-text-8.mp3	Slohové postupy. Vyprávěcí — děj v čase, co se stalo. Popisný — jak něco vypadá. Výkladový — jak něco funguje a proč. Úvahový — přemýšlení nad problémem.
+hlas/cj-literatura-1.mp3	Tři literární druhy. Lyrika vyjadřuje pocity a nálady, nemá děj — typicky báseň. Epika vypráví příběh, má děj a postavy. Drama je určeno k předvedení na jevišti.
+hlas/cj-literatura-2.mp3	Poezie a próza. Poezie je psaná ve verších, člení se do slok a často se rýmuje. Próza je psaná souvisle v odstavcích, běžnou řečí.
+hlas/cj-literatura-3.mp3	Verš, sloka a rým. Verš je jeden řádek básně. Sloka je skupina veršů oddělená mezerou. Rým je zvuková shoda na koncích veršů.
+hlas/cj-literatura-4.mp3	Druhy rýmu. Podle toho, které verše se rýmují, rozlišujeme čtyři základní typy.
+hlas/cj-literatura-5.mp3	Epické žánry. Pohádka má nadpřirozené prvky a dobrý konec. Pověst se váže ke skutečnému místu či osobě. Bajka má zvířecí postavy a poučení. Román je rozsáhlé prozaické dílo s více dějovými liniemi.
+hlas/cj-literatura-6.mp3	Vypravěč. V ich-formě vypráví příběh sám hrdina — mluví v první osobě. V er-formě vypráví někdo zvenčí ve třetí osobě.
+hlas/cj-literatura-7.mp3	Postavy a děj. Hlavní postava je ta, kolem níž se příběh točí. Vedlejší ji doplňují. Děj má obvykle úvod, zápletku, vyvrcholení a rozuzlení.
+hlas/cj-literatura-8.mp3	Básnické prostředky. Metafora přenáší význam podle podobnosti, personifikace dává neživým věcem lidské vlastnosti. Přirovnání používá slovo jako. Zdrobnělina zmenšuje a zjemňuje.
