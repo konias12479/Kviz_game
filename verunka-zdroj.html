@@ -3582,7 +3582,14 @@ function ctiText(t){
   if(!window.speechSynthesis)return;
   try{
     speechSynthesis.cancel();
-    const u=new SpeechSynthesisUtterance(String(t).replace(/\s+/g," ").trim());
+    let txt=String(t).replace(/\s+/g," ").trim();
+    // matematický zápis do řeči: poměry „ku“, jinde dvojtečka jako dělení
+    if(O&&O.predmet==="Matematika"){
+      const ku=(O.id==="mat-pomer")?" ku ":" děleno ";
+      txt=txt.replace(/(\d)\s*:\s*(\d)/g,"$1"+ku+"$2");
+      txt=txt.replace(/²/g," na druhou").replace(/³/g," na třetí").replace(/√/g," odmocnina z ").replace(/π/g," pí ");
+    }
+    const u=new SpeechSynthesisUtterance(txt);
     u.lang="cs-CZ";u.volume=.95;
     u.rate=S.hlasRate||1.3;
     u.pitch=(S.hlasPitch==null?1:S.hlasPitch);

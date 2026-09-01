@@ -1,0 +1,6 @@
+# Opravené texty — dvojtečka v poměru se čte „ku“.
+# Přegenerovat a přepsat tyto tři soubory ve složce hlas/.
+
+hlas/mat-pomer-1.mp3	Co je poměr. Poměr porovnává dvě veličiny. Zapisuje se dvojtečkou a čte se „ku“. Poměr se dá krátit i rozšiřovat jako zlomek — 6 ku 9 je totéž co 2 ku 3.
+hlas/mat-pomer-6.mp3	Měřítko mapy a plánu. Měřítko 1 ku 50 000 znamená, že 1 cm na mapě je 50 000 cm ve skutečnosti. Nejčastější chyba je zapomenout převést jednotky. Vždycky nakonec převeď centimetry na metry nebo kilometry.
+hlas/mat-pomer-7.mp3	Postup u měřítka. Z mapy do skutečnosti se násobí, ze skutečnosti na mapu se dělí. Vždycky číslem z měřítka. Je-li měřítko zvětšovací (třeba 2 ku 1 u drobné součástky), platí to obráceně.
