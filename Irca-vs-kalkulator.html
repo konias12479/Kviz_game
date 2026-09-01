@@ -1898,9 +1898,10 @@ function setKostym(k){
   ["k-studio","k-lab","k-uni","k-retro"].forEach(x=>cs.classList.remove(x));
   if(k)cs.classList.add(k);
 }
-function nastavPostavu(){
+function nastavPostavu(modeOverride){
   const cs=$("calcsvg");if(!cs)return;
-  cs.classList.toggle("ona",jeOna());
+  // v módu Adélka je pořád Kalkulátorka — Verunčiným hlasem vysvětluje sestře, holka k holce
+  cs.classList.toggle("ona",jeOna()||modeOverride==="adelka");
 }
 /* ===== NAHRANÝ HLAS PRO ADÉLKU =====
    Otázky a vysvětlení můžou mít nahrávku ve složce hlas-adelka/
@@ -1986,9 +1987,9 @@ function startGame(mode){
     return;
   }
   const c=ac(); if(c&&c.state==="suspended")c.resume();
-  nastavPostavu();
+  nastavPostavu(mode);
   // kostým se losuje na každou hru; v módu Pro Tátu ho řídí téma otázky
-  if(jeOna()&&mode!=="tata")setKostym(pick(KOSTYMY));
+  if((jeOna()||mode==="adelka")&&mode!=="tata")setKostym(pick(KOSTYMY));
   const deck=buildDeck(mode);
   G={mode,deck,i:0,score:0,streak:0,best:0,jokerUsed:false,
      total:mode==="duel"?Infinity:(["adelka","tata","irca","ucit"].includes(mode)?deck.length:(mode==="klasik"?20:(mode==="legendy"?15:(mode==="kalkulator"?12:10)))),
