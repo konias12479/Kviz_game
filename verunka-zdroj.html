@@ -157,7 +157,10 @@ border:1px solid rgba(255,216,77,.3);border-radius:11px;padding:12px;margin:14px
     <div><b id="stOk">0 %</b><span>úspěšnost</span></div>
     <div><b id="stDays">–</b><span>dní do zkoušky</span></div>
   </div>
-  <button class="btn sec" id="klidBtn" onclick="prepniKlid()" style="padding:9px;font-size:12.5px;margin:0 0 12px"></button>
+  <div style="display:flex;gap:7px;margin:0 0 12px">
+    <button class="btn sec" id="klidBtn" onclick="prepniKlid()" style="flex:1;padding:9px;font-size:12.5px;margin:0"></button>
+    <button class="btn sec" id="hlasBtn" onclick="openHlas()" style="flex:1;padding:9px;font-size:12.5px;margin:0">🗣️ Hlas výkladu…</button>
+  </div>
   <button class="card" onclick="go('rocnik')" style="border-color:rgba(127,227,255,.4)">
     <b style="color:var(--gold);font-size:17px">„Nebojím se. Jdu do toho.“</b>
     <span style="display:block;margin-top:5px;font-weight:700;color:var(--chalk)">🎓 <span id="mnRocnik"></span></span>
@@ -166,6 +169,21 @@ border:1px solid rgba(255,216,77,.3);border-radius:11px;padding:12px;margin:14px
   <div id="okruhy"></div>
   <button class="btn sec" onclick="resetProgress()">Vynulovat postup</button>
   <div class="foot">© 2026 Petr Poslušný — všechna práva vyhrazena</div>
+</div>
+
+<!-- ===== NASTAVENÍ HLASU VÝKLADU ===== -->
+<div class="screen" id="s-hlas">
+  <h1>🗣️ Hlas výkladu</h1>
+  <div class="sub">Výklad v okruzích se dá číst nahlas — jako by u tabule stál učitel. Vyber si hlas a nastav ho podle sebe.</div>
+  <button class="card" id="hlCteni" onclick="prepniCteni()"></button>
+  <label style="font-size:13px;font-weight:700;display:block;margin:12px 0 6px">Hlas v tomto zařízení</label>
+  <select id="hlSel" style="width:100%;background:rgba(255,255,255,.07);border:1px solid rgba(127,227,255,.45);border-radius:11px;padding:11px;color:var(--chalk);font-family:inherit;font-size:14px"></select>
+  <label style="font-size:13px;font-weight:700;display:block;margin:14px 0 4px">Hloubka hlasu — <span id="hlPv"></span></label>
+  <input type="range" id="hlPitch" min="0.4" max="1.6" step="0.05" style="width:100%">
+  <label style="font-size:13px;font-weight:700;display:block;margin:14px 0 4px">Tempo řeči — <span id="hlRv"></span></label>
+  <input type="range" id="hlRate" min="0.6" max="1.3" step="0.02" style="width:100%">
+  <button class="btn cy" onclick="hlasZkouska()" style="margin-top:16px">🔊 Vyzkoušet, jak to zní</button>
+  <button class="btn sec" onclick="go('menu')">← Zpět</button>
 </div>
 
 <!-- ===== VÝUKA JEDNOHO PŘEDMĚTU ===== -->
@@ -3319,7 +3337,11 @@ function kresliSpeed(){
     :"⏩ Rychlý režim: vypnutý — umíš to? Klepni a zrychli si to";
 }
 
-function go(n){document.querySelectorAll(".screen").forEach(x=>x.classList.remove("on"));$("s-"+n).classList.add("on");window.scrollTo(0,0);}
+let aktObrazovka="menu";
+function go(n){
+  if(aktObrazovka==="vyklad"&&n!=="vyklad")zastavCteni();  // odchod od tabule čtení utne
+  aktObrazovka=n;
+  document.querySelectorAll(".screen").forEach(x=>x.classList.remove("on"));$("s-"+n).classList.add("on");window.scrollTo(0,0);}
 
 /* ================= MENU ================= */
 function renderMenu(){
@@ -3383,6 +3405,7 @@ function vyklad(d){
 }
 function renderVyklad(){
   const v=O.vyklad[vi];
+  if(S.cteni)prehrajVyklad(v);
   $("vkOkruh").textContent=O.ikona+" "+O.nazev;
   $("vkPoc").textContent="Výklad "+(vi+1)+"/"+O.vyklad.length;
   $("vkH").textContent=v.h;$("vkT").textContent=v.t;
@@ -3552,6 +3575,76 @@ function dalsiUloha(){
   }
   ui++;renderUloha();go("uloha");
 }
+/* ================= HLAS VÝKLADU ================= */
+function hlasVoices(){return (window.speechSynthesis?speechSynthesis.getVoices():[])||[];}
+function vyberHlas(){
+  if(S.hlasJmeno){const v=hlasVoices().find(function(x){return x.name===S.hlasJmeno});if(v)return v;}
+  const cs=hlasVoices().filter(function(v){return /^cs/i.test(v.lang||"")});
+  return cs[0]||null;
+}
+function ctiText(t){
+  if(!window.speechSynthesis)return;
+  try{
+    speechSynthesis.cancel();
+    const u=new SpeechSynthesisUtterance(String(t).replace(/\s+/g," ").trim());
+    u.lang="cs-CZ";u.volume=.95;
+    u.rate=S.hlasRate||0.98;
+    u.pitch=(S.hlasPitch==null?1:S.hlasPitch);
+    const v=vyberHlas();if(v){u.voice=v;if(v.lang)u.lang=v.lang;}
+    speechSynthesis.speak(u);
+  }catch(e){}
+}
+let vykladAudio=null;
+function zastavCteni(){
+  if(window.speechSynthesis)try{speechSynthesis.cancel()}catch(e){}
+  if(vykladAudio){try{vykladAudio.pause()}catch(e){}vykladAudio=null;}
+}
+/* Stránka výkladu se nejdřív zkusí přehrát z nahrávky ve složce hlas/
+   (soubor <id-okruhu>-<číslo-strany>.mp3, např. hlas/mat-rovnice-1.mp3).
+   Když nahrávka není, čte hlasová syntéza. Tak jde postupně doplňovat
+   namluvený hlas z ElevenLabs, aniž by kdy něco přestalo mluvit. */
+function prehrajVyklad(v){
+  zastavCteni();
+  let zalozni=false;
+  const nahradni=function(){if(zalozni)return;zalozni=true;vykladAudio=null;ctiText(v.h+". "+v.t);};
+  try{
+    const a=new Audio("hlas/"+O.id+"-"+(vi+1)+".mp3");
+    a.volume=.95;
+    a.onerror=nahradni;
+    a.play().then(function(){vykladAudio=a;}).catch(nahradni);
+  }catch(e){nahradni();}
+}
+function prepniCteni(){S.cteni=!S.cteni;save();kresliHlas();if(!S.cteni)zastavCteni();}
+function kresliHlas(){
+  const c=$("hlCteni");
+  if(c)c.innerHTML='<b>'+(S.cteni?"🔊 Čtení výkladu: zapnuté":"🔇 Čtení výkladu: vypnuté")+'</b>'
+    +'<span>'+(S.cteni?"Každá strana výkladu se přečte nahlas, jakmile se objeví na tabuli.":"Klepni a výklad se začne předčítat.")+'</span>';
+}
+function openHlas(){
+  kresliHlas();
+  const naplnit=function(){
+    const all=hlasVoices(),cs=all.filter(function(v){return /^cs/i.test(v.lang||"")}),
+          sk=all.filter(function(v){return /^sk/i.test(v.lang||"")}),
+          ost=all.filter(function(v){return !/^cs|^sk/i.test(v.lang||"")});
+    const opt=function(v){return '<option value="'+v.name.replace(/"/g,"")+'"'+(S.hlasJmeno===v.name?" selected":"")+'>'+v.name+" ("+v.lang+')</option>'};
+    const grp=function(t,arr){return arr.length?('<optgroup label="'+t+'">'+arr.map(opt).join("")+"</optgroup>"):""};
+    $("hlSel").innerHTML='<option value="">Automaticky (první český)</option>'
+      +grp("Čeština",cs)+grp("Slovenština",sk)+grp("Ostatní",ost);
+  };
+  naplnit();
+  if(window.speechSynthesis)speechSynthesis.onvoiceschanged=naplnit;
+  $("hlPitch").value=(S.hlasPitch==null?1:S.hlasPitch);
+  $("hlRate").value=S.hlasRate||0.98;
+  const pop=function(){$("hlPv").textContent=(+$("hlPitch").value).toFixed(2).replace(".",",");
+    $("hlRv").textContent=(+$("hlRate").value).toFixed(2).replace(".",",");};
+  pop();
+  $("hlSel").onchange=function(){S.hlasJmeno=$("hlSel").value||null;save();hlasZkouska();};
+  $("hlPitch").oninput=function(){S.hlasPitch=+$("hlPitch").value;save();pop();};
+  $("hlRate").oninput=function(){S.hlasRate=+$("hlRate").value;save();pop();};
+  go("hlas");
+}
+function hlasZkouska(){ctiText("Ahoj Verunko. Takhle budu číst výklad na tabuli.");}
+
 /* ================= KLIDNÁ HUDBA NA POZADÍ =================
    Pomalé měkké akordy laděné od A = 432 Hz. Čisté tóny umí syntéza
    dobře — na rozdíl od deště. Tichounké, jen jako podkres. */
