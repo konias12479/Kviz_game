@@ -2163,8 +2163,9 @@ function pauseThenNext(ms){
   paused=true;
   $("skipBtn").classList.add("show");
   clearTimeout(pauseTO);
-  pauseTO=setTimeout(function chk(){ // počkej, až Kalkulátor dořekne hlášku
+  pauseTO=setTimeout(function chk(){ // počkej, až Kalkulátor dořekne hlášku (syntéza i nahraný klip)
     if(window.speechSynthesis&&speechSynthesis.speaking){pauseTO=setTimeout(chk,250);return;}
+    if(adelkaAudio&&!adelkaAudio.paused){pauseTO=setTimeout(chk,250);return;}
     nextQ();
   },ms);
 }
