@@ -1814,6 +1814,7 @@ function pickVoice(){
 }
 function speak(txt,chance=1){
   if(!voiceOn||!soundOn||!window.speechSynthesis||Math.random()>chance)return;
+  stopAdelkaAudio();   // dva hlasy přes sebe nikdy
   try{
     let t=txt.replace(/[^\p{L}\p{N}\s.,!?%„“‚'’()–—-]/gu,"");
     for(const [re,sub] of PRON)t=t.replace(re,sub);
@@ -1910,6 +1911,7 @@ function prehrajAdelka(pref,orig,zaloha){
   try{
     const a=new Audio("hlas-adelka/"+pref+"-"+adHash(orig)+".mp3");
     a.volume=.95;
+    a.playbackRate=1.3;   // stejné tempo jako hlas ve Verunce
     a.onerror=fb;
     a.onplay=function(){startTalking();};
     a.onended=function(){adelkaAudio=null;stopTalking();};
@@ -2067,13 +2069,13 @@ function finishReveal(ok){
     G.score++;G.streak++;G.best=Math.max(G.best,G.streak);
     sfxOk();flash("ok");calcFace("happy");
     sv.classList.add("gest-open");setTimeout(()=>sv.classList.remove("gest-open"),1500);
-    if(quipsOn){const t=pickQuip(G.mode==="tata"?(G.curMil?"tataCorrect":"tataLocC"):"correct");bubble(t);speak(t,G.mode==="tata"?1:.55);}
+    if(quipsOn){const t=pickQuip(G.mode==="tata"?(G.curMil?"tataCorrect":"tataLocC"):"correct");bubble(t);speak(t,G.mode==="tata"?1:(G.mode==="adelka"?0:.55));}
   }else{ // špatně → Kalkulátor posmutní a povzbudí
     G.streak=0;
     sfxBad();flash("bad");calcFace("sad");
     $("donkChip").classList.add("shake");
     setTimeout(()=>$("donkChip").classList.remove("shake"),600);
-    if(quipsOn){const t=pickQuip(G.mode==="tata"?(G.curMil?"tataWrong":"tataLocW"):"wrong");bubble(t);speak(t,G.mode==="tata"?1:.55);}
+    if(quipsOn){const t=pickQuip(G.mode==="tata"?(G.curMil?"tataWrong":"tataLocW"):"wrong");bubble(t);speak(t,G.mode==="tata"?1:(G.mode==="adelka"?0:.55));}
   }
   $("scoreTxt").textContent=G.score;
   G.answered++; G.i++;
@@ -2128,7 +2130,7 @@ function onTimeout(){
   set.forEach(p=>btns[p].classList.add("correct"));
   btns[set[0]].querySelector(".aemo").textContent=(G.curQ&&G.curQ.e)||CATEMOJI[G.curQ&&G.curQ.k]||"❓";
   sfxBad();calcFace("sad");
-  if(quipsOn){const t=pickQuip(G.mode==="tata"&&G.curMil?"tataTimeout":"timeout");bubble(t);speak(t,G.mode==="tata"?1:.55);}
+  if(quipsOn){const t=pickQuip(G.mode==="tata"&&G.curMil?"tataTimeout":"timeout");bubble(t);speak(t,G.mode==="tata"?1:(G.mode==="adelka"?0:.55));}
   G.streak=0;G.answered++;G.i++;
   let wait=2600;
   if(G.curQ.x){wait=7500;setTimeout(()=>explainWhenQuiet(G.curQ.x),1200);}
