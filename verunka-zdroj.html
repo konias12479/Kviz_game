@@ -157,10 +157,7 @@ border:1px solid rgba(255,216,77,.3);border-radius:11px;padding:12px;margin:14px
     <div><b id="stOk">0 %</b><span>úspěšnost</span></div>
     <div><b id="stDays">–</b><span>dní do zkoušky</span></div>
   </div>
-  <div style="display:flex;gap:7px;margin:0 0 12px">
-    <button class="btn sec" id="klidBtn" onclick="prepniKlid()" style="flex:1;padding:9px;font-size:12.5px;margin:0"></button>
-    <button class="btn sec" id="hlasBtn" onclick="openHlas()" style="flex:1;padding:9px;font-size:12.5px;margin:0">🗣️ Hlas výkladu…</button>
-  </div>
+  <button class="btn sec" id="hlasBtn" onclick="openHlas()" style="padding:9px;font-size:12.5px;margin:0 0 12px">🗣️ Hlas výkladu…</button>
   <button class="card" onclick="go('rocnik')" style="border-color:rgba(127,227,255,.4)">
     <b style="color:var(--gold);font-size:17px">„Nebojím se. Jdu do toho.“</b>
     <span style="display:block;margin-top:5px;font-weight:700;color:var(--chalk)">🎓 <span id="mnRocnik"></span></span>
@@ -181,7 +178,7 @@ border:1px solid rgba(255,216,77,.3);border-radius:11px;padding:12px;margin:14px
   <label style="font-size:13px;font-weight:700;display:block;margin:14px 0 4px">Hloubka hlasu — <span id="hlPv"></span></label>
   <input type="range" id="hlPitch" min="0.4" max="1.6" step="0.05" style="width:100%">
   <label style="font-size:13px;font-weight:700;display:block;margin:14px 0 4px">Tempo řeči — <span id="hlRv"></span></label>
-  <input type="range" id="hlRate" min="0.6" max="1.3" step="0.02" style="width:100%">
+  <input type="range" id="hlRate" min="0.6" max="1.6" step="0.02" style="width:100%">
   <button class="btn cy" onclick="hlasZkouska()" style="margin-top:16px">🔊 Vyzkoušet, jak to zní</button>
   <button class="btn sec" onclick="go('menu')">← Zpět</button>
 </div>
@@ -3350,7 +3347,6 @@ function renderMenu(){
   $("stDone").textContent=S.total||0;
   $("stOk").textContent=(S.total?Math.round(100*S.ok/S.total):0)+" %";
   if($("mnRocnik"))$("mnRocnik").textContent=ROCPOPIS[rocnik()];
-  kresliKlid();
   const IK={"Čeština":"✍️","Matematika":"📐"};
   let h='<div class="predmety">';
   ["Čeština","Matematika"].forEach(function(p){
@@ -3588,7 +3584,7 @@ function ctiText(t){
     speechSynthesis.cancel();
     const u=new SpeechSynthesisUtterance(String(t).replace(/\s+/g," ").trim());
     u.lang="cs-CZ";u.volume=.95;
-    u.rate=S.hlasRate||0.98;
+    u.rate=S.hlasRate||1.15;
     u.pitch=(S.hlasPitch==null?1:S.hlasPitch);
     const v=vyberHlas();if(v){u.voice=v;if(v.lang)u.lang=v.lang;}
     speechSynthesis.speak(u);
@@ -3610,10 +3606,12 @@ function prehrajVyklad(v){
   try{
     const a=new Audio("hlas/"+O.id+"-"+(vi+1)+".mp3");
     a.volume=.95;
+    a.playbackRate=S.hlasRate||1.15;   // tempo platí i pro namluvené nahrávky
     a.onerror=nahradni;
     a.play().then(function(){vykladAudio=a;}).catch(nahradni);
   }catch(e){nahradni();}
 }
+window.destStop=zastavCteni;   // hra tímhle ztlumí čtení při odchodu z Verunky
 function prepniCteni(){S.cteni=!S.cteni;save();kresliHlas();if(!S.cteni)zastavCteni();}
 function kresliHlas(){
   const c=$("hlCteni");
@@ -3634,7 +3632,7 @@ function openHlas(){
   naplnit();
   if(window.speechSynthesis)speechSynthesis.onvoiceschanged=naplnit;
   $("hlPitch").value=(S.hlasPitch==null?1:S.hlasPitch);
-  $("hlRate").value=S.hlasRate||0.98;
+  $("hlRate").value=S.hlasRate||1.15;
   const pop=function(){$("hlPv").textContent=(+$("hlPitch").value).toFixed(2).replace(".",",");
     $("hlRv").textContent=(+$("hlRate").value).toFixed(2).replace(".",",");};
   pop();
@@ -3644,76 +3642,6 @@ function openHlas(){
   go("hlas");
 }
 function hlasZkouska(){ctiText("Ahoj Verunko. Takhle budu číst výklad na tabuli.");}
-
-/* ================= KLIDNÁ HUDBA NA POZADÍ =================
-   Pomalé měkké akordy laděné od A = 432 Hz. Čisté tóny umí syntéza
-   dobře — na rozdíl od deště. Tichounké, jen jako podkres. */
-let klidCtx=null,klidUzly=[],klidTO=null,klidBezi=false;
-const KLID_AKORDY=[   // o oktávu výš — hluboké tóny malé reproduktory nepřehrají
- [342.88,432.00,514.44],
- [432.00,514.44,648.18],
- [257.22,324.09,385.71],
- [385.71,485.98,576.65]
-];
-let klidKrok=0;
-function klidAc(){try{klidCtx=klidCtx||new (window.AudioContext||window.webkitAudioContext)();return klidCtx;}catch(e){return null;}}
-function klidAkord(){
-  const c=klidCtx;if(!c||!klidBezi)return;
-  const t=c.currentTime,akord=KLID_AKORDY[klidKrok%KLID_AKORDY.length];
-  const prvni=klidKrok===0;
-  klidKrok++;
-  akord.forEach(function(f,i){
-    [0,-1.5].forEach(function(rozladeni){       // dvě lehce rozladěné vrstvy = teplý zvuk
-      const o=c.createOscillator(),g=c.createGain(),lp=c.createBiquadFilter();
-      o.type=i===0?"triangle":"sine";
-      o.frequency.value=f+rozladeni*0.5;
-      lp.type="lowpass";lp.frequency.value=2400;
-      const nastup=prvni?1.2:4;                  // první akord naskočí rychle, ať je slyšet odezva
-      g.gain.setValueAtTime(0.0001,t);
-      g.gain.linearRampToValueAtTime(0.055,t+nastup);
-      g.gain.linearRampToValueAtTime(0.045,t+9);
-      g.gain.linearRampToValueAtTime(0.0001,t+14);
-      o.connect(lp);lp.connect(g);g.connect(c.destination);
-      o.start(t);o.stop(t+14.5);
-      klidUzly.push(o);
-    });
-  });
-  // jemný zvonek nahoře, aby melodie žila
-  const z=c.createOscillator(),zg=c.createGain();
-  z.type="sine";z.frequency.value=akord[2]*2;
-  zg.gain.setValueAtTime(0.0001,t+1);
-  zg.gain.exponentialRampToValueAtTime(0.035,t+1.15);
-  zg.gain.exponentialRampToValueAtTime(0.0001,t+4.5);
-  z.connect(zg);zg.connect(c.destination);z.start(t+1);z.stop(t+5);
-  klidUzly.push(z);
-  klidTO=setTimeout(klidAkord,11000);            // akordy se plynule překrývají
-}
-function klidStart(){
-  const c=klidAc();if(!c)return;
-  if(c.state==="suspended")c.resume();
-  klidBezi=true;klidKrok=0;klidAkord();
-}
-function klidStop(){
-  klidBezi=false;
-  if(klidTO){clearTimeout(klidTO);klidTO=null;}
-  klidUzly.forEach(function(o){try{o.stop()}catch(e){}});
-  klidUzly=[];
-}
-window.destStop=klidStop;                          // ať ji hra umí ztlumit při odchodu
-function prepniKlid(){
-  S.klid=!S.klid;save();
-  if(S.klid)klidStart();else klidStop();
-  kresliKlid();
-}
-function kresliKlid(){
-  const b=$("klidBtn");if(!b)return;
-  b.textContent=S.klid?"🎵 Klidná hudba (432 Hz): hraje — klepni pro ticho":"🎵 Klidná hudba (432 Hz): vypnutá";
-  b.style.borderColor=S.klid?"rgba(127,227,255,.7)":"rgba(244,241,232,.35)";
-}
-// po novém otevření naběhne po prvním klepnutí (prohlížeč nedovolí spustit sám)
-document.addEventListener("click",function(){
-  if(S.klid&&!klidBezi)klidStart();
-},true);
 
 /* ================= TŘÍDA SE ZVUKY UČITELE ================= */
 /* Atmosféra ostré zkoušky: učitel občas něco prohodí, zavržou dveře,
