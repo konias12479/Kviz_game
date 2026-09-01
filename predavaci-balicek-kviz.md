@@ -53,6 +53,17 @@ def adhash(s):
 ```
 Soubor se pak jmenuje `o-<hash>.mp3` (otázka), `v-<hash>.mp3` (vysvětlení), `q-<hash>.mp3` (hláška majora). **Změníš-li text otázky, hash se změní a nahrávka přestane sedět — musí se přegenerovat.** U hlášek majora se hashuje text PŘED personalizací (před přidáním oslovení „Vojíne Poslušný —"). Když nahrávka chybí, hra automaticky spadne zpět na prohlížečovou syntézu — nic se nerozbije, jen to zní hůř.
 
+### Ticho na začátku klipu — POVINNÝ krok po každém generování
+Reproduktor (hlavně Bluetooth) se po spuštění zvuku ~300 ms probouzí a spolkne začátek. Když je na začátku klipu ticho, spolkne ticho místo prvního slova. ElevenLabs vrací klipy, kde řeč začíná hned v prvních 50 ms — **bez doplnění ticha není rozumět prvnímu slovu** (Petr to 1. 9. reklamoval).
+
+Po každém generování spusť:
+```bash
+cd nastroje && python pad_clips_kviz.py
+```
+Skript je idempotentní (klipy s dost dlouhým tichem přeskočí), takže se nedá spustit „dvakrát omylem" a nasčítat pauzy. Jako jediný ze skriptů je i v repu — neobsahuje API klíč.
+
+**Pozor na rychlost přehrávání:** hra pouští `hlas/` a `hlas-adelka/` rychlostí **1,3×**, takže tam skript dává 390 ms (po zrychlení = 300 ms). `hlas-tata/` běží 1× a dostane 300 ms. Kdyby se tempo v aplikaci měnilo, uprav tabulku `PAD` ve skriptu.
+
 ### Generovací skripty (v `nastroje\`, gitignorováno)
 - `extract_adelka_all.py` / `extract_tata_texts.py` — vytáhnou texty z .txt a hry do JSON.
 - `gen_adelka_all.py`, `gen_tata_hlas.py`, `gen_kviz_hlas.py` — generují po dávkách 15, po každé dávce commit+push (dá se kdykoli přerušit a spustit znovu, hotové soubory přeskočí).
@@ -67,6 +78,7 @@ Kolik ještě chybí zjistíš kdykoli: `cd nastroje && python extract_adelka_al
 **Kredity ubývají rychle** (~130 k znaků na ~4000 klipů) — před velkým během se Petra zeptej.
 
 ## Poslední změny (kontext, ne úkoly)
+- **Všem klipům bylo předsazeno ticho** (viz sekce výše). `hlas/` a `hlas-tata/` hotové (767 souborů), `hlas-adelka/` se dodělává až po doběhnutí generování — **zkontroluj to jako první věc** (`cd nastroje && python pad_clips_kviz.py`).
 - Sekce Ruda dostala nahraný hlas místo syntézy (otázky, vysvětlení i hlášky majora).
 - Opraveno: hra už neskáče na další otázku, dokud nahraný klip nedohraje (`pauseThenNext` čeká i na `adelkaAudio`).
 - V Adélčině módu je Kalkulátorka (ženská postava) s vlídným úsměvem, ne mužský Kalkulátor.
