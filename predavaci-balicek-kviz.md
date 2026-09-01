@@ -71,14 +71,18 @@ Skript je idempotentní (klipy s dost dlouhým tichem přeskočí), takže se ne
 - Skripty se pouštějí **ze složky `nastroje/`** (`cd nastroje && python gen_adelka_all.py`) — cestu k repu si dopočítají z umístění souboru.
 - **Pozor na souběžný push:** skripty po každé dávce commitují a pushují. Když mezitím pushne někdo jiný, `gen_adelka_all.py` si udělá `pull --rebase` a zkusí to znovu (max 4×); ostatní skripty tuhle pojistku zatím nemají a spadly by. Před spuštěním udělej `git pull` a během běhu do repa raději nepushuj.
 
-## Stav k 1. 9. 2026
-Hotovo: 184 klipů Verunka-přijímačky, 518 klipů biologie, 583 klipů Ruda, 3 opravné klipy (poměr „ku"), a velká část chemie a ostatních předmětů pro Adélku.
-**Rozpracováno:** zbytek Adélčiny sady (celkem 4850 klipů = 2430 otázek + 2420 vysvětlení). První běh vyčerpal kvótu ElevenLabs (`quota_exceeded` po 4018 klipech), Petr 1. 9. dokoupil kredity a dávka běží dál — zbývalo 734 klipů.
-Kolik ještě chybí zjistíš kdykoli: `cd nastroje && python extract_adelka_all.py` (vypíše „chybí vygenerovat"). Dogenerovat: `python gen_adelka_all.py` — přeskočí hotové, takže se dá pouštět opakovaně.
-**Kredity ubývají rychle** (~130 k znaků na ~4000 klipů) — před velkým během se Petra zeptej.
+## Stav k 1. 9. 2026 — namlouvání KOMPLETNÍ
+Hotovo a nasazeno, všechno s předsazeným tichem:
+- `hlas/` — 184 klipů výkladu Verunka-přijímačky (vč. 3 oprav výslovnosti poměru „ku")
+- `hlas-adelka/` — 4850 klipů (2430 otázek + 2420 vysvětlení): biologie, chemie i ostatní předměty
+- `hlas-tata/` — 583 klipů sekce Ruda (Brian Deep)
+
+První běh Adélčiny sady vyčerpal kvótu ElevenLabs (`quota_exceeded` po 4018 klipech); Petr 1. 9. dokoupil kredity a zbylých 734 klipů doběhlo bez chyby. **Kredity ubývají rychle** (~130 k znaků na ~4000 klipů) — před velkým během se Petra zeptej.
+
+Kdyby se texty měnily, kolik chybí zjistíš `cd nastroje && python extract_adelka_all.py`, dogeneruješ `python gen_adelka_all.py` (přeskočí hotové) a **pak nezapomeň na ticho** — viz sekce níž.
 
 ## Poslední změny (kontext, ne úkoly)
-- **Všem klipům bylo předsazeno ticho** (viz sekce výše). `hlas/` a `hlas-tata/` hotové (767 souborů), `hlas-adelka/` se dodělává až po doběhnutí generování — **zkontroluj to jako první věc** (`cd nastroje && python pad_clips_kviz.py`).
+- **Všem 5617 klipům bylo předsazeno ticho** (viz sekce „Ticho na začátku klipu"). Do té doby nebylo rozumět prvnímu slovu — Petr to reklamoval a je to opravené ve všech třech složkách.
 - Sekce Ruda dostala nahraný hlas místo syntézy (otázky, vysvětlení i hlášky majora).
 - Opraveno: hra už neskáče na další otázku, dokud nahraný klip nedohraje (`pauseThenNext` čeká i na `adelkaAudio`).
 - V Adélčině módu je Kalkulátorka (ženská postava) s vlídným úsměvem, ne mužský Kalkulátor.
@@ -86,9 +90,12 @@ Kolik ještě chybí zjistíš kdykoli: `cd nastroje && python extract_adelka_al
 - Odstraněno tlačítko „Nastavení hlasu Kalkulátora" — hlas se teď namlouvá předem, syntéza je jen záloha.
 
 ## Otevřené úkoly
-1. **Dokončit namlouvání chemie** (viz Stav výše).
-2. **Ikona sekce „Ruda to nevzdá!"** — Petr chce místo emoji 👨 pořádnou komiksovou ilustraci: veselý muž s hnědými vlasy objímá černovlasou usmívající se dívku, k tomu tank, chata a silueta Prahy. Moje ručně kreslené SVG Petr zamítl jako „velmi basic". Claude Design skill nešel použít — na stroji chybí `node` i `bun`. Možnosti: doinstalovat node, najít hotovou komiksovou ilustraci s vhodnou licencí, nebo nechat vygenerovat obrázek jinde a vložit jako PNG.
-3. Grafika Kalkulátorky v Adélčině módu — Petr s ní pořád není spokojený (opravil jsem jen výraz, ne kresbu).
+Namlouvání je hotové — zbývají jen dvě grafické věci, obě ze stejného důvodu: **ručně kreslené SVG Petrovi nestačí** („velmi basic"). Chat, který v tom bude pokračovat, by měl mít po ruce buď `node`/`bun` (kvůli Claude Design), nástroj na generování obrázků, nebo hotové licencované ilustrace.
+
+1. **Ikona sekce „Ruda to nevzdá!"** — místo emoji 👨 chce komiksovou ilustraci: veselý muž s hnědými vlasy objímá černovlasou usmívající se dívku, k tomu tank, chata a silueta Prahy. Claude Design skill v tehdejší session nešel použít, na stroji chybí `node` i `bun`.
+2. **Grafika Kalkulátorky v Adélčině módu** — Petr s ní pořád není spokojený; upraven byl zatím jen výraz (vlídný úsměv v klidu i při výkladu), ne samotná kresba.
+
+Poznámka k inspiraci: v appce Klid jsem podobnou kreslenou postavičku (ukázky cviků) dotáhl do přijatelné podoby tím, že dostala **tmavé obrysy, obličej s výrazem, boty a tvarované oblečení** a byla zvětšená v rámečku — viz `restart.html` v projektu Lepší, blok `/* ===== UKÁZKY CVIKŮ ===== */`. Stejný postup by pomohl i tady.
 
 ## Petrova pravidla (dodržovat!)
 - **Stopka:** před každým úkolem 1–2 věty — vhodnost modelu (rutina → ZASTAVIT a nechat ho přepnout na levnější; „dodělám, je to pár minut" je nepřijatelné) a kontrola délky chatu. Platí oběma směry (i slabý model na složitý úkol). Je to i v paměti (`stopka-pred-ukolem`).
