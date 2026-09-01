@@ -1,0 +1,523 @@
+# Adélka škola — okruh Biologie: texty k namluvení
+# Formát: NÁZEV SOUBORU<TAB>TEXT. Soubory patří do složky hlas-adelka/ v repozitáři konias12479/Kviz_game.
+# o- = otázka, v- = vysvětlení. MP3, čeština.
+# Otázek: 259, souborů: 518, znaků: 15410
+
+hlas-adelka/o-26cb6288.mp3	Co je základní stavební a funkční jednotkou života?
+hlas-adelka/v-5195b510.mp3	Buněčnou teorii formulovali Schleiden a Schwann.
+hlas-adelka/o-a6bd253a.mp3	Čím se liší prokaryotická buňka od eukaryotické?
+hlas-adelka/v-7479fccc.mp3	Prokaryota jsou bakterie a archea.
+hlas-adelka/o-8c89c88f.mp3	Která organela je energetickým centrem buňky?
+hlas-adelka/v-c6ef98ad.mp3	Probíhá v ní buněčné dýchání a tvorba ATP.
+hlas-adelka/o-004ec67a.mp3	Která organela zajišťuje fotosyntézu?
+hlas-adelka/v-3451b316.mp3	Obsahuje zelené barvivo chlorofyl.
+hlas-adelka/o-bb9900e8.mp3	Co je úkolem ribozomů?
+hlas-adelka/v-47191ca3.mp3	Překládají genetickou informaci z mRNA.
+hlas-adelka/o-cf242f17.mp3	Která organela obsahuje trávicí enzymy?
+hlas-adelka/v-f9988d20.mp3	Rozkládá odpadní a poškozené části buňky.
+hlas-adelka/o-f9ffb66e.mp3	Co je úkolem Golgiho aparátu?
+hlas-adelka/v-dec976e2.mp3	Balí produkty do váčků.
+hlas-adelka/o-42776594.mp3	Z čeho je tvořena buněčná stěna rostlin?
+hlas-adelka/v-847f1703.mp3	U hub je to chitin, u bakterií peptidoglykan.
+hlas-adelka/o-240b54cb.mp3	Kde je uložena genetická informace buňky?
+hlas-adelka/v-55c04fb1.mp3	Deoxyribonukleová kyselina v jádře i mitochondriích.
+hlas-adelka/o-10774aaf.mp3	Jaký tvar má molekula DNA?
+hlas-adelka/v-c25a4bf8.mp3	Model popsali Watson a Crick roku 1953.
+hlas-adelka/o-8070efa9.mp3	Které báze se v DNA párují s adeninem?
+hlas-adelka/v-a2d87067.mp3	V RNA se místo thyminu páruje uracil.
+hlas-adelka/o-b7d1c59c.mp3	Které báze se v DNA párují s guaninem?
+hlas-adelka/v-e449a036.mp3	Spojují je tři vodíkové můstky.
+hlas-adelka/o-7d0d93ac.mp3	Čím se liší RNA od DNA?
+hlas-adelka/v-a95b3022.mp3	RNA je zpravidla jednovláknová.
+hlas-adelka/o-1c54ed1f.mp3	Co je gen?
+hlas-adelka/v-1d4b2527.mp3	Většinou kóduje jednu bílkovinu.
+hlas-adelka/o-66798598.mp3	Kolik chromozomů má lidská somatická buňka?
+hlas-adelka/v-f0c98120.mp3	Dvacet tři párů, z toho jeden pár pohlavní.
+hlas-adelka/o-1e88acc1.mp3	Kolik chromozomů má lidská pohlavní buňka?
+hlas-adelka/v-98639eb5.mp3	Vzniká meiózou, obsahuje poloviční počet.
+hlas-adelka/o-a70dca3e.mp3	Jak se jmenuje dělení vedoucí ke dvěma identickým buňkám?
+hlas-adelka/v-230aea24.mp3	Slouží k růstu a obnově tkání.
+hlas-adelka/o-49208c4e.mp3	Jak se jmenuje redukční dělení?
+hlas-adelka/v-6db925dc.mp3	Vznikají čtyři buňky s polovičním počtem chromozomů.
+hlas-adelka/o-0169aa2f.mp3	Co je fotosyntéza?
+hlas-adelka/v-90b9a6ed.mp3	Vedlejším produktem je kyslík.
+hlas-adelka/o-64025b41.mp3	Kde probíhá světelná fáze fotosyntézy?
+hlas-adelka/v-910147e4.mp3	V membránách s fotosystémy.
+hlas-adelka/o-46424671.mp3	Co je buněčné dýchání?
+hlas-adelka/v-2c34810a.mp3	Probíhá v mitochondriích.
+hlas-adelka/o-cbd2ecaa.mp3	Kolik ATP vznikne úplnou oxidací jedné molekuly glukózy?
+hlas-adelka/v-b1effe59.mp3	Nejvíc energie dodá dýchací řetězec.
+hlas-adelka/o-1c3fca8a.mp3	Co je ATP?
+hlas-adelka/v-8f0ffff2.mp3	Adenosintrifosfát uvolní energii odštěpením fosfátu.
+hlas-adelka/o-a2baa780.mp3	Kdo je zakladatelem genetiky?
+hlas-adelka/v-e99d6d01.mp3	Své pokusy s hrachem prováděl v Brně.
+hlas-adelka/o-ecdaaa2b.mp3	Co je genotyp?
+hlas-adelka/v-5fc9a6da.mp3	Fenotyp je jeho vnější projev.
+hlas-adelka/o-0098d54a.mp3	Co je fenotyp?
+hlas-adelka/v-78ead0c8.mp3	Ovlivňuje ho i výživa a prostředí.
+hlas-adelka/o-40cde6f5.mp3	Co je homozygot?
+hlas-adelka/v-6ceab3dc.mp3	Například AA nebo aa.
+hlas-adelka/o-cedd9e69.mp3	Co je heterozygot?
+hlas-adelka/v-75255411.mp3	Například Aa, projeví se dominantní alela.
+hlas-adelka/o-173b2fb9.mp3	Co je dominantní alela?
+hlas-adelka/v-fdd4dfac.mp3	Značí se velkým písmenem.
+hlas-adelka/o-78b62a80.mp3	Kolik krevních skupin má systém AB0?
+hlas-adelka/v-69d59c62.mp3	A, B, AB a 0.
+hlas-adelka/o-fade440c.mp3	Která krevní skupina je univerzálním dárcem?
+hlas-adelka/v-908bcb42.mp3	Nemá na erytrocytech antigeny A ani B.
+hlas-adelka/o-04d08987.mp3	Která krevní skupina je univerzálním příjemcem?
+hlas-adelka/v-893dba49.mp3	Nemá v plazmě protilátky anti-A ani anti-B.
+hlas-adelka/o-0cdfb243.mp3	Co jsou enzymy?
+hlas-adelka/v-34daa5f6.mp3	Urychlují reakce a jsou vysoce specifické.
+hlas-adelka/o-057cc537.mp3	Co je aktivní místo enzymu?
+hlas-adelka/v-4d7749e1.mp3	Platí model zámku a klíče.
+hlas-adelka/o-2ce12aeb.mp3	Co se stane s enzymem při vysoké teplotě?
+hlas-adelka/v-8a2207ae.mp3	Poruší se prostorová struktura bílkoviny.
+hlas-adelka/o-dcae7dc8.mp3	Co jsou vitaminy?
+hlas-adelka/v-eeec119a.mp3	Tělo si je většinou neumí vyrobit.
+hlas-adelka/o-a4796ed0.mp3	Který vitamin chrání před kurdějemi?
+hlas-adelka/v-b57b5039.mp3	Kyselina askorbová je nutná pro tvorbu kolagenu.
+hlas-adelka/o-b9c63ef3.mp3	Který vitamin vzniká v kůži působením slunce?
+hlas-adelka/v-9d4ce85d.mp3	Nezbytný pro vstřebávání vápníku.
+hlas-adelka/o-3d1a80cd.mp3	Které vitaminy jsou rozpustné v tucích?
+hlas-adelka/v-213bc5d0.mp3	Mohou se v těle hromadit a předávkovat.
+hlas-adelka/o-a7143ca3.mp3	Co jsou hormony?
+hlas-adelka/v-b8f52453.mp3	Produkují je žlázy s vnitřní sekrecí.
+hlas-adelka/o-c0e7f6f7.mp3	Který hormon snižuje hladinu cukru v krvi?
+hlas-adelka/v-df2a6723.mp3	Vytváří se ve slinivce břišní.
+hlas-adelka/o-912e8bd9.mp3	Který hormon zvyšuje hladinu cukru v krvi?
+hlas-adelka/v-3a6c5af3.mp3	Působí opačně než inzulin.
+hlas-adelka/o-985029b5.mp3	Co je diabetes mellitus?
+hlas-adelka/v-2573e649.mp3	První typ je nedostatek inzulinu, druhý inzulinová rezistence.
+hlas-adelka/o-d7e0f75e.mp3	Co jsou bakterie?
+hlas-adelka/v-a3babd7f.mp3	Patří mezi prokaryota.
+hlas-adelka/o-0b67ba8e.mp3	Jsou viry živé organismy?
+hlas-adelka/v-572f90c4.mp3	Stojí na hranici mezi živým a neživým.
+hlas-adelka/o-9bd80d50.mp3	Čím se léčí bakteriální infekce?
+hlas-adelka/v-9dae029e.mp3	Na viry antibiotika nepůsobí.
+hlas-adelka/o-93bb6519.mp3	Proč je nadužívání antibiotik problém?
+hlas-adelka/v-ae6bebb8.mp3	Odolné kmeny se pak obtížně léčí.
+hlas-adelka/o-0a9c30e4.mp3	Co je sterilizace?
+hlas-adelka/v-5e4e357e.mp3	Například v autoklávu při 121 stupních.
+hlas-adelka/o-b541825d.mp3	Co je dezinfekce?
+hlas-adelka/v-90c3039f.mp3	Nezničí spolehlivě spory.
+hlas-adelka/o-5e97eeac.mp3	Co je autokláv?
+hlas-adelka/v-db1daf81.mp3	Standardně 121 stupňů po dobu 15 až 20 minut.
+hlas-adelka/o-d0438fc0.mp3	Co je pasterizace?
+hlas-adelka/v-aefa8ada.mp3	Zavedl ji Louis Pasteur, prodlužuje trvanlivost mléka.
+hlas-adelka/o-43da7d49.mp3	Kdo jako první pozoroval buňky?
+hlas-adelka/v-4a7f7bf6.mp3	V roce 1665 v korkové zátce.
+hlas-adelka/o-23440542.mp3	Kdo první pozoroval živé mikroorganismy?
+hlas-adelka/v-c94f6ea1.mp3	Vlastnoručně broušenými čočkami.
+hlas-adelka/o-179d15d6.mp3	Která organela je v rostlinné buňce a v živočišné chybí?
+hlas-adelka/v-64cb4a7c.mp3	Rostliny mají navíc i buněčnou stěnu a velkou vakuolu.
+hlas-adelka/o-d95414a3.mp3	K čemu slouží vakuola v rostlinné buňce?
+hlas-adelka/v-1c00a1e0.mp3	Zabírá až devadesát procent objemu buňky.
+hlas-adelka/o-3c42a4e8.mp3	Co je turgor?
+hlas-adelka/v-21094ef5.mp3	Při jeho ztrátě rostlina vadne.
+hlas-adelka/o-2aef603c.mp3	Co je plazmolýza?
+hlas-adelka/v-9e31ee97.mp3	Nastane v hypertonickém roztoku.
+hlas-adelka/o-b6a79b02.mp3	Co je osmóza?
+hlas-adelka/v-e3a4deed.mp3	Voda putuje do koncentrovanějšího roztoku.
+hlas-adelka/o-4fcfa5ac.mp3	Co je difuze?
+hlas-adelka/v-6e491a8f.mp3	Probíhá bez dodání energie.
+hlas-adelka/o-bd8ec0ac.mp3	Co je aktivní transport?
+hlas-adelka/v-84f6029b.mp3	Například sodíko-draselná pumpa.
+hlas-adelka/o-4c262b1b.mp3	Z čeho je tvořena buněčná membrána?
+hlas-adelka/v-74061e9e.mp3	Model tekuté mozaiky.
+hlas-adelka/o-730b0ea0.mp3	Co je fagocytóza?
+hlas-adelka/v-47a2f6db.mp3	Bílé krvinky tak likvidují bakterie.
+hlas-adelka/o-f865c339.mp3	Co je pinocytóza?
+hlas-adelka/v-8d7612ee.mp3	Buňka vytvoří váček s roztokem.
+hlas-adelka/o-269932d2.mp3	Kolik fází má mitóza?
+hlas-adelka/v-e83a5860.mp3	Profáze, metafáze, anafáze a telofáze.
+hlas-adelka/o-ed8c712c.mp3	Ve které fázi mitózy se chromozomy řadí do roviny?
+hlas-adelka/v-2f4b6a54.mp3	Vytvoří ekvatoriální destičku.
+hlas-adelka/o-6a0864c2.mp3	Ve které fázi se chromatidy rozestupují k pólům?
+hlas-adelka/v-05d9ae74.mp3	Táhnou je vlákna dělicího vřeténka.
+hlas-adelka/o-30a4762d.mp3	Co je interfáze?
+hlas-adelka/v-fd28dae5.mp3	Zabírá většinu buněčného cyklu.
+hlas-adelka/o-041fe804.mp3	Kdy dochází k replikaci DNA?
+hlas-adelka/v-78b99818.mp3	Syntetická fáze.
+hlas-adelka/o-43abe9f7.mp3	Co je apoptóza?
+hlas-adelka/v-cec7d404.mp3	Slouží k odstranění nepotřebných buněk.
+hlas-adelka/o-c0ac068a.mp3	Co je nádorová buňka?
+hlas-adelka/v-818069cf.mp3	Ztrácí schopnost apoptózy.
+hlas-adelka/o-afaa8fc6.mp3	Co je karcinogen?
+hlas-adelka/v-34901f5c.mp3	Například benzo[a]pyren nebo UV záření.
+hlas-adelka/o-41bbff79.mp3	Které záření poškozuje DNA v kůži?
+hlas-adelka/v-4a93d6f4.mp3	Způsobuje vznik dimerů thyminu.
+hlas-adelka/o-218bada4.mp3	Co je mutace?
+hlas-adelka/v-ee2de5f8.mp3	Může být neutrální, škodlivá i výhodná.
+hlas-adelka/o-530399f6.mp3	Co je mutagen?
+hlas-adelka/v-7fb1ba25.mp3	Například ionizující záření nebo některé chemikálie.
+hlas-adelka/o-37175ca4.mp3	Co je genová mutace?
+hlas-adelka/v-6db0c661.mp3	Například bodová záměna.
+hlas-adelka/o-86cbc36c.mp3	Co je chromozomová aberace?
+hlas-adelka/v-f53949bd.mp3	Například Downův syndrom.
+hlas-adelka/o-2ea39e02.mp3	Co je příčinou Downova syndromu?
+hlas-adelka/v-2aa46849.mp3	Trizomie 21.
+hlas-adelka/o-5025360b.mp3	Co je transkripce?
+hlas-adelka/v-80464b5f.mp3	Probíhá v jádře.
+hlas-adelka/o-5d6ef602.mp3	Co je translace?
+hlas-adelka/v-20dd679d.mp3	Probíhá na ribozomech.
+hlas-adelka/o-8f49a740.mp3	Co je kodon?
+hlas-adelka/v-57b39d91.mp3	Genetický kód je tripletový.
+hlas-adelka/o-1f593639.mp3	Kolik kodonů existuje?
+hlas-adelka/v-d57b8aa5.mp3	Čtyři báze ve třech pozicích.
+hlas-adelka/o-f17b9c2b.mp3	Proč se genetický kód nazývá degenerovaný?
+hlas-adelka/v-30dbe52e.mp3	Snižuje dopad mutací.
+hlas-adelka/o-4ae125ce.mp3	Co je start kodon?
+hlas-adelka/v-80d84941.mp3	Kóduje methionin a zahajuje překlad.
+hlas-adelka/o-85458b5b.mp3	Co je genom?
+hlas-adelka/v-47f710cc.mp3	Lidský genom byl přečten roku 2003.
+hlas-adelka/o-26f8d92e.mp3	Co je genové inženýrství?
+hlas-adelka/v-dbf5509a.mp3	Umožnilo výrobu inzulinu bakteriemi.
+hlas-adelka/o-deb2084a.mp3	Jak se dnes vyrábí lidský inzulin?
+hlas-adelka/v-43bb4943.mp3	Dříve se získával ze zvířat.
+hlas-adelka/o-3872b076.mp3	Co je plazmid?
+hlas-adelka/v-4f4d1acd.mp3	Slouží jako vektor v genovém inženýrství.
+hlas-adelka/o-1c47bc2a.mp3	Co je PCR?
+hlas-adelka/v-5b67d294.mp3	Polymerázová řetězová reakce.
+hlas-adelka/o-f573d8d6.mp3	K čemu se PCR používá?
+hlas-adelka/v-cd644bf7.mp3	Umožňuje detekovat i stopové množství DNA.
+hlas-adelka/o-820b94e5.mp3	Co je enzym restrikční endonukleáza?
+hlas-adelka/v-6e93c159.mp3	Molekulární nůžky.
+hlas-adelka/o-07a13f13.mp3	Co jsou kmenové buňky?
+hlas-adelka/v-1bcad70a.mp3	Naděje pro regenerativní medicínu.
+hlas-adelka/o-8b4fa83e.mp3	Kolik tříd obratlovců rozlišujeme?
+hlas-adelka/v-c5132084.mp3	Ryby, obojživelníci, plazi, ptáci a savci.
+hlas-adelka/o-2ad7f4bd.mp3	Co je homeotermní živočich?
+hlas-adelka/v-8fc34dbb.mp3	Ptáci a savci.
+hlas-adelka/o-1e0c7d6d.mp3	Které tkáně rozlišujeme u člověka?
+hlas-adelka/v-1a3a9d17.mp3	Základní čtyři typy.
+hlas-adelka/o-ad536388.mp3	Co je epitel?
+hlas-adelka/v-152f41af.mp3	Pokrývá povrch těla a vystýlá dutiny.
+hlas-adelka/o-909a9193.mp3	Který orgán produkuje žluč?
+hlas-adelka/v-cbe3af0b.mp3	Žluč se skladuje ve žlučníku.
+hlas-adelka/o-dd8e9a1d.mp3	K čemu slouží žluč?
+hlas-adelka/v-3e9a3fc5.mp3	Zvětší povrch tuku pro lipázy.
+hlas-adelka/o-bc39f58c.mp3	Který enzym štěpí bílkoviny v žaludku?
+hlas-adelka/v-33df5f29.mp3	Pracuje v silně kyselém prostředí.
+hlas-adelka/o-909a06d8.mp3	Jaké pH má žaludeční šťáva?
+hlas-adelka/v-e954f1f7.mp3	Kyselina chlorovodíková ničí většinu mikrobů.
+hlas-adelka/o-75213f43.mp3	Který enzym štěpí škrob ve slinách?
+hlas-adelka/v-5d4dc2ba.mp3	Proto chléb při delším žvýkání sládne.
+hlas-adelka/o-a27d3143.mp3	Kde probíhá většina vstřebávání živin?
+hlas-adelka/v-68a259e2.mp3	Klky mnohonásobně zvětšují plochu.
+hlas-adelka/o-1961621e.mp3	Kolik má člověk párů žeber?
+hlas-adelka/v-14eca51e.mp3	Sedm párů je pravých.
+hlas-adelka/o-1e3f7b98.mp3	Kolik kostí má dospělý člověk?
+hlas-adelka/v-03b9f764.mp3	Novorozenec jich má víc, některé srůstají.
+hlas-adelka/o-56e2e78f.mp3	Který sval je největší v lidském těle?
+hlas-adelka/v-86ffad0e.mp3	Umožňuje vzpřímený postoj a chůzi.
+hlas-adelka/o-68d39ab9.mp3	Jaký typ svaloviny je v srdci?
+hlas-adelka/v-f939a397.mp3	Pracuje nezávisle na vůli.
+hlas-adelka/o-72d91a7c.mp3	Kolikrát za minutu bije srdce v klidu?
+hlas-adelka/v-063546b8.mp3	U trénovaných sportovců i méně.
+hlas-adelka/o-c297dc41.mp3	Kolik komor a síní má lidské srdce?
+hlas-adelka/v-1bdacf29.mp3	Celkem čtyři oddíly.
+hlas-adelka/o-2ee15c1f.mp3	Kterou cévou proudí okysličená krev ze srdce?
+hlas-adelka/v-40937811.mp3	Největší tepna v těle.
+hlas-adelka/o-4cc00dd9.mp3	Které cévy vedou krev k srdci?
+hlas-adelka/v-574b8eec.mp3	Mají chlopně bránící zpětnému toku.
+hlas-adelka/o-00a38245.mp3	Co přenáší hemoglobin?
+hlas-adelka/v-d5533a29.mp3	Železo v hemu váže kyslík.
+hlas-adelka/o-238c3d48.mp3	Kolik má člověk krve?
+hlas-adelka/v-e30fb00d.mp3	Zhruba 7 až 8 procent hmotnosti.
+hlas-adelka/o-6a508f3c.mp3	Které krvinky zajišťují imunitu?
+hlas-adelka/v-8ec7a8bc.mp3	Leukocyty.
+hlas-adelka/o-8c679e2c.mp3	Které krvinky se podílejí na srážení krve?
+hlas-adelka/v-168235cf.mp3	Trombocyty.
+hlas-adelka/o-bed8a850.mp3	Kde vznikají krvinky?
+hlas-adelka/v-129b2b92.mp3	Červená kostní dřeň plochých kostí.
+hlas-adelka/o-b89dfe86.mp3	Co je Rh faktor?
+hlas-adelka/v-197118d1.mp3	Rh negativní matka a Rh pozitivní plod mohou být riziko.
+hlas-adelka/o-20b5fae0.mp3	Kolik plicních laloků má člověk?
+hlas-adelka/v-83b53a60.mp3	Vlevo je místo pro srdce.
+hlas-adelka/o-5e989733.mp3	Kde probíhá výměna plynů v plicích?
+hlas-adelka/v-42739f51.mp3	Alveoly mají obrovskou celkovou plochu.
+hlas-adelka/o-13452235.mp3	Který sval je hlavní dýchací sval?
+hlas-adelka/v-a17565d5.mp3	Stahem se zvětší objem hrudníku.
+hlas-adelka/o-e1a664f4.mp3	Který orgán filtruje krev a tvoří moč?
+hlas-adelka/v-1f7b52cf.mp3	Základní jednotkou je nefron.
+hlas-adelka/o-de625828.mp3	Kolik nefronů má jedna ledvina?
+hlas-adelka/v-6bfcb698.mp3	Filtrují asi 180 litrů primární moči denně.
+hlas-adelka/o-a05b7b4d.mp3	Kolik moči vyloučí člověk denně?
+hlas-adelka/v-99f0aec1.mp3	Většina primární moči se zpětně vstřebá.
+hlas-adelka/o-78244d5e.mp3	Který orgán je hlavní detoxikační centrum těla?
+hlas-adelka/v-75ba6406.mp3	Přeměňují amoniak na močovinu.
+hlas-adelka/o-3d7e4031.mp3	Co je nervová buňka?
+hlas-adelka/v-71ac3290.mp3	Vede vzruchy pomocí elektrických signálů.
+hlas-adelka/o-027dc048.mp3	Co je synapse?
+hlas-adelka/v-6cd11d5c.mp3	Přenos zajišťují neurotransmitery.
+hlas-adelka/o-20d8b4da.mp3	Co je myelinová pochva?
+hlas-adelka/v-35eff72e.mp3	Její poškození způsobuje roztroušenou sklerózu.
+hlas-adelka/o-8df87308.mp3	Které části se dělí nervová soustava?
+hlas-adelka/v-87be9cc3.mp3	Centrální tvoří mozek a mícha.
+hlas-adelka/o-97c77c20.mp3	Který oddíl mozku řídí rovnováhu a koordinaci?
+hlas-adelka/v-39f9ef74.mp3	Poškození se projeví nejistou chůzí.
+hlas-adelka/o-f461223b.mp3	Který oddíl mozku řídí dýchání a srdeční činnost?
+hlas-adelka/v-8e7b9801.mp3	Životně důležité centrum.
+hlas-adelka/o-2d044fb1.mp3	Která žláza je nadřazená ostatním žlázám?
+hlas-adelka/v-496b5b2a.mp3	Podvěsek mozkový řídí hormonálně další žlázy.
+hlas-adelka/o-d8800dae.mp3	Který hormon produkuje štítná žláza?
+hlas-adelka/v-cf042243.mp3	Řídí rychlost metabolismu.
+hlas-adelka/o-de01c770.mp3	Který prvek je nutný pro tvorbu hormonů štítné žlázy?
+hlas-adelka/v-351c269c.mp3	Proto se jodizuje kuchyňská sůl.
+hlas-adelka/o-3c83df7b.mp3	Co způsobuje nedostatek jodu?
+hlas-adelka/v-fe2cdede.mp3	Zvětšení štítné žlázy.
+hlas-adelka/o-75bf8e14.mp3	Který hormon reguluje hladinu vápníku?
+hlas-adelka/v-516a7bda.mp3	Z příštítných tělísek.
+hlas-adelka/o-400761e3.mp3	Který vitamin je nutný pro vstřebávání vápníku?
+hlas-adelka/v-6bbf73d9.mp3	Jeho nedostatek u dětí způsobuje křivici.
+hlas-adelka/o-e8c72549.mp3	Co způsobuje nedostatek vitaminu B1?
+hlas-adelka/v-a0c8caa7.mp3	Thiamin je důležitý pro nervovou soustavu.
+hlas-adelka/o-1691abb7.mp3	Co způsobuje nedostatek vitaminu A?
+hlas-adelka/v-15acd87e.mp3	Retinol je součástí zrakového pigmentu.
+hlas-adelka/o-62ee5bad.mp3	Který vitamin je nutný pro srážení krve?
+hlas-adelka/v-f233904c.mp3	Podílí se na tvorbě protrombinu.
+hlas-adelka/o-74c8c3a0.mp3	Který prvek je součástí hemoglobinu?
+hlas-adelka/v-163e7d92.mp3	Jeho nedostatek vede k chudokrevnosti.
+hlas-adelka/o-7dc89938.mp3	Co je anémie?
+hlas-adelka/v-02f4d77e.mp3	Nejčastěji z nedostatku železa.
+hlas-adelka/o-3d6c1e7c.mp3	Co je imunita?
+hlas-adelka/v-279e75f3.mp3	Dělí se na vrozenou a získanou.
+hlas-adelka/o-e5835e20.mp3	Co je protilátka?
+hlas-adelka/v-bd75b0b9.mp3	Produkují ji B lymfocyty.
+hlas-adelka/o-25a6ba2b.mp3	Co je antigen?
+hlas-adelka/v-88f3ffcd.mp3	Například povrch bakterie.
+hlas-adelka/o-92595716.mp3	Jak funguje očkování?
+hlas-adelka/v-e3b78656.mp3	Tělo si vytvoří paměťové buňky.
+hlas-adelka/o-a92a6084.mp3	Co je aktivní imunizace?
+hlas-adelka/v-89bd393c.mp3	Například očkování.
+hlas-adelka/o-d3be6688.mp3	Co je pasivní imunizace?
+hlas-adelka/v-cba5b90b.mp3	Účinek je rychlý, ale krátkodobý.
+hlas-adelka/o-6957cb9e.mp3	Co je alergie?
+hlas-adelka/v-2602945a.mp3	Uvolňuje se histamin.
+hlas-adelka/o-1bd046b4.mp3	Co je autoimunitní onemocnění?
+hlas-adelka/v-bc3f8746.mp3	Například diabetes 1. typu.
+hlas-adelka/o-2e3a47f1.mp3	Kde se v těle nachází mikrobiom?
+hlas-adelka/v-77bed7c0.mp3	Ovlivňuje trávení i imunitu.
+hlas-adelka/o-46c61feb.mp3	Co jsou probiotika?
+hlas-adelka/v-17dbaae9.mp3	Například laktobacily v jogurtu.
+hlas-adelka/o-103a89fc.mp3	Jaká bakterie se používá k výrobě jogurtu?
+hlas-adelka/v-42c7b5e7.mp3	Lactobacillus a Streptococcus.
+hlas-adelka/o-6c7077ad.mp3	Co je ekosystém?
+hlas-adelka/v-d72eee9d.mp3	Propojený funkční celek.
+hlas-adelka/o-90d37feb.mp3	Co je potravní řetězec?
+hlas-adelka/v-1821b1c4.mp3	Začíná producenty.
+hlas-adelka/o-9dfa30d4.mp3	Co jsou producenti?
+hlas-adelka/v-d1faa0e6.mp3	Především zelené rostliny.
+hlas-adelka/o-02358a3e.mp3	Co jsou destruenti?
+hlas-adelka/v-90235086.mp3	Bakterie a houby vracejí živiny do půdy.
+hlas-adelka/o-4f979137.mp3	Co je bioakumulace?
+hlas-adelka/v-d408e3ba.mp3	Koncentrace roste v potravním řetězci.
+hlas-adelka/o-f130d971.mp3	Co je biodiverzita?
+hlas-adelka/v-b8e19529.mp3	Její pokles ohrožuje stabilitu ekosystémů.
+hlas-adelka/o-23d89788.mp3	Co je eutrofizace vody?
+hlas-adelka/v-b67b6b63.mp3	Hlavně dusík a fosfor z hnojiv.
+hlas-adelka/o-73b63c27.mp3	Proč je eutrofizace problém?
+hlas-adelka/v-50659f0a.mp3	Vzniká anoxie.
+hlas-adelka/o-8551825a.mp3	Co je metabolismus?
+hlas-adelka/v-1ed22cc0.mp3	Dělí se na katabolismus a anabolismus.
+hlas-adelka/o-22c5f9d4.mp3	Co je katabolismus?
+hlas-adelka/v-ba639a2b.mp3	Například odbourávání glukózy.
+hlas-adelka/o-aa7540a3.mp3	Co je anabolismus?
+hlas-adelka/v-283213e4.mp3	Například tvorba bílkovin.
+hlas-adelka/o-a3ef895f.mp3	Co je bazální metabolismus?
+hlas-adelka/v-41609199.mp3	U dospělého kolem 7000 kJ denně.
+hlas-adelka/o-a4397a0f.mp3	Co je glykolýza?
+hlas-adelka/v-c8388881.mp3	Probíhá v cytoplazmě bez kyslíku.
+hlas-adelka/o-550013ed.mp3	Kolik ATP vznikne čistě glykolýzou?
+hlas-adelka/v-fe8b3b9b.mp3	Většina energie se získá až v mitochondriích.
+hlas-adelka/o-430439a5.mp3	Co je glykogen?
+hlas-adelka/v-0a934fbb.mp3	Ukládá se v játrech a svalech.
+hlas-adelka/o-ccddfbb4.mp3	Co je škrob?
+hlas-adelka/v-478f1951.mp3	Skládá se z amylózy a amylopektinu.
+hlas-adelka/o-29faf728.mp3	Co je celulóza?
+hlas-adelka/v-af1b298b.mp3	Člověk ji nedokáže strávit.
+hlas-adelka/o-851dca4d.mp3	Proč člověk nestráví celulózu?
+hlas-adelka/v-da8f3880.mp3	Funguje jako vláknina.
+hlas-adelka/o-396b6562.mp3	Jaký význam má vláknina?
+hlas-adelka/v-71468c07.mp3	Zpomaluje také vstřebávání cukrů.
+hlas-adelka/o-b78532e0.mp3	Jaká vazba spojuje monosacharidy?
+hlas-adelka/v-dc93a448.mp3	Vzniká odštěpením vody.
+hlas-adelka/o-385da46f.mp3	Z čeho se skládá sacharóza?
+hlas-adelka/v-36dd3dde.mp3	Řepný nebo třtinový cukr.
+hlas-adelka/o-656b9729.mp3	Z čeho se skládá laktóza?
+hlas-adelka/v-52d13702.mp3	Mléčný cukr.
+hlas-adelka/o-d26acb18.mp3	Co je laktózová intolerance?
+hlas-adelka/v-a570d8a7.mp3	Neštěpená laktóza kvasí ve střevě.
+hlas-adelka/o-540294ab.mp3	Z čeho se skládá maltóza?
+hlas-adelka/v-b939e3ae.mp3	Sladový cukr.
+hlas-adelka/o-d1b06b9d.mp3	Kolik uhlíků má glukóza?
+hlas-adelka/v-9ebc8b66.mp3	Hexóza.
+hlas-adelka/o-e83355e7.mp3	Kolik uhlíků má ribóza?
+hlas-adelka/v-eacbf10f.mp3	Pentóza v RNA.
+hlas-adelka/o-167ef404.mp3	Který cukr je v DNA?
+hlas-adelka/v-bb0fed26.mp3	Chybí jí kyslík na druhém uhlíku.
+hlas-adelka/o-22db4ed4.mp3	Co je nukleotid?
+hlas-adelka/v-cd262150.mp3	Tvoří ho báze, cukr a fosfát.
+hlas-adelka/o-82e4278c.mp3	Kolik typů bází je v DNA?
+hlas-adelka/v-5d9ba0df.mp3	Adenin, guanin, cytosin a thymin.
+hlas-adelka/o-e2e9fc6b.mp3	Co je peptid?
+hlas-adelka/v-9f585cc1.mp3	Delší řetězce jsou bílkoviny.
+hlas-adelka/o-2d5050db.mp3	Co je primární struktura bílkoviny?
+hlas-adelka/v-b357407d.mp3	Určuje ji genetická informace.
+hlas-adelka/o-c535a14d.mp3	Co je sekundární struktura bílkoviny?
+hlas-adelka/v-c0da742f.mp3	Stabilizují ji vodíkové vazby.
+hlas-adelka/o-d2ae77fa.mp3	Co je terciární struktura bílkoviny?
+hlas-adelka/v-70878d3c.mp3	Rozhoduje o funkci.
+hlas-adelka/o-79a12898.mp3	Co je kvartérní struktura?
+hlas-adelka/v-cb8de021.mp3	Například hemoglobin ze čtyř podjednotek.
+hlas-adelka/o-0985a35c.mp3	Co je denaturace bílkoviny?
+hlas-adelka/v-0bf976c6.mp3	Způsobí ji teplo, kyseliny nebo těžké kovy.
+hlas-adelka/o-5f08213f.mp3	Je denaturace vždy nevratná?
+hlas-adelka/v-23d9ad2e.mp3	Sražené vejce se zpět nevrátí.
+hlas-adelka/o-0db45663.mp3	Proč jsou těžké kovy jedovaté?
+hlas-adelka/v-f0cc3307.mp3	Například olovo nebo rtuť.
+hlas-adelka/o-d1527565.mp3	Co je specifita enzymu?
+hlas-adelka/v-d468b211.mp3	Vyplývá z tvaru aktivního místa.
+hlas-adelka/o-ad1b5216.mp3	Co je optimální pH enzymu?
+hlas-adelka/v-aaa1c0dd.mp3	Pepsin má optimum kolem pH 2.
+hlas-adelka/o-14084375.mp3	Co je inhibitor enzymu?
+hlas-adelka/v-1c42ca49.mp3	Mnohé léky jsou inhibitory.
+hlas-adelka/o-2fdaf247.mp3	Co je kompetitivní inhibice?
+hlas-adelka/v-aab7673c.mp3	Lze ji překonat vyšší koncentrací substrátu.
+hlas-adelka/o-422df97f.mp3	Co je alosterická regulace?
+hlas-adelka/v-1ee19d63.mp3	Umožňuje jemné řízení metabolismu.
+hlas-adelka/o-0ffda01d.mp3	Co je zpětnovazebná inhibice?
+hlas-adelka/v-f2b0aa83.mp3	Šetří zdroje buňky.
+hlas-adelka/o-071a5c35.mp3	Co je fotosyntéza v souhrnné rovnici?
+hlas-adelka/v-fcca614e.mp3	Za přítomnosti světla a chlorofylu.
+hlas-adelka/o-f13afe52.mp3	Co je temnostní fáze fotosyntézy?
+hlas-adelka/v-aaf082d6.mp3	Probíhá ve stromatu.
+hlas-adelka/o-c096d362.mp3	Odkud pochází kyslík uvolněný při fotosyntéze?
+hlas-adelka/v-2f6e0e15.mp3	Prokázalo se izotopovým značením.
+hlas-adelka/o-9b2dcaf8.mp3	Který pigment pohlcuje světlo při fotosyntéze?
+hlas-adelka/v-587543da.mp3	Karotenoidy jsou doplňkové pigmenty.
+hlas-adelka/o-5a9f944e.mp3	Proč jsou rostliny zelené?
+hlas-adelka/v-c3497ad5.mp3	Pohlcuje modrou a červenou.
+hlas-adelka/o-abacaa6d.mp3	Proč listy na podzim žloutnou?
+hlas-adelka/v-b58bb75c.mp3	Rostlina si stahuje živiny.
+hlas-adelka/o-bca49b01.mp3	Co je transpirace?
+hlas-adelka/v-d3732d6a.mp3	Probíhá průduchy.
+hlas-adelka/o-f0fabf05.mp3	Co jsou průduchy?
+hlas-adelka/v-163dacb7.mp3	Regulují je svěrací buňky.
+hlas-adelka/o-ae581658.mp3	Co je xylém?
+hlas-adelka/v-21499333.mp3	Dřevní část cévního svazku.
+hlas-adelka/o-8371a19c.mp3	Co je floém?
+hlas-adelka/v-cc4ef962.mp3	Lýková část.
+hlas-adelka/o-07589817.mp3	Co je symbióza?
+hlas-adelka/v-25b2c1f2.mp3	Například hlízkové bakterie a bobovité rostliny.
+hlas-adelka/o-0e8a7d83.mp3	Které bakterie poutají vzdušný dusík?
+hlas-adelka/v-2f18d416.mp3	Obohacují půdu o dusík.
+hlas-adelka/o-7286f458.mp3	Co je koloběh dusíku?
+hlas-adelka/v-a337a266.mp3	Zahrnuje fixaci, nitrifikaci i denitrifikaci.
+hlas-adelka/o-c891390e.mp3	Co je nitrifikace?
+hlas-adelka/v-50d56309.mp3	Provádějí ji půdní bakterie.
+hlas-adelka/o-026d9557.mp3	Co je denitrifikace?
+hlas-adelka/v-3ae869be.mp3	V čistírnách odpadních vod se využívá cíleně.
+hlas-adelka/o-e7547def.mp3	Proč jsou dusičnany ve vodě problém?
+hlas-adelka/v-313062b5.mp3	Riziko methemoglobinemie.
+hlas-adelka/o-9ae132cc.mp3	Co je virus stavebně?
+hlas-adelka/v-56fad68e.mp3	Nemá vlastní metabolismus.
+hlas-adelka/o-6ee55a82.mp3	Co je kapsida?
+hlas-adelka/v-afdba512.mp3	Chrání genetickou informaci.
+hlas-adelka/o-6d703772.mp3	Který virus způsobuje AIDS?
+hlas-adelka/v-8817fe71.mp3	Napadá pomocné T lymfocyty.
+hlas-adelka/o-01ddb404.mp3	Co je bakteriofág?
+hlas-adelka/v-476d75b7.mp3	Zkoumá se jako alternativa k antibiotikům.
+hlas-adelka/o-54204eae.mp3	Jaký tvar má bakterie kok?
+hlas-adelka/v-c1938f6a.mp3	Například streptokok.
+hlas-adelka/o-0d226f7d.mp3	Jaký tvar má bacil?
+hlas-adelka/v-368533f2.mp3	Například Bacillus subtilis.
+hlas-adelka/o-8854842b.mp3	Co je Gramovo barvení?
+hlas-adelka/v-c0754ffe.mp3	Grampozitivní jsou fialové, gramnegativní růžové.
+hlas-adelka/o-57874595.mp3	Proč se bakterie barví podle Grama?
+hlas-adelka/v-b3539d72.mp3	Ovlivňuje to i volbu antibiotika.
+hlas-adelka/o-ee71dc34.mp3	Co je bakteriální spora?
+hlas-adelka/v-6d620fad.mp3	Přežije i var, proto se sterilizuje v autoklávu.
+hlas-adelka/o-ee588d17.mp3	Která bakterie tvoří spory a způsobuje botulismus?
+hlas-adelka/v-d097905d.mp3	Produkuje jeden z nejsilnějších známých jedů.
+hlas-adelka/o-281adf1f.mp3	Kde hrozí botulismus?
+hlas-adelka/v-52ddfa4c.mp3	Anaerobní prostředí konzervy jí vyhovuje.
+hlas-adelka/o-f930bb69.mp3	Co je tetanus?
+hlas-adelka/v-a52e2705.mp3	Předchází se očkováním.
+hlas-adelka/o-65da6ab5.mp3	Která bakterie běžně žije v lidském střevě?
+hlas-adelka/v-3964843b.mp3	Většina kmenů je neškodná.
+hlas-adelka/o-14146dce.mp3	Co je salmonelóza?
+hlas-adelka/v-c6dbda86.mp3	Nejčastěji z vajec a drůbeže.
+hlas-adelka/o-52e7af24.mp3	Jak se předchází salmonelóze?
+hlas-adelka/v-af695aa9.mp3	Bakterie hyne varem.
+hlas-adelka/o-ee393f8e.mp3	Co je pasterizace mléka?
+hlas-adelka/v-3eac72ce.mp3	Vysokoteplotní krátkodobá pasterizace.
+hlas-adelka/o-427249b2.mp3	Co je UHT mléko?
+hlas-adelka/v-53afbfe3.mp3	Má delší trvanlivost bez chlazení.
+hlas-adelka/o-fc138fce.mp3	Co je plíseň?
+hlas-adelka/v-afea24ec.mp3	Rozmnožuje se výtrusy.
+hlas-adelka/o-c37945e7.mp3	Který rod plísní produkuje penicilin?
+hlas-adelka/v-17234757.mp3	Objevil to Alexander Fleming.
+hlas-adelka/o-4b2a99d6.mp3	Co jsou aflatoxiny?
+hlas-adelka/v-c96bfbdd.mp3	Silně karcinogenní, hlídají se v ořeších.
+hlas-adelka/o-2a533cdd.mp3	Co je kvasinka?
+hlas-adelka/v-c73a0f3f.mp3	Množí se pučením.
+hlas-adelka/o-ea22ecaa.mp3	Co je Saccharomyces cerevisiae?
+hlas-adelka/v-48887906.mp3	Nejvyužívanější mikroorganismus v biotechnologii.
+hlas-adelka/o-04999bb7.mp3	Co je mikrobiologické očkování v laboratoři?
+hlas-adelka/v-6b5199dc.mp3	Provádí se sterilně kličkou.
+hlas-adelka/o-6b58a755.mp3	Co je živná půda?
+hlas-adelka/v-986e75ed.mp3	Například agar s živinami.
+hlas-adelka/o-a686e640.mp3	Co je agar?
+hlas-adelka/v-0f12d0b4.mp3	Bakterie ho většinou nerozkládají.
+hlas-adelka/o-e43474f1.mp3	Co je kolonie na Petriho misce?
+hlas-adelka/v-c45dbf8b.mp3	Umožňuje počítat mikroorganismy.
+hlas-adelka/o-51e0187a.mp3	Co je inkubátor v mikrobiologii?
+hlas-adelka/v-9e218bd9.mp3	Například 37 stupňů pro lidské patogeny.
+hlas-adelka/o-aba74f21.mp3	Co je aseptická technika?
+hlas-adelka/v-fa22fc6e.mp3	Zahrnuje práci v blízkosti kahanu nebo v boxu.
+hlas-adelka/o-1c164b15.mp3	Co je antibiotikum?
+hlas-adelka/v-c429278f.mp3	Na viry nepůsobí.
+hlas-adelka/o-0c2c9b88.mp3	Kdo objevil penicilin?
+hlas-adelka/v-4fc812db.mp3	Náhodně roku 1928.
+hlas-adelka/o-ded90699.mp3	Kdo umožnil masovou výrobu penicilinu?
+hlas-adelka/v-1504cd3d.mp3	Získali spolu s Flemingem Nobelovu cenu.
+hlas-adelka/o-04bead9f.mp3	Co je rezistence na antibiotika?
+hlas-adelka/v-b3aafb12.mp3	Šíří se i přenosem genů mezi bakteriemi.
+hlas-adelka/o-721115d7.mp3	Jak se rezistenci předchází?
+hlas-adelka/v-981e1780.mp3	Nedokončená kúra riziko zvyšuje.
+hlas-adelka/o-2e13d5f9.mp3	Co je nozokomiální nákaza?
+hlas-adelka/v-15257a04.mp3	Často způsobená rezistentními kmeny.
+hlas-adelka/o-a5113658.mp3	Co je MRSA?
+hlas-adelka/v-2d84fb28.mp3	Obávaný původce nemocničních nákaz.
+hlas-adelka/o-870c599e.mp3	Co je dezinfekce rukou v nemocnici?
+hlas-adelka/v-4872de1e.mp3	Semmelweis to prokázal už v 19. století.
+hlas-adelka/o-c7b3557b.mp3	Kdo zavedl mytí rukou na porodnici?
+hlas-adelka/v-fffa27d6.mp3	Snížil úmrtnost na horečku omladnic.
+hlas-adelka/o-0be6afcf.mp3	Co jsou Kochovy postuláty?
+hlas-adelka/v-dae87e5c.mp3	Formuloval je Robert Koch.
+hlas-adelka/o-b90ffe1f.mp3	Který mikroorganismus objevil Robert Koch?
+hlas-adelka/v-d1556aab.mp3	Za objev získal Nobelovu cenu.
+hlas-adelka/o-bd7737d4.mp3	Co je imunitní paměť?
+hlas-adelka/v-f35f871d.mp3	Základ účinnosti očkování.
+hlas-adelka/o-fb1fe6b8.mp3	Které buňky tvoří protilátky?
+hlas-adelka/v-93333d6a.mp3	Každá tvoří protilátku jedné specifity.
+hlas-adelka/o-59051480.mp3	Jaká je funkce T lymfocytů?
+hlas-adelka/v-d12f1b43.mp3	Pomocné a cytotoxické.
+hlas-adelka/o-ba5e4a5d.mp3	Co je zánět?
+hlas-adelka/v-8da56961.mp3	Projevuje se zarudnutím, otokem, bolestí a teplem.
+hlas-adelka/o-74fa47a2.mp3	Co je horečka z pohledu obrany?
+hlas-adelka/v-4ca43853.mp3	Do určité míry je prospěšná.
+hlas-adelka/o-8936b986.mp3	Co je vakcína?
+hlas-adelka/v-9c0769a9.mp3	Obsahuje oslabený nebo usmrcený antigen.
+hlas-adelka/o-837a4d60.mp3	Který lékař zavedl očkování proti neštovicím?
+hlas-adelka/v-8f4040b3.mp3	Použil kravské neštovice.
+hlas-adelka/o-d1b35c35.mp3	Která nemoc byla očkováním celosvětově vymýcena?
+hlas-adelka/v-a7409e45.mp3	Vymýcení potvrdila WHO roku 1980.
+hlas-adelka/o-0a8ecd40.mp3	Co je kolektivní imunita?
+hlas-adelka/v-31fda1f1.mp3	Přerušuje se přenos nákazy.
+hlas-adelka/o-b8f27594.mp3	Co je mRNA vakcína?
+hlas-adelka/v-8f4a9572.mp3	Použita proti covidu-19.
+hlas-adelka/o-13483dff.mp3	Co je antigenní drift?
+hlas-adelka/v-7eeb4f29.mp3	Proto se očkování proti chřipce opakuje.

@@ -1832,6 +1832,7 @@ if(window.speechSynthesis)speechSynthesis.getVoices(); // předehřátí hlasů
 function explainWhenQuiet(x){ // nech Kalkulátora nejdřív dořeknout hlášku
   if(!paused)return;
   if(window.speechSynthesis&&speechSynthesis.speaking){setTimeout(()=>explainWhenQuiet(x),250);return;}
+  if(adelkaAudio&&!adelkaAudio.paused){setTimeout(()=>explainWhenQuiet(x),250);return;}
   explain(x);
 }
 function explain(txt){
@@ -1839,7 +1840,10 @@ function explain(txt){
   const b=$("bubble");b.textContent="🧮 "+txt;b.classList.add("show","explain");
   const sv=$("calcsvg");sv.classList.add("declaim"); // recitátorské gesto: hlava vzhůru, ruka pozvednutá
   const hg=$("headG");if(hg)hg.style.transform="rotate(-2deg) translateY(-2px)";
-  calcFace("squint");speak(txt);
+  calcFace("squint");
+  if(G&&G.mode==="adelka"&&G.curQ&&G.curQ.x){
+    const pv=G.curQ.x;prehrajAdelka("v",pv,function(){speak(txt);});
+  }else speak(txt);
   clearTimeout(b._t);b._t=setTimeout(()=>{
     b.classList.remove("show","explain");
     sv.classList.remove("declaim");
@@ -1890,6 +1894,27 @@ function setKostym(k){
 function nastavPostavu(){
   const cs=$("calcsvg");if(!cs)return;
   cs.classList.toggle("ona",jeOna());
+}
+/* ===== NAHRANÝ HLAS PRO ADÉLKU =====
+   Otázky a vysvětlení můžou mít nahrávku ve složce hlas-adelka/
+   (o-<otisk>.mp3 pro otázku, v-<otisk>.mp3 pro vysvětlení; otisk je
+   djb2 z přesného textu). Když nahrávka není, čte syntéza jako dřív. */
+function adHash(s){let x=5381;for(let i=0;i<s.length;i++)x=((x*33)+s.charCodeAt(i))>>>0;return ("0000000"+x.toString(16)).slice(-8);}
+let adelkaAudio=null;
+function stopAdelkaAudio(){if(adelkaAudio){try{adelkaAudio.pause()}catch(e){}adelkaAudio=null;stopTalking();}}
+function prehrajAdelka(pref,orig,zaloha){
+  if(!voiceOn||!soundOn)return;
+  stopAdelkaAudio();
+  let uz=false;
+  const fb=function(){if(uz)return;uz=true;adelkaAudio=null;stopTalking();if(zaloha)zaloha();};
+  try{
+    const a=new Audio("hlas-adelka/"+pref+"-"+adHash(orig)+".mp3");
+    a.volume=.95;
+    a.onerror=fb;
+    a.onplay=function(){startTalking();};
+    a.onended=function(){adelkaAudio=null;stopTalking();};
+    a.play().then(function(){adelkaAudio=a;}).catch(fb);
+  }catch(e){fb();}
 }
 const MIL_RE=/pluk|tank|vojen|vojn|kasárn|ČSLA|major|důstoj|voják|vojín|služn|přísah|MiG|letec|divi[zs]|kanad|rajón|mazák|bažant|budíček|žold|hodnost|OT-|T-5|Dukl|zbraní SS|Milovic|Vltava 1966|nárameník|uniform|zupák|štáb/i;
 let G=null, timerInt=null;
@@ -1987,6 +2012,7 @@ function updateTimer(t,max){
 }
 
 function renderQ(){
+  stopAdelkaAudio();
   if(G.i>=G.deck.length || (G.mode!=="duel" && G.i>=G.total)){endGame();return}
   const Q=G.deck[G.i];
   G.curQ=Q;
@@ -2025,7 +2051,7 @@ function renderQ(){
     speak(Q.q); // v módu Pro Tátu se otázka předčítá vždycky
   }else if(G.mode==="adelka"){
     // ve školním módu se předčítá zhruba 60 % otázek — učí se líp, když je i slyší
-    if(Math.random()<.6)speak(Q.q);
+    if(Math.random()<.6){const ot=Q.q;prehrajAdelka("o",ot,function(){speak(ot);});}
     else if(quipsOn&&Math.random()<.25){
       const t=pickQuip(Math.random()<.5?"tension":"funny");bubble(t,2600);speak(t,.4);
     }
@@ -2207,6 +2233,7 @@ function useJoker(){
 }
 
 function endGame(){
+  stopAdelkaAudio();
   clearInterval(timerInt);
   const m=MODES[G.mode];
   const xp=Math.round(G.score*10*m.xpMult)+G.best*2;
@@ -2266,6 +2293,7 @@ $("jokerBtn").addEventListener("click",useJoker);
 $("confirmBtn").addEventListener("click",confirmMulti);
 $("quitBtn").addEventListener("click",()=>{
   gearOpen(false);
+  stopAdelkaAudio();
   clearInterval(timerInt);clearTimeout(pauseTO);paused=false;
   if(window.speechSynthesis){try{speechSynthesis.cancel()}catch(e){}}   // ať Kalkulátor nedomlouvá do menu
   stopTalking();
