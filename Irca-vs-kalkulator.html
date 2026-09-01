@@ -307,7 +307,6 @@
   </div>
   <button class="soundtoggle" id="soundBtn">🔊 Zvuk: zapnutý</button>
   <button class="soundtoggle" id="voiceBtn">🗣️ Hlas Kalkulátora: zapnutý</button>
-  <button class="soundtoggle" id="voiceCfgBtn">🎚️ Nastavení hlasu (hloubka, výběr hlasu)</button>
   <button class="soundtoggle" id="musicBtn">🎵 Hudba: zapnutá</button>
   <button class="soundtoggle" id="mixBtn">🔀 Školní otázky i v ostatních módech: vypnuto</button>
   <button class="soundtoggle" id="uploadBtn" style="border-color:rgba(255,207,63,.5);color:var(--neon-gold)">📂 Nahrát vlastní otázky (PDF / Word / TXT)</button>
@@ -335,7 +334,6 @@
         <button id="gSound">🔊 Zvuk: zapnutý</button>
         <button id="gVoice">🗣️ Hlas: zapnutý</button>
         <button id="gQuips">💬 Hlášky: zapnuté</button>
-        <button id="gVoiceCfg">🎚️ Nastavení hlasu…</button>
         <button class="quit" id="gQuit">✖ Ukončit hru a zpět do menu</button>
       </div>
     </div>
@@ -1754,6 +1752,7 @@ function bubble(txt,ms=2600){
 function calcFace(mood){ // neutral(zamračený) | happy | angry | smug | shock | squint
   lastMood=mood||"neutral";
   const eL=$("eyeL"),eR=$("eyeR"),m=$("mouth"),bL=$("browL"),bR=$("browR");
+  const girl=G&&G.mode==="adelka"; // Kalkulátorka je vlídná a usměvavá i v klidu
   // eyeL/eyeR jsou VÍČKA: větší výška = přivřenější oko
   if(mood==="happy"){ eL.setAttribute("height","2.5");eR.setAttribute("height","2.5");
     bL.setAttribute("transform","rotate(-8 77 71) translate(0,-3)");bR.setAttribute("transform","rotate(8 123 71) translate(0,-3)");
@@ -1767,15 +1766,27 @@ function calcFace(mood){ // neutral(zamračený) | happy | angry | smug | shock 
   else if(mood==="shock"){ eL.setAttribute("height","0.5");eR.setAttribute("height","0.5");
     bL.setAttribute("transform","translate(0,-5)");bR.setAttribute("transform","translate(0,-5)");
     m.setAttribute("d","M93 127 Q100 137 107 127");}
-  else if(mood==="sad"){ eL.setAttribute("height","9");eR.setAttribute("height","9");
-    bL.setAttribute("transform","rotate(-16 77 71) translate(0,3)");bR.setAttribute("transform","rotate(16 123 71) translate(0,3)");
-    m.setAttribute("d","M86 133 Q100 123 114 133");}
-  else if(mood==="squint"){ eL.setAttribute("height","10");eR.setAttribute("height","10");
-    bL.setAttribute("transform","rotate(8 77 71)");bR.setAttribute("transform","rotate(-8 123 71)");
-    m.setAttribute("d","M86 130 Q100 126 114 130");}
-  else { eL.setAttribute("height","6");eR.setAttribute("height","6");
-    bL.setAttribute("transform","rotate(10 77 71) translate(0,1)");bR.setAttribute("transform","rotate(-10 123 71) translate(0,1)");
-    m.setAttribute("d","M86 130 Q100 125 114 130");}
+  else if(mood==="sad"){
+    if(girl){ eL.setAttribute("height","7");eR.setAttribute("height","7");
+      bL.setAttribute("transform","rotate(-10 77 71) translate(0,2)");bR.setAttribute("transform","rotate(10 123 71) translate(0,2)");
+      m.setAttribute("d","M88 130 Q100 125 112 130");} // mrzí ji to, ale hned povzbudí dál
+    else { eL.setAttribute("height","9");eR.setAttribute("height","9");
+      bL.setAttribute("transform","rotate(-16 77 71) translate(0,3)");bR.setAttribute("transform","rotate(16 123 71) translate(0,3)");
+      m.setAttribute("d","M86 133 Q100 123 114 133");}}
+  else if(mood==="squint"){
+    if(girl){ eL.setAttribute("height","6");eR.setAttribute("height","6");
+      bL.setAttribute("transform","rotate(3 77 71)");bR.setAttribute("transform","rotate(-3 123 71)");
+      m.setAttribute("d","M86 125 Q100 134 114 125");} // soustředěná, ale pořád usměvavá při vysvětlování
+    else { eL.setAttribute("height","10");eR.setAttribute("height","10");
+      bL.setAttribute("transform","rotate(8 77 71)");bR.setAttribute("transform","rotate(-8 123 71)");
+      m.setAttribute("d","M86 130 Q100 126 114 130");}}
+  else { // neutral
+    if(girl){ eL.setAttribute("height","5");eR.setAttribute("height","5");
+      bL.setAttribute("transform","rotate(4 77 71) translate(0,-1)");bR.setAttribute("transform","rotate(-4 123 71) translate(0,-1)");
+      m.setAttribute("d","M85 124 Q100 136 115 124");} // vřelý úsměv v klidu
+    else { eL.setAttribute("height","6");eR.setAttribute("height","6");
+      bL.setAttribute("transform","rotate(10 77 71) translate(0,1)");bR.setAttribute("transform","rotate(-10 123 71) translate(0,1)");
+      m.setAttribute("d","M86 130 Q100 125 114 130");}}
 }
 /* ===== mluvící ústa ===== */
 let talkInt=null,lastMood="neutral";
@@ -6409,66 +6420,6 @@ if(!S.rocnik)go("rocnik");   // při prvním otevření se zeptáme, kam se hlá
 `;
 /* ==== VERUNKA-KONEC ==== */
 /* ===== NASTAVENÍ HLASU ===== */
-function openVoiceCfg(){
-  const old=document.getElementById("vcOv");if(old)old.remove();
-  const d=document.createElement("div");
-  d.id="vcOv";
-  d.style.cssText="position:fixed;inset:0;z-index:998;background:rgba(8,8,26,.97);display:flex;flex-direction:column;align-items:center;justify-content:flex-start;padding:22px 16px;overflow:auto";
-  d.innerHTML='<div style="max-width:540px;width:100%;display:flex;flex-direction:column;gap:11px">'
-   +'<div style="font-weight:900;font-size:21px;color:var(--neon-gold)">🎚️ Nastavení hlasu Kalkulátora</div>'
-   +'<div id="vcInfo" style="font-size:12.5px;line-height:1.5;opacity:.85"></div>'
-   +'<label style="font-size:13px;font-weight:700">Hlas v tomto zařízení</label>'
-   +'<select id="vcSel" style="background:#1a1540;border:1px solid rgba(0,229,255,.45);border-radius:11px;padding:11px;color:#f2f0ff;font-family:inherit;font-size:14px"></select>'
-   +'<label style="font-size:13px;font-weight:700;margin-top:4px">Hloubka hlasu — <span id="vcPv"></span><br><span style="font-weight:400;font-size:11.5px;opacity:.75">Nižší číslo = hlubší, mužštější. Nejlepší výsledek bývá mezi 0,4 a 0,7.</span></label>'
-   +'<input type="range" id="vcPitch" min="0.1" max="1.6" step="0.05" style="width:100%">'
-   +'<label style="font-size:13px;font-weight:700;margin-top:4px">Tempo řeči — <span id="vcRv"></span></label>'
-   +'<input type="range" id="vcRate" min="0.5" max="1.4" step="0.02" style="width:100%">'
-   +'<button class="bigbtn" id="vcTest" style="margin-top:6px">🔊 Vyzkoušet, jak to zní</button>'
-   +'<button class="bigbtn alt" id="vcReset">Vrátit doporučené nastavení</button>'
-   +'<div style="font-size:12px;line-height:1.55;opacity:.8;background:rgba(255,255,255,.05);border-radius:11px;padding:11px;margin-top:4px">'
-   +'<b>Proč je hlas ženský?</b><br>Telefony a tablety mají pro češtinu od výroby jen ženský hlas — Google i Apple mužský nedodávají. Aplikace si ho nemůže vyrobit sama.<br><br>'
-   +'<b>Co s tím jde udělat:</b><br>1. Stáhnout hloubku posuvníkem — nejrychlejší cesta, hlas zní výrazně mužštěji.<br>'
-   +'2. Zkusit v seznamu <b>slovenský</b> hlas, pokud ho zařízení má. Češtinu přečte srozumitelně a bývá posazený jinak.<br>'
-   +'3. Na Androidu doinstalovat jiný převod textu na řeč s mužskou češtinou (například eSpeak NG) a přepnout na něj v <i>Nastavení → Usnadnění → Text na řeč</i>. Pak se objeví v seznamu výše.</div>'
-   +'<button class="bigbtn alt" id="vcBack">← Zpět</button></div>';
-  document.body.appendChild(d);
-  const naplnit=()=>{
-    const all=(window.speechSynthesis?speechSynthesis.getVoices():[])||[];
-    const cs=all.filter(v=>/^cs/i.test(v.lang||"")),sk=all.filter(v=>/^sk/i.test(v.lang||"")),
-          ost=all.filter(v=>!/^cs|^sk/i.test(v.lang||""));
-    const auto=pickVoice();
-    let o='<option value="">Automaticky'+(auto?" — nyní: "+auto.name:"")+'</option>';
-    const grp=(t,arr)=>arr.length?('<optgroup label="'+t+'">'+arr.map(v=>'<option value="'+v.name.replace(/"/g,"")+'"'+(store.v_name===v.name?" selected":"")+'>'+v.name+" ("+v.lang+")"+(MALE_RE.test(v.name)?" ♂":"")+'</option>').join("")+"</optgroup>"):"";
-    o+=grp("Čeština",cs)+grp("Slovenština — čte česky srozumitelně",sk)+grp("Ostatní jazyky",ost);
-    $("vcSel").innerHTML=o;
-    $("vcInfo").textContent=all.length
-      ? "Zařízení nabízí "+all.length+" hlasů, z toho pro češtinu "+cs.length+(sk.length?" a pro slovenštinu "+sk.length:"")+"."
-      : "Zařízení zatím nehlásí žádné hlasy. Zkus panel zavřít a otevřít znovu.";
-  };
-  naplnit();
-  if(window.speechSynthesis)speechSynthesis.onvoiceschanged=naplnit;
-  const p=$("vcPitch"),r=$("vcRate");
-  p.value=vsetting("pitch",IS_MOBILE?0.55:0.8);r.value=vsetting("rate",0.94);
-  const popisky=()=>{$("vcPv").textContent=(+p.value).toFixed(2).replace(".",",");$("vcRv").textContent=(+r.value).toFixed(2).replace(".",",");};
-  popisky();
-  const uloz=()=>{store.v_pitch=+p.value;store.v_rate=+r.value;store.v_name=$("vcSel").value||null;save();popisky();};
-  p.addEventListener("input",uloz);r.addEventListener("input",uloz);
-  $("vcSel").addEventListener("change",()=>{uloz();zkouska();});
-  function zkouska(){ // ukázka zazní i když je hlas nebo zvuk zrovna vypnutý
-    const pv=voiceOn,ps=soundOn;
-    voiceOn=true;soundOn=true;
-    speak("Vojíne Poslušný, tady Kalkulátor. Takhle teď zním.");
-    voiceOn=pv;soundOn=ps;
-  }
-  $("vcTest").addEventListener("click",()=>{voiceOn=true;store.voice=true;save();refreshVoiceBtns();zkouska();});
-  $("vcReset").addEventListener("click",()=>{
-    store.v_pitch=IS_MOBILE?0.55:0.8;store.v_rate=0.94;store.v_name=null;save();
-    p.value=store.v_pitch;r.value=store.v_rate;naplnit();popisky();zkouska();
-  });
-  $("vcBack").addEventListener("click",()=>{if(window.speechSynthesis)speechSynthesis.onvoiceschanged=null;d.remove();});
-}
-$("voiceCfgBtn").addEventListener("click",openVoiceCfg);
-$("gVoiceCfg").addEventListener("click",e=>{e.stopPropagation();gearOpen(false);openVoiceCfg();});
 
 function openVerunka(){
   const f=$("vFrame");
