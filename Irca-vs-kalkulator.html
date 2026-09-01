@@ -1693,9 +1693,12 @@ function personalize(t){ // v módu Pro Tátu občas oslovení Vojíne Poslušn�
   // zhruba každá pátá hláška — častěji už oslovení otravuje
   return Math.random()<.2?((G.curMil?"Vojíne Poslušný — ":"Rudo — ")+t):t;
 }
-function pickQuip(cat){
+function pickQuipRaw(cat){ // bez oslovení — hodí se pro hledání nahrávky podle otisku
   if(!QUIP_BAGS[cat]||!QUIP_BAGS[cat].length)QUIP_BAGS[cat]=shuffle([...QUIPS[cat]]);
-  return personalize(QUIP_BAGS[cat].pop());
+  return QUIP_BAGS[cat].pop();
+}
+function pickQuip(cat){
+  return personalize(pickQuipRaw(cat));
 }
 // anglická výslovnost vybraných slov
 const PRON=[[/\bGPS\b/g,"džípíes"],[/\bWi-?Fi\b/gi,"vajfaj"],[/\bUSB\b/g,"jů es bí"],[/\bOK\b/g,"okej"],[/\bYouTube\b/gi,"jůtůb"],[/\bGoogle\b/gi,"gůgl"],[/\biPhone\b/gi,"ajfoun"],[/\bError\b/gi,"eror"],[/\be-?mail\b/gi,"ímejl"],[/\bonline\b/gi,"onlajn"]];
@@ -1836,6 +1839,7 @@ function explainWhenQuiet(x){ // nech Kalkulátora nejdřív dořeknout hlášku
   explain(x);
 }
 function explain(txt){
+  const rawX=(G&&G.curQ)?G.curQ.x:null; // puvodni text pred pripadnym oslovenim, pro hledani nahravky
   if(G&&G.mode==="tata"&&Math.random()<.5)txt=(G.curMil?"Vojíne Poslušný — ":"Rudo — ")+txt; // oslovení podle fáze
   const b=$("bubble");b.textContent="🧮 "+txt;b.classList.add("show","explain");
   const sv=$("calcsvg");sv.classList.add("declaim"); // recitátorské gesto: hlava vzhůru, ruka pozvednutá
@@ -1843,6 +1847,8 @@ function explain(txt){
   calcFace("squint");
   if(G&&G.mode==="adelka"&&G.curQ&&G.curQ.x){
     const pv=G.curQ.x;prehrajAdelka("v",pv,function(){speak(txt);});
+  }else if(G&&G.mode==="tata"&&rawX){
+    prehrajTata("v",rawX,function(){speak(txt);});
   }else speak(txt);
   clearTimeout(b._t);b._t=setTimeout(()=>{
     b.classList.remove("show","explain");
@@ -1902,19 +1908,31 @@ function nastavPostavu(){
 function adHash(s){let x=5381;for(let i=0;i<s.length;i++)x=((x*33)+s.charCodeAt(i))>>>0;return ("0000000"+x.toString(16)).slice(-8);}
 let adelkaAudio=null;
 function stopAdelkaAudio(){if(adelkaAudio){try{adelkaAudio.pause()}catch(e){}adelkaAudio=null;stopTalking();}}
-function prehrajAdelka(pref,orig,zaloha){
+function prehrajHlas(folder,pref,orig,zaloha){
   if(!voiceOn||!soundOn)return;
   stopAdelkaAudio();
   let uz=false;
   const fb=function(){if(uz)return;uz=true;adelkaAudio=null;stopTalking();if(zaloha)zaloha();};
   try{
-    const a=new Audio("hlas-adelka/"+pref+"-"+adHash(orig)+".mp3");
+    const a=new Audio(folder+"/"+pref+"-"+adHash(orig)+".mp3");
     a.volume=.95;
     a.onerror=fb;
     a.onplay=function(){startTalking();};
     a.onended=function(){adelkaAudio=null;stopTalking();};
     a.play().then(function(){adelkaAudio=a;}).catch(fb);
   }catch(e){fb();}
+}
+function prehrajAdelka(pref,orig,zaloha){prehrajHlas("hlas-adelka",pref,orig,zaloha);}
+/* ===== NAHRANÝ HLAS PRO SEKCI "PRO TÁTU" =====
+   Hlášky majora (q-<otisk>.mp3) a otázky/vysvětlení (o-/v-<otisk>.mp3)
+   ve složce hlas-tata/, hlas hluboký mužský (Brian). Otisk je djb2
+   z přesného textu PŘED personalizací (oslovením Vojíne/Rudo). */
+function prehrajTata(pref,orig,zaloha){prehrajHlas("hlas-tata",pref,orig,zaloha);}
+function tataQuip(cat,rate){ // vybere hlášku majora, přehraje nahrávku nebo (záložně) syntézu
+  const raw=pickQuipRaw(cat), t=personalize(raw);
+  bubble(t);
+  prehrajTata("q",raw,function(){speak(t,rate);});
+  return t;
 }
 const MIL_RE=/pluk|tank|vojen|vojn|kasárn|ČSLA|major|důstoj|voják|vojín|služn|přísah|MiG|letec|divi[zs]|kanad|rajón|mazák|bažant|budíček|žold|hodnost|OT-|T-5|Dukl|zbraní SS|Milovic|Vltava 1966|nárameník|uniform|zupák|štáb/i;
 let G=null, timerInt=null;
@@ -1975,7 +1993,7 @@ function startGame(mode){
   $("jokerBtn").disabled=false;
   showScreen("game");
   calcFace("neutral");
-  if(quipsOn){const it=pickQuip(mode==="tata"?"tataIntro":"intro");bubble(it);if(mode==="tata")speak(it,1);}
+  if(quipsOn){if(mode==="tata")tataQuip("tataIntro",1);else{const it=pickQuip("intro");bubble(it);}}
   if(mode==="duel") startDuelTimer();
   setTimeout(()=>renderQ(),900);
 }
@@ -2048,7 +2066,7 @@ function renderQ(){
   });
   calcFace(Math.random()<.4?"squint":"neutral");
   if(G.mode==="tata"){
-    speak(Q.q); // v módu Pro Tátu se otázka předčítá vždycky
+    const qt=Q.q;prehrajTata("o",qt,function(){speak(qt);}); // v módu Pro Tátu se otázka předčítá vždycky
   }else if(G.mode==="adelka"){
     // ve školním módu se předčítá zhruba 60 % otázek — učí se líp, když je i slyší
     if(Math.random()<.6){const ot=Q.q;prehrajAdelka("o",ot,function(){speak(ot);});}
@@ -2067,13 +2085,13 @@ function finishReveal(ok){
     G.score++;G.streak++;G.best=Math.max(G.best,G.streak);
     sfxOk();flash("ok");calcFace("happy");
     sv.classList.add("gest-open");setTimeout(()=>sv.classList.remove("gest-open"),1500);
-    if(quipsOn){const t=pickQuip(G.mode==="tata"?(G.curMil?"tataCorrect":"tataLocC"):"correct");bubble(t);speak(t,G.mode==="tata"?1:.55);}
+    if(quipsOn){if(G.mode==="tata")tataQuip(G.curMil?"tataCorrect":"tataLocC",1);else{const t=pickQuip("correct");bubble(t);speak(t,.55);}}
   }else{ // špatně → Kalkulátor posmutní a povzbudí
     G.streak=0;
     sfxBad();flash("bad");calcFace("sad");
     $("donkChip").classList.add("shake");
     setTimeout(()=>$("donkChip").classList.remove("shake"),600);
-    if(quipsOn){const t=pickQuip(G.mode==="tata"?(G.curMil?"tataWrong":"tataLocW"):"wrong");bubble(t);speak(t,G.mode==="tata"?1:.55);}
+    if(quipsOn){if(G.mode==="tata")tataQuip(G.curMil?"tataWrong":"tataLocW",1);else{const t=pickQuip("wrong");bubble(t);speak(t,.55);}}
   }
   $("scoreTxt").textContent=G.score;
   G.answered++; G.i++;
@@ -2128,7 +2146,7 @@ function onTimeout(){
   set.forEach(p=>btns[p].classList.add("correct"));
   btns[set[0]].querySelector(".aemo").textContent=(G.curQ&&G.curQ.e)||CATEMOJI[G.curQ&&G.curQ.k]||"❓";
   sfxBad();calcFace("sad");
-  if(quipsOn){const t=pickQuip(G.mode==="tata"&&G.curMil?"tataTimeout":"timeout");bubble(t);speak(t,G.mode==="tata"?1:.55);}
+  if(quipsOn){if(G.mode==="tata"&&G.curMil)tataQuip("tataTimeout",1);else{const t=pickQuip("timeout");bubble(t);speak(t,G.mode==="tata"?1:.55);}}
   G.streak=0;G.answered++;G.i++;
   let wait=2600;
   if(G.curQ.x){wait=7500;setTimeout(()=>explainWhenQuiet(G.curQ.x),1200);}
